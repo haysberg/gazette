@@ -32,4 +32,4 @@ jobs:
         with:
           push: true
           file: Dockerfile
-          tag: ghcr.io/${{ github.repository_owner }}/insoumis.news:latest
+          tag: ghcr.io/haysberg/gauchonews:latest
