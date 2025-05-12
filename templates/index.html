@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>📰 Nouvelles de gauche</title>
+	<meta name="application-name" content="gaucho.news">
+	<meta name="description" content="Nouvelles du front">
+	<meta name="referrer" content="same-origin">
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+
+<body>
+	<header>
+		<hr>
+		<div class="feed-list">
+			{% for feed in feeds %}
+			<div>
+				{% if feed.image is defined and feed.image != "" %} <img src="{{ feed.image }}" width="32px" height="32px"> {% endif%} <a href="https://{{ feed.domain }}" target="_blank">{{ feed.title }}</a>
+			</div>
+			{% endfor %}
+		</div>
+	</header>
+	<hr>
+	<main>
+        {% if posts_last24h is defined and posts_last24h|length > 0 %}
+            <h1>Ces dernières 24h</h1>
+            <hr>
+            {% with articles=posts_last24h %}
+                {% include "posts.html" %}
+            {% endwith %}
+        {% endif %}
+        {% if posts_24_48h is defined and posts_24_48h|length > 0 %}
+            <h1>Hier</h1>
+            <hr>
+            {% with articles=posts_24_48h %}
+                {% include "posts.html" %}
+            {% endwith %}
+        {% endif %}
+        {% if posts_later is defined and posts_later|length > 0 %}
+            <h1>Précédemment cette semaine</h1>
+            <hr>
+            {% with articles=posts_later %}
+                {% include "posts.html" %}
+            {% endwith %}
+        {% endif %}
+	</main>
+	<footer>
+		<br>
+		<small class="center"><I>Fait avec amour sur GitHub !</I></small>
+	</footer>
+</body>
+</html>

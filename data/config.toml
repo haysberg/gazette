@@ -1,0 +1,20 @@
+[feeds]
+feedlist = [
+    { link = "https://spectremedia.org/feed/podcast/" },
+    { link = "https://www.politis.fr/flux-rss-apps/", title = "Politis", image = "https://www.politis.fr/favicon-32x32.png" },
+    { link = "http://www.contretemps.eu/rss", title = "Contretemps", image = "https://www.contretemps.eu/wp-content/uploads/ctt.ico" },
+    { link = "https://linsoumission.fr/feed/"},
+    { link = "http://melenchon.fr/feed/", title = "JLM Le blog"},
+    { link = "https://lecturesantiimperialistes.org/feed/", title = "Lectures Anti-Impérialistes"},
+    { link = "https://afriquexxi.info/?page=backend&lang=fr", image = "https://afriquexxi.info/squelettes-2021/favicon/favicon-32x32.png"},
+    { link = "https://www.frustrationmagazine.fr/feed.xml" },
+    { link = "https://www.revue-ballast.fr/feed/", image = "https://www.revue-ballast.fr/wp-content/uploads/2016/09/ballast_favicon.ico" },
+    { link = "https://orientxxi.info/?page=backend&lang=fr" },
+    { link = "https://survie.org/spip.php?page=backend" },
+    { link = "https://www.revolutionpermanente.fr/spip.php?page=backend_portada", image = "https://revolutionpermanente.fr/squelettes/assets/img/favicon.ico" },
+    { link = "https://orgasolitrans.fr/index.php/feed/", title = "L'OST" },
+    { link = "https://api.lemediatv.fr/rss.xml", title = "Le Média" },
+    { link = "https://backend.streetpress.com/rss.xml", title = "StreetPress", domain = "streetpress.com", image = "https://www.streetpress.com/favicon.ico" },
+    { link = "https://api.blast-info.fr/rss.xml", title = "BLAST" },
+    { link = "https://lutte-ouvriere.org/xml/rss/actualite.xml", title = "Lutte Ouvrière", image = "https://www.lutte-ouvriere.org/static/common/icon/favicon-32x32.png" }
+]

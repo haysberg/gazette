@@ -1,0 +1,19 @@
+https://spectremedia.org/feed/podcast/
+https://www.politis.fr/flux-rss-apps/
+http://www.contretemps.eu/rss
+https://linsoumission.fr/feed/
+http://melenchon.fr/feed/
+https://qgdecolonial.fr/feed/
+https://lecturesantiimperialistes.org/feed/
+https://afriquexxi.info/?page=backend&lang=fr
+https://www.frustrationmagazine.fr/feed.xml
+https://www.revue-ballast.fr/feed/
+https://orientxxi.info/?page=backend&lang=fr
+https://survie.org/spip.php?page=backend
+# https://lanticapitaliste.org/rss.xml (RSS foireux sur les dates)
+https://www.revolutionpermanente.fr/spip.php?page=backend
+https://orgasolitrans.fr/index.php/feed/
+https://api.lemediatv.fr/rss.xml
+https://backend.streetpress.com/rss.xml
+https://api.blast-info.fr/rss.xml
+https://lutte-ouvriere.org/xml/rss/actualite.xml

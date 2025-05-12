@@ -1,0 +1,119 @@
+:root {
+    --txt: #444444;
+    --bd: #333333;
+    --bg: white;
+    --primary: #7b13d6;
+    --secondary: #f91616;
+}
+
+body {
+    font-family: Calibri, 'Trebuchet MS', 'Lucida Sans', Arial, sans-serif;
+    color: var(--txt);
+    background: var(--bg);
+    max-width: 80rem;
+    width: 95%;
+    margin: 2em auto;
+    line-height: 1.25em;
+}
+
+h1 {
+    display: inline-block;
+    margin-bottom: 0.25em;
+}
+
+h2 {
+    font-size: 1rem;
+    display: inline;
+}
+
+ol {
+    padding-left: 5ch;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin-block-start: 1em;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: var(--primary)
+}
+
+a:visited {
+    color: var(--secondary)
+}
+
+a:hover {
+    opacity: 0.8
+}
+
+small {
+    padding-top: 0.25rem;
+    font-size: 0.95rem;
+}
+
+small>a:link,
+small>a:visited {
+    color: var(--txt);
+}
+
+footer {
+    #padding: 2rem 1rem;
+}
+
+.feed-list {
+    display: flex;
+    flex-wrap: wrap;
+    border: 0;
+}
+
+.feed-list>div {
+    flex-grow: 1;
+    padding: 0.5em 0.5em 0.35em 0.5em;
+    text-align: center;
+    vertical-align: middle;
+    border: 0;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.feed-list>div>img {
+    margin-right: 0.2rem;
+}
+
+.center {
+    margin-top: 20px;
+    margin: auto;
+}
+
+header a, header a:visited {
+    color: var(--primary)
+}
+
+hr {
+    border: none;
+    height: 0.3em; /* Adjust the height of the hr element */
+    background-image: linear-gradient(to right, #7b13d6, #f91616); /* Adjust the colors as needed */
+}
+
+@media only screen and (max-width: 480px) {
+    header {
+        display: none;
+    }
+    * {
+        font-size: 20px;
+    }
+    body {
+        margin-top: 5px;
+    }
+}
