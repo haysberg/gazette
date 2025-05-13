@@ -11,10 +11,12 @@ feedlist = [
     { link = "https://www.revue-ballast.fr/feed/", image = "https://www.revue-ballast.fr/wp-content/uploads/2016/09/ballast_favicon.ico" },
     { link = "https://orientxxi.info/?page=backend&lang=fr" },
     { link = "https://survie.org/spip.php?page=backend" },
-    { link = "https://www.revolutionpermanente.fr/spip.php?page=backend_portada", image = "https://revolutionpermanente.fr/squelettes/assets/img/favicon.ico" },
+    { link = "https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5", image = "https://revolutionpermanente.fr/squelettes/assets/img/favicon.ico" },
     { link = "https://orgasolitrans.fr/index.php/feed/", title = "L'OST" },
     { link = "https://api.lemediatv.fr/rss.xml", title = "Le Média" },
     { link = "https://backend.streetpress.com/rss.xml", title = "StreetPress", domain = "streetpress.com", image = "https://www.streetpress.com/favicon.ico" },
     { link = "https://api.blast-info.fr/rss.xml", title = "BLAST" },
-    { link = "https://lutte-ouvriere.org/xml/rss/actualite.xml", title = "Lutte Ouvrière", image = "https://www.lutte-ouvriere.org/static/common/icon/favicon-32x32.png" }
+    { link = "https://lutte-ouvriere.org/xml/rss/actualite.xml", title = "Lutte Ouvrière", image = "https://www.lutte-ouvriere.org/static/common/icon/favicon-32x32.png" },
+    { link = "https://www.courrierinternational.com/feed/all/rss.xml" },
+    { link = "https://strass-syndicat.org/feed/", title = "Le STRASS" }
 ]

@@ -225,9 +225,13 @@ dependencies = [
     { name = "fastapi", extra = ["standard"] },
     { name = "feedparser" },
     { name = "jinja2" },
-    { name = "ruff" },
     { name = "sqlmodel" },
     { name = "structlog" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "ruff" },
 ]
 
 [package.metadata]
@@ -235,10 +239,12 @@ requires-dist = [
     { name = "fastapi", extras = ["standard"], specifier = ">=0.115.12" },
     { name = "feedparser", specifier = ">=6.0.11" },
     { name = "jinja2", specifier = ">=3.1.6" },
-    { name = "ruff", specifier = ">=0.11.9" },
     { name = "sqlmodel", specifier = ">=0.0.24" },
     { name = "structlog", specifier = ">=25.3.0" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "ruff", specifier = ">=0.11.9" }]
 
 [[package]]
 name = "jinja2"
