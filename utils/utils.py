@@ -2,9 +2,10 @@ import asyncio
 from datetime import datetime, timedelta
 import json
 import os
+from sqlite3 import IntegrityError
 from time import mktime
 import feedparser
-from sqlmodel import Session, delete, select
+from sqlmodel import Session, delete, insert, select
 from models.models import Feed, Post
 from utils.db import engine
 from utils.logs import logger
@@ -23,22 +24,21 @@ templates = Jinja2Templates(directory="templates")
 async def update_feeds_and_posts() -> None:
     with open("data/config.toml", "rb") as f:
         config_data = tomllib.load(f)
-    logger.info(config_data["feeds"]["feedlist"])
-
+    logger.info("Running recurrent feed update...")
     # Add debug logging to verify tasks creation
-    logger.info(f"Creating tasks for {len(config_data['feeds']['feedlist'])} feeds")
-    
+    logger.debug(f"Creating tasks for {len(config_data['feeds']['feedlist'])} feeds")
+
     # Run parse_feed concurrently for all feed URLs
     tasks = [parse_feed(feed_dict) for feed_dict in config_data["feeds"]["feedlist"]]
-    logger.info(f"Created {len(tasks)} tasks")
-    
+    logger.debug(f"Created {len(tasks)} tasks")
+
     results = await asyncio.gather(*tasks)
-    logger.info(f"Completed parsing {len([r for r in results if r is not None])} feeds successfully")
+    logger.info(f"Finished parsing {len([r for r in results if r is not None])} feeds.")
 
     # Delete entries older than a week
     with Session(engine) as session:
         # Delete entries in db older than a week
-        logger.info("Deleting posts older than a week")
+        logger.info("Running cleanup of old posts...")
         statement = delete(Post).where(
             Post.publication_date < datetime.now() - timedelta(weeks=1)
         )
@@ -49,7 +49,7 @@ async def update_feeds_and_posts() -> None:
 
 
 async def update_served_files() -> None:
-    logger.info("Generating static files")
+    logger.info("Generating static files...")
 
     os.makedirs(STATIC_DIR, exist_ok=True)
 
@@ -105,7 +105,7 @@ async def update_served_files() -> None:
                     "feeds": feeds,
                 },
             ).body.decode("utf-8")
-            logger.info("Template rendered successfully")
+            logger.info("HTML page rendered successfully !")
         except Exception as e:
             logger.error(f"Failed to render template: {e}")
             return
@@ -135,8 +135,8 @@ async def update_served_files() -> None:
 
 
 async def parse_feed(feed_dict: dict) -> None:
-    logger.info(f"Parsing feed {feed_dict}")
-    data: dict = feedparser.parse(feed_dict['link'])
+    logger.debug(f"Parsing feed {feed_dict}")
+    data: dict = feedparser.parse(feed_dict["link"])
 
     if data.bozo:
         logger.error(
@@ -164,27 +164,40 @@ async def parse_feed(feed_dict: dict) -> None:
 
     with Session(engine) as session:
         parsed_feed = session.merge(parsed_feed)
-        logger.info(f"Feed {parsed_feed.link} parsed and saved successfully.")
+        logger.debug(f"Feed {parsed_feed.link} parsed and saved successfully.")
 
         for entry in data.entries:
             try:
                 if "published_parsed" not in entry:
-                    entry.published_parsed = entry.updated_parsed if hasattr(entry, "updated_parsed") else None
-                
-                if not entry.published_parsed:
-                    logger.warning(f"Entry {entry.get('title', 'No title')} has no valid date, skipping")
-                    continue
+                    entry.published_parsed = (
+                        entry.updated_parsed
+                        if hasattr(entry, "updated_parsed")
+                        else None
+                    )
 
+                if not entry.published_parsed:
+                    logger.warning(
+                        f"Entry {entry.get('title', 'No title')} has no valid date, skipping"
+                    )
+                    continue
                 parsed_entry = Post(
                     link=entry.link,
                     title=entry.title,
+                    author=entry.author if hasattr(entry, "author") else None,
+                    tags=entry.tags if hasattr(entry, "tags") else [],
                     feed=parsed_feed,
-                    publication_date=datetime.fromtimestamp(mktime(entry.published_parsed)),
+                    publication_date=datetime.fromtimestamp(
+                        mktime(entry.published_parsed)
+                    ),
                 )
+
+                session.add(parsed_entry)
                 session.merge(parsed_entry)
             except AttributeError as ae:
-                logger.error(f"An entry from {parsed_feed.title} does not have a valid structure: {ae}")
+                logger.error(
+                    f"An entry from {parsed_feed.title} does not have a valid structure: {ae}"
+                )
                 continue
-        
+
         session.commit()
         return parsed_feed

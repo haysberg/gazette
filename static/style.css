@@ -13,6 +13,7 @@ body {
     max-width: 80rem;
     width: 95%;
     margin: 2em auto;
+    margin-top: 1em;
     line-height: 1.25em;
 }
 
@@ -59,15 +60,12 @@ a:hover {
 small {
     padding-top: 0.25rem;
     font-size: 0.95rem;
+    color: var(--txt);
 }
 
 small>a:link,
 small>a:visited {
     color: var(--txt);
-}
-
-footer {
-    #padding: 2rem 1rem;
 }
 
 .feed-list {
@@ -76,8 +74,19 @@ footer {
     border: 0;
 }
 
-.feed-list>div {
-    flex-grow: 1;
+.feed-details {
+    flex-wrap: wrap;
+}
+
+.feed-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: none;
+    gap: 5px;
+    height: 1em;
+}
+
+.feed-list div {
     padding: 0.5em 0.5em 0.35em 0.5em;
     text-align: center;
     vertical-align: middle;
@@ -87,13 +96,31 @@ footer {
     align-items: center;
 }
 
-.feed-list>div>img {
+.feed-list img {
     margin-right: 0.2rem;
+}
+
+.italique {
+    font-style: italic;
 }
 
 .center {
     margin-top: 20px;
     margin: auto;
+}
+
+.liens-lfi {
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+}
+
+summary {
+    cursor: pointer;
+}
+
+.liste-articles summary::marker {
+    font-size: 1.75rem;
 }
 
 header a, header a:visited {

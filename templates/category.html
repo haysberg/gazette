@@ -1,0 +1,9 @@
+{% if posts_last24h is defined and posts_last24h|length > 0 %}
+    {% if open %}<details class="liste-articles" open>{% else %}<details class="liste-articles">{% endif %}
+        <summary>
+            <h1>{{ name }}</h1>
+            <hr>
+        </summary>
+        {% include "posts.html" %}
+    </details>
+{% endif %}

@@ -1,5 +1,9 @@
 import logging
 import structlog
+import os
+
+LOGLEVEL = os.getenv("LOGLEVEL", "INFO").upper()
+
 
 def configure_logging():
     # Define a shared processor chain for structlog
@@ -12,7 +16,7 @@ def configure_logging():
     # Configure structlog
     structlog.configure(
         processors=processors,
-        wrapper_class=structlog.make_filtering_bound_logger(logging.INFO),
+        wrapper_class=structlog.make_filtering_bound_logger(LOGLEVEL),
         context_class=dict,
         logger_factory=structlog.stdlib.LoggerFactory(),
         cache_logger_on_first_use=True,
@@ -36,7 +40,7 @@ def configure_logging():
     handler.setFormatter(formatter)
     logging.basicConfig(
         handlers=[handler],
-        level=logging.INFO,
+        level=LOGLEVEL,
     )
 
     # Ensure structlog logs bypass logging module formatting
@@ -49,8 +53,10 @@ def configure_logging():
     uvicorn_logger.propagate = False
 
     # Redirect SQLAlchemy logs to structlog
-    logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
-    logging.getLogger().setLevel(logging.INFO)
+    logging.getLogger("sqlalchemy.engine").setLevel(LOGLEVEL)
+    if LOGLEVEL != "DEBUG":
+        logging.getLogger("sqlalchemy.engine").setLevel(logging.NOTSET)
+    logging.getLogger().setLevel(LOGLEVEL)
 
 
 logger = structlog.get_logger()

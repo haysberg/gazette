@@ -7,7 +7,7 @@ feedlist = [
     { link = "http://melenchon.fr/feed/", title = "JLM Le blog"},
     { link = "https://lecturesantiimperialistes.org/feed/", title = "Lectures Anti-Impérialistes"},
     { link = "https://afriquexxi.info/?page=backend&lang=fr", image = "https://afriquexxi.info/squelettes-2021/favicon/favicon-32x32.png"},
-    { link = "https://www.frustrationmagazine.fr/feed.xml" },
+    { link = "https://www.frustrationmagazine.fr/feed.xml", image = "https://frustrationmagazine.fr/img/favicon_light.png" },
     { link = "https://www.revue-ballast.fr/feed/", image = "https://www.revue-ballast.fr/wp-content/uploads/2016/09/ballast_favicon.ico" },
     { link = "https://orientxxi.info/?page=backend&lang=fr" },
     { link = "https://survie.org/spip.php?page=backend" },
@@ -16,7 +16,10 @@ feedlist = [
     { link = "https://api.lemediatv.fr/rss.xml", title = "Le Média" },
     { link = "https://backend.streetpress.com/rss.xml", title = "StreetPress", domain = "streetpress.com", image = "https://www.streetpress.com/favicon.ico" },
     { link = "https://api.blast-info.fr/rss.xml", title = "BLAST" },
-    { link = "https://lutte-ouvriere.org/xml/rss/actualite.xml", title = "Lutte Ouvrière", image = "https://www.lutte-ouvriere.org/static/common/icon/favicon-32x32.png" },
-    { link = "https://www.courrierinternational.com/feed/all/rss.xml" },
-    { link = "https://strass-syndicat.org/feed/", title = "Le STRASS" }
+    { link = "https://www.courrierinternational.com/feed/rubrique/geopolitique/rss.xml", title = "Courrier International", image = "https://www.courrierinternational.com/bucket/assets/e04cb3bc293a7e5fc5bb7702ca8cca95c7ddd8bc/img/logos/favicon.ico" },
+    { link = "https://strass-syndicat.org/feed/", title = "Le STRASS" },
+    { link = "https://fourth.international/french.rss", title = "IVe Internationale", image = "https://fourth.international/sites/default/files/favicon.ico" },
+    { link = "https://npa-lanticapitaliste.org/rss.xml", title = "NPA", image = "https://npa-lanticapitaliste.org/sites/default/files/favicon_1.ico"},
+    { link = "https://lafranceinsoumise.fr/feed/", title = "LFI"},
+    { link = "https://leftalliance.eu/feed/", title = "EU LEFT Alliance", image = "https://leftalliance.eu/wp-content/uploads/2025/04/cropped-FAVICON-ELA-1-32x32.png"}
 ]
