@@ -2,10 +2,10 @@ FROM ghcr.io/astral-sh/uv:alpine
 
 # Copy the application into the container.
 COPY config.toml main.py uv.lock pyproject.toml /app
-COPY templates /app/templates
-COPY utils /app/utils
-COPY models /app/models
-COPY static /app/static
+COPY templates /app/templates/
+COPY utils /app/utils/
+COPY models /app/models/
+COPY static /app/static/
 
 # Install the application dependencies.
 WORKDIR /app
