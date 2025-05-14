@@ -1,0 +1,7 @@
+services:
+  site:
+    image: ghcr.io/haysberg/gazette:latest
+    container_name: "gazette"
+    restart: unless-stopped
+    ports:
+      - 80:80

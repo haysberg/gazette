@@ -32,4 +32,4 @@ jobs:
         with:
           push: true
           file: Dockerfile
-          tags: ghcr.io/haysberg/insoumis.news:latest
+          tags: ghcr.io/haysberg/gazette:latest
