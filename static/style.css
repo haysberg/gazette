@@ -150,6 +150,10 @@ summary {
     cursor: pointer;
 }
 
+#sources {
+    text-align: center;
+}
+
 .article-source {
     display: flex;
     gap: 3px;
@@ -230,5 +234,9 @@ hr {
 
     .article-source {
         padding-top: 0.1em;
+    }
+
+    #sources {
+        text-align: left;
     }
 }

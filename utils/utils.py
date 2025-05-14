@@ -139,7 +139,7 @@ async def parse_feed(feed_dict: dict) -> None:
     try:
         data: dict = feedparser.parse(feed_dict["link"])
     except ConnectionResetError as cre:
-        logger.error(f"Couldn't connect to {feed_dict["link"]}, reason is {cre}")
+        logger.error(f"Couldn't connect to {feed_dict['link']}, reason is {cre}")
         return None
 
     if data.bozo:

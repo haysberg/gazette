@@ -43,12 +43,12 @@ async def index(json: bool = False):
     return FileResponse(STATIC_DIR + "/index.html")
 
 
-if __name__ == "__main__":
-    configure_logging()
-    uvicorn.run(
-        "app:app",  # Replace with your app's entry point
-        host="0.0.0.0",
-        port=8000,
-        log_config=None,  # Disable Uvicorn's default logging
-        access_log=False,  # Disable Uvicorn's access logs
-    )
+# if __name__ == "__main__":
+#     configure_logging()
+#     uvicorn.run(
+#         "app:app",  # Replace with your app's entry point
+#         host="0.0.0.0",
+#         port=8000,
+#         log_config=None,  # Disable Uvicorn's default logging
+#         access_log=False,  # Disable Uvicorn's access logs
+#     )
