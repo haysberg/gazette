@@ -17,7 +17,7 @@ async def periodic_update():
         logger.info("Running periodic feed update")
         await update_feeds_and_posts()
         logger.info("Feed update completed")
-        await asyncio.sleep(60)
+        await asyncio.sleep(900)
 
 
 # Run update_feeds_and_posts at startup
