@@ -1577,7 +1577,9 @@
             "link": "https://www.courrierinternational.com/article/geopolitique-a-moscou-le-president-burkinabe-ibrahim-traore-a-ete-accueilli-en-guest-star_230794",
             "author": null,
             "publication_date": "2025-05-12 14:48:48"
-        },
+        }
+    ],
+    "posts_later": [
         {
             "score": 0,
             "title": "Nationalisation d\u2019ArcelorMittal \u2013 Les salari\u00e9s se rassembleront ce mardi 13 mai pour l\u2019exiger, devant le si\u00e8ge de la multinationale",
@@ -1597,9 +1599,7 @@
             "link": "https://linsoumission.fr/2025/05/12/arcelormittal-nationalisation-salaries/",
             "author": "Nadim Fevrier",
             "publication_date": "2025-05-12 14:29:49"
-        }
-    ],
-    "posts_later": [
+        },
         {
             "score": 0,
             "title": "Urgence Palestine, la Jeune Garde : les dissolutions, un levier autoritaire aux mains de l'ex\u00e9cutif",
@@ -3450,66 +3450,6 @@
         },
         {
             "score": 0,
-            "title": "La spoliation des locataires juifs \u2013 avec Isabelle Backouche",
-            "feed_link": "https://spectremedia.org/feed/podcast/",
-            "tags": [
-                {
-                    "term": "Antis\u00e9mitisme",
-                    "scheme": "http://www.itunes.com/",
-                    "label": null
-                },
-                {
-                    "term": "Fascisme",
-                    "scheme": "http://www.itunes.com/",
-                    "label": null
-                },
-                {
-                    "term": "France",
-                    "scheme": "http://www.itunes.com/",
-                    "label": null
-                },
-                {
-                    "term": "Guerre",
-                    "scheme": "http://www.itunes.com/",
-                    "label": null
-                },
-                {
-                    "term": "Histoire",
-                    "scheme": "http://www.itunes.com/",
-                    "label": null
-                },
-                {
-                    "term": "Injustice",
-                    "scheme": "http://www.itunes.com/",
-                    "label": null
-                },
-                {
-                    "term": "Logement",
-                    "scheme": "http://www.itunes.com/",
-                    "label": null
-                },
-                {
-                    "term": "Nazisme",
-                    "scheme": "http://www.itunes.com/",
-                    "label": null
-                },
-                {
-                    "term": "Occupation",
-                    "scheme": "http://www.itunes.com/",
-                    "label": null
-                },
-                {
-                    "term": "R\u00e9novation urbaine",
-                    "scheme": "http://www.itunes.com/",
-                    "label": null
-                }
-            ],
-            "link": "https://spectremedia.org/podcast/la-spoliation-des-locataires-juifs-avec-isabelle-backouche/",
-            "author": "Spectre",
-            "publication_date": "2025-05-08 10:15:32"
-        },
-        {
-            "score": 0,
             "title": "13\u00a0mai \u00e0 Poitiers\u00a0: \u00ab\u00a0Quand les mots font d\u00e9sordre\u00a0\u00bb",
             "feed_link": "https://www.politis.fr/flux-rss-apps/",
             "tags": [],
@@ -4132,56 +4072,9 @@
             "link": "https://www.politis.fr/api/proxy/?articleID=378935",
             "author": null,
             "publication_date": "2025-05-07 14:38:15"
-        },
-        {
-            "score": 0,
-            "title": "Manuel Bompard recadre les journalistes de la meute de BFMTV",
-            "feed_link": "https://linsoumission.fr/feed/",
-            "tags": [
-                {
-                    "term": "Actualit\u00e9s",
-                    "scheme": null,
-                    "label": null
-                },
-                {
-                    "term": "Critique des m\u00e9dias",
-                    "scheme": null,
-                    "label": null
-                },
-                {
-                    "term": "D\u00e9sintox",
-                    "scheme": null,
-                    "label": null
-                },
-                {
-                    "term": "Dossiers",
-                    "scheme": null,
-                    "label": null
-                },
-                {
-                    "term": "\u00c9chiquier politique",
-                    "scheme": null,
-                    "label": null
-                },
-                {
-                    "term": "News420",
-                    "scheme": null,
-                    "label": null
-                }
-            ],
-            "link": "https://linsoumission.fr/2025/05/07/bompard-bfmtv-meute/",
-            "author": "Nadim Fevrier",
-            "publication_date": "2025-05-07 14:34:26"
         }
     ],
     "feeds": [
-        {
-            "subtitle": "",
-            "domain": "spectremedia.org",
-            "title": "Spectre",
-            "link": "https://spectremedia.org/feed/podcast/",
-            "image": "https://spectremedia.org/wp-content/uploads/2022/01/spectre_cover.png"
-        },
         {
             "subtitle": "Un journal pour d\u00e9fricher les id\u00e9es, nourrir les combats",
             "domain": "politis.fr",

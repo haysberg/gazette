@@ -135,7 +135,13 @@ small>a:visited {
 }
 
 #feed-list summary::marker {
-  content: '🞤 ';
+    content: none;
+    font-weight: bold;
+    position: relative;
+}
+#feed-list summary {
+    cursor: pointer;
+    font-weight: bold;
 }
 
 summary {
@@ -213,7 +219,7 @@ hr {
     }
 
     #feed-list summary::marker {
-        content: '🞧 ';
+        content: '+ ';
     }
 
     .liste-articles summary::marker {
