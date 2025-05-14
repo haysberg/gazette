@@ -2,9 +2,7 @@ import asyncio
 from datetime import datetime, timedelta
 import json
 import os
-from sqlite3 import IntegrityError
 from time import mktime
-import time
 import feedparser
 from sqlmodel import Session, delete, insert, select
 from models.models import Feed, Post
@@ -13,6 +11,7 @@ from utils.logs import logger
 from sqlalchemy.orm import selectinload
 from fastapi.templating import Jinja2Templates
 import tomllib
+from datetime import datetime
 
 # Paths for static files
 STATIC_DIR = "data/static"
@@ -104,7 +103,7 @@ async def update_served_files() -> None:
                     "posts_24_48h": posts_24_48h,
                     "posts_later": posts_later,
                     "feeds": feeds,
-                    "render_time": datetime.now().strftime("%H:%M").capitalize(),
+                    "render_time": datetime.now().strftime('%Hh%M').capitalize(),
                 },
             ).body.decode("utf-8")
             logger.info("HTML page rendered successfully !")

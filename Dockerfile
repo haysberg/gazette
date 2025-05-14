@@ -1,5 +1,8 @@
 FROM ghcr.io/astral-sh/uv:alpine
 
+RUN apk add --no-cache tzdata
+ENV TZ=Europe/Paris
+
 WORKDIR /app
 
 # Copy the application into the container.

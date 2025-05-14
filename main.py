@@ -1,13 +1,12 @@
 import locale
+import asyncio
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from utils.utils import STATIC_DIR, update_feeds_and_posts
 from utils.logs import configure_logging, logger
 from fastapi import FastAPI
-import asyncio
 
 configure_logging()
 
