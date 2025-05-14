@@ -104,7 +104,7 @@ async def update_served_files() -> None:
                     "posts_24_48h": posts_24_48h,
                     "posts_later": posts_later,
                     "feeds": feeds,
-                    "render_time": datetime.now().strftime('%H:%M').capitalize()
+                    "render_time": datetime.now().strftime("%H:%M").capitalize(),
                 },
             ).body.decode("utf-8")
             logger.info("HTML page rendered successfully !")
@@ -194,11 +194,15 @@ async def parse_feed(feed_dict: dict) -> None:
                     "author": entry.author if hasattr(entry, "author") else None,
                     "tags": entry.tags if hasattr(entry, "tags") else [],
                     "feed_link": parsed_feed.link,  # Use feed_id instead of the full object
-                    "publication_date": datetime.fromtimestamp(mktime(entry.published_parsed)),
+                    "publication_date": datetime.fromtimestamp(
+                        mktime(entry.published_parsed)
+                    ),
                 }
 
                 # Check if the entry already exists
-                existing_post = session.exec(select(Post).where(Post.link == entry.link)).first()
+                existing_post = session.exec(
+                    select(Post).where(Post.link == entry.link)
+                ).first()
                 if existing_post:
                     # Update the existing entry
                     existing_post.title = parsed_entry["title"]

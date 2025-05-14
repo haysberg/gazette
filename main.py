@@ -11,6 +11,7 @@ import asyncio
 
 configure_logging()
 
+
 async def periodic_update():
     while True:
         logger.info("Running periodic feed update")
