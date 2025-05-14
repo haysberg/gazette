@@ -103,7 +103,7 @@ async def update_served_files() -> None:
                     "posts_24_48h": posts_24_48h,
                     "posts_later": posts_later,
                     "feeds": feeds,
-                    "render_time": datetime.now().strftime('%Hh%M').capitalize(),
+                    "render_time": datetime.now().strftime("%Hh%M").capitalize(),
                 },
             ).body.decode("utf-8")
             logger.info("HTML page rendered successfully !")
