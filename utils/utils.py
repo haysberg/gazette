@@ -22,7 +22,7 @@ templates = Jinja2Templates(directory="templates")
 
 
 async def update_feeds_and_posts() -> None:
-    with open("data/config.toml", "rb") as f:
+    with open("config.toml", "rb") as f:
         config_data = tomllib.load(f)
     logger.info("Running recurrent feed update...")
     # Add debug logging to verify tasks creation
