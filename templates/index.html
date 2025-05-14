@@ -4,10 +4,10 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Nouvelles insoumises</title>
-	<meta name="application-name" content="Nouvelles Insoumises">
+	<title>Gazette Insoumise</title>
+	<meta name="application-name" content="Gazette Insoumise">
 	<meta name="description"
-		content="Nouvelles Insoumises est un agrégateur de flux qui regroupe les dernières nouvelles des médias alternatifs et indépendants de la gauche de rupture.">
+		content="Gazette Insoumise est un agrégateur de flux qui regroupe les dernières nouvelles des médias alternatifs et indépendants de la gauche de rupture.">
 	<meta name="referrer" content="same-origin">
 	<link rel="stylesheet" type="text/css" href="static/style.css">
 	<link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png">
@@ -18,13 +18,18 @@
 
 <body>
 	<header>
-		<h1 id="title"><span id="random-emoji"></span>Nouvelles Insoumises</h1>
+		<h1 id="title"><span id="random-emoji"></span>Gazette Insoumise</h1>
 		<hr style="margin-top: 0;">
 		<div class="liens-lfi">
 			<a href="https://programme.lafranceinsoumise.fr/" target="_blank"><B>Le programme</B></a>
-			<a href="https://programme.lafranceinsoumise.fr/municipales-2026/" target="_blank"><B>Municipales 2026</B></a>
-			<a id="ilb" href="https://institutlaboetie.fr/" target="_blank"><img src="https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON.png"><B> Institut La Boétie</B></B></a>
-			<a id="action-pop" href="https://actionpopulaire.fr/" target="_blank"><img src="https://raw.githubusercontent.com/lafranceinsoumise/actionpopulaire.fr/refs/heads/staging/agir/front/components/genericComponents/logos/action-populaire_primary_mini.svg"><B>Action Populaire</B></a>
+			<a href="https://programme.lafranceinsoumise.fr/municipales-2026/" target="_blank"><B>Municipales
+					2026</B></a>
+			<a id="ilb" href="https://institutlaboetie.fr/" target="_blank"><img
+					src="https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON.png"><B> Institut La
+					Boétie</B></B></a>
+			<a id="action-pop" href="https://actionpopulaire.fr/" target="_blank"><img
+					src="https://raw.githubusercontent.com/lafranceinsoumise/actionpopulaire.fr/refs/heads/staging/agir/front/components/genericComponents/logos/action-populaire_primary_mini.svg"><B>Action
+					Populaire</B></a>
 		</div>
 		<hr>
 		<details id="feed-list" open>
@@ -33,7 +38,7 @@
 			</summary>
 			<div class="feed-details">
 				{% for feed in feeds %}
-					{% include "source.html" %}
+				{% include "source.html" %}
 				{% endfor %}
 			</div>
 		</details>
@@ -59,14 +64,15 @@
 		{% endif %}
 	</main>
 	<footer>
-		<small class="center italique"><I>Cette application est disponible en source ouverte <a href="https://github.com/haysberg/insoumis.news">sur GitHub</a>.
-		<br>Si vous souhaitez modifier le logiciel ou proposer une nouvelle fonctionnalité, faites-le ici !
-		<br>Dernière mise à jour de la page à {{ render_time }}</I></small>
+		<small class="center italique"><I>Cette application est disponible en source ouverte <a
+					href="https://github.com/haysberg/insoumis.news">sur GitHub</a>.
+				<br>Si vous souhaitez modifier le logiciel ou proposer une nouvelle fonctionnalité, faites-le ici !
+				<br>Dernière mise à jour de la page à {{ render_time }}</I></small>
 	</footer>
 </body>
 
 <script>
-	emoji_list=["🐢", "🇵🇸", "🍉", "✊", "🔺", "🌈", "🗞️", "📬", "🕊️"]
+	emoji_list = ["🐢", "🇵🇸", "🍉", "✊", "🔺", "🌈", "🗞️", "📬", "🕊️"]
 	document.getElementById("random-emoji").innerText = emoji_list[Math.floor(Math.random() * emoji_list.length)];
 
 	if (window.matchMedia && window.matchMedia("(max-width: 480px)").matches) {
