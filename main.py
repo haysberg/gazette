@@ -9,7 +9,6 @@ from utils.logs import configure_logging, logger
 from fastapi import FastAPI
 import asyncio
 
-locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 configure_logging()
 
 async def periodic_update():

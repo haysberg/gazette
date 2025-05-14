@@ -18,7 +18,7 @@
 
 <body>
 	<header>
-		<h1 id="title"><span id="random-emoji" style="margin-right: 0.5em;"></span>Nouvelles Insoumises</h1>
+		<h1 id="title"><span id="random-emoji"></span>Nouvelles Insoumises</h1>
 		<hr style="margin-top: 0;">
 		<div class="liens-lfi">
 			<a href="https://programme.lafranceinsoumise.fr/" target="_blank"><B>Le programme</B></a>
@@ -61,12 +61,12 @@
 	<footer>
 		<small class="center italique"><I>Cette application est disponible en source ouverte <a href="https://github.com/haysberg/insoumis.news">sur GitHub</a>.
 		<br>Si vous souhaitez modifier le logiciel ou proposer une nouvelle fonctionnalité, faites-le ici !
-		<br>Date de dernière mise à jour : {{ render_time }}</I></small>
+		<br>Page mise à jour à {{ render_time }}</I></small>
 	</footer>
 </body>
 
 <script>
-	emoji_list=["🐢", "🇵🇸", "🍉", "✊", "🔺", "🏳️‍🌈", "🗞️", "📬"]
+	emoji_list=["🐢", "🇵🇸", "🍉", "✊", "🔺", "🌈", "🗞️", "📬", "🕊️"]
 	document.getElementById("random-emoji").innerText = emoji_list[Math.floor(Math.random() * emoji_list.length)];
 
 	if (window.matchMedia && window.matchMedia("(max-width: 480px)").matches) {
