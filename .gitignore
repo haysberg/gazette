@@ -176,5 +176,5 @@ cython_debug/
 
 ######### SPECIFIC
 *.db*
-./data/static/*
-./data/static/
+data/static/*
+data/static/
