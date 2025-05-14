@@ -4,6 +4,7 @@ import json
 import os
 from sqlite3 import IntegrityError
 from time import mktime
+import time
 import feedparser
 from sqlmodel import Session, delete, insert, select
 from models.models import Feed, Post
@@ -103,6 +104,7 @@ async def update_served_files() -> None:
                     "posts_24_48h": posts_24_48h,
                     "posts_later": posts_later,
                     "feeds": feeds,
+                    "render_time": datetime.now().strftime('%A %d %B à %Hh%M').capitalize()
                 },
             ).body.decode("utf-8")
             logger.info("HTML page rendered successfully !")
@@ -184,19 +186,30 @@ async def parse_feed(feed_dict: dict) -> None:
                         f"Entry {entry.get('title', 'No title')} has no valid date, skipping"
                     )
                     continue
-                parsed_entry = Post(
-                    link=entry.link,
-                    title=entry.title,
-                    author=entry.author if hasattr(entry, "author") else None,
-                    tags=entry.tags if hasattr(entry, "tags") else [],
-                    feed=parsed_feed,
-                    publication_date=datetime.fromtimestamp(
-                        mktime(entry.published_parsed)
-                    ),
-                )
 
-                session.add(parsed_entry)
-                session.merge(parsed_entry)
+                # Prepare the Post object
+                parsed_entry = {
+                    "link": entry.link,
+                    "title": entry.title,
+                    "author": entry.author if hasattr(entry, "author") else None,
+                    "tags": entry.tags if hasattr(entry, "tags") else [],
+                    "feed_link": parsed_feed.link,  # Use feed_id instead of the full object
+                    "publication_date": datetime.fromtimestamp(mktime(entry.published_parsed)),
+                }
+
+                # Check if the entry already exists
+                existing_post = session.exec(select(Post).where(Post.link == entry.link)).first()
+                if existing_post:
+                    # Update the existing entry
+                    existing_post.title = parsed_entry["title"]
+                    existing_post.author = parsed_entry["author"]
+                    existing_post.tags = parsed_entry["tags"]
+                    existing_post.feed_link = parsed_entry["feed_link"]
+                    existing_post.publication_date = parsed_entry["publication_date"]
+                else:
+                    # Insert a new entry
+                    session.add(Post(**parsed_entry))
+
             except AttributeError as ae:
                 logger.error(
                     f"An entry from {parsed_feed.title} does not have a valid structure: {ae}"

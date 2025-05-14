@@ -5,7 +5,7 @@
     --primary: #7b13d6;
     --secondary: #f91616;
     --ilb-bg: #EBF3F4;
-    --ilg-text: #7200FF;
+    --ilb-text: #390080;
     --action-pop-bg: #F4ED0F;
 }
 
@@ -195,7 +195,7 @@ summary {
 
 .liens-lfi #ilb {
     background-color: var(--ilb-bg);
-    color: var(--ilg-text);
+    color: var(--ilb-text);
     background-image: var(--ilb-bg);
 }
 

@@ -1,3 +1,4 @@
+import locale
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
@@ -8,6 +9,7 @@ from utils.logs import configure_logging, logger
 from fastapi import FastAPI
 import asyncio
 
+locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 configure_logging()
 
 async def periodic_update():
@@ -15,15 +17,13 @@ async def periodic_update():
         logger.info("Running periodic feed update")
         await update_feeds_and_posts()
         logger.info("Feed update completed")
-        await asyncio.sleep(600)  # Wait for 10 minutes (600 seconds)
+        await asyncio.sleep(60)
 
 
 # Run update_feeds_and_posts at startup
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Running startup tasks")
-    asyncio.create_task(update_feeds_and_posts())
-    task = asyncio.create_task(periodic_update())  # Start periodic updates
+    task = asyncio.create_task(periodic_update())
     try:
         yield
     finally:
