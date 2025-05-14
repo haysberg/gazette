@@ -21,5 +21,6 @@ feedlist = [
     { link = "https://fourth.international/french.rss", title = "IVe Internationale", image = "https://fourth.international/sites/default/files/favicon.ico" },
     { link = "https://npa-lanticapitaliste.org/rss.xml", title = "NPA", image = "https://npa-lanticapitaliste.org/sites/default/files/favicon_1.ico"},
     { link = "https://lafranceinsoumise.fr/feed/", title = "LFI"},
-    { link = "https://leftalliance.eu/feed/", title = "EU LEFT Alliance", image = "https://leftalliance.eu/wp-content/uploads/2025/04/cropped-FAVICON-ELA-1-32x32.png"}
+    { link = "https://leftalliance.eu/feed/", title = "EU LEFT Alliance", image = "https://leftalliance.eu/wp-content/uploads/2025/04/cropped-FAVICON-ELA-1-32x32.png"},
+    { link = "https://institutlaboetie.fr/feed/", title = "Institut La Boétie", image = "https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON-150x150.png" },
 ]

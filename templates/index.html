@@ -7,23 +7,26 @@
 	<title>📰 Nouvelles insoumises</title>
 	<meta name="application-name" content="news.insoumis.app">
 	<meta name="description"
-		content="Nouvelles Insoumises est un agrégateur de flux RSS qui regroupe les dernières nouvelles des médias alternatifs et indépendants.">
+		content="Nouvelles Insoumises est un agrégateur de flux qui regroupe les dernières nouvelles des médias alternatifs et indépendants de la gauche de rupture.">
 	<meta name="referrer" content="same-origin">
 	<link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 
 <body>
 	<header>
+		<h1 id="title">📰 Nouvelles insoumises</h1>
+		<hr style="margin-top: 0;">
+		<div class="liens-lfi">
+			<a href="https://programme.lafranceinsoumise.fr/" target="_blank"><B>Le programme</B></a>
+			<a href="https://programme.lafranceinsoumise.fr/municipales-2026/" target="_blank"><B>Municipales 2026</B></a>
+			<a id="ilb" href="https://institutlaboetie.fr/" target="_blank"><img src="https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON.png"><B> Institut La Boétie</B></B></a>
+			<a id="action-pop" href="https://actionpopulaire.fr/" target="_blank"><img src="https://raw.githubusercontent.com/lafranceinsoumise/actionpopulaire.fr/refs/heads/staging/agir/front/components/genericComponents/logos/action-populaire_primary_mini.svg"><B>Action Populaire</B></a>
+		</div>
 		<hr>
-			<div class="liens-lfi">
-				<a href="https://programme.lafranceinsoumise.fr/" target="_blank">Le programme</a>
-				<a href="https://actionpopulaire.fr/financer/" target="_blank">Faire un don à LFI</a> 
-				<a href="https://actionpopulaire.fr/" target="_blank">Action Populaire</a>
-				<a href="https://programme.lafranceinsoumise.fr/municipales-2026/" target="_blank">Municipales 2026</a>
-			</div>
-		<hr>
-		<details class="feed-list" open>
-			<summary>Sources</summary>
+		<details id="feed-list" open>
+			<summary>
+				<h2>Sources</h2>
+			</summary>
 			<div class="feed-details">
 				{% for feed in feeds %}
 				<a href="https://{{ feed.domain }}" target="_blank" title="{{ feed.subtitle }}">
@@ -42,27 +45,35 @@
 	</header>
 	<main>
 		{% if posts_last24h is defined and posts_last24h|length > 0 %}
-			{% with name="Ces dernières 24H", open=true, articles=posts_last24h %}
-				{% include "category.html" %}
-			{% endwith %}
+		{% with name="Ces dernières 24H", open=true, articles=posts_last24h %}
+		{% include "category.html" %}
+		{% endwith %}
 		{% endif %}
 
 		{% if posts_24_48h is defined and posts_24_48h|length > 0 %}
-			{% with name="Hier", open=false, articles=posts_24_48h %}
-				{% include "category.html" %}
-			{% endwith %}
+		{% with name="Hier", open=false, articles=posts_24_48h %}
+		{% include "category.html" %}
+		{% endwith %}
 		{% endif %}
 
 		{% if posts_later is defined and posts_later|length > 0 %}
-			{% with name="Précédemment cette semaine", open=false, articles=posts_later %}
-				{% include "category.html" %}
-			{% endwith %}
+		{% with name="Cette semaine", open=false, articles=posts_later %}
+		{% include "category.html" %}
+		{% endwith %}
 		{% endif %}
 	</main>
 	<footer>
 		<br>
-		<small class="center italique"><I>Fait avec amour sur GitHub !</I></small>
+		<small class="center italique"><I>Cette application est disponible en source ouverte <a href="https://github.com/haysberg/insoumis.news">sur GitHub</a>.</I></small>
 	</footer>
 </body>
+
+<script>
+	if (window.matchMedia && window.matchMedia("(max-width: 480px)").matches) {
+		console.log("Closing feed-list on phone.")
+		feed_element = document.getElementById("feed-list");
+		feed_element.open = false;
+	}
+</script>
 
 </html>

@@ -1,11 +1,11 @@
 <ul>
     {% for article in articles %}
-    <li>
+    <li class="article">
         <a href="{{ article.link }}" target="_blank">
-            <h2>{{ article.title }}</h2>
+            <h2 class="article-link">{{ article.title }}</h2>
         </a>
         <br>
-        <small>
+        <small class="article-source">
             {% if article.feed.image is defined and article.feed.image != "" %} <img style="vertical-align: middle;" src="{{ article.feed.image }}" width="16px" height="16px"> {% endif%} <a href="https://{{article.feed.domain}}" target="_blank"><I>{{article.feed.title}}</I></a>
         </small>
     </li>

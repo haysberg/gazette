@@ -136,7 +136,11 @@ async def update_served_files() -> None:
 
 async def parse_feed(feed_dict: dict) -> None:
     logger.debug(f"Parsing feed {feed_dict}")
-    data: dict = feedparser.parse(feed_dict["link"])
+    try:
+        data: dict = feedparser.parse(feed_dict["link"])
+    except ConnectionResetError as cre:
+        logger.error(f"Couldn't connect to {feed_dict["link"]}, reason is {cre}")
+        return None
 
     if data.bozo:
         logger.error(
