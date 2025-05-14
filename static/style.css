@@ -80,6 +80,7 @@ small>a:visited {
 
 .feed-details {
     flex-wrap: wrap;
+    row-gap: 0.5em;
 }
 
 .feed-card {
@@ -87,7 +88,8 @@ small>a:visited {
     flex-direction: row;
     flex-wrap: none;
     gap: 5px;
-    height: 1em;
+    height: 0.7em;
+    font-weight: bold;
 }
 
 #feed-list div {

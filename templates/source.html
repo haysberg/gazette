@@ -1,0 +1,9 @@
+<a href="https://{{ feed.domain }}" target="_blank" title="{{ feed.subtitle }}">
+    <div class="feed-card">
+        <div>
+            {% if feed.image is defined and feed.image != "" %}<img style="vertical-align: middle;"
+                src="{{ feed.image }}" width="16px" height="16px">{% endif%}
+            {{ feed.title }}
+        </div>
+    </div>
+</a>

@@ -25,20 +25,11 @@
 		<hr>
 		<details id="feed-list" open>
 			<summary id="sources">
-				<h2>Sources</h2>
+				<h2>Liste des sources</h2>
 			</summary>
 			<div class="feed-details">
 				{% for feed in feeds %}
-				<a href="https://{{ feed.domain }}" target="_blank" title="{{ feed.subtitle }}">
-					<div class="feed-card">
-						<div>
-							{% if feed.image is defined and feed.image != "" %}<img style="vertical-align: middle;"
-								src="{{ feed.image }}" width="16px" height="16px">{% endif%}
-							{{ feed.title }}
-						</div>
-
-					</div>
-				</a>
+					{% include "source.html" %}
 				{% endfor %}
 			</div>
 		</details>
@@ -64,13 +55,14 @@
 	</main>
 	<footer>
 		<br>
-		<small class="center italique"><I>Cette application est disponible en source ouverte <a href="https://github.com/haysberg/insoumis.news">sur GitHub</a>.</I></small>
+		<small class="center italique"><I>Cette application est disponible en source ouverte <a href="https://github.com/haysberg/insoumis.news">sur GitHub</a>.
+		Si vous souhaitez modifier le logiciel ou proposer une nouvelle feature, faites-le ici !</I></small>
 	</footer>
 </body>
 
 <script>
 	if (window.matchMedia && window.matchMedia("(max-width: 480px)").matches) {
-		console.log("Closing feed-list on phone.")
+		console.log("Fermeture des sources sur téléphone.")
 		feed_element = document.getElementById("feed-list");
 		feed_element.open = false;
 	}

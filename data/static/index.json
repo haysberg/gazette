@@ -2,6 +2,48 @@
     "posts_last24h": [
         {
             "score": 0,
+            "title": "Le conseil de la semaine : \u00ab\u00a0Koko n\u2019aime pas le capitalisme \u00e0 la plage\u00a0\u00bb",
+            "feed_link": "https://www.politis.fr/flux-rss-apps/",
+            "tags": [],
+            "link": "https://www.politis.fr/api/proxy/?articleID=380975",
+            "author": null,
+            "publication_date": "2025-05-14 17:00:00"
+        },
+        {
+            "score": 0,
+            "title": "Macron TF1 : que cache vraiment cette op\u00e9ration de com ?",
+            "feed_link": "https://api.lemediatv.fr/rss.xml",
+            "tags": [
+                {
+                    "term": "Macron",
+                    "scheme": "https://www.lemediatv.fr/tags/macron-HYGWa_RFQQOQ-Mob7xH02g",
+                    "label": null
+                }
+            ],
+            "link": "https://www.lemediatv.fr/emissions/2025/macron-tf1-que-cache-vraiment-cette-operation-de-com-uJV6VqIHRsW5OvClGbmnjA",
+            "author": null,
+            "publication_date": "2025-05-14 16:51:00"
+        },
+        {
+            "score": 0,
+            "title": "Contre Trump,  des villes et des \u00c9tats entrent en r\u00e9sistance",
+            "feed_link": "https://www.politis.fr/flux-rss-apps/",
+            "tags": [],
+            "link": "https://www.politis.fr/api/proxy/?articleID=379847",
+            "author": null,
+            "publication_date": "2025-05-14 16:00:00"
+        },
+        {
+            "score": 0,
+            "title": "Gaza : le \u00ab\u00a0sursaut de conscience\u00a0\u00bb de Delphine Horvilleur",
+            "feed_link": "https://www.politis.fr/flux-rss-apps/",
+            "tags": [],
+            "link": "https://www.politis.fr/api/proxy/?articleID=380958",
+            "author": null,
+            "publication_date": "2025-05-14 15:36:41"
+        },
+        {
+            "score": 0,
             "title": "\u00ab\u00a0Le spatial de d\u00e9fense\u00a0fait partie des fronts avanc\u00e9s du r\u00e9armement\u00a0\u00bb",
             "feed_link": "https://www.politis.fr/flux-rss-apps/",
             "tags": [],
@@ -11,12 +53,180 @@
         },
         {
             "score": 0,
+            "title": "La Chine prend la barre de la mondialisation",
+            "feed_link": "https://www.monde-diplomatique.fr/rss/",
+            "tags": [
+                {
+                    "term": "Chine",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "\u00c9tats-Unis",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Commerce international",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://www.monde-diplomatique.fr/2025/05/LAMBERT/68357",
+            "author": "Renaud Lambert",
+            "publication_date": "2025-05-14 14:56:02"
+        },
+        {
+            "score": 0,
+            "title": "Le dilemme des m\u00e9dias de gauche face \u00e0 \"La Meute\"",
+            "feed_link": "https://api.arretsurimages.net/api/public/rss/all-content",
+            "tags": [],
+            "link": "https://www.arretsurimages.net/articles/le-dilemme-des-medias-de-gauche-face-a-la-meute",
+            "author": null,
+            "publication_date": "2025-05-14 14:45:43"
+        },
+        {
+            "score": 0,
+            "title": "Y a-t-il un axe Washington-Moscou ?",
+            "feed_link": "https://www.monde-diplomatique.fr/rss/",
+            "tags": [
+                {
+                    "term": "G\u00e9opolitique",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Conflit russo-ukrainien 2022-",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Russie",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "\u00c9tats-Unis",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://www.monde-diplomatique.fr/2025/05/LARUELLE/68355",
+            "author": "Marl\u00e8ne Laruelle",
+            "publication_date": "2025-05-14 14:37:24"
+        },
+        {
+            "score": 0,
             "title": "\u00ab\u00a0Enzo\u00a0\u00bb, de Laurent Cantet, par Robin Campillo (Quinzaine des cin\u00e9astes)",
             "feed_link": "https://www.politis.fr/flux-rss-apps/",
             "tags": [],
             "link": "https://www.politis.fr/api/proxy/?articleID=380784",
             "author": null,
             "publication_date": "2025-05-14 14:26:55"
+        },
+        {
+            "score": 0,
+            "title": "Cannes s\u2019illumine, Gaza s\u2019\u00e9teint",
+            "feed_link": "https://linsoumission.fr/feed/",
+            "tags": [
+                {
+                    "term": "Culture",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Nos murs ont des oreilles",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://linsoumission.fr/2025/05/14/cannes-illumine-gaza-seteint/",
+            "author": "Nadim Fevrier",
+            "publication_date": "2025-05-14 14:23:11"
+        },
+        {
+            "score": 0,
+            "title": "Macron sur TF1 : de l'op\u00e9ration de communication \u00e0 la d\u00e9monstration de fragilit\u00e9",
+            "feed_link": "https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5",
+            "tags": [
+                {
+                    "term": "Politique",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Palestine",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Ukraine",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Emmanuel Macron",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Principal1",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Fran\u00e7ois Bayrou",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Macronisme",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Crise politique",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://www.revolutionpermanente.fr/Macron-sur-TF1-de-l-operation-de-communication-a-la-demonstration-de-fragilite",
+            "author": "Nathan Deas",
+            "publication_date": "2025-05-14 14:15:40"
+        },
+        {
+            "score": 0,
+            "title": "Trump critiqu\u00e9 jusque chez les Maga pour l\u2019avion luxueux qu\u2019il veut accepter du Qatar",
+            "feed_link": "https://www.courrierinternational.com/feed/rubrique/geopolitique/rss.xml",
+            "tags": [],
+            "link": "https://www.courrierinternational.com/article/etats-unis-trump-critique-jusque-chez-les-maga-pour-l-avion-luxueux-qu-il-veut-accepter-du-qatar_230895",
+            "author": null,
+            "publication_date": "2025-05-14 14:03:43"
+        },
+        {
+            "score": 0,
+            "title": "PR\u00c9SIDENTIELLE : TOUT FOIRER ET PARTIR AU SOLEIL",
+            "feed_link": "https://regards.fr/feed/",
+            "tags": [
+                {
+                    "term": "La revue",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Gauche(s)",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Pr\u00e9sidentielle 2027",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://regards.fr/presidentielle-tout-foirer-et-partir-au-soleil/?utm_source=rss&utm_medium=rss&utm_campaign=presidentielle-tout-foirer-et-partir-au-soleil",
+            "author": "la R\u00e9daction",
+            "publication_date": "2025-05-14 13:44:56"
         },
         {
             "score": 0,
@@ -117,6 +327,56 @@
         },
         {
             "score": 0,
+            "title": "Macron\u00a0dit oui \u00e0 M\u00e9nard, non \u00e0 Binet et vive Darmanin !",
+            "feed_link": "https://regards.fr/feed/",
+            "tags": [
+                {
+                    "term": "L'actu",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Emmanuel Macron",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://regards.fr/macron-dit-oui-a-menard-non-a-binet-et-vive-darmanin/?utm_source=rss&utm_medium=rss&utm_campaign=macron-dit-oui-a-menard-non-a-binet-et-vive-darmanin",
+            "author": "Catherine Tricot",
+            "publication_date": "2025-05-14 11:55:13"
+        },
+        {
+            "score": 0,
+            "title": "MANDELA DU JOUR",
+            "feed_link": "https://regards.fr/feed/",
+            "tags": [
+                {
+                    "term": "Br\u00e8ves",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://regards.fr/breve-du-jour/?utm_source=rss&utm_medium=rss&utm_campaign=breve-du-jour",
+            "author": "la R\u00e9daction",
+            "publication_date": "2025-05-14 11:54:16"
+        },
+        {
+            "score": 0,
+            "title": "LA LETTRE DU 14 MAI",
+            "feed_link": "https://regards.fr/feed/",
+            "tags": [
+                {
+                    "term": "La Lettre de Regards",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://regards.fr/la-lettre-du-14-mai/?utm_source=rss&utm_medium=rss&utm_campaign=la-lettre-du-14-mai",
+            "author": "la R\u00e9daction",
+            "publication_date": "2025-05-14 11:53:27"
+        },
+        {
+            "score": 0,
             "title": "Manuel Bompard recadre Laurent Wauquiez et la meute m\u00e9diatique, la SDJ de France 3 d\u00e9nonce les pressions de sa direction \u2013 La revue de presse de L\u2019Insoumission",
             "feed_link": "https://linsoumission.fr/feed/",
             "tags": [
@@ -210,6 +470,15 @@
             "link": "https://www.politis.fr/api/proxy/?articleID=380294",
             "author": null,
             "publication_date": "2025-05-14 09:00:00"
+        },
+        {
+            "score": 0,
+            "title": "Macron / TF1 : Gaza, guerre de seconde classe",
+            "feed_link": "https://api.arretsurimages.net/api/public/rss/all-content",
+            "tags": [],
+            "link": "https://www.arretsurimages.net/chroniques/obsessions/macron-tf1-gaza-guerre-de-seconde-classe",
+            "author": null,
+            "publication_date": "2025-05-14 08:50:07"
         },
         {
             "score": 0,
@@ -326,12 +595,30 @@
         },
         {
             "score": 0,
+            "title": "Victoire pour Utopia 56 !",
+            "feed_link": "https://www.politis.fr/flux-rss-apps/",
+            "tags": [],
+            "link": "https://www.politis.fr/api/proxy/?articleID=380967",
+            "author": null,
+            "publication_date": "2025-05-14 07:00:00"
+        },
+        {
+            "score": 0,
             "title": "Au Cachemire, des civils pris entre deux feux",
             "feed_link": "https://www.courrierinternational.com/feed/rubrique/geopolitique/rss.xml",
             "tags": [],
             "link": "https://www.courrierinternational.com/article/la-lettre-de-l-educ-au-cachemire-des-civils-pris-entre-deux-feux_230795",
             "author": null,
             "publication_date": "2025-05-14 06:00:09"
+        },
+        {
+            "score": 0,
+            "title": "Prisonniers sahraouis\u00a0: une marche contre l\u2019oubli",
+            "feed_link": "https://www.politis.fr/flux-rss-apps/",
+            "tags": [],
+            "link": "https://www.politis.fr/api/proxy/?articleID=380988",
+            "author": null,
+            "publication_date": "2025-05-14 06:00:00"
         },
         {
             "score": 0,
@@ -564,6 +851,46 @@
         },
         {
             "score": 0,
+            "title": "M. Trump en guerre contre la libre expression",
+            "feed_link": "https://www.monde-diplomatique.fr/rss/",
+            "tags": [
+                {
+                    "term": "Palestine",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Isra\u00ebl",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "R\u00e9pression",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Conflit isra\u00e9lo-palestinien",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Censure",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "\u00c9tats-Unis",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://www.monde-diplomatique.fr/2025/05/ALTERMAN/68354",
+            "author": "Eric Alterman",
+            "publication_date": "2025-05-13 18:23:51"
+        },
+        {
+            "score": 0,
             "title": "Gaza : Macron doit agir imm\u00e9diatement contre la colonisation et le d\u00e9placement forc\u00e9 des Palestiniens",
             "feed_link": "https://lafranceinsoumise.fr/feed/",
             "tags": [
@@ -709,6 +1036,31 @@
         },
         {
             "score": 0,
+            "title": "Le 29 mai 2005, un peuple disait \u00ab non \u00bb",
+            "feed_link": "https://www.monde-diplomatique.fr/rss/",
+            "tags": [
+                {
+                    "term": "Citoyennet\u00e9",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "\u00c9lections",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "France",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://www.monde-diplomatique.fr/2025/05/BELLON/68352",
+            "author": "Andr\u00e9 Bellon",
+            "publication_date": "2025-05-13 16:22:37"
+        },
+        {
+            "score": 0,
             "title": "Le \u00ab T\u00e9l\u00e9graphe \u00bb de l\u2019Insoumission \u2013 Retrouvez les actions et propositions de la France insoumise de la semaine",
             "feed_link": "https://linsoumission.fr/feed/",
             "tags": [
@@ -744,7 +1096,9 @@
             "link": "https://www.courrierinternational.com/article/moyen-orient-trump-est-il-courtise-ou-manipule-par-les-petromonarchies-du-golfe_230839",
             "author": null,
             "publication_date": "2025-05-13 16:11:57"
-        },
+        }
+    ],
+    "posts_24_48h": [
         {
             "score": 0,
             "title": "Que peut vraiment le droit face au fascisme\u2009?",
@@ -836,9 +1190,42 @@
             "link": "https://www.politis.fr/api/proxy/?articleID=379646",
             "author": null,
             "publication_date": "2025-05-13 15:00:00"
-        }
-    ],
-    "posts_24_48h": [
+        },
+        {
+            "score": 0,
+            "title": "Des algorithmes emplis de bont\u00e9",
+            "feed_link": "https://www.monde-diplomatique.fr/rss/",
+            "tags": [
+                {
+                    "term": "T\u00e9l\u00e9surveillance",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Litt\u00e9rature",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Technologies de l'information",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Informatique",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "\u00c9tats-Unis",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://www.monde-diplomatique.fr/2025/05/HIDALGO/68391",
+            "author": "Paloma Hermina Hidalgo",
+            "publication_date": "2025-05-13 14:20:38"
+        },
         {
             "score": 0,
             "title": "ArcelorMittal \u2013 Manuel Bompard exige la nationalisation, Bayrou refuse de r\u00e9pondre",
@@ -940,6 +1327,21 @@
         },
         {
             "score": 0,
+            "title": "Fin de vie : l\u2019\u00e9thique au d\u00e9fi du fric",
+            "feed_link": "https://regards.fr/feed/",
+            "tags": [
+                {
+                    "term": "L'actu",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://regards.fr/fin-de-vie-lethique-au-defi-du-fric/?utm_source=rss&utm_medium=rss&utm_campaign=fin-de-vie-lethique-au-defi-du-fric",
+            "author": "Pablo Pillaud-Vivien",
+            "publication_date": "2025-05-13 11:58:25"
+        },
+        {
+            "score": 0,
             "title": "Proche-Orient : apr\u00e8s Gaza, Trump et Isra\u00ebl veulent raser le Liban ?",
             "feed_link": "https://api.lemediatv.fr/rss.xml",
             "tags": [
@@ -955,12 +1357,66 @@
         },
         {
             "score": 0,
+            "title": "LA LETTRE DU 13 MAI",
+            "feed_link": "https://regards.fr/feed/",
+            "tags": [
+                {
+                    "term": "La Lettre de Regards",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://regards.fr/la-lettre-du-13-mai/?utm_source=rss&utm_medium=rss&utm_campaign=la-lettre-du-13-mai",
+            "author": "la R\u00e9daction",
+            "publication_date": "2025-05-13 11:49:11"
+        },
+        {
+            "score": 0,
             "title": "Extr\u00eame droite : comment le\u00a0patronat se\u00a0pr\u00e9pare \u00e0 collaborer",
             "feed_link": "https://www.politis.fr/flux-rss-apps/",
             "tags": [],
             "link": "https://www.politis.fr/api/proxy/?articleID=379827",
             "author": null,
             "publication_date": "2025-05-13 10:47:03"
+        },
+        {
+            "score": 0,
+            "title": "\u00ab\u00a0La d\u00e9l\u00e9gation du pouvoir nourrit le totalitarisme\u00a0\u00bb",
+            "feed_link": "https://regards.fr/feed/",
+            "tags": [
+                {
+                    "term": "La Midinale",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Extr\u00eame droite",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Gauche(s)",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "NPA",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://regards.fr/la-delegation-du-pouvoir-nourrit-le-totalitarisme/?utm_source=rss&utm_medium=rss&utm_campaign=la-delegation-du-pouvoir-nourrit-le-totalitarisme",
+            "author": "Pablo Pillaud-Vivien",
+            "publication_date": "2025-05-13 10:08:05"
+        },
+        {
+            "score": 0,
+            "title": "Fascistes/antifas\u00a0: le deux poids deux mesures des autorit\u00e9s",
+            "feed_link": "https://www.politis.fr/flux-rss-apps/",
+            "tags": [],
+            "link": "https://www.politis.fr/api/proxy/?articleID=380962",
+            "author": null,
+            "publication_date": "2025-05-13 10:00:00"
         },
         {
             "score": 0,
@@ -1297,6 +1753,26 @@
         },
         {
             "score": 0,
+            "title": "L'art de la chute",
+            "feed_link": "https://www.monde-diplomatique.fr/rss/",
+            "tags": [
+                {
+                    "term": "Mac\u00e9doine",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Litt\u00e9rature",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://www.monde-diplomatique.fr/2025/05/ROSSIGNOL/68378",
+            "author": "Jean-Philippe Rossignol",
+            "publication_date": "2025-05-12 18:31:12"
+        },
+        {
+            "score": 0,
             "title": "Comprendre le RIC des gilets jaunes en une infographie",
             "feed_link": "https://www.politis.fr/flux-rss-apps/",
             "tags": [],
@@ -1327,6 +1803,26 @@
             "link": "https://www.politis.fr/api/proxy/?articleID=380162",
             "author": null,
             "publication_date": "2025-05-12 18:14:40"
+        },
+        {
+            "score": 0,
+            "title": "Gatti l'unique",
+            "feed_link": "https://www.monde-diplomatique.fr/rss/",
+            "tags": [
+                {
+                    "term": "Personnalit\u00e9s",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Th\u00e9\u00e2tre",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://www.monde-diplomatique.fr/2025/05/COSTAZ/68393",
+            "author": "Gilles Costaz",
+            "publication_date": "2025-05-12 18:01:59"
         },
         {
             "score": 0,
@@ -1482,6 +1978,31 @@
         },
         {
             "score": 0,
+            "title": "Combats pour l'enchantement",
+            "feed_link": "https://www.monde-diplomatique.fr/rss/",
+            "tags": [
+                {
+                    "term": "Litt\u00e9rature",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Autobiographie",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Personnalit\u00e9s",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://www.monde-diplomatique.fr/2025/05/LONDON/68392",
+            "author": "Ernest London",
+            "publication_date": "2025-05-12 16:31:07"
+        },
+        {
+            "score": 0,
             "title": "Pour contrer le RN, la gauche redouble\u00a0de modes d\u2019action",
             "feed_link": "https://www.politis.fr/flux-rss-apps/",
             "tags": [],
@@ -1497,7 +2018,9 @@
             "link": "https://www.courrierinternational.com/article/etats-unis-milliards-et-palace-aerien-les-affaires-au-c-ur-de-la-tournee-de-trump-dans-le-golfe_230792",
             "author": null,
             "publication_date": "2025-05-12 16:11:03"
-        },
+        }
+    ],
+    "posts_later": [
         {
             "score": 0,
             "title": "Des n\u00e9ofascistes venus de toute l\u2019Europe d\u00e9filent \u00e0 Paris",
@@ -1529,6 +2052,35 @@
         },
         {
             "score": 0,
+            "title": "Cin\u00e9ma : La Clef tourne \u00e0 nouveau",
+            "feed_link": "https://www.politis.fr/flux-rss-apps/",
+            "tags": [],
+            "link": "https://www.politis.fr/api/proxy/?articleID=380970",
+            "author": null,
+            "publication_date": "2025-05-12 16:00:00"
+        },
+        {
+            "score": 0,
+            "title": "Pirates punks",
+            "feed_link": "https://www.monde-diplomatique.fr/rss/",
+            "tags": [
+                {
+                    "term": "Musique",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Soci\u00e9t\u00e9",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://www.monde-diplomatique.fr/2025/05/PIRONET/68384",
+            "author": "Olivier Pironet",
+            "publication_date": "2025-05-12 15:57:59"
+        },
+        {
+            "score": 0,
             "title": "La Colombie accorde l\u2019asile \u00e0 un ancien pr\u00e9sident panam\u00e9en condamn\u00e9 pour blanchiment",
             "feed_link": "https://www.courrierinternational.com/feed/rubrique/geopolitique/rss.xml",
             "tags": [],
@@ -1556,6 +2108,15 @@
         },
         {
             "score": 0,
+            "title": "Vol\u00e9e de reproches pour deux enqu\u00eates sur l'IA : \"Cash\" r\u00e9pond",
+            "feed_link": "https://api.arretsurimages.net/api/public/rss/all-content",
+            "tags": [],
+            "link": "https://www.arretsurimages.net/articles/volee-de-reproches-pour-deux-enquetes-sur-lia-cash-repond",
+            "author": null,
+            "publication_date": "2025-05-12 14:59:30"
+        },
+        {
+            "score": 0,
             "title": "\u00ab\u00a0Journalistes, reprenez la parole\u00a0!\u00a0\u00bb\u00a0: la Soci\u00e9t\u00e9 des Journalistes de France 3 d\u00e9nonce les pressions de leur direction pour invisibiliser les sujets qui d\u00e9rangent l\u2019officialit\u00e9 politico-m\u00e9diatique",
             "feed_link": "https://linsoumission.fr/feed/",
             "tags": [
@@ -1571,15 +2132,29 @@
         },
         {
             "score": 0,
-            "title": "\u00c0 Moscou, le pr\u00e9sident burkinab\u00e8, Ibrahim Traor\u00e9, a \u00e9t\u00e9 accueilli en \u201cguest-star\u201d",
-            "feed_link": "https://www.courrierinternational.com/feed/rubrique/geopolitique/rss.xml",
-            "tags": [],
-            "link": "https://www.courrierinternational.com/article/geopolitique-a-moscou-le-president-burkinabe-ibrahim-traore-a-ete-accueilli-en-guest-star_230794",
-            "author": null,
-            "publication_date": "2025-05-12 14:48:48"
-        }
-    ],
-    "posts_later": [
+            "title": "La porte et le mur",
+            "feed_link": "https://www.monde-diplomatique.fr/rss/",
+            "tags": [
+                {
+                    "term": "Art",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Photographie",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Chine",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://www.monde-diplomatique.fr/2025/05/PATAUD_CELERIER/68379",
+            "author": "Philippe Pataud C\u00e9l\u00e9rier",
+            "publication_date": "2025-05-12 14:31:03"
+        },
         {
             "score": 0,
             "title": "Nationalisation d\u2019ArcelorMittal \u2013 Les salari\u00e9s se rassembleront ce mardi 13 mai pour l\u2019exiger, devant le si\u00e8ge de la multinationale",
@@ -1707,6 +2282,15 @@
         },
         {
             "score": 0,
+            "title": "\"Ne  pas laisser passer\" : injuri\u00e9, un journaliste porte plainte contre Hubert Falco",
+            "feed_link": "https://api.arretsurimages.net/api/public/rss/all-content",
+            "tags": [],
+            "link": "https://www.arretsurimages.net/articles/ne-pas-laisser-passer-injurie-un-journaliste-porte-plainte-contre-hubert-falco",
+            "author": null,
+            "publication_date": "2025-05-12 13:17:52"
+        },
+        {
+            "score": 0,
             "title": "Doit-on d\u00e9fendre sa patrie ? \u00ab L'\u00c9tat voleur imp\u00e9rialiste \u00bb par Nikola\u00ef Boukharine",
             "feed_link": "https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5",
             "tags": [
@@ -1811,12 +2395,47 @@
         },
         {
             "score": 0,
+            "title": "La France insoumise face \u00e0 son destin : vivre ou mourir comme le PCF",
+            "feed_link": "https://regards.fr/feed/",
+            "tags": [
+                {
+                    "term": "L'actu",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "LFI",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://regards.fr/la-france-insoumise-face-a-son-destin-vivre-ou-mourir-comme-le-pcf/?utm_source=rss&utm_medium=rss&utm_campaign=la-france-insoumise-face-a-son-destin-vivre-ou-mourir-comme-le-pcf",
+            "author": "Roger Martelli",
+            "publication_date": "2025-05-12 10:23:15"
+        },
+        {
+            "score": 0,
             "title": "La R\u00e9publique italienne \u00e0 l\u2019ombre du fascisme",
             "feed_link": "https://www.politis.fr/flux-rss-apps/",
             "tags": [],
             "link": "https://www.politis.fr/api/proxy/?articleID=379158",
             "author": null,
             "publication_date": "2025-05-12 10:00:00"
+        },
+        {
+            "score": 0,
+            "title": "LA LETTRE DU 12 MAI",
+            "feed_link": "https://regards.fr/feed/",
+            "tags": [
+                {
+                    "term": "La Lettre de Regards",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://regards.fr/la-lettre-du-12-mai/?utm_source=rss&utm_medium=rss&utm_campaign=la-lettre-du-12-mai",
+            "author": "la R\u00e9daction",
+            "publication_date": "2025-05-12 09:54:54"
         },
         {
             "score": 0,
@@ -2180,6 +2799,15 @@
         },
         {
             "score": 0,
+            "title": "Sinclair, Horvilleur, Sfar : des paroles, mais apr\u00e8s ?",
+            "feed_link": "https://api.arretsurimages.net/api/public/rss/all-content",
+            "tags": [],
+            "link": "https://www.arretsurimages.net/chroniques/obsessions/sinclair-horvilleur-sfar-des-paroles-mais-apres",
+            "author": null,
+            "publication_date": "2025-05-11 12:23:04"
+        },
+        {
+            "score": 0,
             "title": "La politique de Trump : sous l'influence des \"lumi\u00e8res sombres\" et de son proph\u00e8te ?",
             "feed_link": "https://api.lemediatv.fr/rss.xml",
             "tags": [
@@ -2247,6 +2875,15 @@
             "link": "https://www.blast-info.fr/emissions/2025/sondages-medias-etc-comment-les-milliardaires-manipulent-la-democratie-zg-wYZcZSqOxLra9xZ0IwA",
             "author": null,
             "publication_date": "2025-05-11 08:51:19"
+        },
+        {
+            "score": 0,
+            "title": "\"On n'est pas d'accord !\" sur M6 : l'humiliation en guise de show t\u00e9l\u00e9",
+            "feed_link": "https://api.arretsurimages.net/api/public/rss/all-content",
+            "tags": [],
+            "link": "https://www.arretsurimages.net/chroniques/plateau-tele/on-nest-pas-daccord-sur-m6-lhumiliation-en-guise-de-show-tele",
+            "author": null,
+            "publication_date": "2025-05-11 07:48:09"
         },
         {
             "score": 0,
@@ -2372,6 +3009,35 @@
             "link": "https://www.blast-info.fr/articles/2025/revelations-et-contre-enquete-sur-dix-meurtres-de-militants-kanak-par-les-forces-de-lordre-en-2024-RQ_fSmeZTX-sD-ufQojdFw",
             "author": null,
             "publication_date": "2025-05-10 11:51:00"
+        },
+        {
+            "score": 0,
+            "title": "\"La Meute\" : Goebbels, Jakubowicz, M\u00e9lenchon et... Apolline de Malherbe",
+            "feed_link": "https://api.arretsurimages.net/api/public/rss/all-content",
+            "tags": [],
+            "link": "https://www.arretsurimages.net/chroniques/sur-le-gril/la-meute-goebbels-jakubowicz-melenchon-et-apolline-de-malherbe",
+            "author": null,
+            "publication_date": "2025-05-10 11:29:01"
+        },
+        {
+            "score": 0,
+            "title": "LFI : foin de d\u00e9mocratie \u2013 8 mai 2025 : le monde se r\u00e9organise",
+            "feed_link": "https://regards.fr/feed/",
+            "tags": [
+                {
+                    "term": "Le D\u00e9brief",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "LFI",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://regards.fr/lfi-foin-de-democratie-8-mai-2025-le-monde-se-reorganise/?utm_source=rss&utm_medium=rss&utm_campaign=lfi-foin-de-democratie-8-mai-2025-le-monde-se-reorganise",
+            "author": "la R\u00e9daction",
+            "publication_date": "2025-05-10 11:15:00"
         },
         {
             "score": 0,
@@ -2560,6 +3226,41 @@
         },
         {
             "score": 0,
+            "title": "Un autre protectionnisme est toujours possible",
+            "feed_link": "https://www.monde-diplomatique.fr/rss/",
+            "tags": [
+                {
+                    "term": "Commerce international",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Accord international",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "\u00c9tats-Unis",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Protectionnisme",
+                    "scheme": null,
+                    "label": null
+                },
+                {
+                    "term": "Monde",
+                    "scheme": null,
+                    "label": null
+                }
+            ],
+            "link": "https://www.monde-diplomatique.fr/2025/05/BREVILLE/68401",
+            "author": "Beno\u00eet Br\u00e9ville",
+            "publication_date": "2025-05-09 18:23:43"
+        },
+        {
+            "score": 0,
             "title": "Plaintes \u00ab class\u00e9es sans suite \u00bb : comment ce d\u00e9put\u00e9 rend justice aux citoyens",
             "feed_link": "https://api.lemediatv.fr/rss.xml",
             "tags": [
@@ -2670,6 +3371,15 @@
         },
         {
             "score": 0,
+            "title": "\u00c0 la t\u00e9l\u00e9 : Gaza, une info comme une autre",
+            "feed_link": "https://api.arretsurimages.net/api/public/rss/all-content",
+            "tags": [],
+            "link": "https://www.arretsurimages.net/emissions/arret-sur-images/a-la-tele-gaza-une-info-comme-une-autre",
+            "author": null,
+            "publication_date": "2025-05-09 16:29:20"
+        },
+        {
+            "score": 0,
             "title": "Gauche \u00ab\u00a0antis\u00e9mite\u00a0\u00bb : l\u2019amn\u00e9sie tr\u00e8s suspecte des m\u00e9dias dominants",
             "feed_link": "https://api.blast-info.fr/rss.xml",
             "tags": [
@@ -2721,6 +3431,15 @@
             "link": "https://linsoumission.fr/2025/05/09/sncf-cheminots-greve-49-3/",
             "author": "Nadim Fevrier",
             "publication_date": "2025-05-09 14:51:00"
+        },
+        {
+            "score": 0,
+            "title": "\u00c9mission antis\u00e9mitisme : et si on recadrait le d\u00e9bat ?",
+            "feed_link": "https://api.arretsurimages.net/api/public/rss/all-content",
+            "tags": [],
+            "link": "https://www.arretsurimages.net/emissions/arret-sur-images/emission-antisemitisme-et-si-on-recadrait-le-debat",
+            "author": null,
+            "publication_date": "2025-05-09 14:23:13"
         },
         {
             "score": 0,
@@ -3450,6 +4169,66 @@
         },
         {
             "score": 0,
+            "title": "La spoliation des locataires juifs \u2013 avec Isabelle Backouche",
+            "feed_link": "https://spectremedia.org/feed/podcast/",
+            "tags": [
+                {
+                    "term": "Antis\u00e9mitisme",
+                    "scheme": "http://www.itunes.com/",
+                    "label": null
+                },
+                {
+                    "term": "Fascisme",
+                    "scheme": "http://www.itunes.com/",
+                    "label": null
+                },
+                {
+                    "term": "France",
+                    "scheme": "http://www.itunes.com/",
+                    "label": null
+                },
+                {
+                    "term": "Guerre",
+                    "scheme": "http://www.itunes.com/",
+                    "label": null
+                },
+                {
+                    "term": "Histoire",
+                    "scheme": "http://www.itunes.com/",
+                    "label": null
+                },
+                {
+                    "term": "Injustice",
+                    "scheme": "http://www.itunes.com/",
+                    "label": null
+                },
+                {
+                    "term": "Logement",
+                    "scheme": "http://www.itunes.com/",
+                    "label": null
+                },
+                {
+                    "term": "Nazisme",
+                    "scheme": "http://www.itunes.com/",
+                    "label": null
+                },
+                {
+                    "term": "Occupation",
+                    "scheme": "http://www.itunes.com/",
+                    "label": null
+                },
+                {
+                    "term": "R\u00e9novation urbaine",
+                    "scheme": "http://www.itunes.com/",
+                    "label": null
+                }
+            ],
+            "link": "https://spectremedia.org/podcast/la-spoliation-des-locataires-juifs-avec-isabelle-backouche/",
+            "author": "Spectre",
+            "publication_date": "2025-05-08 10:15:32"
+        },
+        {
+            "score": 0,
             "title": "13\u00a0mai \u00e0 Poitiers\u00a0: \u00ab\u00a0Quand les mots font d\u00e9sordre\u00a0\u00bb",
             "feed_link": "https://www.politis.fr/flux-rss-apps/",
             "tags": [],
@@ -3524,7 +4303,16 @@
         },
         {
             "score": 0,
-            "title": "Rencontre & d\u00e9dicace \u00ab Extr\u00eame droite : la r\u00e9sistible ascension\u00a0\u00bb avec Cassandre Begous, Fanny Gallot et Nad\u00e8ge Abomangoli",
+            "title": "Paul de Saint Sernin et Nicolas Bedos : retour sur une s\u00e9quence pol\u00e9mique",
+            "feed_link": "https://api.arretsurimages.net/api/public/rss/all-content",
+            "tags": [],
+            "link": "https://www.arretsurimages.net/articles/paul-de-saint-sernin-et-nicolas-bedos-retour-sur-une-sequence-polemique",
+            "author": null,
+            "publication_date": "2025-05-08 07:56:07"
+        },
+        {
+            "score": 0,
+            "title": "Rencontre & d\u00e9dicace \u00ab Extr\u00eame droite : la r\u00e9sistible ascension\u00a0\u00bb avec Fanny Gallot, Nad\u00e8ge Abomangoli et Louis Boyard",
             "feed_link": "https://institutlaboetie.fr/feed/",
             "tags": [
                 {
@@ -3533,12 +4321,12 @@
                     "label": null
                 },
                 {
-                    "term": "Cassandre Begous",
+                    "term": "Fanny Gallot",
                     "scheme": null,
                     "label": null
                 },
                 {
-                    "term": "Fanny Gallot",
+                    "term": "Louis Boyard",
                     "scheme": null,
                     "label": null
                 },
@@ -4036,45 +4824,16 @@
             "link": "https://www.politis.fr/api/proxy/?articleID=378958",
             "author": null,
             "publication_date": "2025-05-07 16:21:39"
-        },
-        {
-            "score": 0,
-            "title": "Urgence Palestine et la Jeune Garde dans le viseur de Bruno Retailleau",
-            "feed_link": "https://www.politis.fr/flux-rss-apps/",
-            "tags": [],
-            "link": "https://www.politis.fr/api/proxy/?articleID=379065",
-            "author": null,
-            "publication_date": "2025-05-07 15:54:08"
-        },
-        {
-            "score": 0,
-            "title": "C\u00e9dric Durand\u00a0: \u00ab\u00a0Nous sommes d\u00e9pendants des plateformes comme autrefois des seigneurs\u00a0\u00bb",
-            "feed_link": "https://www.politis.fr/flux-rss-apps/",
-            "tags": [],
-            "link": "https://www.politis.fr/api/proxy/?articleID=379021",
-            "author": null,
-            "publication_date": "2025-05-07 15:40:26"
-        },
-        {
-            "score": 0,
-            "title": "\u00ab\u00a0Il y a en France une passion d\u2019enfermer\u00a0\u00bb",
-            "feed_link": "https://www.politis.fr/flux-rss-apps/",
-            "tags": [],
-            "link": "https://www.politis.fr/api/proxy/?articleID=378990",
-            "author": null,
-            "publication_date": "2025-05-07 15:00:04"
-        },
-        {
-            "score": 0,
-            "title": "Darmanin, ministre hyperactif cherche voix pour l\u2019\u00c9lys\u00e9e",
-            "feed_link": "https://www.politis.fr/flux-rss-apps/",
-            "tags": [],
-            "link": "https://www.politis.fr/api/proxy/?articleID=378935",
-            "author": null,
-            "publication_date": "2025-05-07 14:38:15"
         }
     ],
     "feeds": [
+        {
+            "subtitle": "",
+            "domain": "spectremedia.org",
+            "title": "Spectre",
+            "link": "https://spectremedia.org/feed/podcast/",
+            "image": "https://spectremedia.org/wp-content/uploads/2022/01/spectre_cover.png"
+        },
         {
             "subtitle": "Un journal pour d\u00e9fricher les id\u00e9es, nourrir les combats",
             "domain": "politis.fr",
@@ -4228,6 +4987,27 @@
             "title": "Institut La Bo\u00e9tie",
             "link": "https://institutlaboetie.fr/feed/",
             "image": "https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON-150x150.png"
+        },
+        {
+            "subtitle": "Site de critique m\u00e9dia ind\u00e9pendant.",
+            "domain": "arretsurimages.net",
+            "title": "Arr\u00eat sur Images",
+            "link": "https://api.arretsurimages.net/api/public/rss/all-content",
+            "image": "https://www.arretsurimages.net/assets/img/favicon/favicon-32x32.png"
+        },
+        {
+            "subtitle": "Mensuel critique d'informations et d'analyses",
+            "domain": "monde-diplomatique.fr",
+            "title": "Le monde diplomatique",
+            "link": "https://www.monde-diplomatique.fr/rss/",
+            "image": "https://www.monde-diplomatique.fr/favicon.ico"
+        },
+        {
+            "subtitle": "Ind\u00e9pendant et engag\u00e9 depuis 1928",
+            "domain": "regards.fr",
+            "title": "Regards",
+            "link": "https://regards.fr/feed/",
+            "image": "https://regards.fr/wp-content/uploads/2024/10/cropped-cropped-favicon-32x32.png"
         }
     ]
 }
