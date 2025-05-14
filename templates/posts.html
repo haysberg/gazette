@@ -6,7 +6,9 @@
         </a>
         <br>
         <small class="article-source">
-            {% if article.feed.image is defined and article.feed.image != "" %} <img style="vertical-align: middle;" src="{{ article.feed.image }}" width="16px" height="16px"> {% endif%} <a href="https://{{article.feed.domain}}" target="_blank"><I>{{article.feed.title}}</I></a>
+            <a href="https://{{article.feed.domain}}" target="_blank">
+                {% if article.feed.image is defined and article.feed.image != "" %} <img src="{{ article.feed.image }}" width="16px" height="16px"> {% endif%} <I>{{article.feed.title}}</I>
+            </a>
         </small>
     </li>
     {% endfor %}

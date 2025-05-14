@@ -155,10 +155,22 @@ summary {
 }
 
 .article-source {
-    display: flex;
-    gap: 3px;
-    align-items: center;
     padding: 0;
+}
+
+.article-source a {
+    display: flex;
+    gap: 0.2em;
+    align-items: center;
+}
+
+.article-source a * {
+    padding: 0;
+    margin: 0;
+}
+
+.article-source a I {
+    height: 21px;
 }
 
 .liens-lfi img {
