@@ -5352,183 +5352,183 @@
         {
             "domain": "spectremedia.org",
             "subtitle": "",
-            "link": "https://spectremedia.org/feed/podcast/",
             "title": "Spectre",
+            "link": "https://spectremedia.org/feed/podcast/",
             "image": "https://spectremedia.org/wp-content/uploads/2022/01/spectre_cover.png"
         },
         {
             "domain": "politis.fr",
             "subtitle": "Un journal pour d\u00e9fricher les id\u00e9es, nourrir les combats",
-            "link": "https://www.politis.fr/flux-rss-apps/",
             "title": "Politis",
+            "link": "https://www.politis.fr/flux-rss-apps/",
             "image": "https://www.politis.fr/favicon-32x32.png"
         },
         {
             "domain": "contretemps.eu",
             "subtitle": "REVUE DE CRITIQUE COMMUNISTE",
-            "link": "http://www.contretemps.eu/rss",
             "title": "Contretemps",
+            "link": "http://www.contretemps.eu/rss",
             "image": "https://www.contretemps.eu/wp-content/uploads/ctt.ico"
         },
         {
             "domain": "linsoumission.fr",
             "subtitle": "La plateforme multim\u00e9dia insoumise",
-            "link": "https://linsoumission.fr/feed/",
             "title": "L'insoumission",
+            "link": "https://linsoumission.fr/feed/",
             "image": "https://linsoumission.fr/wp-content/uploads/2025/02/cropped-Pharefavicon-32x32.png"
         },
         {
             "domain": "melenchon.fr",
             "subtitle": "",
-            "link": "http://melenchon.fr/feed/",
             "title": "JLM Le blog",
+            "link": "http://melenchon.fr/feed/",
             "image": "https://melenchon.fr/wp-content/uploads/2024/10/cropped-turtle2-32x32.png"
         },
         {
             "domain": "lecturesantiimperialistes.org",
             "subtitle": "",
-            "link": "https://lecturesantiimperialistes.org/feed/",
             "title": "Lectures Anti-Imp\u00e9rialistes",
+            "link": "https://lecturesantiimperialistes.org/feed/",
             "image": "https://lecturesantiimperialistes.org/wp-content/uploads/2024/10/cropped-Logo_simple_rouge-32x32.png"
         },
         {
             "domain": "afriquexxi.info",
             "subtitle": "",
-            "link": "https://afriquexxi.info/?page=backend&lang=fr",
             "title": "Afrique XXI",
+            "link": "https://afriquexxi.info/?page=backend&lang=fr",
             "image": "https://afriquexxi.info/squelettes-2021/favicon/favicon-32x32.png"
         },
         {
             "domain": "frustrationmagazine.fr",
             "subtitle": "Frustration Magazine, m\u00e9dia ind\u00e9pendant et offensif qui relate la guerre des classes.",
-            "link": "https://www.frustrationmagazine.fr/feed.xml",
             "title": "Frustration Magazine",
+            "link": "https://www.frustrationmagazine.fr/feed.xml",
             "image": "https://frustrationmagazine.fr/img/favicon_light.png"
         },
         {
             "domain": "revue-ballast.fr",
             "subtitle": "Tenir t\u00eate, f\u00e9d\u00e9rer, amorcer",
-            "link": "https://www.revue-ballast.fr/feed/",
             "title": "BALLAST",
+            "link": "https://www.revue-ballast.fr/feed/",
             "image": "https://www.revue-ballast.fr/wp-content/uploads/2016/09/ballast_favicon.ico"
         },
         {
             "domain": "orientxxi.info",
             "subtitle": "En fran\u00e7ais, arabe, anglais, persan, espagnol et italien. Reportages, enqu\u00eates et analyses sur les mutations du Maghreb et du Proche-Orient\u00a0: politique, \u00e9conomie, soci\u00e9t\u00e9, culture, islam, terrorisme",
-            "link": "https://orientxxi.info/?page=backend&lang=fr",
             "title": "Orient XXI",
+            "link": "https://orientxxi.info/?page=backend&lang=fr",
             "image": "https://orientxxi.info/local/cache-vignettes/L144xH144/siteon0-c1872.jpg?1731672836"
         },
         {
             "domain": "survie.org",
             "subtitle": "Cr\u00e9\u00e9e il y a plus de 30 ans, l'association Survie d\u00e9crypte l'actualit\u00e9 franco-africaine et se mobilise contre la Fran\u00e7afrique, qu'elle a fait conna\u00eetre. Elle compte plus de 1300 adh\u00e9rent.e.s et une vingtaine de groupes locaux partout en France.",
-            "link": "https://survie.org/spip.php?page=backend",
             "title": "Survie",
+            "link": "https://survie.org/spip.php?page=backend",
             "image": "https://survie.org/local/cache-vignettes/L144xH144/siteon0-2c919.png?1691664216"
         },
         {
             "domain": "revolutionpermanente.fr",
             "subtitle": "",
-            "link": "https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5",
             "title": "R\u00e9volution Permanente",
+            "link": "https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5",
             "image": "https://revolutionpermanente.fr/squelettes/assets/img/favicon.ico"
         },
         {
             "domain": "orgasolitrans.fr",
             "subtitle": "",
-            "link": "https://orgasolitrans.fr/index.php/feed/",
             "title": "L'OST",
+            "link": "https://orgasolitrans.fr/index.php/feed/",
             "image": "https://orgasolitrans.fr/wp-content/uploads/2025/03/cropped-ost_v2-32x32.png"
         },
         {
             "domain": "lemediatv.fr",
             "subtitle": "Le M\u00e9dia n'appartient ni \u00e0 l'\u00c9tat, ni \u00e0 des milliardaires. Engag\u00e9 en faveur des luttes sociales et \u00e9cologiques, il offre un regard diff\u00e9rent des m\u00e9dias dominants.",
-            "link": "https://api.lemediatv.fr/rss.xml",
             "title": "Le M\u00e9dia",
+            "link": "https://api.lemediatv.fr/rss.xml",
             "image": "https://ressources.lemediatv.fr/logo-microdata.png"
         },
         {
             "domain": "streetpress.com",
             "subtitle": "",
-            "link": "https://backend.streetpress.com/rss.xml",
             "title": "StreetPress",
+            "link": "https://backend.streetpress.com/rss.xml",
             "image": "https://www.streetpress.com/favicon.ico"
         },
         {
             "domain": "blast-info.fr",
             "subtitle": "Blast est un site de presse en ligne d\u2019information g\u00e9n\u00e9rale et une web tv cr\u00e9\u00e9 par le journaliste Denis Robert. M\u00e9dia libre et ind\u00e9pendant, affranchi de toute pression industrielle ou financi\u00e8re, Blast fait du journalisme sans complaisance avec aucun pouvoir.",
-            "link": "https://api.blast-info.fr/rss.xml",
             "title": "BLAST",
+            "link": "https://api.blast-info.fr/rss.xml",
             "image": "https://api.blast-info.fr/static/logo-blast-black.png"
         },
         {
             "domain": "courrierinternational.com",
             "subtitle": "Derniers articles parus sur Courrier international",
-            "link": "https://www.courrierinternational.com/feed/rubrique/geopolitique/rss.xml",
             "title": "Courrier International",
+            "link": "https://www.courrierinternational.com/feed/rubrique/geopolitique/rss.xml",
             "image": "https://www.courrierinternational.com/bucket/assets/e04cb3bc293a7e5fc5bb7702ca8cca95c7ddd8bc/img/logos/favicon.ico"
         },
         {
             "domain": "strass-syndicat.org",
             "subtitle": "",
-            "link": "https://strass-syndicat.org/feed/",
             "title": "Le STRASS",
+            "link": "https://strass-syndicat.org/feed/",
             "image": "https://strass-syndicat.org/wp-content/uploads/2020/04/cropped-fav-strass-32x32.png"
         },
         {
             "domain": "fourth.international",
             "subtitle": "",
-            "link": "https://fourth.international/french.rss",
             "title": "IVe Internationale",
+            "link": "https://fourth.international/french.rss",
             "image": "https://fourth.international/sites/default/files/favicon.ico"
         },
         {
             "domain": "npa-lanticapitaliste.org",
             "subtitle": "",
-            "link": "https://npa-lanticapitaliste.org/rss.xml",
             "title": "NPA",
+            "link": "https://npa-lanticapitaliste.org/rss.xml",
             "image": "https://npa-lanticapitaliste.org/sites/default/files/favicon_1.ico"
         },
         {
             "domain": "lafranceinsoumise.fr",
             "subtitle": "Rejoignez la France insoumise",
-            "link": "https://lafranceinsoumise.fr/feed/",
             "title": "LFI",
+            "link": "https://lafranceinsoumise.fr/feed/",
             "image": "https://lafranceinsoumise.fr/wp-content/uploads/2024/11/cropped-TOUT-PETIT-LOGO-32x32.png"
         },
         {
             "domain": "leftalliance.eu",
             "subtitle": "For the people, for the planet",
-            "link": "https://leftalliance.eu/feed/",
             "title": "EU LEFT Alliance",
+            "link": "https://leftalliance.eu/feed/",
             "image": "https://leftalliance.eu/wp-content/uploads/2025/04/cropped-FAVICON-ELA-1-32x32.png"
         },
         {
             "domain": "institutlaboetie.fr",
             "subtitle": "Fondation insoumise",
-            "link": "https://institutlaboetie.fr/feed/",
             "title": "Institut La Bo\u00e9tie",
+            "link": "https://institutlaboetie.fr/feed/",
             "image": "https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON-150x150.png"
         },
         {
             "domain": "arretsurimages.net",
             "subtitle": "Site de critique m\u00e9dia ind\u00e9pendant.",
-            "link": "https://api.arretsurimages.net/api/public/rss/all-content",
             "title": "Arr\u00eat sur Images",
+            "link": "https://api.arretsurimages.net/api/public/rss/all-content",
             "image": "https://www.arretsurimages.net/assets/img/favicon/favicon-32x32.png"
         },
         {
             "domain": "monde-diplomatique.fr",
             "subtitle": "Mensuel critique d'informations et d'analyses",
-            "link": "https://www.monde-diplomatique.fr/rss/",
             "title": "Le monde diplomatique",
+            "link": "https://www.monde-diplomatique.fr/rss/",
             "image": "https://www.monde-diplomatique.fr/favicon.ico"
         },
         {
             "domain": "regards.fr",
             "subtitle": "Ind\u00e9pendant et engag\u00e9 depuis 1928",
-            "link": "https://regards.fr/feed/",
             "title": "Regards",
+            "link": "https://regards.fr/feed/",
             "image": "https://regards.fr/wp-content/uploads/2024/10/cropped-cropped-favicon-32x32.png"
         }
     ]
