@@ -4,7 +4,7 @@ import json
 import os
 from time import mktime
 import feedparser
-from sqlmodel import Session, delete, insert, select
+from sqlmodel import Session, delete, select
 from models.models import Feed, Post
 from utils.db import engine
 from utils.logs import logger
@@ -14,7 +14,7 @@ import tomllib
 from datetime import datetime
 
 # Paths for static files
-STATIC_DIR = "data/static"
+STATIC_DIR = "data"
 os.makedirs(STATIC_DIR, exist_ok=True)
 HTML_FILE = os.path.join(STATIC_DIR, "index.html")
 JSON_FILE = os.path.join(STATIC_DIR, "index.json")

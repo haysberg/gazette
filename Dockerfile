@@ -11,6 +11,7 @@ COPY templates ./templates/
 COPY utils ./utils/
 COPY models ./models/
 COPY static ./static/
+COPY data ./data/
 
 
 RUN uv sync --frozen --no-cache --no-dev

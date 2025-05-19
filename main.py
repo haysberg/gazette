@@ -1,10 +1,8 @@
-import locale
 import asyncio
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from utils.utils import STATIC_DIR, update_feeds_and_posts
+from utils.utils import update_feeds_and_posts
 from utils.logs import configure_logging, logger
 from fastapi import FastAPI
 
@@ -32,4 +30,4 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 app.mount('/app', app)
 app.mount("/static", StaticFiles(directory="static"), name="static")
-app.mount("/", StaticFiles(directory="data/static", html=True), name="root")
+app.mount("/", StaticFiles(directory="data", html=True), name="root")
