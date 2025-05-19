@@ -52,18 +52,19 @@
     ],
     "id": "/",
     "start_url": "/",
+    "scope:": "/",
     "orientation": "any",
     "description": "Gazette Insoumise est un agrégateur de flux qui regroupe les dernières nouvelles des médias alternatifs et indépendants de la gauche de rupture.",
     "screenshots": [
         {
-            "src": "screenshots/phone_screenshot.png",
+            "src": "static/screenshots/phone_screenshot.png",
             "sizes": "1082x2400",
             "form_factor": "narrow",
             "label": "Accueil Gazette LFI sur mobile",
             "platform": "android"
         },
         {
-            "src": "screenshots/desktop_screenshot.png",
+            "src": "static/screenshots/desktop_screenshot.png",
             "sizes": "2543x1318",
             "form_factor": "wide",
             "label": "Accueil Gazette LFI sur ordinateur",
@@ -73,7 +74,8 @@
     "related_applications": [
         {
             "platform": "webapp",
-            "url": "https://news.insoumis.app/static/site.webmanifest"
+            "url": "https://news.insoumis.app/manifest.json",
+            "id": "/"
         }
     ],
     "prefer_related_applications": true,

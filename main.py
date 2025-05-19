@@ -30,11 +30,6 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+app.mount('/app', app)
 app.mount("/static", StaticFiles(directory="static"), name="static")
-
-
-@app.get("/")
-async def index(json: bool = False):
-    if json:
-        return FileResponse(STATIC_DIR + "/index.json")
-    return FileResponse(STATIC_DIR + "/index.html")
+app.mount("/", StaticFiles(directory="data/static", html=True), name="root")

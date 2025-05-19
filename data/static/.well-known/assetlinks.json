@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.query_webapk"],
     "target": {
       "namespace": "web",
-      "site": "https://news.insoumis.app/static/site.webmanifest"
+      "site": "https://news.insoumis.app"
     }
   }
 ]

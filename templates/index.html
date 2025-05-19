@@ -19,7 +19,10 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="static/icons/favicon_96x96.png" />
 	<link rel="icon" type="image/png" sizes="150x150" href="static/icons/mstile_150x150.png" />
 	<link rel="icon" type="image/png" sizes="512x512" href="static/icons/safari_pinned_tab.png" />
-	<link rel="manifest" href="static/site.webmanifest">
+	<link rel="manifest" href="manifest.json">
+	<meta name="theme-color" content="#7b13d6">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="author" content="haysberg">
 </head>
 
 <body>
@@ -92,8 +95,12 @@
 		feed_element = document.getElementById("feed-list");
 		feed_element.open = false;
 	}
+</script>
 
-	if (typeof window.onbeforeinstallprompt == 'object') {
+<script>
+	const isPWA = !!(window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone);
+
+	if (typeof window.onbeforeinstallprompt == 'object' && !isPWA) {
 		console.log("This browser supports the beforeinstallprompt event.");
 		document.getElementById("install-button").style.display = "inline";
 
@@ -103,10 +110,9 @@
 		window.addEventListener("beforeinstallprompt", (event) => {
 			event.preventDefault();
 			installPrompt = event;
-			installButton.removeAttribute("hidden");
-		});
+			
 
-		installButton.addEventListener("click", async () => {
+			installButton.addEventListener("click", async () => {
 			if (!installPrompt) {
 				return;
 			}
@@ -114,6 +120,8 @@
 			console.log(`Install prompt was: ${result.outcome}`);
 			installPrompt = null;
 			installButton.setAttribute("hidden", "");
+		});
+			installButton.removeAttribute("hidden");
 		});
 	} else {
 		console.log("This browser does not support the beforeinstallprompt event.");
