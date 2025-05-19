@@ -31,11 +31,11 @@
 			<a href="https://programme.lafranceinsoumise.fr/municipales-2026/" target="_blank"><B>🏛️ Municipales 2026</B></a>
 			<a id="ilb" href="https://institutlaboetie.fr/" target="_blank">
 				<img src="https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON.png">
-				<B> Institut La Boétie</B>
+				<B>Institut La Boétie</B>
 			</a>
 			<a id="action-pop" href="https://actionpopulaire.fr/" target="_blank">
 				<img src="https://raw.githubusercontent.com/lafranceinsoumise/actionpopulaire.fr/refs/heads/staging/agir/front/components/genericComponents/logos/action-populaire_primary_mini.svg">
-				<B>Action Populaire</B>
+				<B>Action Pop</B>
 			</a>
 			<a id="install-button"><B>📲 Créer un raccourci</B></a>
 		</div>
@@ -91,31 +91,38 @@
 		feed_element.open = false;
 	}
 
-	const relatedApps = await navigator.getInstalledRelatedApps();
+	// Check if browser window has beforeinstallprompt event in its attributes
+	if (window.matchMedia && window.matchMedia("(display-mode: browser)").matches) {
+		// Handling install prompt on button press
+		let installPrompt = null;
+		const installButton = document.querySelector("#install-button");
 
-	// Handling install prompt on button press
-	let installPrompt = null;
-	const installButton = document.querySelector("#install-button");
+		window.addEventListener("beforeinstallprompt", (event) => {
+			event.preventDefault();
+			installPrompt = event;
+			installButton.removeAttribute("hidden");
+		});
 
-	window.addEventListener("beforeinstallprompt", (event) => {
-		event.preventDefault();
-		installPrompt = event;
-		installButton.removeAttribute("hidden");
-	});
-
-	installButton.addEventListener("click", async () => {
-		if (!installPrompt) {
-			return;
-		}
-		const result = await installPrompt.prompt();
-		console.log(`Install prompt was: ${result.outcome}`);
-		installPrompt = null;
+		installButton.addEventListener("click", async () => {
+			if (!installPrompt) {
+				return;
+			}
+			const result = await installPrompt.prompt();
+			console.log(`Install prompt was: ${result.outcome}`);
+			installPrompt = null;
+			installButton.setAttribute("hidden", "");
+		});
+	} else {
+		console.log("Display mode is not browser.");
+		//Hide install button
+		const installButton = document.querySelector("#install-button");
 		installButton.setAttribute("hidden", "");
-	});
-	
-	if (relatedApps.length > 0) {
-		document.getElementById("install-button").style.display = "none";
 	}
+
+	if ('getInstalledRelatedApps' in window.navigator) {
+  const relatedApps = navigator.getInstalledRelatedApps();
+  console.log(relatedApps);
+}
 </script>
 
 </html>

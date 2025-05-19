@@ -86,7 +86,6 @@ small>a:visited {
 .feed-card {
     display: flex;
     flex-direction: row;
-    flex-wrap: none;
     gap: 5px;
     height: 0.7em;
     font-weight: bold;
@@ -267,6 +266,15 @@ hr {
 
     #action-pop img {
         margin: 0;
+    }
+
+    .liens-lfi {
+        gap: 0.6em;
+        row-gap: 0.6em;
+    }
+
+    .liens-lfi * {
+        height: 1.5rem;
     }
 }
 

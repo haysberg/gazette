@@ -43,8 +43,8 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "theme_color": "#7b13d6",
+    "background_color": "#7b13d6",
     "display": "fullscreen",
     "category": [
         "news",
@@ -76,5 +76,7 @@
             "url": "https://news.insoumis.app/static/site.webmanifest"
         }
     ],
-    "prefer_related_applications": true
+    "prefer_related_applications": true,
+    "lang": "fr",
+    "dir": "ltr"
 }
