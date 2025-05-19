@@ -98,7 +98,11 @@
 </script>
 
 <script>
-	const isPWA = !!(window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone);
+	const isPWA = !!(
+		window.matchMedia?.('(display-mode: standalone)').matches ||
+		window.matchMedia?.('(display-mode: fullscreen)').matches ||
+		window.navigator.standalone
+	);
 
 	if (typeof window.onbeforeinstallprompt == 'object' && !isPWA) {
 		console.log("This browser supports the beforeinstallprompt event.");
