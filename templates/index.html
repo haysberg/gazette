@@ -91,6 +91,8 @@
 		feed_element.open = false;
 	}
 
+	const relatedApps = await navigator.getInstalledRelatedApps();
+
 	// Handling install prompt on button press
 	let installPrompt = null;
 	const installButton = document.querySelector("#install-button");
@@ -110,6 +112,10 @@
 		installPrompt = null;
 		installButton.setAttribute("hidden", "");
 	});
+	
+	if (relatedApps.length > 0) {
+		document.getElementById("install-button").style.display = "none";
+	}
 </script>
 
 </html>

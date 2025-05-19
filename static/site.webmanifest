@@ -75,5 +75,6 @@
             "platform": "webapp",
             "url": "https://news.insoumis.app/static/site.webmanifest"
         }
-    ]
+    ],
+    "prefer_related_applications": true
 }
