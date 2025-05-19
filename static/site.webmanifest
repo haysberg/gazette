@@ -59,13 +59,21 @@
             "src": "screenshots/phone_screenshot.png",
             "sizes": "1082x2400",
             "form_factor": "narrow",
-            "label": "Accueil Gazette LFI sur mobile"
+            "label": "Accueil Gazette LFI sur mobile",
+            "platform": "android"
         },
         {
             "src": "screenshots/desktop_screenshot.png",
             "sizes": "2543x1318",
             "form_factor": "wide",
-            "label": "Accueil Gazette LFI sur ordinateur"
+            "label": "Accueil Gazette LFI sur ordinateur",
+            "platform": "windows"
+        }
+    ],
+    "related_applications": [
+        {
+            "platform": "webapp",
+            "url": "https://news.insoumis.app/static/site.webmanifest"
         }
     ]
 }

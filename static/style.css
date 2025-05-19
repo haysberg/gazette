@@ -269,3 +269,9 @@ hr {
         margin: 0;
     }
 }
+
+@media (display-mode: standalone), (display-mode: fullscreen) {
+    #install-button {
+        display: none;
+    }
+}

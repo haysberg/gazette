@@ -168,6 +168,7 @@ async def parse_feed(feed_dict: dict) -> None:
         return None
 
     with Session(engine) as session:
+        parsed_feed.image = parsed_feed.image.replace("http://", "https://")
         parsed_feed = session.merge(parsed_feed)
         logger.debug(f"Feed {parsed_feed.link} parsed and saved successfully.")
 

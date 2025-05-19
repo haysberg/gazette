@@ -13,7 +13,7 @@
 	<link rel="icon" type="image/x-icon" href="static/icons/favicon_96x96.png">
 	<link rel="icon" type="image/png" sizes="192x192" href="static/icons/android_chrome_192x192.png"/>
 	<link rel="icon" type="image/png" sizes="512x512" href="static/icons/android_chrome_512x512.png"/>
-	<link rel="icon" type="image/png" sizes="180x180" href="static/icons/apple_touch_icon.png"/>
+	<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="static/icons/apple_touch_icon.png"/>
 	<link rel="icon" type="image/png" sizes="16x16" href="static/icons/favicon_16x16.png"/>
 	<link rel="icon" type="image/png" sizes="32x32" href="static/icons/favicon_32x32.png"/>
 	<link rel="icon" type="image/png" sizes="96x96" href="static/icons/favicon_96x96.png"/>
@@ -37,7 +37,7 @@
 				<img src="https://raw.githubusercontent.com/lafranceinsoumise/actionpopulaire.fr/refs/heads/staging/agir/front/components/genericComponents/logos/action-populaire_primary_mini.svg">
 				<B>Action Populaire</B>
 			</a>
-			<a id="install-button" hidden><B>📲 Créer un raccourci</B></a>
+			<a id="install-button"><B>📲 Créer un raccourci</B></a>
 		</div>
 		<hr>
 		<details id="feed-list" open>
@@ -91,6 +91,9 @@
 		feed_element.open = false;
 	}
 
+	// Hide install button if browser does not support PWA
+
+
 	// Handling install prompt on button press
 	let installPrompt = null;
 	const installButton = document.querySelector("#install-button");
@@ -106,12 +109,14 @@
 			return;
 		}
 		const result = await installPrompt.prompt();
-		console.log(`Install prompt was: ${result.outcome}`);
 		installPrompt = null;
 		installButton.setAttribute("hidden", "");
 	});
 
-
+	const relatedApps = await navigator.getInstalledRelatedApps();
+	relatedApps.forEach((app) => {
+		console.log(app.id, app.platform, app.url);
+	});
 </script>
 
 </html>
