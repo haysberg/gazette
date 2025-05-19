@@ -10,9 +10,15 @@
 		content="Gazette Insoumise est un agrégateur de flux qui regroupe les dernières nouvelles des médias alternatifs et indépendants de la gauche de rupture.">
 	<meta name="referrer" content="same-origin">
 	<link rel="stylesheet" type="text/css" href="static/style.css">
-	<link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+	<link rel="icon" type="image/x-icon" href="static/icons/favicon_96x96.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="static/icons/android_chrome_192x192.png"/>
+	<link rel="icon" type="image/png" sizes="512x512" href="static/icons/android_chrome_512x512.png"/>
+	<link rel="icon" type="image/png" sizes="180x180" href="static/icons/apple_touch_icon.png"/>
+	<link rel="icon" type="image/png" sizes="16x16" href="static/icons/favicon_16x16.png"/>
+	<link rel="icon" type="image/png" sizes="32x32" href="static/icons/favicon_32x32.png"/>
+	<link rel="icon" type="image/png" sizes="96x96" href="static/icons/favicon_96x96.png"/>
+	<link rel="icon" type="image/png" sizes="150x150" href="static/icons/mstile_150x150.png"/>
+	<link rel="icon" type="image/png" sizes="512x512" href="static/icons/safari_pinned_tab.png"/>
 	<link rel="manifest" href="static/site.webmanifest">
 </head>
 
@@ -21,15 +27,17 @@
 		<h1 id="title"><span id="random-emoji"></span>Gazette Insoumise</h1>
 		<hr style="margin-top: 0;">
 		<div class="liens-lfi">
-			<a href="https://programme.lafranceinsoumise.fr/" target="_blank"><B>Le programme</B></a>
-			<a href="https://programme.lafranceinsoumise.fr/municipales-2026/" target="_blank"><B>Municipales
-					2026</B></a>
-			<a id="ilb" href="https://institutlaboetie.fr/" target="_blank"><img
-					src="https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON.png"><B> Institut La
-					Boétie</B></B></a>
-			<a id="action-pop" href="https://actionpopulaire.fr/" target="_blank"><img
-					src="https://raw.githubusercontent.com/lafranceinsoumise/actionpopulaire.fr/refs/heads/staging/agir/front/components/genericComponents/logos/action-populaire_primary_mini.svg"><B>Action
-					Populaire</B></a>
+			<a href="https://programme.lafranceinsoumise.fr/" target="_blank"><B>📚 Le programme</B></a>
+			<a href="https://programme.lafranceinsoumise.fr/municipales-2026/" target="_blank"><B>🏛️ Municipales 2026</B></a>
+			<a id="ilb" href="https://institutlaboetie.fr/" target="_blank">
+				<img src="https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON.png">
+				<B> Institut La Boétie</B>
+			</a>
+			<a id="action-pop" href="https://actionpopulaire.fr/" target="_blank">
+				<img src="https://raw.githubusercontent.com/lafranceinsoumise/actionpopulaire.fr/refs/heads/staging/agir/front/components/genericComponents/logos/action-populaire_primary_mini.svg">
+				<B>Action Populaire</B>
+			</a>
+			<a id="install-button" hidden><B>📲 Créer un raccourci</B></a>
 		</div>
 		<hr>
 		<details id="feed-list" open>
@@ -72,14 +80,27 @@
 </body>
 
 <script>
-	emoji_list = ["🐢", "🇵🇸", "🍉", "✊", "🔺", "🌈", "🗞️", "📬", "🕊️"]
+	// Random emoji for header
+	emoji_list = ["🐢", "🇵🇸", "🍉", "✊", "🔺", "🌈", "📬", "🕊️"]
 	document.getElementById("random-emoji").innerText = emoji_list[Math.floor(Math.random() * emoji_list.length)];
 
+	// Closing sources summary on phone for better lisibility
 	if (window.matchMedia && window.matchMedia("(max-width: 480px)").matches) {
 		console.log("Fermeture des sources sur téléphone.")
 		feed_element = document.getElementById("feed-list");
 		feed_element.open = false;
 	}
+
+	// Handling install prompt on button press
+	let installPrompt = null;
+	const installButton = document.querySelector("#install-button");
+
+	window.addEventListener("beforeinstallprompt", (event) => {
+		event.preventDefault();
+		installPrompt = event;
+		installButton.removeAttribute("hidden");
+	});
+
 </script>
 
 </html>
