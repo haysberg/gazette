@@ -81,7 +81,7 @@
 
 <script>
 	// Random emoji for header
-	emoji_list = ["🐢", "🇵🇸", "🍉", "✊", "🔺", "🌈", "📬", "🕊️"]
+	emoji_list = ["🐢", "🇵🇸", "🍉", "✊", "🔺", "🌈", "📬", "🕊️", "🗞️"]
 	document.getElementById("random-emoji").innerText = emoji_list[Math.floor(Math.random() * emoji_list.length)];
 
 	// Closing sources summary on phone for better lisibility
@@ -90,9 +90,6 @@
 		feed_element = document.getElementById("feed-list");
 		feed_element.open = false;
 	}
-
-	// Hide install button if browser does not support PWA
-
 
 	// Handling install prompt on button press
 	let installPrompt = null;
@@ -109,13 +106,9 @@
 			return;
 		}
 		const result = await installPrompt.prompt();
+		console.log(`Install prompt was: ${result.outcome}`);
 		installPrompt = null;
 		installButton.setAttribute("hidden", "");
-	});
-
-	const relatedApps = await navigator.getInstalledRelatedApps();
-	relatedApps.forEach((app) => {
-		console.log(app.id, app.platform, app.url);
 	});
 </script>
 
