@@ -1,16 +1,22 @@
+{% set description = "Gazette Insoumise est un agrégateur de flux qui regroupe les dernières nouvelles des médias alternatifs et indépendants de la gauche de rupture." %}
+{% set keywords = "Gazette Insoumise, La France Insoumise, LFI, médias alternatifs, médias indépendants, gauche de rupture" %}
+{% set long_name = "Gazette Insoumise" %}
+{% set short_name = "Gazette LFI" %}
+{% set default_favicon = "static/icons/favicon.ico" %}
+
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gazette Insoumise</title>
-	<meta name="application-name" content="Gazette Insoumise">
-	<meta name="description"
-		content="Gazette Insoumise est un agrégateur de flux qui regroupe les dernières nouvelles des médias alternatifs et indépendants de la gauche de rupture.">
+	<title>{{ long_name }}</title>
+	<meta name="application-name" content="{{ long_name }}">
+	<meta name="description" content="{{ description }}">
+	<meta name="keywords" content="{{ keywords }}">
 	<meta name="referrer" content="same-origin">
 	<link rel="stylesheet" type="text/css" href="static/style.css">
-	<link rel="icon" type="image/x-icon" href="static/icons/favicon_96x96.png">
+	<link rel="icon" type="image/x-icon" href="{{ default_favicon }}">
 	<link rel="icon" type="image/png" sizes="192x192" href="static/icons/android_chrome_192x192.png" />
 	<link rel="icon" type="image/png" sizes="512x512" href="static/icons/android_chrome_512x512.png" />
 	<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="static/icons/apple_touch_icon.png" />
@@ -23,15 +29,15 @@
 	<meta name="theme-color" content="#7b13d6">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="author" content="haysberg">
-	<meta property="og:image" content="https://news.insoumis.app/static/icons/favicon_96x96.png" />
-	<meta property="og:title" content="Gazette Insoumise" />
+	<meta property="og:image" content="{{ default_favicon }}" />
+	<meta property="og:title" content="{{ long_name }}" />
 	<meta property="og:locale" content="fr_FR" />
-	<meta property="og:site_name" content="Gazette Insoumise" />
+	<meta property="og:site_name" content="{{ long_name }}" />
 </head>
 
 <body>
 	<header>
-		<h1 id="title"><span id="random-emoji"></span>Gazette Insoumise</h1>
+		<h1 id="title"><span id="random-emoji"></span>{{ long_name }}</h1>
 		<hr style="margin-top: 0;">
 		<div class="liens-lfi">
 			<a href="https://programme.lafranceinsoumise.fr/" target="_blank"><B>📚 Le programme</B></a>
