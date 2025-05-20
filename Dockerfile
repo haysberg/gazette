@@ -10,7 +10,6 @@ COPY config.toml main.py uv.lock pyproject.toml .
 COPY templates ./templates/
 COPY utils ./utils/
 COPY models ./models/
-COPY static ./static/
 COPY data ./data/
 
 
