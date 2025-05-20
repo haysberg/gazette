@@ -17,7 +17,7 @@ from io import BytesIO
 import httpx
 
 # Paths for static files
-STATIC_DIR = "data"
+STATIC_DIR = "tmp"
 os.makedirs(STATIC_DIR, exist_ok=True)
 HTML_FILE = os.path.join(STATIC_DIR, "index.html")
 JSON_FILE = os.path.join(STATIC_DIR, "index.json")
