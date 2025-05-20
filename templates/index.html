@@ -33,6 +33,7 @@
 	<meta property="og:title" content="{{ long_name }}" />
 	<meta property="og:locale" content="fr_FR" />
 	<meta property="og:site_name" content="{{ long_name }}" />
+	<script data-goatcounter="https://analytics.insoumis.app/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 
 <body>
@@ -105,9 +106,7 @@
 		feed_element = document.getElementById("feed-list");
 		feed_element.open = false;
 	}
-</script>
 
-<script>
 	const isPWA = !!(
 		window.matchMedia?.('(display-mode: standalone)').matches ||
 		window.matchMedia?.('(display-mode: fullscreen)').matches ||
