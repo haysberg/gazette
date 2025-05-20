@@ -177,5 +177,6 @@ cython_debug/
 ######### SPECIFIC
 *.db*
 data/static/index*
-data/index*
+data/index.html
+data/index.json
 data/favicons
