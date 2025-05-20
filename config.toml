@@ -11,7 +11,7 @@ feedlist = [
     { link = "https://www.revue-ballast.fr/feed/", image = "https://www.revue-ballast.fr/wp-content/uploads/2016/09/ballast_favicon.ico" },
     { link = "https://orientxxi.info/?page=backend&lang=fr" },
     { link = "https://survie.org/spip.php?page=backend" },
-    { link = "https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5", image = "https://revolutionpermanente.fr/squelettes/assets/img/favicon.ico" },
+    { link = "https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5", image = "https://pbs.twimg.com/profile_images/1584923031687806980/SgoWFAk9_400x400.jpg" },
     { link = "https://orgasolitrans.fr/index.php/feed/", title = "L'OST" },
     { link = "https://api.lemediatv.fr/rss.xml", title = "Le Média" },
     { link = "https://backend.streetpress.com/rss.xml", title = "StreetPress", domain = "streetpress.com", image = "https://www.streetpress.com/favicon.ico" },

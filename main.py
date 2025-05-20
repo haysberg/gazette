@@ -1,10 +1,10 @@
 import asyncio
 from fastapi import FastAPI
+from fastapi.middleware.gzip import GZipMiddleware
 from contextlib import asynccontextmanager
 from fastapi.staticfiles import StaticFiles
 from utils.utils import update_feeds_and_posts
 from utils.logs import configure_logging, logger
-from fastapi import FastAPI
 
 configure_logging()
 
@@ -28,6 +28,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+app.add_middleware(GZipMiddleware, minimum_size=1000, compresslevel=5)
 app.mount("/app", app)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/", StaticFiles(directory="data", html=True), name="root")
