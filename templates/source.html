@@ -2,7 +2,7 @@
     <div class="feed-card">
         <div>
             {% if feed.image is defined and feed.image != "" %}<img style="vertical-align: middle;"
-                src="/favicons/{{ feed.domain }}.webp" width="16px" height="16px" role="presentation">{% endif%}
+                src="/favicons/{{ feed.domain }}.webp" loading="lazy" width="16px" height="16px" role="presentation">{% endif%}
             {{ feed.title }}
         </div>
     </div>
