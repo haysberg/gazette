@@ -231,6 +231,21 @@ hr {
     background-color: #227242;
 }
 
+#amfis {
+    background-image: none;
+    background-color: #f0dcc0;
+}
+
+#amfis B {
+    background: linear-gradient(to right, red, orange);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 900;
+}
+
+
+
 @media only screen and (max-width: 480px) {
     .article-link {
         font-size: 1.2em;
