@@ -12,6 +12,9 @@ from sqlalchemy.orm import selectinload
 from fastapi.templating import Jinja2Templates
 import tomllib
 from datetime import datetime
+from PIL import Image
+from io import BytesIO
+import httpx
 
 # Paths for static files
 STATIC_DIR = "data"
@@ -131,6 +134,30 @@ async def update_served_files() -> None:
         logger.info(f"JSON file saved to {JSON_FILE}")
     except Exception as e:
         logger.error(f"Failed to save JSON file: {e}")
+
+    # Download images to STATIC_DIR/favicons and convert them to webp, 64x64
+    for feed in feeds:
+        if feed.image:
+            try:
+                # Skip if image already present in folder
+                if os.path.exists(
+                    os.path.join(STATIC_DIR, "favicons", f"{feed.domain}.webp")
+                ):
+                    logger.info(
+                        f"Image for {feed.domain} already exists, skipping download."
+                    )
+                    continue
+                image_path = os.path.join(STATIC_DIR, "favicons", f"{feed.domain}.webp")
+                os.makedirs(os.path.dirname(image_path), exist_ok=True)
+                with httpx.Client(timeout=10) as client:
+                    response = client.get(feed.image)
+                response.raise_for_status()
+                img = Image.open(BytesIO(response.content)).convert("RGBA")
+                img = img.resize((64, 64), Image.LANCZOS)
+                img.save(image_path, "WEBP")
+                logger.info(f"Image for {feed.domain} saved to {image_path}")
+            except Exception as e:
+                logger.error(f"Failed to save image for {feed.domain}: {e}")
 
     logger.info("Static files generation ended.")
 

@@ -1,6 +1,6 @@
 [feeds]
 feedlist = [
-    { link = "https://spectremedia.org/feed/podcast/" },
+    { link = "https://spectremedia.org/feed/podcast/", image = "https://spectremedia.org/wp-content/themes/spectre-v2/favicon.png" },
     { link = "https://www.politis.fr/flux-rss-apps/", title = "Politis", image = "https://www.politis.fr/favicon-32x32.png" },
     { link = "http://www.contretemps.eu/rss", title = "Contretemps", image = "https://www.contretemps.eu/wp-content/uploads/ctt.ico" },
     { link = "https://linsoumission.fr/feed/"},
