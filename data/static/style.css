@@ -5,7 +5,7 @@
     --primary: #7b13d6;
     --secondary: #f91616;
     --ilb-bg: #EBF3F4;
-    --ilb-text: #390080;
+    --ilb-text: #40098e;
     --action-pop-yellow: #F4ED0F;
 }
 
@@ -230,6 +230,7 @@ summary {
     background-color: var(--ilb-bg);
     color: var(--ilb-text);
     background-image: var(--ilb-bg);
+    border: 5px solid var(--ilb-text);
 }
 
 #action-pop {
@@ -273,7 +274,7 @@ hr {
     width: 100%;
     height: auto;
     max-width: 100%;
-    max-height: 2em;
+    max-height: 2.5em;
     min-width: 5em;
     object-fit: contain;
     display: block;
