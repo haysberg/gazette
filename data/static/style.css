@@ -6,7 +6,7 @@
     --secondary: #f91616;
     --ilb-bg: #EBF3F4;
     --ilb-text: #390080;
-    --action-pop-bg: #F4ED0F;
+    --action-pop-yellow: #F4ED0F;
 }
 
 @font-face {
@@ -38,10 +38,10 @@ body {
     color: var(--txt);
     background: var(--bg);
     max-width: 80rem;
-    width: 95%;
+    width: 97%;
     margin: 2em auto;
     margin-top: 0;
-    line-height: 1.25em;
+    line-height: 1.15em;
 }
 
 h1 {
@@ -66,7 +66,7 @@ ul {
 }
 
 li {
-    margin-block-start: 1em;
+    margin-block-start: 0.75em;
 }
 
 a {
@@ -104,7 +104,6 @@ small>a:visited {
 
 .feed-details {
     flex-wrap: wrap;
-    row-gap: 0.5em;
 }
 
 .feed-card {
@@ -116,7 +115,7 @@ small>a:visited {
 }
 
 #feed-list div {
-    padding: 0.5em 0.5em 0.35em 0.5em;
+    padding: 0.4em 0.4em 0.3em 0.4em;
     text-align: center;
     vertical-align: middle;
     border: 0;
@@ -141,21 +140,35 @@ small>a:visited {
 .liens-lfi {
     display: flex;
     justify-content: space-between;
-    gap: 1em;
+    gap: 0.5rem;
     flex-wrap: wrap;
     row-gap: 0.6em;
+    line-height: normal;
 }
 
 .liens-lfi a {
-    display: inline-block;
-    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 0;
     text-align: center;
-    padding: 0.5em 1em;
+    padding: 0.2em 0.5em;
     transition: background-color 0.3s, color 0.3s;
     background-image: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     border-radius: 15px;
     white-space: nowrap;
+    font-size: 1.3em;
+    min-height: 2.5em; /* Ensures consistent height */
+    box-sizing: border-box;
+}
+
+.liens-lfi a img, .liens-lfi a svg {
+    width: 1.5em;
+    height: 1.5em;
+    object-fit: contain;
+    margin-right: 0.3em;
+    flex-shrink: 1;
 }
 
 #feed-list summary::marker {
@@ -184,6 +197,12 @@ summary {
     display: flex;
     gap: 0.2em;
     align-items: center;
+    vertical-align: middle;
+    line-height: 1.5; /* Adjust as needed for better vertical centering */
+}
+
+.article-source a * {
+    vertical-align: middle;
 }
 
 .article-source a * {
@@ -191,9 +210,9 @@ summary {
     margin: 0;
 }
 
-.article-source a I {
+/* .article-source a I {
     height: 21px;
-}
+} */
 
 .liens-lfi img {
     height: 20px; 
@@ -206,7 +225,6 @@ summary {
 }
 
 .liste-articles summary::marker {
-    font-size: 1.75rem;
     vertical-align: middle;
 }
 
@@ -224,13 +242,6 @@ summary {
     height: 2em;
 }
 
-#action-pop img {
-    width: 1.5em;
-    height: 1.5em;
-    margin-right: 0.5rem;
-    vertical-align: middle;
-}
-
 .liens-lfi #ilb {
     background-color: var(--ilb-bg);
     color: var(--ilb-text);
@@ -238,9 +249,9 @@ summary {
 }
 
 #action-pop {
-    background-color: var(--action-pop-bg);
     background-image: none;
-    color: black;
+    background-color: transparent;
+    border: 5px solid var(--action-pop-yellow);
 }
 
 hr {
@@ -250,14 +261,23 @@ hr {
 }
 
 #install-button {
-    background-image: none;
     display: none;
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
     background-color: #227242;
+    background-image: none;
+    z-index: 1000;
+    padding: 0.75em 1.5em;
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 1.5em;
 }
 
 #amfis {
     background-image: none;
-    background-color: #f0dcc0;
+    background-color: #e2d2bc;
 }
 
 #amfis B {
@@ -265,18 +285,42 @@ hr {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-weight: 900;
+    font-weight: 1000;
+}
+
+#logo-ap {
+    width: auto;
+    height: auto;
+    margin-right: 0;
+}
+
+#programme-btn {
+    background: white;
+    border: 5px solid;
+    border-color: var(--primary);
+}
+
+#programme-btn img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 2em;
+    object-fit: contain;
+    display: block;
+    padding: 0.15em;
+    margin-right: 0;
+    box-sizing: border-box;
 }
 
 
-
 @media only screen and (max-width: 480px) {
-    .article-link {
-        font-size: 1.2em;
+    .feed-details {
+        flex-wrap: wrap;
+        row-gap: 0.5em;
     }
 
-    .article-source a I {
-        font-size: 1.15rem;
+    .article-link {
+        font-size: 1.1em;
     }
 
     #title {
@@ -287,20 +331,8 @@ hr {
         content: '+ ';
     }
 
-    .liste-articles summary::marker {
-        font-size: 1.3rem;
-    }
-
-    .article-source {
-        padding-top: 0.1em;
-    }
-
     #sources {
         text-align: left;
-    }
-
-    #action-pop img {
-        margin: 0;
     }
 
     .liens-lfi {
@@ -308,8 +340,14 @@ hr {
         row-gap: 0.6em;
     }
 
-    .liens-lfi * {
-        height: 1.5rem;
+    #install-button {
+        bottom: 0.5em;
+        right: 0.5em;
+        padding: 0.5em 1em;
+        font-size: 1em;
+        height: auto;
+        min-width: 7em;
+        border-radius: 0.5em;
     }
 }
 

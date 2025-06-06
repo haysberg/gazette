@@ -15,7 +15,7 @@
 	<meta name="description" content="{{ description }}">
 	<meta name="keywords" content="{{ keywords }}">
 	<meta name="referrer" content="same-origin">
-	<link rel="stylesheet" type="text/css" href="static/style.css">
+	<link rel="stylesheet" type="text/css" href="static/style.min.css">
 	<link rel="icon" href="{{ default_favicon }}">
 	<link rel="icon" type="image/png" sizes="192x192" href="static/icons/android_chrome_192x192.png" />
 	<link rel="icon" type="image/png" sizes="512x512" href="static/icons/android_chrome_512x512.png" />
@@ -41,25 +41,27 @@
 		<h1 id="title"><span id="random-emoji"></span>{{ long_name }}</h1>
 		<hr style="margin-top: 0;">
 		<div class="liens-lfi">
-			<a href="https://programme.lafranceinsoumise.fr/" target="_blank" referrerpolicy="origin"><B>📚 Le programme</B></a>
-			<a href="https://programme.lafranceinsoumise.fr/municipales-2026/" target="_blank" referrerpolicy="origin"><B>🏛️ Municipales
-					2026</B></a>
 			<a id="ilb" href="https://institutlaboetie.fr/" target="_blank" referrerpolicy="origin">
-				<img role="presentation" src="/favicons/institutlaboetie.fr.webp">
+				<img role="presentation" src="/static/img/ilb.webp" loading="lazy">
 				<B>Institut La Boétie</B>
 			</a>
+			<a href="https://programme.lafranceinsoumise.fr/" id="programme-btn" target="_blank" referrerpolicy="origin">
+				<img loading="lazy" aria-label="Action Populaire" style="height: auto;" src="/static/img/programme.webp">
+			</a>
 			<a id="action-pop" href="https://actionpopulaire.fr/" target="_blank" referrerpolicy="origin">
-				<img
-					role="presentation" src="https://raw.githubusercontent.com/lafranceinsoumise/actionpopulaire.fr/refs/heads/staging/agir/front/components/genericComponents/logos/action-populaire_primary_mini.svg">
-				<B>Action Pop'</B>
+				<img id="logo-ap" loading="lazy" aria-label="Action Populaire" src="/static/img/action-populaire_small.svg">
+			</a>
+			<a href="https://programme.lafranceinsoumise.fr/municipales-2026/" target="_blank" referrerpolicy="origin">
+				<B>🏛️ Municipales 2026</B>
 			</a>
 			<a id="amfis" href="https://amfis.fr/" target="_blank" referrerpolicy="origin">
-				<img role="presentation" loading="lazy" src="https://amfis.fr/wp-content/uploads/2024/12/cropped-AmfisFavicon-32x32.png">
+				<img role="presentation" loading="lazy" src="/static/img/amfis.webp">
 				<B>AMFIS 2025</B>
 			</a>
-			<a id="install-button" style="display: none; cursor: pointer;"><B>📲 Créer un raccourci</B></a>
+			<a id="install-button"><B>📲 Installer</B></a>
 		</div>
 		<hr>
+	</header>
 		<details id="feed-list" open>
 			<summary id="sources">
 				<h2>Liste des sources</h2>
@@ -70,74 +72,70 @@
 				{% endfor %}
 			</div>
 		</details>
-		<hr>
-	</header>
 	<main>
 		{% if posts_last24h is defined and posts_last24h|length > 0 %}
 		{% with name="Ces dernières 24H", open=true, articles=posts_last24h %}
 		{% include "category.html" %}
 		{% endwith %}
 		{% endif %}
-
+		
 		{% if posts_24_48h is defined and posts_24_48h|length > 0 %}
 		{% with name="Hier", open=false, articles=posts_24_48h %}
 		{% include "category.html" %}
 		{% endwith %}
 		{% endif %}
-
-		{% if posts_later is defined and posts_later|length > 0 %}
-		{% with name="Cette semaine", open=false, articles=posts_later %}
-		{% include "category.html" %}
-		{% endwith %}
-		{% endif %}
 	</main>
 	<footer>
-		<small class="center italique"><I>Cette application est disponible en source ouverte <a
-					href="https://github.com/haysberg/gazette">sur GitHub</a>.
-				<br>Si vous souhaitez modifier le logiciel ou proposer une nouvelle fonctionnalité, faites-le ici !
-				<br>Dernière mise à jour de la page à {{ render_time }}</I></small>
+		<small class="center italique">
+			<I>
+				Cette application est disponible en source ouverte, sous licence libre. Si vous souhaitez modifier le logiciel ou proposer une nouvelle fonctionnalité, faites-le <a href="https://github.com/haysberg/gazette">sur GitHub</a> !
+				<br>Dernière mise à jour de la page à {{ render_time }}
+			</I>
+		</small>
 	</footer>
 </body>
 
 <script>
-	// Random emoji for header
-	emoji_list = ["🐢", "🇵🇸", "🍉", "✊", "🔺", "🌈", "📬", "🕊️", "🗞️"]
-	document.getElementById("random-emoji").innerText = emoji_list[Math.floor(Math.random() * emoji_list.length)];
+	emoji_list = [
+		"🐢", "🇵🇸", "🍉", "✊", "🔺", "🌈", "📬", "🕊️", "🗞️"
+	];
+	document.getElementById("random-emoji").innerText =
+		emoji_list[(Math.random() * emoji_list.length) | 0];
 
-	// Closing sources summary on phone for better lisibility
-	if (window.matchMedia && window.matchMedia("(max-width: 480px)").matches) {
-		console.log("Fermeture des sources sur téléphone.")
+	if (
+		window.matchMedia &&
+		window.matchMedia("(max-width: 480px)").matches
+	) {
+		console.log("Fermeture des sources sur téléphone.");
 		feed_element = document.getElementById("feed-list");
 		feed_element.open = false;
 	}
 
-	const isPWA = !!(
-		window.matchMedia?.('(display-mode: standalone)').matches ||
-		window.matchMedia?.('(display-mode: fullscreen)').matches ||
-		window.navigator.standalone
-	);
+	const isPWA =
+		!!(
+			window.matchMedia?.('(display-mode: standalone)').matches ||
+			window.matchMedia?.('(display-mode: fullscreen)').matches ||
+			window.navigator.standalone
+		);
 
-	if (typeof window.onbeforeinstallprompt == 'object' && !isPWA) {
+	if (
+		typeof window.onbeforeinstallprompt == "object" &&
+		!isPWA
+	) {
 		console.log("This browser supports the beforeinstallprompt event.");
-		document.getElementById("install-button").style.display = "inline";
-
+		document.getElementById("install-button").style.display = "block";
 		let installPrompt = null;
 		const installButton = document.querySelector("#install-button");
-
-		window.addEventListener("beforeinstallprompt", (event) => {
-			event.preventDefault();
-			installPrompt = event;
-			
-
+		window.addEventListener("beforeinstallprompt", e => {
+			e.preventDefault();
+			installPrompt = e;
 			installButton.addEventListener("click", async () => {
-			if (!installPrompt) {
-				return;
-			}
-			const result = await installPrompt.prompt();
-			console.log(`Install prompt was: ${result.outcome}`);
-			installPrompt = null;
-			installButton.setAttribute("hidden", "");
-		});
+				if (!installPrompt) return;
+				const r = await installPrompt.prompt();
+				console.log(`Install prompt was: ${r.outcome}`);
+				installPrompt = null;
+				installButton.setAttribute("hidden", "");
+			});
 			installButton.removeAttribute("hidden");
 		});
 	} else {
