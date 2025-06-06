@@ -153,7 +153,7 @@ async def update_served_files() -> None:
                     response = client.get(feed.image)
                 response.raise_for_status()
                 img = Image.open(BytesIO(response.content)).convert("RGBA")
-                img = img.resize((64, 64), Image.LANCZOS)
+                img = img.resize((32, 32), Image.LANCZOS)
                 img.save(image_path, "WEBP")
                 logger.info(f"Image for {feed.domain} saved to {image_path}")
             except Exception as e:

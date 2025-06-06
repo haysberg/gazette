@@ -9,6 +9,30 @@
     --action-pop-bg: #F4ED0F;
 }
 
+@font-face {
+    font-family: 'Calibri';
+    src: local('Calibri');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Trebuchet MS';
+    src: local('Trebuchet MS');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lucida Sans';
+    src: local('Lucida Sans');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arial';
+    src: local('Arial');
+    font-display: swap;
+}
+
 body {
     font-family: Calibri, 'Trebuchet MS', 'Lucida Sans', Arial, sans-serif;
     color: var(--txt);
@@ -222,7 +246,7 @@ summary {
 hr {
     border: none;
     height: 0.3em; /* Adjust the height of the hr element */
-    background-image: linear-gradient(135deg, #7b13d6, #f91616); /* Adjust the colors as needed */
+    background-image: linear-gradient(135deg, var(--primary), var(--secondary)); /* Adjust the colors as needed */
 }
 
 #install-button {

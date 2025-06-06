@@ -9,6 +9,6 @@ Gazette est un logiciel permettant d'agréger des flux RSS et de les servir dans
 - Calcul de la page toutes les 10 minutes pour être léger sur votre serveur
 - Compression (Gazette supporte GZip par défaut, le setup du `docker-compose.yml` support aussi Brotli)
 - Téléchargement des images sources pour une conversion en WebP
-- Compatible WPA
-- Compatible avec les lecteurs d'écran
+- Compatible PWA
+- Compatible avec les lecteurs d'écran, pour les personnes malvoyantes / aveugles
 - Responsive
