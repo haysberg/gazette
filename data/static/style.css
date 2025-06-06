@@ -10,31 +10,14 @@
 }
 
 @font-face {
-    font-family: 'Calibri';
-    src: local('Calibri');
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Trebuchet MS';
-    src: local('Trebuchet MS');
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Lucida Sans';
-    src: local('Lucida Sans');
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Arial';
-    src: local('Arial');
-    font-display: swap;
+    font-family: 'Public Sans';
+    src: url('/static/fonts/PublicSans-Bold.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
 }
 
 body {
-    font-family: Calibri, 'Trebuchet MS', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Public Sans', sans-serif;
     color: var(--txt);
     background: var(--bg);
     max-width: 80rem;
@@ -122,6 +105,7 @@ small>a:visited {
     display: flex;
     justify-content: center; 
     align-items: center;
+    row-gap: 0.35rem;
 }
 
 #feed-list img {
@@ -272,26 +256,11 @@ hr {
     color: white;
     border: none;
     cursor: pointer;
-    height: 1.5em;
 }
 
 #amfis {
     background-image: none;
     background-color: #e2d2bc;
-}
-
-#amfis B {
-    background: linear-gradient(to right, red, orange);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-weight: 1000;
-}
-
-#logo-ap {
-    width: auto;
-    height: auto;
-    margin-right: 0;
 }
 
 #programme-btn {
@@ -300,16 +269,21 @@ hr {
     border-color: var(--primary);
 }
 
-#programme-btn img {
+#programme-btn img, #amfis img, #logo-ap, #ilb img {
     width: 100%;
     height: auto;
     max-width: 100%;
     max-height: 2em;
+    min-width: 5em;
     object-fit: contain;
     display: block;
     padding: 0.15em;
     margin-right: 0;
     box-sizing: border-box;
+}
+
+#ilb img {
+    padding: 0;
 }
 
 

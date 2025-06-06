@@ -34,9 +34,6 @@
 	<meta property="og:description" content="{{ description }}">
 	<meta property="og:locale" content="fr_FR" />
 	<meta property="og:site_name" content="{{ long_name }}" />
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -45,8 +42,7 @@
 		<hr style="margin-top: 0;">
 		<div class="liens-lfi">
 			<a id="ilb" href="https://institutlaboetie.fr/" target="_blank" referrerpolicy="origin">
-				<img role="presentation" src="/static/img/ilb.webp" loading="lazy">
-				<B>Institut La Boétie</B>
+				<img role="presentation" src="/static/img/ilbcombo.webp" loading="lazy">
 			</a>
 			<a href="https://programme.lafranceinsoumise.fr/" id="programme-btn" target="_blank" referrerpolicy="origin">
 				<img loading="lazy" aria-label="Action Populaire" style="height: auto;" src="/static/img/programme.webp">
@@ -54,12 +50,11 @@
 			<a id="action-pop" href="https://actionpopulaire.fr/" target="_blank" referrerpolicy="origin">
 				<img id="logo-ap" loading="lazy" aria-label="Action Populaire" src="/static/img/action-populaire_small.svg">
 			</a>
-			<a href="https://programme.lafranceinsoumise.fr/municipales-2026/" target="_blank" referrerpolicy="origin">
-				<B>🏛️ Municipales 2026</B>
+			<a href="https://lafranceinsoumise.fr/2025/04/09/elections-municipales-2026/" target="_blank" referrerpolicy="origin">
+				🏛️ Municipales
 			</a>
 			<a id="amfis" href="https://amfis.fr/" target="_blank" referrerpolicy="origin">
-				<img role="presentation" loading="lazy" src="/static/img/amfis.webp">
-				<B>AMFIS 2025</B>
+				<img loading="lazy" aria-label="Action Populaire" style="height: auto;" src="/static/img/amfis_cropped.webp">
 			</a>
 			<a id="install-button"><B>📲 Installer</B></a>
 		</div>
@@ -77,7 +72,7 @@
 		</details>
 	<main>
 		{% if posts_last24h is defined and posts_last24h|length > 0 %}
-		{% with name="Ces dernières 24H", open=true, articles=posts_last24h %}
+		{% with name="Ces dernières 24 heures", open=true, articles=posts_last24h %}
 		{% include "category.html" %}
 		{% endwith %}
 		{% endif %}
@@ -146,6 +141,6 @@
 	}
 </script>
 
-<script data-goatcounter="https://insoumis.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://insoumis.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 
 </html>
