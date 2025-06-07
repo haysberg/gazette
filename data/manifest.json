@@ -58,14 +58,14 @@
     "screenshots": [
         {
             "src": "static/screenshots/phone_screenshot.png",
-            "sizes": "1082x2400",
+            "sizes": "1290x2796",
             "form_factor": "narrow",
             "label": "Accueil Gazette LFI sur mobile",
             "platform": "android"
         },
         {
             "src": "static/screenshots/desktop_screenshot.png",
-            "sizes": "2543x1318",
+            "sizes": "2541x1354",
             "form_factor": "wide",
             "label": "Accueil Gazette LFI sur ordinateur",
             "platform": "windows"
