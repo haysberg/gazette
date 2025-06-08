@@ -42,7 +42,7 @@
 		<hr style="margin-top: 0;">
 		<div class="liens-lfi">
 			<a href="https://programme.lafranceinsoumise.fr/" id="programme-btn" target="_blank" referrerpolicy="origin">
-				<img loading="lazy" aria-label="Action Populaire" style="height: auto;" src="/static/img/programme.webp">
+				<img loading="lazy" aria-label="Le programme" style="height: auto;" src="/static/img/programme.webp">
 			</a>
 			<a id="action-pop" href="https://actionpopulaire.fr/" target="_blank" referrerpolicy="origin">
 				<img id="logo-ap" loading="lazy" aria-label="Action Populaire" src="/static/img/action-populaire_small.svg">
@@ -51,7 +51,7 @@
 				<img loading="lazy" aria-label="Amfis 2025" style="height: auto;" src="/static/img/amfis_cropped.webp">
 			</a>
 			<a id="ilb" href="https://institutlaboetie.fr/" target="_blank" referrerpolicy="origin">
-				<img role="presentation" src="/static/img/ilbcombo.webp" loading="lazy">
+				<img aria-label="Institut la Boétie" src="/static/img/ilbcombo.webp" loading="lazy">
 			</a>
 			<a id="install-button"><B>📲 Installer</B></a>
 		</div>
@@ -79,12 +79,18 @@
 		{% include "category.html" %}
 		{% endwith %}
 		{% endif %}
+
+		{% if posts_later is defined and posts_later|length > 0 %}
+		{% with name="Plus tôt dans la semaine", open=false, articles=posts_later %}
+		{% include "category.html" %}
+		{% endwith %}
+		{% endif %}
 	</main>
 	<footer>
-		<small class="center italique">
+		<small class="center">
 			<I>
 				Cette application est disponible en source ouverte, sous licence libre. Si vous souhaitez modifier le logiciel ou proposer une nouvelle fonctionnalité, faites-le <a href="https://github.com/haysberg/gazette">sur GitHub</a> !
-				<br>Dernière mise à jour de la page à {{ render_time }}
+				<br>Dernière mise à jour de la page à {{ render_time }}.
 			</I>
 		</small>
 	</footer>
