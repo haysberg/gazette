@@ -74,7 +74,7 @@
     "related_applications": [
         {
             "platform": "webapp",
-            "url": "https://news.insoumis.app/manifest.json",
+            "url": "https://insoumis.news/manifest.json",
             "id": "/"
         }
     ],
