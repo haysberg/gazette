@@ -20,6 +20,7 @@ import httpx
 STATIC_DIR = "tmp"
 os.makedirs(STATIC_DIR, exist_ok=True)
 HTML_FILE = os.path.join(STATIC_DIR, "index.html")
+PLUS_FILE = os.path.join(STATIC_DIR, "plus.html")
 JSON_FILE = os.path.join(STATIC_DIR, "index.json")
 templates = Jinja2Templates(directory="templates")
 
@@ -70,61 +71,69 @@ async def update_served_files() -> None:
         )
         results = session.exec(statement)
         posts_last24h = results.all()
-        # Get posts from between 24 and 48 hours ago
+
+        # Get posts from later
         statement = (
             select(Post)
             .options(selectinload(Post.feed))
-            .where(
-                Post.publication_date < datetime.now() - timedelta(days=1),
-                Post.publication_date > datetime.now() - timedelta(days=2),
-            )
-            .order_by(Post.publication_date.desc())
-        )
-        results = session.exec(statement)
-        posts_24_48h = results.all()
-        # Get posts from later than 48 hours ago
-        statement = (
-            select(Post)
-            .options(selectinload(Post.feed))
-            .where(Post.publication_date < datetime.now() - timedelta(days=2))
+            .where(Post.publication_date < datetime.now() - timedelta(days=1))
             .order_by(Post.publication_date.desc())
         )
         results = session.exec(statement)
         posts_later = results.all()
+
         # Get all feeds
         statement = select(Feed)
         results = session.exec(statement)
         feeds = results.all()
+        render_time = datetime.now().strftime("%Hh%M").capitalize()
 
         # Render Jinja2 template and save as HTML
         try:
-            rendered_html = templates.TemplateResponse(
+            # Render index.html
+            index_html = templates.TemplateResponse(
                 name="index.html",
                 context={
                     "request": None,  # No request object needed for static rendering
-                    "posts_last24h": posts_last24h,
-                    "posts_24_48h": posts_24_48h,
-                    "posts_later": posts_later,
+                    "posts": posts_last24h,
                     "feeds": feeds,
-                    "render_time": datetime.now().strftime("%Hh%M").capitalize(),
+                    "plus": True,
+                    "render_time": render_time,
                 },
             ).body.decode("utf-8")
-            logger.info("HTML page rendered successfully !")
+
+            # Render plus.html
+            plus_html = templates.TemplateResponse(
+                name="plus.html",
+                context={
+                    "request": None,  # No request object needed for static rendering
+                    "posts": posts_later,
+                    "feeds": feeds,
+                    "render_time": render_time,
+                },
+            ).body.decode("utf-8")
+            logger.info("HTML pages rendered successfully !")
         except Exception as e:
             logger.error(f"Failed to render template: {e}")
             return
 
     try:
         with open(HTML_FILE, "w") as f:
-            f.write(rendered_html)
+            f.write(index_html)
         logger.info(f"HTML file saved to {HTML_FILE}")
+    except Exception as e:
+        logger.error(f"Failed to save HTML file: {e}")
+
+    try:
+        with open(PLUS_FILE, "w") as f:
+            f.write(plus_html)
+        logger.info(f"HTML file saved to {PLUS_FILE}")
     except Exception as e:
         logger.error(f"Failed to save HTML file: {e}")
 
     # Generate JSON and save as a file
     json_data = {
         "posts_last24h": [post.model_dump() for post in posts_last24h],
-        "posts_24_48h": [post.model_dump() for post in posts_24_48h],
         "posts_later": [post.model_dump() for post in posts_later],
         "feeds": [feed.model_dump() for feed in feeds],
     }

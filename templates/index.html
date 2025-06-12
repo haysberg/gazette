@@ -1,149 +1,25 @@
-{% set description = "Gazette Insoumise est un agrégateur de flux qui regroupe les dernières nouvelles des médias alternatifs et indépendants de la gauche de rupture." %}
-{% set keywords = "Gazette Insoumise, La France Insoumise, LFI, médias alternatifs, médias indépendants, gauche de rupture" %}
-{% set long_name = "Gazette Insoumise" %}
-{% set short_name = "Gazette LFI" %}
-{% set default_favicon = "static/icons/favicon.ico" %}
-
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{ long_name }}</title>
-	<meta name="application-name" content="{{ long_name }}">
-	<meta name="description" content="{{ description }}">
-	<meta name="keywords" content="{{ keywords }}">
-	<meta name="referrer" content="same-origin">
-	<link rel="stylesheet" type="text/css" href="static/style.min.css">
-	<link rel="icon" href="{{ default_favicon }}">
-	<link rel="icon" type="image/png" sizes="192x192" href="static/icons/android_chrome_192x192.png" />
-	<link rel="icon" type="image/png" sizes="512x512" href="static/icons/android_chrome_512x512.png" />
-	<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="static/icons/apple_touch_icon.png" />
-	<link rel="icon" type="image/png" sizes="16x16" href="static/icons/favicon_16x16.png" />
-	<link rel="icon" type="image/png" sizes="32x32" href="static/icons/favicon_32x32.png" />
-	<link rel="icon" type="image/png" sizes="96x96" href="static/icons/favicon_96x96.png" />
-	<link rel="icon" type="image/png" sizes="150x150" href="static/icons/mstile_150x150.png" />
-	<link rel="icon" type="image/png" sizes="512x512" href="static/icons/safari_pinned_tab.png" />
-	<link rel="manifest" href="manifest.json">
-	<meta name="theme-color" content="#7b13d6">
-	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="author" content="haysberg">
-	<meta property="og:image" content="{{ default_favicon }}" />
-	<meta property="og:title" content="{{ long_name }}" />
-	<meta property="og:description" content="{{ description }}">
-	<meta property="og:locale" content="fr_FR" />
-	<meta property="og:site_name" content="{{ long_name }}" />
-</head>
+{% include "head.html" %}
 
 <body>
-	<header>
-		<h1 id="title"><span id="random-emoji"></span>{{ long_name }}</h1>
-		<hr style="margin-top: 0;">
-		<div class="liens-lfi">
-			<a href="https://programme.lafranceinsoumise.fr/" id="programme-btn" target="_blank" referrerpolicy="origin">
-				<img loading="lazy" aria-label="Le programme" style="height: auto;" src="/static/img/programme.webp">
-			</a>
-			<a id="action-pop" href="https://actionpopulaire.fr/" target="_blank" referrerpolicy="origin">
-				<img id="logo-ap" loading="lazy" aria-label="Action Populaire" src="/static/img/action-populaire_small.svg">
-			</a>
-			<a id="amfis" href="https://amfis.fr/" target="_blank" referrerpolicy="origin">
-				<img loading="lazy" aria-label="Amfis 2025" style="height: auto;" src="/static/img/amfis_cropped.webp">
-			</a>
-			<a id="ilb" href="https://institutlaboetie.fr/" target="_blank" referrerpolicy="origin">
-				<img aria-label="Institut la Boétie" src="/static/img/ilbcombo.webp" loading="lazy">
-			</a>
-			<a id="install-button"><B>📲 Installer</B></a>
-		</div>
-		<hr>
-	</header>
-		<details id="feed-list" open>
-			<summary id="sources">
-				<h2>Liste des sources</h2>
-			</summary>
-			<div class="feed-details">
-				{% for feed in feeds %}
-				{% include "source.html" %}
-				{% endfor %}
-			</div>
-		</details>
+	{% include "header.html" %}
+	<hr>
 	<main>
-		{% if posts_last24h is defined and posts_last24h|length > 0 %}
-		{% with name="Ces dernières 24 heures", open=true, articles=posts_last24h %}
-		{% include "category.html" %}
+		{% with articles=posts %}
+		{% include "posts.html" %}
 		{% endwith %}
-		{% endif %}
-		
-		{% if posts_24_48h is defined and posts_24_48h|length > 0 %}
-		{% with name="Hier", open=false, articles=posts_24_48h %}
-		{% include "category.html" %}
-		{% endwith %}
-		{% endif %}
-
-		{% if posts_later is defined and posts_later|length > 0 %}
-		{% with name="Plus tôt dans la semaine", open=false, articles=posts_later %}
-		{% include "category.html" %}
-		{% endwith %}
-		{% endif %}
 	</main>
-	<footer>
-		<small class="center">
-			<I>
-				Cette application est disponible en source ouverte, sous licence libre. Si vous souhaitez modifier le logiciel ou proposer une nouvelle fonctionnalité, faites-le <a href="https://github.com/haysberg/gazette">sur GitHub</a> !
-				<br>Dernière mise à jour de la page à {{ render_time }}.
-			</I>
-		</small>
-	</footer>
+	<hr>
+	{% if plus is defined and plus %}
+		<a id="bouton-plus" href="/plus.html"><I>Voir les articles plus anciens</I></a>
+	{% else %}
+		<a id="bouton-plus" href="/"><I>Voir les articles plus récents</I></a>
+	{% endif %}
+	{% include "footer.html" %}
 </body>
 
-<script>
-	emoji_list = [
-		"🐢", "🇵🇸", "🍉", "✊", "🔺", "🌈", "📬", "🕊️", "🗞️"
-	];
-	document.getElementById("random-emoji").innerText =
-		emoji_list[(Math.random() * emoji_list.length) | 0];
-
-	if (
-		window.matchMedia &&
-		window.matchMedia("(max-width: 480px)").matches
-	) {
-		console.log("Fermeture des sources sur téléphone.");
-		feed_element = document.getElementById("feed-list");
-		feed_element.open = false;
-	}
-
-	const isPWA =
-		!!(
-			window.matchMedia?.('(display-mode: standalone)').matches ||
-			window.matchMedia?.('(display-mode: fullscreen)').matches ||
-			window.navigator.standalone
-		);
-
-	if (
-		typeof window.onbeforeinstallprompt == "object" &&
-		!isPWA
-	) {
-		console.log("This browser supports the beforeinstallprompt event.");
-		document.getElementById("install-button").style.display = "block";
-		let installPrompt = null;
-		const installButton = document.querySelector("#install-button");
-		window.addEventListener("beforeinstallprompt", e => {
-			e.preventDefault();
-			installPrompt = e;
-			installButton.addEventListener("click", async () => {
-				if (!installPrompt) return;
-				const r = await installPrompt.prompt();
-				console.log(`Install prompt was: ${r.outcome}`);
-				installPrompt = null;
-				installButton.setAttribute("hidden", "");
-			});
-			installButton.removeAttribute("hidden");
-		});
-	} else {
-		console.log("This browser does not support the beforeinstallprompt event.");
-	}
-</script>
-
-<script data-goatcounter="https://insoumis.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+{% include "script.html" %}
 
 </html>

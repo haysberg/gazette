@@ -10,13 +10,6 @@
     --action-pop-yellow: #F4ED0F;
 }
 
-/* @font-face {
-    font-family: 'Public Sans';
-    src: url('/static/fonts/PublicSans-Bold.woff2') format('woff2');
-    font-weight: 900;
-    font-style: normal;
-} */
-
 @font-face {
     font-family: 'Public Sans';
     src: url('/static/fonts/PublicSans-Regular.woff2') format('woff2');
@@ -143,7 +136,7 @@ small>a:visited {
     line-height: normal;
 }
 
-.liens-lfi a {
+.liens-lfi a, #bouton-plus {
     display: flex;
     align-items: center;
     justify-content: center;
