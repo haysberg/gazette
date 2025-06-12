@@ -136,7 +136,7 @@ small>a:visited {
     line-height: normal;
 }
 
-.liens-lfi a, #bouton-plus {
+.liens-lfi a {
     display: flex;
     align-items: center;
     justify-content: center;
