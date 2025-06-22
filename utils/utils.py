@@ -5,7 +5,7 @@ import os
 from time import mktime
 import feedparser
 from sqlmodel import Session, delete, select
-from models.models import Feed, Post
+from utils.models import Feed, Post
 from utils.db import engine
 from utils.logs import logger
 from sqlalchemy.orm import selectinload
@@ -17,7 +17,7 @@ from io import BytesIO
 import httpx
 
 # Paths for static files
-STATIC_DIR = "tmp"
+STATIC_DIR = "static"
 os.makedirs(STATIC_DIR, exist_ok=True)
 HTML_FILE = os.path.join(STATIC_DIR, "index.html")
 PLUS_FILE = os.path.join(STATIC_DIR, "plus.html")
@@ -104,11 +104,12 @@ async def update_served_files() -> None:
 
             # Render plus.html
             plus_html = templates.TemplateResponse(
-                name="plus.html",
+                name="index.html",
                 context={
                     "request": None,  # No request object needed for static rendering
                     "posts": posts_later,
                     "feeds": feeds,
+                    "plus": False,
                     "render_time": render_time,
                 },
             ).body.decode("utf-8")

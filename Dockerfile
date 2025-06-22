@@ -1,19 +1,48 @@
-FROM ghcr.io/astral-sh/uv:alpine
+# # Copy the application into the container.
+# COPY config.toml main.py uv.lock pyproject.toml .
+# COPY templates ./templates/
+# COPY utils ./utils/
+# COPY models ./models/
+# COPY data ./data/
 
-RUN apk add --no-cache tzdata
-ENV TZ=Europe/Paris
+# Stage 0
+# Installs dependencies and builds the application
+# Artifacts will be copied to the final image
+FROM debian:12-slim AS build
+
+ARG PYTHON_VERSION="3.13"
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin
+
+ENV UV_COMPILE_BYTECODE="1"
+ENV UV_LINK_MODE="copy"
+ENV UV_PYTHON_INSTALL_DIR="/python"
+ENV UV_PYTHON_PREFERENCE="only-managed"
 
 WORKDIR /app
 
-# Copy the application into the container.
-COPY config.toml main.py uv.lock pyproject.toml .
+RUN uv python install $PYTHON_VERSION --no-cache
+RUN --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --frozen --no-cache --no-dev --no-editable
+
+COPY config.toml app.py .
 COPY templates ./templates/
 COPY utils ./utils/
-COPY models ./models/
-COPY data ./data/
+COPY static ./static/
 
+# Stage 1
+# Uses GoogleContainerTools/distroless as a minimal base
+# Contains only necessary files and build artifacts
+# Caching improves build speed
+FROM gcr.io/distroless/python3
 
-RUN uv sync --frozen --no-cache --no-dev
+COPY --from=build /python /python
+COPY --from=build /app /app
 
-# Run the application.
-CMD ["/app/.venv/bin/fastapi", "run", "main.py", "--port", "80", "--host", "0.0.0.0"]
+ENV PATH="/app/.venv/bin:$PATH"
+ENV TZ=Europe/Paris
+
+WORKDIR /app
+ENTRYPOINT ["uvicorn", "app:app"]
+CMD ["--host=0.0.0.0", "--port=8000"]

@@ -27,5 +27,6 @@ feedlist = [
     { link = "https://www.monde-diplomatique.fr/rss/", title = "Le monde diplomatique", image = "https://www.monde-diplomatique.fr/favicon.ico"},
     { link = "https://regards.fr/feed/", title = "Regards", image = "https://regards.fr/wp-content/uploads/2024/10/cropped-cropped-favicon-32x32.png"},
     { link = "https://infos-ouvrieres.fr/feed/", title = "Informations Ouvrières", image = "https://infos-ouvrieres.fr/wp-content/uploads/2018/12/Logo-500x500-e1612179565960-92x92.png"},
-    { link = "https://www.acrimed.org/spip.php?page=backend", title = "Acrimed", image = "https://www.acrimed.org/squelettes/favicon.ico"}
+    { link = "https://www.acrimed.org/spip.php?page=backend", title = "Acrimed", image = "https://www.acrimed.org/squelettes/favicon.ico"},
+    { link = "http://www.revue-ouvrage.org/feed/", title = "Ouvrage"}
 ]
