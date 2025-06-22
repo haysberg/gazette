@@ -40,7 +40,6 @@ async def lifespan(app: FastAPI):
         task.cancel()  # Cancel the periodic task on shutdown
 
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(lifespan=lifespan, ocs_url=None, redoc_url=None, openapi_url=None)
 app.add_middleware(GZipMiddleware, minimum_size=1000, compresslevel=5)
-app.mount("/app", app)
 app.mount("/", StaticFiles(directory="static", html=True), name="root")

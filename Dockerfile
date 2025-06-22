@@ -45,4 +45,4 @@ ENV TZ=Europe/Paris
 
 WORKDIR /app
 ENTRYPOINT ["uvicorn", "app:app"]
-CMD ["--host=0.0.0.0", "--port=8000"]
+CMD ["--host=0.0.0.0", "--port=8000", "--workers", "25"]
