@@ -190,7 +190,7 @@ async def parse_feed(feed_dict: dict) -> None:
             link=data.feed.link,
             domain=data.feed.link.split("/")[2].removeprefix("www."),
             title=data.feed.title,
-            subtitle=data.feed.subtitle,
+            subtitle=data.feed.subtitle if hasattr(data.feed, "subtitle") else "",
             image=data.feed.image.href if hasattr(data.feed, "image") else None,
         )
 
@@ -205,7 +205,6 @@ async def parse_feed(feed_dict: dict) -> None:
         return None
 
     with Session(engine) as session:
-        parsed_feed.image = parsed_feed.image.replace("http://", "https://")
         parsed_feed = session.merge(parsed_feed)
         logger.debug(f"Feed {parsed_feed.link} parsed and saved successfully.")
 
