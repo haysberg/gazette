@@ -22,11 +22,14 @@ feedlist = [
     { link = "https://leftalliance.eu/feed/", title = "EU LEFT Alliance", image = "https://leftalliance.eu/wp-content/uploads/2025/04/cropped-FAVICON-ELA-1-32x32.png" },
     { link = "https://institutlaboetie.fr/feed/", title = "Institut La Boétie", image = "https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON-150x150.png" },
     { link = "https://api.arretsurimages.net/api/public/rss/all-content", title = "Arrêt sur Images", image = "https://www.arretsurimages.net/assets/img/favicon/favicon-32x32.png" },
-    { link = "https://www.monde-diplomatique.fr/rss/", title = "Le monde diplomatique", image = "https://www.monde-diplomatique.fr/favicon.ico" },
     { link = "https://regards.fr/feed/", title = "Regards", image = "https://regards.fr/wp-content/uploads/2024/10/cropped-cropped-favicon-32x32.png" },
     { link = "https://infos-ouvrieres.fr/feed/", title = "Informations Ouvrières", image = "https://infos-ouvrieres.fr/wp-content/uploads/2018/12/Logo-500x500-e1612179565960-92x92.png" },
     { link = "https://www.acrimed.org/spip.php?page=backend", title = "Acrimed", image = "https://www.acrimed.org/squelettes/favicon.ico" },
     { link = "http://www.revue-ouvrage.org/feed/", title = "Ouvrage" },
     { link = "https://www.socialter.fr/rss", title = "Socialter", subtitle = "Critique radicale et alternatives", image = "https://www.socialter.fr/theme/images/favicon.png" },
     { link = "http://revueperiode.net/feed/", title = "Revue Période", image = "http://revueperiode.net/wp-includes/images/w-logo-blue-white-bg.png" },
+    { link = "https://antoineleaument.fr/feed/" },
+    { link = "https://clemenceguette.fr/feed/" },
+    { link = "https://manuelbompard.fr/feed/", title = "Manuel Bompard" },
+    { link = "https://ici-et-ailleurs.org/spip.php?page=backend", image = "https://ici-et-ailleurs.org/favicon.ico" }
 ]
