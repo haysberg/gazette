@@ -14,7 +14,7 @@ feedlist = [
     { link = "https://orgasolitrans.fr/index.php/feed/", title = "L'OST" },
     { link = "https://backend.streetpress.com/rss.xml", title = "StreetPress", domain = "streetpress.com", image = "https://www.streetpress.com/favicon.ico" },
     { link = "https://api.blast-info.fr/rss.xml", title = "BLAST" },
-    { link = "https://www.courrierinternational.com/feed/rubrique/geopolitique/rss.xml", title = "Courrier International", image = "https://www.courrierinternational.com/bucket/assets/e04cb3bc293a7e5fc5bb7702ca8cca95c7ddd8bc/img/logos/favicon.ico" },
+    # { link = "https://www.courrierinternational.com/feed/rubrique/geopolitique/rss.xml", title = "Courrier International", image = "https://www.courrierinternational.com/bucket/assets/e04cb3bc293a7e5fc5bb7702ca8cca95c7ddd8bc/img/logos/favicon.ico" },
     { link = "https://strass-syndicat.org/feed/", title = "Le STRASS" },
     { link = "https://fourth.international/french.rss", title = "IVe Internationale", image = "https://fourth.international/sites/default/files/favicon.ico" },
     { link = "https://npa-lanticapitaliste.org/rss.xml", title = "NPA", image = "https://npa-lanticapitaliste.org/sites/default/files/favicon_1.ico" },
@@ -26,10 +26,11 @@ feedlist = [
     { link = "https://infos-ouvrieres.fr/feed/", title = "Informations Ouvrières", image = "https://infos-ouvrieres.fr/wp-content/uploads/2018/12/Logo-500x500-e1612179565960-92x92.png" },
     { link = "https://www.acrimed.org/spip.php?page=backend", title = "Acrimed", image = "https://www.acrimed.org/squelettes/favicon.ico" },
     { link = "http://www.revue-ouvrage.org/feed/", title = "Ouvrage" },
-    { link = "https://www.socialter.fr/rss", title = "Socialter", subtitle = "Critique radicale et alternatives", image = "https://www.socialter.fr/theme/images/favicon.png" },
+    # { link = "https://www.socialter.fr/rss", title = "Socialter", subtitle = "Critique radicale et alternatives", image = "https://www.socialter.fr/theme/images/favicon.png" },
     { link = "http://revueperiode.net/feed/", title = "Revue Période", image = "http://revueperiode.net/wp-includes/images/w-logo-blue-white-bg.png" },
     { link = "https://antoineleaument.fr/feed/" },
     { link = "https://clemenceguette.fr/feed/" },
     { link = "https://manuelbompard.fr/feed/", title = "Manuel Bompard" },
-    { link = "https://ici-et-ailleurs.org/spip.php?page=backend", image = "https://ici-et-ailleurs.org/favicon.ico" }
+    { link = "https://ici-et-ailleurs.org/spip.php?page=backend", image = "https://ici-et-ailleurs.org/favicon.ico" },
+    { link = "https://www.reseau-salariat.info/index.xml", image = "https://www.reseau-salariat.info/images/logo2.svg", title = "Réseau Salariat" }
 ]

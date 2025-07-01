@@ -54,6 +54,7 @@ def configure_logging():
 
     # Redirect SQLAlchemy logs to structlog
     logging.getLogger("sqlalchemy.engine").setLevel(LOGLEVEL)
+    logging.getLogger("httpx").setLevel(logging.ERROR)
     if LOGLEVEL != "DEBUG":
         logging.getLogger("sqlalchemy.engine").setLevel(logging.NOTSET)
     logging.getLogger().setLevel(LOGLEVEL)

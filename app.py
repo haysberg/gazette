@@ -1,43 +1,32 @@
-import asyncio
-import os
+from datetime import datetime, timedelta
 from fastapi import FastAPI
 from fastapi.middleware.gzip import GZipMiddleware
 from contextlib import asynccontextmanager
 from fastapi.staticfiles import StaticFiles
-from utils.utils import update_feeds_and_posts
-from utils.logs import configure_logging, logger
-import shutil
+from sqlmodel import SQLModel
+from utils.utils import init_service, update_all_posts
+from utils.logs import configure_logging
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from utils import engine
 
 configure_logging()
 
-
-async def periodic_update():
-    while True:
-        logger.info("Running periodic feed update")
-        asyncio.create_task(update_feeds_and_posts())
-        logger.info("Feed update completed")
-        await asyncio.sleep(900)
-
-
-# Run update_feeds_and_posts at startup
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # If tmp folder does not exist, create it
-    os.makedirs("tmp", exist_ok=True)
-    # Copy everything from data folder to tmp folder
-    if os.path.exists("data"):
-        for item in os.listdir("data"):
-            s = os.path.join("data", item)
-            d = os.path.join("tmp", item)
-            if os.path.isdir(s):
-                shutil.copytree(s, d, dirs_exist_ok=True)
-            else:
-                shutil.copy2(s, d)
-    task = asyncio.create_task(periodic_update())
-    try:
-        yield
-    finally:
-        task.cancel()  # Cancel the periodic task on shutdown
+    async with engine.begin() as conn:
+        await conn.run_sync(SQLModel.metadata.create_all)
+    await init_service()
+    scheduler = AsyncIOScheduler()
+    scheduler.add_job(
+        update_all_posts,
+        "interval",
+        minutes=15,
+        max_instances=1,
+        next_run_time=datetime.now(),
+    )
+    scheduler.start()
+
+    yield
 
 
 app = FastAPI(lifespan=lifespan, ocs_url=None, redoc_url=None, openapi_url=None)
