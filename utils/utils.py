@@ -3,49 +3,48 @@ from datetime import datetime, timedelta
 import json
 import os
 import aiofiles
-from sqlmodel import delete, select
-from sqlmodel.ext.asyncio.session import AsyncSession
+from sqlmodel import Session, delete, select
 from utils.models import Feed, Post
 from utils import engine
 from utils.logs import logger
 from sqlalchemy.orm import selectinload
-from fastapi.templating import Jinja2Templates
 import tomllib
 from datetime import datetime
 from utils import STATIC_DIR, TEMPLATES_DIR, HTML_FILE, PLUS_FILE, JSON_FILE
-
-
+from jinja2 import Environment, FileSystemLoader
 
 
 async def update_all_posts() -> None:
     logger.info("Updating posts")
-    async with AsyncSession(engine) as session:
-        feeds = (await session.exec(select(Feed))).all()
+    with Session(engine) as session:
+        feeds = (session.exec(select(Feed))).all()
     tasks = [feed.update_posts() for feed in feeds]
     await asyncio.gather(*tasks)
     logger.info("Finished updating posts.")
 
     # Delete entries older than a week
-    async with AsyncSession(engine) as session:
+    with Session(engine) as session:
         # Delete entries in db older than a week
         logger.debug("Running cleanup of old posts...")
         statement = delete(Post).where(
             Post.publication_date < datetime.now() - timedelta(weeks=1)
         )
-        await session.exec(statement)
-        await session.commit()
+        session.exec(statement)
+        session.commit()
     await update_served_files()
+
 
 async def update_served_files() -> None:
     logger.info("Generating static files...")
-    templates = Jinja2Templates(directory=TEMPLATES_DIR)
-
     os.makedirs(STATIC_DIR, exist_ok=True)
 
     posts_last24h: list[Post] = []
     posts_later: list[Post] = []
 
-    async with AsyncSession(engine) as session:
+    # Initialize Jinja2 environment
+    env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
+
+    with Session(engine) as session:
         # Get posts from the last 24 hours
         statement = (
             select(Post)
@@ -53,7 +52,7 @@ async def update_served_files() -> None:
             .where(Post.publication_date > datetime.now() - timedelta(days=1))
             .order_by(Post.publication_date.desc())
         )
-        results = await session.exec(statement)
+        results = session.exec(statement)
         posts_last24h = results.all()
 
         # Get posts from later
@@ -63,38 +62,31 @@ async def update_served_files() -> None:
             .where(Post.publication_date < datetime.now() - timedelta(days=1))
             .order_by(Post.publication_date.desc())
         )
-        results = await session.exec(statement)
+        results = session.exec(statement)
         posts_later = results.all()
 
         # Get all feeds
-        feeds = (await session.exec(select(Feed).order_by(Feed.title.desc()))).all()
+        feeds = (session.exec(select(Feed).order_by(Feed.title.desc()))).all()
         render_time = datetime.now().strftime("%Hh%M").capitalize()
 
         # Render Jinja2 template and save as HTML
         try:
             # Render index.html
-            index_html = templates.TemplateResponse(
-                name="index.html",
-                context={
-                    "request": None,  # No request object needed for static rendering
-                    "posts": posts_last24h,
-                    "feeds": feeds,
-                    "plus": True,
-                    "render_time": render_time,
-                },
-            ).body.decode("utf-8")
+            template = env.get_template("index.html")
+            index_html = template.render(
+                posts=posts_last24h,
+                feeds=feeds,
+                plus=True,
+                render_time=render_time,
+            )
 
             # Render plus.html
-            plus_html = templates.TemplateResponse(
-                name="index.html",
-                context={
-                    "request": None,  # No request object needed for static rendering
-                    "posts": posts_later,
-                    "feeds": feeds,
-                    "plus": False,
-                    "render_time": render_time,
-                },
-            ).body.decode("utf-8")
+            plus_html = template.render(
+                posts=posts_later,
+                feeds=feeds,
+                plus=False,
+                render_time=render_time,
+            )
 
             # Generate JSON and save as a file
             json_data = {
@@ -125,15 +117,15 @@ async def update_served_files() -> None:
 
     logger.debug("Static files generation ended.")
 
+
 async def init_service() -> None:
-    async with aiofiles.open("config.toml", "rb") as f:
-        content = await f.read()
+    with open("config.toml", "rb") as f:
+        content = f.read()
         config_data = tomllib.loads(content.decode("utf-8"))
         logger.debug(f"Found {len(config_data['feeds']['feedlist'])} feeds")
 
     logger.info("Initializing feeds...")
-
-    semaphore = asyncio.Semaphore(10)
-
-    tasks = [Feed.init_feed(feed_dict) for feed_dict in config_data["feeds"]["feedlist"]]
+    tasks = [
+        Feed.init_feed(feed_dict) for feed_dict in config_data["feeds"]["feedlist"]
+    ]
     await asyncio.gather(*tasks)

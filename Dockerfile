@@ -20,4 +20,4 @@ RUN apk update && apk add cairo
 
 EXPOSE 8000
 
-CMD ["fastapi", "run", "--host", "127.0.0.1", "--port", "8001"]
+CMD ["python3", "app.py"]

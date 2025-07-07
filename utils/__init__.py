@@ -1,7 +1,7 @@
 import os
-from sqlalchemy.ext.asyncio import create_async_engine
+from sqlmodel import create_engine
 
-engine = create_async_engine("sqlite+aiosqlite:///:memory:", echo=False)
+engine = create_engine("sqlite:///gazette.db", echo=False)
 
 # Paths for static files
 STATIC_DIR = "static"

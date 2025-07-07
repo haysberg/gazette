@@ -8,10 +8,11 @@ import feedparser
 import cairosvg
 from utils.logs import logger
 import httpx
-from sqlmodel import Field, Relationship, SQLModel
+from sqlmodel import Field, Relationship, SQLModel, Session
 from sqlmodel.ext.asyncio.session import AsyncSession
 from PIL import Image
 from utils import engine
+
 
 class Feed(SQLModel, table=True):
     link: str = Field(primary_key=True)
@@ -32,16 +33,20 @@ class Feed(SQLModel, table=True):
                     try:
                         response.raise_for_status()
                     except httpx.HTTPStatusError as http_err:
-                        logger.error(f"HTTP error while downloading image for {self.domain}: {http_err}")
+                        logger.error(
+                            f"HTTP error while downloading image for {self.domain}: {http_err}"
+                        )
                         return
-                
+
                 img_data = BytesIO(response.content)
-                if self.image.endswith('.svg'):
+                if self.image.endswith(".svg"):
                     png_data = BytesIO()
                     cairosvg.svg2png(bytestring=img_data.getvalue(), write_to=png_data)
                     img_data = png_data
 
-                Image.open(img_data).resize((32, 32), Image.LANCZOS).save(image_path, 'WEBP')
+                Image.open(img_data).resize((32, 32), Image.LANCZOS).save(
+                    image_path, "WEBP"
+                )
                 logger.debug(f"Image for {self.domain} saved to {image_path}")
             except Exception as e:
                 logger.error(f"Failed to save image for {self.domain}: {e}")
@@ -50,12 +55,14 @@ class Feed(SQLModel, table=True):
 
     @classmethod
     async def init_feed(cls, feed_dict: dict):
-        logger.debug(f"Initializing feed {feed_dict['link']}")
+        logger.info(f"Initializing feed {feed_dict['link']}")
         try:
             data: dict = await asyncio.to_thread(feedparser.parse, feed_dict["link"])
 
             if data.bozo:
-                raise SyntaxError(f"Issue when updating feed {feed_dict['link']}: {data.bozo_exception.getMessage()}")
+                raise SyntaxError(
+                    f"Issue when updating feed {feed_dict['link']}: {data.bozo_exception.getMessage()}"
+                )
 
             feed = Feed(
                 link=data.feed.link,
@@ -67,9 +74,9 @@ class Feed(SQLModel, table=True):
 
             for key, value in feed_dict.items():
                 setattr(feed, key, value)
-            async with AsyncSession(engine) as session:
-                await session.merge(feed)
-                await session.commit()
+            with Session(engine) as session:
+                session.merge(feed)
+                session.commit()
             asyncio.create_task(feed.download_image())
             return feed
 
@@ -86,7 +93,7 @@ class Feed(SQLModel, table=True):
     async def update_posts(self):
         try:
             data: dict = feedparser.parse(self.link)
-            async with AsyncSession(engine) as session:
+            with Session(engine) as session:
                 for entry in data.entries:
                     try:
                         # Prepare the Post object
@@ -95,11 +102,15 @@ class Feed(SQLModel, table=True):
                             title=entry.title,
                             feed_link=self.link,
                             publication_date=datetime.fromtimestamp(
-                                mktime(entry.published_parsed if hasattr(entry, "published_parsed") else entry.updated_parsed)
+                                mktime(
+                                    entry.published_parsed
+                                    if hasattr(entry, "published_parsed")
+                                    else entry.updated_parsed
+                                )
                             ),
                         )
 
-                        await session.merge(parsed_entry)
+                        session.merge(parsed_entry)
 
                     except AttributeError as ae:
                         logger.error(
@@ -112,16 +123,17 @@ class Feed(SQLModel, table=True):
                         )
                         continue
                 try:
-                    await session.commit()
+                    session.commit()
                 except Exception as commit_exc:
                     logger.error(f"Session commit failed: {commit_exc}")
-                    await session.rollback()
+                    session.rollback()
         except ConnectionResetError as cre:
             logger.error(f"Couldn't connect to {self.link}, reason is {cre}")
             return None
         except Exception as e:
             logger.error(f"Unexpected error in update_posts: {e}")
             return None
+
 
 class Post(SQLModel, table=True):
     link: str = Field(primary_key=True)
