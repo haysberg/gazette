@@ -40,3 +40,4 @@ root = "/app/static"
 port = 8000
 page404 = "./static/404.html"
 cache-control-headers = true
+host = "0.0.0.0"
