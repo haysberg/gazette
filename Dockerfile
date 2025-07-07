@@ -43,6 +43,8 @@ ENV TZ=Europe/Paris
 
 COPY --from=build /python /python
 COPY --from=build /app /app
+COPY --from=joseluisq/static-web-server:2-alpine /usr/local/bin/static-web-server /bin/static-web-server
+COPY entrypoint.sh .
 
-RUN apk update && apk add cairo
-CMD ["fastapi", "run", "app.py", "--port", "8000"]
+RUN apk update && apk add cairo tini
+ENTRYPOINT ["tini", "--", "./entrypoint.sh"]
