@@ -8,7 +8,7 @@
 # Stage 0
 # Installs dependencies and builds the application
 # Artifacts will be copied to the final image
-FROM debian:12-slim AS build
+FROM alpine AS build
 
 ARG PYTHON_VERSION="3.13"
 
@@ -24,7 +24,7 @@ WORKDIR /app
 RUN uv python install $PYTHON_VERSION --no-cache
 RUN --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --frozen --no-cache --no-dev --no-editable
+    uv sync --frozen --no-cache --no-dev --no-editable --compile-bytecode
 
 COPY config.toml app.py .
 COPY templates ./templates/
@@ -35,14 +35,14 @@ COPY static ./static/
 # Uses GoogleContainerTools/distroless as a minimal base
 # Contains only necessary files and build artifacts
 # Caching improves build speed
-FROM gcr.io/distroless/python3
+FROM python:3.13-alpine
+
+WORKDIR /app
+ENV PATH="/app/.venv/bin:$PATH"
+ENV TZ=Europe/Paris
 
 COPY --from=build /python /python
 COPY --from=build /app /app
 
-ENV PATH="/app/.venv/bin:$PATH"
-ENV TZ=Europe/Paris
-
-WORKDIR /app
-ENTRYPOINT ["uvicorn", "app:app"]
-CMD ["--host=0.0.0.0", "--port=8000", "--workers", "25"]
+RUN apk update && apk add cairo
+CMD ["fastapi", "run", "app.py", "--port", "8000"]

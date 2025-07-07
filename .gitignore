@@ -183,3 +183,4 @@ data/favicons
 tmp
 static/*.html
 static/favicons
+static/index.json
