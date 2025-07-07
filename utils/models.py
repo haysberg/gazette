@@ -22,28 +22,31 @@ class Feed(SQLModel, table=True):
     posts: list["Post"] = Relationship(back_populates="feed")
 
     async def download_image(self):
-        try:
-            image_path = os.path.join("static", "favicons", f"{self.domain}.webp")
-            os.makedirs(os.path.dirname(image_path), exist_ok=True)
+        for i in range(3):
+            try:
+                image_path = os.path.join("static", "favicons", f"{self.domain}.webp")
+                os.makedirs(os.path.dirname(image_path), exist_ok=True)
 
-            async with httpx.AsyncClient(timeout=10) as client:
-                response = await client.get(self.image)
-                try:
-                    response.raise_for_status()
-                except httpx.HTTPStatusError as http_err:
-                    logger.error(f"HTTP error while downloading image for {self.domain}: {http_err}")
-                    return
-            
-            img_data = BytesIO(response.content)
-            if self.image.endswith('.svg'):
-                png_data = BytesIO()
-                cairosvg.svg2png(bytestring=img_data.getvalue(), write_to=png_data)
-                img_data = png_data
+                async with httpx.AsyncClient(timeout=10) as client:
+                    response = await client.get(self.image)
+                    try:
+                        response.raise_for_status()
+                    except httpx.HTTPStatusError as http_err:
+                        logger.error(f"HTTP error while downloading image for {self.domain}: {http_err}")
+                        return
+                
+                img_data = BytesIO(response.content)
+                if self.image.endswith('.svg'):
+                    png_data = BytesIO()
+                    cairosvg.svg2png(bytestring=img_data.getvalue(), write_to=png_data)
+                    img_data = png_data
 
-            Image.open(img_data).resize((32, 32), Image.LANCZOS).save(image_path, 'WEBP')
-            logger.debug(f"Image for {self.domain} saved to {image_path}")
-        except Exception as e:
-            logger.error(f"Failed to save image for {self.domain}: {e}")
+                Image.open(img_data).resize((32, 32), Image.LANCZOS).save(image_path, 'WEBP')
+                logger.debug(f"Image for {self.domain} saved to {image_path}")
+            except Exception as e:
+                logger.error(f"Failed to save image for {self.domain}: {e}")
+                continue
+            break
 
     @classmethod
     async def init_feed(cls, feed_dict: dict):
