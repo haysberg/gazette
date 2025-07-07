@@ -1,4 +1,5 @@
 #!/bin/sh
 
-python3 /app/.venv/bin/fastapi run app.py --port 8001 &
-/bin/static-web-server
+/bin/static-web-server &
+sleep 2
+python3 /app/.venv/bin/fastapi run app.py --port 8001
