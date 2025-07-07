@@ -39,5 +39,5 @@ feedlist = [
 root = "/app/static"
 port = 8000
 page404 = "./404.html"
-cache-control-headers = true
+cache-control-headers = false
 host = "0.0.0.0"
