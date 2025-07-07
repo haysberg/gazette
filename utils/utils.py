@@ -135,9 +135,5 @@ async def init_service() -> None:
 
     semaphore = asyncio.Semaphore(10)
 
-    async def limited_init_feed(feed_dict):
-        async with semaphore:
-            await Feed.init_feed(feed_dict)
-
-    tasks = [limited_init_feed(feed_dict) for feed_dict in config_data["feeds"]["feedlist"]]
+    tasks = [Feed.init_feed(feed_dict) for feed_dict in config_data["feeds"]["feedlist"]]
     await asyncio.gather(*tasks)
