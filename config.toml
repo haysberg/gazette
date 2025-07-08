@@ -11,7 +11,7 @@ feedlist = [
     { link = "https://www.revue-ballast.fr/feed/", image = "https://www.revue-ballast.fr/wp-content/uploads/2016/09/ballast_favicon.ico" },
     { link = "https://orientxxi.info/?page=backend&lang=fr" },
     { link = "https://survie.org/spip.php?page=backend" },
-    { link = "https://www.revolutionpermanente.fr/spip.php?page=backend_portada", image = "https://pbs.twimg.com/profile_images/1584923031687806980/SgoWFAk9_400x400.jpg" },
+    { link = "https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5", image = "https://pbs.twimg.com/profile_images/1584923031687806980/SgoWFAk9_400x400.jpg" },
     { link = "https://orgasolitrans.fr/index.php/feed/", title = "L'OST" },
     { link = "https://backend.streetpress.com/rss.xml", title = "StreetPress", domain = "streetpress.com", image = "https://www.streetpress.com/favicon.ico" },
     { link = "https://api.blast-info.fr/rss.xml", title = "BLAST" },
@@ -27,12 +27,14 @@ feedlist = [
     { link = "https://www.acrimed.org/spip.php?page=backend", title = "Acrimed", image = "https://www.acrimed.org/squelettes/favicon.ico" },
     { link = "http://www.revue-ouvrage.org/feed/", title = "Ouvrage" },
     { link = "https://www.socialter.fr/rss", title = "Socialter", subtitle = "Critique radicale et alternatives", image = "https://www.socialter.fr/theme/images/favicon.png" },
-    { link = "http://revueperiode.net/feed/", title = "Revue Période", image = "http://revueperiode.net/wp-includes/images/w-logo-blue-white-bg.png" },
     { link = "https://www.reseau-salariat.info/index.xml", image = "https://www.reseau-salariat.info/images/logo2.svg", title = "Réseau Salariat" },
     { link = "https://lahorde.info/spip.php?page=backend", title = "La Horde", image = "https://lahorde.info/squelettes/favicon.ico" },
     { link = "https://basta.media/spip.php?page=backend", title = "Basta!", image = "https://basta.media/squelettes/basta/favicon/favicon.svg" },
     { link = "https://disclose.ngo/feed/", title = "Disclose" },
-    { link = "https://www.terrestres.org/feed/" }
+    { link = "https://www.terrestres.org/feed/" },
+    { link = "https://reporterre.net/spip.php?page=backend-simple", title = "Reporterre"},
+    { link = "https://www.alternatives-economiques.fr/rss.xml", title = "AlterÉco", image = "https://www.alternatives-economiques.fr/sites/all/themes/alternatives-economiques-main/assets/apple-touch-icon.png" },
+    { link = "https://rapportsdeforce.fr/feed", image = "https://rapportsdeforce.fr/wp-content/themes/flymag-child/images/favicon-196x196.png" },
 ]
 
 [general]
@@ -41,3 +43,5 @@ port = 8000
 page404 = "./404.html"
 cache-control-headers = false
 host = "0.0.0.0"
+compression = true
+compression-static = true

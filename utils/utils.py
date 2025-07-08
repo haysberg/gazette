@@ -12,6 +12,9 @@ import tomllib
 from datetime import datetime
 from utils import STATIC_DIR, TEMPLATES_DIR, HTML_FILE, PLUS_FILE, JSON_FILE
 from jinja2 import Environment, FileSystemLoader
+import gzip
+import brotli
+import zstandard as zstd
 
 
 async def update_all_posts() -> None:
@@ -32,6 +35,7 @@ async def update_all_posts() -> None:
         session.exec(statement)
         session.commit()
     await update_served_files()
+    await compress_static_files()
 
 
 async def update_served_files() -> None:
@@ -43,6 +47,8 @@ async def update_served_files() -> None:
 
     # Initialize Jinja2 environment
     env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
+
+    
 
     with Session(engine) as session:
         # Get posts from the last 24 hours
@@ -117,6 +123,35 @@ async def update_served_files() -> None:
 
     logger.debug("Static files generation ended.")
 
+async def compress_static_files() -> None:
+    for root, dirs, files in os.walk("static"):
+        for file in files:
+            file_path = os.path.join(root, file)
+            if not file.endswith((".gz", ".br", ".zst")):  # Skip already compressed files
+                async with aiofiles.open(file_path, "rb") as f_in:
+                    data = await f_in.read()
+                gz_path = file_path + ".gz"
+                async with aiofiles.open(gz_path, "wb") as f_out:
+                    compressed = gzip.compress(data)
+                    await f_out.write(compressed)
+                # Brotli compression
+                try:
+                    br_path = file_path + ".br"
+                    compressed_br = brotli.compress(data)
+                    async with aiofiles.open(br_path, "wb") as f_br:
+                        await f_br.write(compressed_br)
+                except ImportError:
+                    logger.warning("brotli module not installed, skipping Brotli compression for %s", file_path)
+
+                # Zstandard compression
+                try:
+                    zst_path = file_path + ".zst"
+                    cctx = zstd.ZstdCompressor()
+                    compressed_zst = cctx.compress(data)
+                    async with aiofiles.open(zst_path, "wb") as f_zst:
+                        await f_zst.write(compressed_zst)
+                except ImportError:
+                    logger.warning("zstandard module not installed, skipping Zstandard compression for %s", file_path)
 
 async def init_service() -> None:
     with open("config.toml", "rb") as f:
