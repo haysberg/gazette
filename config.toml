@@ -25,7 +25,7 @@ feedlist = [
     { link = "https://api.arretsurimages.net/api/public/rss/all-content", title = "Arrêt sur Images", image = "https://www.arretsurimages.net/assets/img/favicon/favicon-32x32.png" },
     { link = "https://infos-ouvrieres.fr/feed/", title = "Informations Ouvrières", image = "https://infos-ouvrieres.fr/wp-content/uploads/2018/12/Logo-500x500-e1612179565960-92x92.png" },
     { link = "https://www.acrimed.org/spip.php?page=backend", title = "Acrimed", image = "https://www.acrimed.org/squelettes/favicon.ico" },
-    { link = "http://www.revue-ouvrage.org/feed/", title = "Ouvrage" },
+    { link = "http://www.revue-ouvrage.org/feed/", title = "Ouvrage", image = "https://www.revue-ouvrage.org/wp-content/uploads/2020/04/cropped-ouvrage-noir-1-32x32.png" },
     { link = "https://www.socialter.fr/rss", title = "Socialter", subtitle = "Critique radicale et alternatives", image = "https://www.socialter.fr/theme/images/favicon.png" },
     { link = "https://www.reseau-salariat.info/index.xml", image = "https://www.reseau-salariat.info/images/logo2.svg", title = "Réseau Salariat" },
     { link = "https://lahorde.info/spip.php?page=backend", title = "La Horde", image = "https://lahorde.info/squelettes/favicon.ico" },
@@ -35,6 +35,8 @@ feedlist = [
     { link = "https://reporterre.net/spip.php?page=backend-simple", title = "Reporterre"},
     { link = "https://www.alternatives-economiques.fr/rss.xml", title = "AlterÉco", image = "https://www.alternatives-economiques.fr/sites/all/themes/alternatives-economiques-main/assets/apple-touch-icon.png" },
     { link = "https://rapportsdeforce.fr/feed", image = "https://rapportsdeforce.fr/wp-content/themes/flymag-child/images/favicon-196x196.png" },
+    { link = "http://revueperiode.net/feed/", title = "Période", image = "https://revueperiode.net/wp-content/uploads/2020/04/cropped-periode-32x32.png" },
+    { link = "https://www.monde-diplomatique.fr/rss/", image = "https://www.monde-diplomatique.fr/favicon.ico"}
 ]
 
 [general]

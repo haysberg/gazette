@@ -28,7 +28,7 @@ class Feed(SQLModel, table=True):
                 image_path = os.path.join("static", "favicons", f"{self.domain}.webp")
                 os.makedirs(os.path.dirname(image_path), exist_ok=True)
 
-                async with httpx.AsyncClient(timeout=10) as client:
+                async with httpx.AsyncClient(timeout=10, verify=False) as client:
                     response = await client.get(self.image)
                     try:
                         response.raise_for_status()
