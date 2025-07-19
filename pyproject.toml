@@ -20,8 +20,10 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "brotli>=1.1.0",
     "ruff>=0.11.9",
     "yq>=3.4.3",
+    "zstandard>=0.23.0",
 ]
 
 [tool.ruff]
