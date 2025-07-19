@@ -6,21 +6,20 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "aiofiles>=24.1.0",
-    # "aiosqlite>=0.21.0",
     "apscheduler>=3.11.0",
+    "cairosvg>=2.8.2",
+    "csscompressor>=0.9.5",
     "feedparser>=6.0.11",
     "jinja2>=3.1.6",
+    "jsmin>=3.0.1",
+    "pillow>=11.3.0",
+    "requests>=2.32.4",
     "sqlmodel>=0.0.24",
     "structlog>=25.3.0",
 ]
 
 [dependency-groups]
 dev = [
-    "cairosvg>=2.8.2",
-    "csscompressor>=0.9.5",
-    "jsmin>=3.0.1",
-    "pillow>=11.3.0",
-    "requests>=2.32.4",
     "ruff>=0.11.9",
     "yq>=3.4.3",
 ]
