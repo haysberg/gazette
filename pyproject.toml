@@ -6,22 +6,23 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "aiofiles>=24.1.0",
-    "aiosqlite>=0.21.0",
+    # "aiosqlite>=0.21.0",
     "apscheduler>=3.11.0",
-    "brotli>=1.1.0",
-    "cairosvg>=2.8.2",
     "feedparser>=6.0.11",
-    "httpx>=0.28.1",
     "jinja2>=3.1.6",
-    "pillow>=11.2.1",
     "sqlmodel>=0.0.24",
     "structlog>=25.3.0",
-    "zstandard>=0.23.0",
 ]
 
 [dependency-groups]
 dev = [
+    "cairosvg>=2.8.2",
+    "csscompressor>=0.9.5",
+    "jsmin>=3.0.1",
+    "pillow>=11.3.0",
+    "requests>=2.32.4",
     "ruff>=0.11.9",
+    "yq>=3.4.3",
 ]
 
 [tool.ruff]
@@ -59,8 +60,7 @@ exclude = [
 line-length = 88
 indent-width = 4
 
-# Assume Python 3.9
-target-version = "py39"
+target-version = "py313"
 
 [tool.ruff.lint]
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
