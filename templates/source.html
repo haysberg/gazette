@@ -1,4 +1,4 @@
-<a href="https://{{ feed.domain }}" target="_blank" title="{{ feed.subtitle }}" referrerpolicy="origin">
+<a href="https://{{ feed.domain }}" target="_blank" title="{{ feed.subtitle|forceescape }}" referrerpolicy="origin">
     <div class="feed-card">
         <div>
             {% if feed.image is defined and feed.image != "" %}<img style="vertical-align: middle;"
