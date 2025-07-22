@@ -7,23 +7,15 @@ requires-python = ">=3.13"
 dependencies = [
     "aiofiles>=24.1.0",
     "apscheduler>=3.11.0",
-    "cairosvg>=2.8.2",
-    "csscompressor>=0.9.5",
     "feedparser>=6.0.11",
     "jinja2>=3.1.6",
-    "jsmin>=3.0.1",
-    "pillow>=11.3.0",
-    "requests>=2.32.4",
     "sqlmodel>=0.0.24",
     "structlog>=25.3.0",
 ]
 
 [dependency-groups]
 dev = [
-    "brotli>=1.1.0",
     "ruff>=0.11.9",
-    "yq>=3.4.3",
-    "zstandard>=0.23.0",
 ]
 
 [tool.ruff]
@@ -58,7 +50,7 @@ exclude = [
 ]
 
 # Same as Black.
-line-length = 88
+line-length = 100
 indent-width = 4
 
 target-version = "py313"
@@ -67,8 +59,8 @@ target-version = "py313"
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
 # Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
 # McCabe complexity (`C901`) by default.
-select = ["E4", "E7", "E9", "F"]
-ignore = []
+select = ["E4", "E7", "E9", "F", "W"]
+ignore = ["W191"]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
@@ -78,28 +70,9 @@ unfixable = []
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [tool.ruff.format]
-# Like Black, use double quotes for strings.
-quote-style = "double"
-
-# Like Black, indent with spaces, rather than tabs.
-indent-style = "space"
-
-# Like Black, respect magic trailing commas.
+quote-style = "single"
+indent-style = "tab"
 skip-magic-trailing-comma = false
-
-# Like Black, automatically detect the appropriate line ending.
 line-ending = "auto"
-
-# Enable auto-formatting of code examples in docstrings. Markdown,
-# reStructuredText code/literal blocks and doctests are all supported.
-#
-# This is currently disabled by default, but it is planned for this
-# to be opt-out in the future.
 docstring-code-format = true
-
-# Set the line length limit used when formatting code snippets in
-# docstrings.
-#
-# This only has an effect when the `docstring-code-format` setting is
-# enabled.
-docstring-code-line-length = "dynamic"
+docstring-code-line-length = 30
