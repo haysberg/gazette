@@ -1,32 +1,28 @@
 <header>
-    <a href="/">
-        <h1 id="title"><span id="random-emoji"></span>Gazette Insoumise</h1>
-    </a>
-    <hr style="margin-top: 0;">
-    <div class="liens-lfi">
-        <a href="https://programme.lafranceinsoumise.fr/" id="programme-btn" target="_blank" referrerpolicy="origin">
-            <img loading="lazy" aria-label="Le programme" style="height: auto;" src="/img/programme.webp">
-        </a>
-        <a id="action-pop" href="https://actionpopulaire.fr/" target="_blank" referrerpolicy="origin">
-            <img id="logo-ap" loading="lazy" aria-label="Action Populaire" src="/img/action-populaire_small.svg">
-        </a>
-        <a id="amfis" href="https://amfis.fr/" target="_blank" referrerpolicy="origin">
-            <img loading="lazy" aria-label="Amfis 2025" style="height: auto;" src="/img/amfis2025.webp">
-        </a>
-        <a id="ilb" href="https://institutlaboetie.fr/" target="_blank" referrerpolicy="origin">
-            <img aria-label="Institut la Boétie" src="/img/ilbcombo.webp" loading="lazy">
-        </a>
-        <a id="install-button"><B>📲 Installer</B></a>
+    <div id="title-container">
+        <img loading="lazy" role="presentation" alt="Logo gazette LFI" src="/icons/android_chrome_192x192.webp">
+        <h1 id="title">Gazette Insoumise</h1>
     </div>
-    <hr>
-    <details id="feed-list" open>
-        <summary id="sources">
-            <h2>Liste des {{feeds|length}} sources</h2>
-        </summary>
-        <div class="feed-details">
-            {% for feed in feeds %}
-            {% include "source.html" %}
-            {% endfor %}
+    <div class="maxwidth autopad">
+        <div id="liens">
+            <div class="liens-lfi">
+                <a href="https://programme.lafranceinsoumise.fr/" id="programme-btn" target="_blank"
+                    referrerpolicy="origin">
+                    <img loading="lazy" aria-label="Le programme" style="height: auto;" src="/img/programme.webp">
+                </a>
+                <a id="action-pop" href="https://actionpopulaire.fr/" target="_blank" referrerpolicy="origin">
+                    <img id="logo-ap" loading="lazy" aria-label="Action Populaire"
+                        src="/img/action-populaire_small.svg">
+                </a>
+                <a id="amfis" href="https://amfis.fr/" target="_blank" referrerpolicy="origin">
+                    <img loading="lazy" aria-label="Amfis 2025" style="height: auto;" src="/img/amfis2025.webp">
+                </a>
+                <a id="ilb" href="https://institutlaboetie.fr/" target="_blank" referrerpolicy="origin">
+                    <img aria-label="Institut la Boétie" src="/img/ilbcombo.webp" loading="lazy">
+                </a>
+                <a id="install-button"><B>📲 Installer</B></a>
+            </div>
+            <hr>
         </div>
-    </details>
+    </div>
 </header>

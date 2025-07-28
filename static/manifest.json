@@ -3,6 +3,11 @@
     "short_name": "Gazette LFI",
     "icons": [
         {
+            "src": "/icons/gazette_lfi.webp",
+            "sizes": "192x192",
+            "type": "image/webp"
+        },
+        {
             "src": "/icons/android_chrome_192x192.png",
             "sizes": "192x192",
             "type": "image/png"

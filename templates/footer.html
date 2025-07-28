@@ -1,10 +1,20 @@
-<footer>
-    <small class="center">
+<footer class="maxwidth">
+    <p style="margin: 0;">
         <I>
-            Cette application est disponible en source ouverte, sous licence libre. Si vous souhaitez modifier le
-            logiciel ou proposer une nouvelle fonctionnalité, faites-le <a
-                href="https://github.com/haysberg/gazette">sur GitHub</a> !
-            <br>Dernière mise à jour de la page à {{ render_time }}.
+            La gazette insoumise est un site permettant de regrouper les dernières actualités de la gauche de rupture et
+            des
+            luttes en France et dans le monde. Ce site est disponible en source ouverte sous licence libre, ce qui veut
+            dire
+            que le code source est disponible publiquement, et que vous pouvez modifier et redistribuer cette
+            application.
         </I>
-    </small>
+    </p>
+    <ul>
+        {% if plus is defined and plus %}
+        <li><a id="bouton-plus" href="/plus.html">Voir les articles plus anciens</a></li>
+        {% else %}
+        <a id="bouton-plus" href="/">Voir les articles plus récents</a>
+        {% endif %}
+        <li><a href="https://github.com/haysberg/gazette">Code source</a></li>
+    </ul>
 </footer>

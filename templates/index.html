@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 {% include "head.html" %}
+
 <body>
 	{% include "header.html" %}
-	<hr>
-	<main>
-		{% with articles=posts %}
-		{% include "posts.html" %}
-		{% endwith %}
-	</main>
-	<hr>
-	{% if plus is defined and plus %}
-		<a id="bouton-plus" href="/plus.html"><I>Voir les articles plus anciens</I></a>
-	{% else %}
-		<a id="bouton-plus" href="/"><I>Voir les articles plus récents</I></a>
-	{% endif %}
+	<div class="maxwidth">
+		<main>
+			{% with articles=posts %}
+			{% include "posts.html" %}
+			{% endwith %}
+		</main>
+		<hr>
+		<details id="feed-list">
+			<summary id="sources">
+				<h2>Sources</h2>
+			</summary>
+			<div class="feed-details">
+				{% for feed in feeds %}
+				{% include "source.html" %}
+				{% endfor %}
+			</div>
+		</details>
+		<hr>
+	</div>
 	{% include "footer.html" %}
 </body>
 <script async src="index.min.js"></script>
 <script data-goatcounter="https://insoumis.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+
 </html>
