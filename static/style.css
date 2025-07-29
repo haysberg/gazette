@@ -49,6 +49,18 @@
     }
 }
 
+@keyframes slideInFromTop {
+    0% {
+        transform: translateY(-10%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 #title-container * {
     animation: slideInFromLeft 0.8s ease-in-out;
 }
@@ -84,6 +96,7 @@ body {
     background: var(--bg);
     margin: auto;
     font-family: 'Public Sans', sans-serif;
+    padding-bottom: 1.5rem;
 }
 
 .maxwidth {
@@ -203,6 +216,7 @@ small>a:visited {
     font-size: 1.3em;
     min-height: 2.5em;
     box-sizing: border-box;
+    animation: slideInFromTop 0.8s ease-in-out;
 }
 
 .liens-lfi a img,
@@ -283,6 +297,23 @@ footer {
     left: 0;
     bottom: 0;
     width: 100%;
+    margin-bottom: 32px;
+}
+
+footer a:link, footer a:visited {
+    color: var(--primary)
+}
+
+#footer-links {
+    margin: 0.5rem 0;
+    display: flex;
+    gap: 1rem;
+}
+
+#footer-links * {
+    border: 5px solid var(--primary);
+    border-radius: 10px;
+    padding: 6px;
 }
 
 #install-button {
