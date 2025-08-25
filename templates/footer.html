@@ -1,12 +1,4 @@
 <footer class="maxwidth">
-    <div id="footer-links">
-        {% if plus is defined and plus %}
-        <a id="bouton-plus" href="/plus.html">Voir les articles plus anciens</a>
-        {% else %}
-        <a id="bouton-plus" href="/">Voir les articles plus récents</a>
-        {% endif %}
-        <a href="https://github.com/haysberg/gazette">Code source</a>
-    </div>
     <p>
         <I>
             La gazette insoumise est un site permettant de regrouper les dernières actualités de la gauche de rupture et
@@ -17,4 +9,12 @@
             application. <B>Le site n'est pas affilié à la France Insoumise.</B>
         </I>
     </p>
+    <div id="footer-links">
+        {% if plus is defined and plus %}
+        <a id="bouton-plus" href="/plus.html">Voir les articles plus anciens</a>
+        {% else %}
+        <a id="bouton-plus" href="/">Voir les articles plus récents</a>
+        {% endif %}
+        <a href="https://github.com/haysberg/gazette">Code source</a>
+    </div>
 </footer>

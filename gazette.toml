@@ -1,8 +1,5 @@
 [[feeds.feedlist]]
-link = "https://antoineleaument.fr/feed/"
-image = "https://antoineleaument.fr/wp-content/uploads/2023/05/cropped-Cocarde.svg_.png"
-[[feeds.feedlist]]
-link = "http://www.contretemps.eu/rss"
+link = "https://www.contretemps.eu/rss"
 title = "Contretemps"
 image = "https://www.contretemps.eu/wp-content/uploads/ctt.ico"
 [[feeds.feedlist]]
@@ -12,7 +9,7 @@ image = "https://spectremedia.org/wp-content/themes/spectre-v2/favicon.png"
 link = "https://linsoumission.fr/feed/"
 image = "https://linsoumission.fr/wp-content/uploads/2025/02/cropped-Pharefavicon-32x32.png"
 [[feeds.feedlist]]
-link = "http://melenchon.fr/feed/"
+link = "https://melenchon.fr/feed/"
 title = "JLM Le blog"
 image = "https://melenchon.fr/wp-content/uploads/2024/10/cropped-turtle2-32x32.png"
 [[feeds.feedlist]]
@@ -51,10 +48,6 @@ link = "https://api.blast-info.fr/rss.xml"
 title = "BLAST"
 image = "https://www.blast-info.fr/favicon.ico"
 [[feeds.feedlist]]
-link = "https://www.courrierinternational.com/feed/rubrique/geopolitique/rss.xml"
-title = "Courrier International"
-image = "https://www.courrierinternational.com/bucket/assets/e04cb3bc293a7e5fc5bb7702ca8cca95c7ddd8bc/img/logos/favicon.ico"
-[[feeds.feedlist]]
 link = "https://strass-syndicat.org/feed/"
 title = "Le STRASS"
 image = "https://strass-syndicat.org/wp-content/uploads/2020/04/cropped-fav-strass-32x32.png"
@@ -91,7 +84,7 @@ link = "https://www.acrimed.org/spip.php?page=backend"
 title = "Acrimed"
 image = "https://www.acrimed.org/squelettes/favicon.ico"
 [[feeds.feedlist]]
-link = "http://www.revue-ouvrage.org/feed/"
+link = "https://www.revue-ouvrage.org/feed/"
 title = "Ouvrage"
 image = "https://www.revue-ouvrage.org/wp-content/uploads/2020/04/cropped-ouvrage-noir-1-32x32.png"
 [[feeds.feedlist]]
@@ -129,3 +122,15 @@ image = "https://rapportsdeforce.fr/wp-content/themes/flymag-child/images/favico
 [[feeds.feedlist]]
 image = "https://www.monde-diplomatique.fr/favicon.ico"
 link = "https://www.monde-diplomatique.fr/rss/"
+[[feeds.feedlist]]
+title = "L214"
+image = "https://www.l214.com/wp-content/uploads/2020/02/Favicon-L214-64x64-1.png"
+link = "https://www.l214.com/feed/"
+[[feeds.feedlist]]
+title = "L'Amorce"
+image = "https://cdn.bsky.app/img/avatar/plain/did:plc:4ig26oattbxt5gepdy2yngec/bafkreigikxkg6dwpv55jmuvlsqxc4szfecbohnrydenb6m5dqxi52vwv7i"
+link = "https://lamorce.co/feed/"
+[[feeds.feedlist]]
+title = "Oxfam France"
+image = "https://www.oxfamfrance.org/app/uploads/2019/04/favicon-256x256.png"
+link = "https://www.oxfamfrance.org/feed/"

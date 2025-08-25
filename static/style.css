@@ -327,10 +327,7 @@ footer a:link, footer a:visited {
     z-index: 1000;
     padding: 0.75em 1.5em;
     cursor: pointer;
-}
-
-#amfis {
-    background-color: #e2d2bc;
+    border-radius: 0.5em;
 }
 
 #programme-btn {
@@ -339,7 +336,7 @@ footer a:link, footer a:visited {
 }
 
 #programme-btn img,
-#amfis img,
+#municipales img,
 #logo-ap,
 #ilb img {
     width: 100%;
@@ -354,8 +351,8 @@ footer a:link, footer a:visited {
     box-sizing: border-box;
 }
 
-#ilb img {
-    padding: 0;
+#municipales {
+    background-image: linear-gradient(135deg, var(--primary), var(--secondary));
 }
 
 
@@ -396,7 +393,6 @@ footer a:link, footer a:visited {
         padding: 0.5em 1em;
         font-size: 1em;
         min-width: 7em;
-        border-radius: 0.5em;
         font-weight: 900;
     }
 }

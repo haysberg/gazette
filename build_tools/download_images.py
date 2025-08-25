@@ -21,17 +21,17 @@ with open('gazette.toml', 'rb') as f:
 	content = f.read()
 	config_data = tomllib.loads(content.decode('utf-8'))
 	for feed in config_data['feeds']['feedlist']:
-		retries = 3
+		retries = 10
 		for attempt in range(retries):
 			try:
 				image_path = os.path.join(
 					'static',
 					'favicons',
-					f'{feed["image"].split("/")[2].removeprefix("www.")}.webp',
+					f'{feed["link"].split("/")[2].removeprefix("www.")}.webp',
 				)
 				os.makedirs(os.path.dirname(image_path), exist_ok=True)
 
-				response = requests.get(feed['image'], timeout=10, verify=False)
+				response = requests.get(feed['image'], timeout=10)
 				response.raise_for_status()
 
 				img_data = BytesIO(response.content)
