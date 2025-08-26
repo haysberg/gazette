@@ -134,3 +134,19 @@ link = "https://lamorce.co/feed/"
 title = "Oxfam France"
 image = "https://www.oxfamfrance.org/app/uploads/2019/04/favicon-256x256.png"
 link = "https://www.oxfamfrance.org/feed/"
+[[feeds.feedlist]]
+title = "Vert"
+image = "https://vert.eco/wp-content/uploads/2023/12/favicon.png"
+link = "https://vert.eco/feed/"
+[[feeds.feedlist]]
+title = "La Brèche"
+image = "https://journal-labreche.fr/ezessogn/2025/05/cropped-Logo-RS-1.webp"
+link = "https://journal-labreche.fr/feed/"
+[[feeds.feedlist]]
+title = "Attac"
+image = "https://france.attac.org/favicon.ico"
+link = "https://france.attac.org/spip.php?page=backend"
+[[feeds.feedlist]]
+title = "Solidaires"
+image = "https://solidaires.org/static/img/logo/logo_solidaires_carre.svg"
+link = "https://www.solidaires.org/rss"
