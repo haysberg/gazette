@@ -13,10 +13,6 @@ link = "https://melenchon.fr/feed/"
 title = "JLM Le blog"
 image = "https://melenchon.fr/wp-content/uploads/2024/10/cropped-turtle2-32x32.png"
 [[feeds.feedlist]]
-link = "https://lecturesantiimperialistes.org/feed/"
-title = "Lectures Anti-Impérialistes"
-image = "https://lecturesantiimperialistes.org/wp-content/uploads/2024/10/cropped-Logo_simple_rouge-32x32.png"
-[[feeds.feedlist]]
 link = "https://afriquexxi.info/?page=backend&lang=fr"
 image = "https://afriquexxi.info/squelettes-2021/favicon/favicon-32x32.png"
 [[feeds.feedlist]]
@@ -51,10 +47,6 @@ image = "https://www.blast-info.fr/favicon.ico"
 link = "https://strass-syndicat.org/feed/"
 title = "Le STRASS"
 image = "https://strass-syndicat.org/wp-content/uploads/2020/04/cropped-fav-strass-32x32.png"
-[[feeds.feedlist]]
-link = "https://fourth.international/french.rss"
-title = "IVe Internationale"
-image = "https://fourth.international/sites/default/files/favicon.ico"
 [[feeds.feedlist]]
 link = "https://npa-lanticapitaliste.org/rss.xml"
 title = "NPA"
@@ -135,10 +127,6 @@ title = "Oxfam France"
 image = "https://www.oxfamfrance.org/app/uploads/2019/04/favicon-256x256.png"
 link = "https://www.oxfamfrance.org/feed/"
 [[feeds.feedlist]]
-title = "Vert"
-image = "https://vert.eco/wp-content/uploads/2023/12/favicon.png"
-link = "https://vert.eco/feed/"
-[[feeds.feedlist]]
 title = "La Brèche"
 image = "https://journal-labreche.fr/ezessogn/2025/05/cropped-Logo-RS-1.webp"
 link = "https://journal-labreche.fr/feed/"
@@ -147,6 +135,14 @@ title = "Attac"
 image = "https://france.attac.org/favicon.ico"
 link = "https://france.attac.org/spip.php?page=backend"
 [[feeds.feedlist]]
-title = "Solidaires"
-image = "https://solidaires.org/static/img/logo/logo_solidaires_carre.svg"
-link = "https://www.solidaires.org/rss"
+title = "CQFD"
+link = "https://cqfd-journal.org/spip.php?page=backend"
+image = "https://cqfd-journal.org/squelettes/favicon.ico"
+[[feeds.feedlist]]
+title = "Au Poste"
+link = "https://www.auposte.fr/feed/"
+image = "https://www.auposte.fr/wp-content/uploads/2022/10/cropped-Fichier-107@33.33x-1-1-32x32.png"
+[[feeds.feedlist]]
+title = "Off Investigation"
+link = "https://www.off-investigation.fr/feed/"
+image = "https://www.off-investigation.fr/wp-content/uploads/2021/05/favicon2.png"
