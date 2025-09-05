@@ -96,7 +96,7 @@ body {
     background: var(--bg);
     margin: auto;
     font-family: 'Public Sans', sans-serif;
-    padding-bottom: 1.5rem;
+    min-height: 100vh;
 }
 
 .maxwidth {
@@ -106,6 +106,7 @@ body {
     line-height: 1.15em;
     margin: auto;
 }
+
 
 h2 {
     font-size: 1rem;
@@ -117,7 +118,7 @@ ol {
     padding-left: 5ch;
 }
 
-ul {
+main ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -161,7 +162,13 @@ small>a:visited {
 }
 
 .feed-details {
+    display: flex;
+    gap: 1em;
     flex-wrap: wrap;
+}
+
+.feed-details * {
+    flex: 1 0 50%;
 }
 
 .feed-card {
@@ -293,27 +300,28 @@ hr {
 }
 
 footer {
-    color: var(--bg);
     left: 0;
     bottom: 0;
     width: 100%;
-    margin-bottom: 32px;
+    padding: 1rem 0;
+    margin-top: 15px;
+    background-image: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--bg);
+    align-items: center;
+    bottom: 0;
 }
 
-footer a:link, footer a:visited {
-    color: var(--primary)
-}
-
-#footer-links {
-    margin: 0.5rem 0;
+footer .maxwidth {
     display: flex;
-    gap: 1rem;
+    flex-direction: row;
+    gap: 1em;
 }
 
-#footer-links * {
-    border: 5px solid var(--primary);
-    border-radius: 10px;
-    padding: 6px;
+footer a:link,
+footer a:visited,
+li::marker {
+    font-weight: bolder;
+    color: var(--bg)
 }
 
 #install-button {
@@ -355,8 +363,12 @@ footer a:link, footer a:visited {
     background-image: linear-gradient(135deg, var(--primary), var(--secondary));
 }
 
-
 @media only screen and (max-width: 480px) {
+    footer .maxwidth {
+        flex-direction: column;
+        gap: 0;
+    }
+
     .feed-details {
         flex-wrap: wrap;
         row-gap: 0.5em;

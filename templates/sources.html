@@ -3,15 +3,13 @@
 {% include "head.html" %}
 
 <body>
-	{% include "header.html" %}
-	<div class="maxwidth">
-		<main>
-			{% with articles=posts %}
-			{% include "posts.html" %}
-			{% endwith %}
-		</main>
-	</div>
-	{% include "footer.html" %}
+    {% include "header.html" %}
+    <div class="feed-details maxwidth">
+        {% for feed in feeds %}
+        {% include "source.html" %}
+        {% endfor %}
+    </div>
+    {% include "footer.html" %}
 </body>
 <script async src="index.min.js"></script>
 <script data-goatcounter="https://insoumis.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

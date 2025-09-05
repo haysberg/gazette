@@ -9,7 +9,7 @@ from jinja2 import Environment, FileSystemLoader
 from sqlalchemy.orm import selectinload
 from sqlmodel import Session, delete, select
 
-from utils import HTML_FILE, JSON_FILE, PLUS_FILE, STATIC_DIR, TEMPLATES_DIR, engine
+from utils import HTML_FILE, JSON_FILE, PLUS_FILE, SOURCES_FILE, STATIC_DIR, TEMPLATES_DIR, engine
 from utils.logs import logger
 from utils.models import Feed, Post
 
@@ -65,7 +65,6 @@ async def update_served_files() -> None:
 
 		# Get all feeds
 		feeds = (session.exec(select(Feed).order_by(Feed.title.desc()))).all()
-		render_time = datetime.now().strftime('%Hh%M').capitalize()
 
 		# Render Jinja2 template and save as HTML
 		try:
@@ -75,7 +74,6 @@ async def update_served_files() -> None:
 				posts=posts_last24h,
 				feeds=feeds,
 				plus=True,
-				render_time=render_time,
 			)
 
 			# Render plus.html
@@ -83,7 +81,12 @@ async def update_served_files() -> None:
 				posts=posts_later,
 				feeds=feeds,
 				plus=False,
-				render_time=render_time,
+			)
+
+			# Render sources.html
+			sources_template = env.get_template('sources.html')
+			sources_html = sources_template.render(
+				feeds=feeds,
 			)
 
 			# Generate JSON and save as a file
@@ -105,6 +108,10 @@ async def update_served_files() -> None:
 		async with aiofiles.open(PLUS_FILE, 'w') as f:
 			await f.write(plus_html)
 		logger.debug(f'PLUS file saved to {PLUS_FILE}')
+
+		async with aiofiles.open(SOURCES_FILE, 'w') as f:
+			await f.write(sources_html)
+		logger.debug(f'SOURCES file saved to {SOURCES_FILE}')
 
 		async with aiofiles.open(JSON_FILE, 'w') as f:
 			await f.write(json.dumps(json_data, sort_keys=True, default=str))
