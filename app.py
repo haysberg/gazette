@@ -20,7 +20,7 @@ async def main():
 	def run_update_all_posts():
 		asyncio.run(update_all_posts())
 
-	scheduler.add_job(
+	_ = scheduler.add_job(
 		run_update_all_posts,
 		'interval',
 		minutes=15,
