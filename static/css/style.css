@@ -39,36 +39,19 @@
     }
 }
 
-@keyframes slideInFromTop {
-    0% {
-        transform: translateY(-10%);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
 .navbar * {
     animation: slideInFromLeft 0.8s ease-in-out;
-}
-
-.navbar img {
-    width: auto;
-    height: 100%;
 }
 
 /*VBVJOR*/
 .navbar {
     background-image: linear-gradient(
         65deg,
-        #7b13d699,
-        #40098e99,
-        #2e995999,
-        #f9c90099,
-        #f9161699
+        #7b13d680,
+        #40098e80,
+        #2e995980,
+        #f9c90080,
+        #f9161680
     );
 }
 
@@ -82,15 +65,4 @@
 
 body {
     background: var(--bg);
-    min-height: 100vh;
-    width: 100%;
-}
-
-main ul {
-    list-style-type: none;
-}
-
-.tooltip-right::after,
-.tooltip-right::before{
-    z-index: 1001;
 }

@@ -1,35 +1,32 @@
 {% if divider %}
 <div class="divider">HIER</div>
 {% endif %}
-<ul>
     {% for article in articles %}
-    <li class="article mt-2">
+    <div class="flex flex-col flex-wrap">
         <a
-            class="link link-hover link-primary md:text-base"
+            class="link link-hover link-primary md:text-base font-medium text-base/5"
             href="{{ article.link }}"
             target="_blank"
             referrerpolicy="origin"
             >{{ article.title }}
         </a>
-        <br />
-            <a
-                href="https://{{article.feed.domain}}"
-                target="_blank"
-                referrerpolicy="origin"
-                class="link link-hover flex items-center gap-x-1 inline-flex items-center tooltip tooltip-right tooltip-neutral grow-0"
-                {% if article.feed.subtitle is defined and article.feed.subtitle != "" %} data-tip="{{article.feed.subtitle}}" {% endif %}
-            >
-                {% if article.feed.image is defined and article.feed.image != ""
-                %}
-                <img
-                    src="/favicons/{{ article.feed.domain }}.webp"
-                    loading="lazy"
-                    width="16px"
-                    height="16px"
-                    role="presentation"
-                />
-                {% endif %} <i class="discret">{{article.feed.title}}</i>
-            </a>
-    </li>
+        <a
+            href="https://{{article.feed.domain}}"
+            target="_blank"
+            referrerpolicy="origin"
+            class="link link-hover flex items-center gap-x-1 inline-flex mb-1"
+        >
+            {% if article.feed.image is defined and article.feed.image != ""
+            %}
+            <img
+                src="/favicons/{{ article.feed.domain }}.webp"
+                loading="lazy"
+                width="16px"
+                height="16px"
+                role="presentation"
+            />
+            {% endif %} <i class="discret">{{article.feed.title}}</i>
+        </a>
+    </div>
     {% endfor %}
 </ul>

@@ -28,7 +28,7 @@ image = "https://orientxxi.info/squelettes-2021/favicon/android-icon-192x192.png
 link = "https://survie.org/spip.php?page=backend"
 image = "https://survie.org/favicon.ico"
 [[feeds.feedlist]]
-link = "https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5"
+link = "https://www.revolutionpermanente.fr/spip.php?page=backend_portada" #"https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5"
 image = "https://pbs.twimg.com/profile_images/1584923031687806980/SgoWFAk9_400x400.jpg"
 [[feeds.feedlist]]
 link = "https://orgasolitrans.fr/index.php/feed/"
@@ -59,82 +59,99 @@ image = "https://lafranceinsoumise.fr/wp-content/uploads/2024/11/cropped-TOUT-PE
 link = "https://leftalliance.eu/feed/"
 title = "EU LEFT Alliance"
 image = "https://leftalliance.eu/wp-content/uploads/2025/04/cropped-FAVICON-ELA-1-32x32.png"
-# [[feeds.feedlist]]
-# link = "https://institutlaboetie.fr/feed/"
-# title = "Institut La Boétie"
-# image = "https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON-150x150.png"
-# [[feeds.feedlist]]
-# link = "https://api.arretsurimages.net/api/public/rss/all-content"
-# title = "Arrêt sur Images"
-# image = "https://www.arretsurimages.net/assets/img/favicon/favicon-32x32.png"
-# [[feeds.feedlist]]
-# link = "https://infos-ouvrieres.fr/feed/"
-# title = "Informations Ouvrières"
-# image = "https://infos-ouvrieres.fr/wp-content/uploads/2018/12/Logo-500x500-e1612179565960-92x92.png"
-# [[feeds.feedlist]]
-# link = "https://www.acrimed.org/spip.php?page=backend"
-# title = "Acrimed"
-# image = "https://www.acrimed.org/squelettes/favicon.ico"
-# [[feeds.feedlist]]
-# link = "https://www.revue-ouvrage.org/feed/"
-# title = "Ouvrage"
-# image = "https://www.revue-ouvrage.org/wp-content/uploads/2020/04/cropped-ouvrage-noir-1-32x32.png"
-# [[feeds.feedlist]]
-# link = "https://www.socialter.fr/rss"
-# title = "Socialter"
-# subtitle = "Critique radicale et alternatives"
-# image = "https://www.socialter.fr/theme/images/favicon.png"
-# [[feeds.feedlist]]
-# link = "https://www.reseau-salariat.info/index.xml"
-# image = "https://www.reseau-salariat.info/images/logo2.svg"
-# title = "Réseau Salariat"
-# [[feeds.feedlist]]
-# link = "https://lahorde.info/spip.php?page=backend"
-# title = "La Horde"
-# image = "https://lahorde.info/squelettes/favicon.ico"
-# [[feeds.feedlist]]
-# link = "https://basta.media/spip.php?page=backend"
-# title = "Basta!"
-# image = "https://basta.media/squelettes/basta/favicon/favicon.svg"
-# [[feeds.feedlist]]
-# link = "https://disclose.ngo/feed/"
-# title = "Disclose"
-# image = "https://disclose.ngo/assets/favicons/favicon.ico"
-# [[feeds.feedlist]]
-# link = "https://reporterre.net/spip.php?page=backend-simple"
-# title = "Reporterre"
-# image = "https://reporterre.net/squelettes/images/android-chrome-512x512.png"
-# [[feeds.feedlist]]
-# link = "https://www.alternatives-economiques.fr/rss.xml"
-# title = "AlterÉco"
-# image = "https://www.alternatives-economiques.fr/sites/all/themes/alternatives-economiques-main/assets/apple-touch-icon.png"
-# [[feeds.feedlist]]
-# link = "https://rapportsdeforce.fr/feed"
-# image = "https://rapportsdeforce.fr/wp-content/themes/flymag-child/images/favicon-196x196.png"
-# [[feeds.feedlist]]
-# image = "https://www.monde-diplomatique.fr/favicon.ico"
-# link = "https://www.monde-diplomatique.fr/rss/"
-# [[feeds.feedlist]]
-# title = "L214"
-# image = "https://www.l214.com/wp-content/uploads/2020/02/Favicon-L214-64x64-1.png"
-# link = "https://www.l214.com/feed/"
-# [[feeds.feedlist]]
-# title = "L'Amorce"
-# image = "https://cdn.bsky.app/img/avatar/plain/did:plc:4ig26oattbxt5gepdy2yngec/bafkreigikxkg6dwpv55jmuvlsqxc4szfecbohnrydenb6m5dqxi52vwv7i"
-# link = "https://lamorce.co/feed/"
-# [[feeds.feedlist]]
-# title = "Oxfam France"
-# image = "https://www.oxfamfrance.org/app/uploads/2019/04/favicon-256x256.png"
-# link = "https://www.oxfamfrance.org/feed/"
-# [[feeds.feedlist]]
-# title = "Attac"
-# image = "https://france.attac.org/favicon.ico"
-# link = "https://france.attac.org/spip.php?page=backend"
-# [[feeds.feedlist]]
-# title = "Au Poste"
-# link = "https://www.auposte.fr/feed/"
-# image = "https://www.auposte.fr/wp-content/uploads/2022/10/cropped-Fichier-107@33.33x-1-1-32x32.png"
-# [[feeds.feedlist]]
-# title = "Off Investigation"
-# link = "https://www.off-investigation.fr/feed/"
-# image = "https://www.off-investigation.fr/wp-content/uploads/2021/05/favicon2.png"
+[[feeds.feedlist]]
+link = "https://institutlaboetie.fr/feed/"
+title = "Institut La Boétie"
+image = "https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON-150x150.png"
+[[feeds.feedlist]]
+link = "https://api.arretsurimages.net/api/public/rss/all-content"
+title = "Arrêt sur Images"
+image = "https://www.arretsurimages.net/assets/img/favicon/favicon-32x32.png"
+[[feeds.feedlist]]
+link = "https://infos-ouvrieres.fr/feed/"
+title = "Informations Ouvrières"
+image = "https://infos-ouvrieres.fr/wp-content/uploads/2018/12/Logo-500x500-e1612179565960-92x92.png"
+[[feeds.feedlist]]
+link = "https://www.acrimed.org/spip.php?page=backend"
+title = "Acrimed"
+image = "https://www.acrimed.org/squelettes/favicon.ico"
+[[feeds.feedlist]]
+link = "https://www.revue-ouvrage.org/feed/"
+title = "Ouvrage"
+image = "https://www.revue-ouvrage.org/wp-content/uploads/2020/04/cropped-ouvrage-noir-1-32x32.png"
+[[feeds.feedlist]]
+link = "https://www.socialter.fr/rss"
+title = "Socialter"
+subtitle = "Critique radicale et alternatives"
+image = "https://www.socialter.fr/theme/images/favicon.png"
+[[feeds.feedlist]]
+link = "https://www.reseau-salariat.info/index.xml"
+image = "https://www.reseau-salariat.info/images/logo2.svg"
+title = "Réseau Salariat"
+[[feeds.feedlist]]
+link = "https://basta.media/spip.php?page=backend"
+title = "Basta!"
+image = "https://basta.media/squelettes/basta/favicon/favicon.svg"
+[[feeds.feedlist]]
+link = "https://disclose.ngo/feed/"
+title = "Disclose"
+image = "https://disclose.ngo/assets/favicons/favicon.ico"
+[[feeds.feedlist]]
+link = "https://reporterre.net/spip.php?page=backend-simple"
+title = "Reporterre"
+image = "https://reporterre.net/squelettes/images/android-chrome-512x512.png"
+[[feeds.feedlist]]
+link = "https://www.alternatives-economiques.fr/rss.xml"
+title = "AlterÉco"
+image = "https://www.alternatives-economiques.fr/sites/all/themes/alternatives-economiques-main/assets/apple-touch-icon.png"
+[[feeds.feedlist]]
+link = "https://rapportsdeforce.fr/feed"
+image = "https://rapportsdeforce.fr/wp-content/themes/flymag-child/images/favicon-196x196.png"
+[[feeds.feedlist]]
+title = "L214"
+image = "https://www.l214.com/wp-content/uploads/2020/02/Favicon-L214-64x64-1.png"
+link = "https://www.l214.com/feed/"
+[[feeds.feedlist]]
+title = "L'Amorce"
+image = "https://cdn.bsky.app/img/avatar/plain/did:plc:4ig26oattbxt5gepdy2yngec/bafkreigikxkg6dwpv55jmuvlsqxc4szfecbohnrydenb6m5dqxi52vwv7i"
+link = "https://lamorce.co/feed/"
+[[feeds.feedlist]]
+title = "Oxfam France"
+image = "https://www.oxfamfrance.org/app/uploads/2019/04/favicon-256x256.png"
+link = "https://www.oxfamfrance.org/feed/"
+[[feeds.feedlist]]
+title = "Attac"
+image = "https://france.attac.org/favicon.ico"
+link = "https://france.attac.org/spip.php?page=backend"
+[[feeds.feedlist]]
+title = "Au Poste"
+link = "https://www.auposte.fr/feed/"
+image = "https://www.auposte.fr/wp-content/uploads/2022/10/cropped-Fichier-107@33.33x-1-1-32x32.png"
+[[feeds.feedlist]]
+title = "Off Investigation"
+link = "https://www.off-investigation.fr/feed/"
+image = "https://www.off-investigation.fr/wp-content/uploads/2021/05/favicon2.png"
+[[feeds.feedlist]]
+title = "Observatoire des multinationales"
+link = "https://multinationales.org/fr/page/backend"
+image = "https://multinationales.org/squelettes/odm/static/img/favicon/android-chrome-192x192.png"
+[[feeds.feedlist]]
+title = "Bondy Blog"
+link = "https://www.bondyblog.fr/feed/"
+image = "https://www.bondyblog.fr/app/uploads/2020/10/cropped-LEBB-Rouge-192x192.png"
+[[feeds.feedlist]]
+title = "Le Média"
+link = "https://api.lemediatv.fr/rss.xml"
+image = "https://www.lemediatv.fr/favicon.ico"
+[[feeds.feedlist]]
+title = "Histoires Crépues"
+link = "https://histoirescrepues.fr/latest/rss/"
+image = "https://histoirescrepues.fr/content/images/size/w256h256/2024/11/Plan-de-travail-2-copie.png"
+[[feeds.feedlist]]
+title = "Fracas"
+link = "https://fracas.media/feed/"
+image = "https://fracas.media/wp-content/uploads/2024/03/cropped-favicon-192x192.png"
+[[feeds.feedlist]]
+title = "Equal Times"
+link = "https://www.equaltimes.org/spip.php?page=backend&lang=fr"
+image = "https://fracas.media/wp-content/uploads/2024/03/cropped-favicon-192x192.png"
