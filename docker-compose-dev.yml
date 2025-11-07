@@ -1,0 +1,8 @@
+services:
+  gazette:
+    build:
+      context: .
+      no_cache: true
+    container_name: gazette
+    ports:
+      - 8000:8000

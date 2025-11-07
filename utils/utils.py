@@ -36,9 +36,6 @@ async def update_served_files() -> None:
 	logger.info('Generating static files...')
 	os.makedirs(STATIC_DIR, exist_ok=True)
 
-	posts_last24h: list[Post] = []
-	posts_later: list[Post] = []
-
 	# Initialize Jinja2 environment
 	env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
 
@@ -50,8 +47,7 @@ async def update_served_files() -> None:
 			.where(Post.publication_date > datetime.now() - timedelta(days=1))
 			.order_by(Post.publication_date.desc())
 		)
-		results = session.exec(statement)
-		posts_last24h = results.all()
+		posts_last24h: list[Post] = session.exec(statement).all()
 
 		# Get posts from later
 		statement = (
@@ -60,8 +56,18 @@ async def update_served_files() -> None:
 			.where(Post.publication_date < datetime.now() - timedelta(days=1))
 			.order_by(Post.publication_date.desc())
 		)
-		results = session.exec(statement)
-		posts_later = results.all()
+		posts_later: list[Post] = session.exec(statement).all()
+
+		# Split posts from the last 24 hours into today and yesterday
+		posts_today: list[Post] = []
+		posts_yesterday: list[Post] = []
+		today_date = datetime.now().date()
+
+		for post in posts_last24h:
+			if post.publication_date.date() == today_date:
+				posts_today.append(post)
+			else:
+				posts_yesterday.append(post)
 
 		# Get all feeds
 		feeds = (session.exec(select(Feed).order_by(Feed.title.desc()))).all()
@@ -71,14 +77,15 @@ async def update_served_files() -> None:
 			# Render index.html
 			template = env.get_template('index.html')
 			index_html = template.render(
-				posts=posts_last24h,
+				posts_today=posts_today,
+				posts_yesterday=posts_yesterday,
 				feeds=feeds,
 				plus=True,
 			)
 
 			# Render plus.html
 			plus_html = template.render(
-				posts=posts_later,
+				posts_today=posts_later,
 				feeds=feeds,
 				plus=False,
 			)

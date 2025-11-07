@@ -1,6 +1,22 @@
 <div class="source">
-    <img style="vertical-align: middle;" src="/favicons/{{ feed.domain }}.webp" loading="lazy" width="16px" height="16px" role="presentation">
-    <a href="https://{{ feed.domain }}" target="_blank" title="{{ feed.subtitle|forceescape }}" referrerpolicy="origin" style="margin-bottom: 1em;">
-        {{ feed.title }} <I style="font-size: 0.8em; color: var(--discret);">({{ feed.domain }})</I>
+    <img
+        style="vertical-align: middle"
+        src="/favicons/{{ feed.domain }}.webp"
+        loading="lazy"
+        width="16px"
+        height="16px"
+        role="presentation"
+    />
+    <a
+        href="https://{{ feed.domain }}"
+        target="_blank"
+        title="{{ feed.subtitle|forceescape }}"
+        referrerpolicy="origin"
+        style="margin-bottom: 1em"
+    >
+        {{ feed.title }}
+        <i style="font-size: 0.8em; color: var(--discret)"
+            >({{ feed.domain }})</i
+        >
     </a>
 </div>

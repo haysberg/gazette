@@ -3,7 +3,7 @@
 root = "/app/static"
 port = 8000
 page404 = "./404.html"
-cache-control-headers = false
+cache-control-headers = true
 host = "0.0.0.0"
 compression = true
 compression-static = true

@@ -1,34 +1,78 @@
-{% set description = "Gazette Insoumise est un agrégateur de flux qui regroupe les dernières nouvelles des médias alternatifs et indépendants de la gauche de rupture." %}
-{% set keywords = "Gazette Insoumise, La France Insoumise, LFI, médias alternatifs, médias indépendants, gauche de rupture" %}
-{% set long_name = "Gazette Insoumise" %}
-{% set short_name = "Gazette LFI" %}
-{% set default_favicon = "icons/favicon.ico" %}
+{% set description = "Gazette Insoumise est un agrégateur de flux qui regroupe
+les dernières nouvelles des médias alternatifs et indépendants de la gauche de
+rupture." %} {% set keywords = "Gazette Insoumise, La France Insoumise, LFI,
+médias alternatifs, médias indépendants, gauche de rupture" %} {% set long_name
+= "Gazette Insoumise" %} {% set short_name = "Gazette LFI" %} {% set
+default_favicon = "icons/favicon.ico" %}
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{ long_name }}</title>
-	<meta name="application-name" content="{{ long_name }}">
-	<meta name="description" content="{{ description }}">
-	<meta name="keywords" content="{{ keywords }}">
-	<meta name="referrer" content="same-origin">
-	<link rel="stylesheet" type="text/css" href="style.min.css">
-	<link rel="icon" href="{{ default_favicon }}">
-	<link rel="icon" type="image/png" sizes="192x192" href="icons/android_chrome_192x192.png" />
-	<link rel="icon" type="image/png" sizes="512x512" href="icons/android_chrome_512x512.png" />
-	<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="icons/apple_touch_icon.png" />
-	<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon_16x16.png" />
-	<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon_32x32.png" />
-	<link rel="icon" type="image/png" sizes="96x96" href="icons/favicon_96x96.png" />
-	<link rel="icon" type="image/png" sizes="150x150" href="icons/mstile_150x150.png" />
-	<link rel="icon" type="image/png" sizes="512x512" href="icons/safari_pinned_tab.png" />
-	<link rel="manifest" href="manifest.json">
-	<meta name="theme-color" content="#7b13d6">
-	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="author" content="haysberg">
-	<meta property="og:image" content="{{ default_favicon }}" />
-	<meta property="og:title" content="{{ long_name }}" />
-	<meta property="og:description" content="{{ description }}">
-	<meta property="og:locale" content="fr_FR" />
-	<meta property="og:site_name" content="{{ long_name }}" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ long_name }}</title>
+    <meta name="application-name" content="{{ long_name }}" />
+    <meta name="description" content="{{ description }}" />
+    <meta name="keywords" content="{{ keywords }}" />
+    <meta name="referrer" content="same-origin" />
+    <script async src="/js/index.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.min.css" />
+    <link rel="icon" href="{{ default_favicon }}" />
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="192x192"
+        href="icons/android_chrome_192x192.png"
+    />
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="512x512"
+        href="icons/android_chrome_512x512.png"
+    />
+    <link
+        rel="apple-touch-icon"
+        type="image/png"
+        sizes="180x180"
+        href="icons/apple_touch_icon.png"
+    />
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="icons/favicon_16x16.png"
+    />
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="icons/favicon_32x32.png"
+    />
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="96x96"
+        href="icons/favicon_96x96.png"
+    />
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="150x150"
+        href="icons/mstile_150x150.png"
+    />
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="512x512"
+        href="icons/safari_pinned_tab.png"
+    />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#7b13d6" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="author" content="haysberg" />
+    <meta property="og:image" content="{{ default_favicon }}" />
+    <meta property="og:title" content="{{ long_name }}" />
+    <meta property="og:description" content="{{ description }}" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="{{ long_name }}" />
+    <link href="css/daisy.min.css" rel="stylesheet" type="text/css" />
+    <script async src="js/daisy.min.js"></script>
 </head>
