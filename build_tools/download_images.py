@@ -1,49 +1,50 @@
-#!/usr/bin/env uv run --script
-#
-# /// script
-# requires-python = ">=3.13"
-# dependencies = [
-#     "cairosvg",
-#     "pillow",
-#     "requests",
-# ]
-# ///
-
 import os
 import tomllib
 from io import BytesIO
 
-import cairosvg
 import requests
 from PIL import Image
+
+headers = {
+	'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+}
 
 with open('gazette.toml', 'rb') as f:
 	content = f.read()
 	config_data = tomllib.loads(content.decode('utf-8'))
+	print(f'Found {len(config_data["feeds"]["feedlist"])} feeds in config.')
 	for feed in config_data['feeds']['feedlist']:
-		retries = 10
-		for attempt in range(retries):
-			try:
-				image_path = os.path.join(
-					'static',
-					'favicons',
-					f'{feed["link"].split("/")[2].removeprefix("www.")}.webp',
+		image_path = os.path.join(
+			'static',
+			'favicons',
+			f'{feed["link"].split("/")[2].removeprefix("www.")}.avif',
+		)
+		os.makedirs(os.path.dirname(image_path), exist_ok=True)
+		try:
+			response = requests.get(feed['image'], timeout=10, headers=headers, stream=True)
+			response.raise_for_status()
+			img_data = BytesIO(response.content)
+			Image.open(img_data).resize((32, 32)).save(image_path, 'AVIF')
+		except Exception as e:
+			print(f'Failed to process favicon for {feed["link"]}: {e}')
+# Count all .avif images in static/favicons
+avif_count = len(
+	[
+		name
+		for name in os.listdir('static/favicons')
+		if os.path.isfile(os.path.join('static/favicons', name)) and name.endswith('.avif')
+	]
+)
+print(f'{avif_count} AVIF images in static/favicons.')
+
+for root, dirs, files in os.walk('static/img'):
+	for file in files:
+		file_path = os.path.join(root, file)
+		if file.endswith('.png'):
+			# Open file and convert to AVIF
+			image_path = file_path.rsplit('.', 1)[0] + '.avif'
+			with open(file_path, 'rb') as f:
+				file_content = f.read()
+				Image.open(BytesIO(file_content)).resize((128, 128), Image.LANCZOS).save(
+					image_path, 'AVIF'
 				)
-				os.makedirs(os.path.dirname(image_path), exist_ok=True)
-
-				response = requests.get(feed['image'], timeout=10)
-				response.raise_for_status()
-
-				img_data = BytesIO(response.content)
-				if feed['image'].endswith('.svg'):
-					png_data = BytesIO()
-					cairosvg.svg2png(bytestring=img_data.getvalue(), write_to=png_data)
-					img_data = png_data
-
-				Image.open(img_data).resize((32, 32), Image.LANCZOS).save(image_path, 'WEBP')
-				break  # Success, exit retry loop
-			except Exception as e:
-				if attempt == retries - 1:
-					print(f'Failed to process favicon for {feed["link"]}: {e}')
-				else:
-					continue

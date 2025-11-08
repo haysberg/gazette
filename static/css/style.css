@@ -9,11 +9,11 @@
     --color-accent-content: oklch(38% 0.063 188.416);
     --color-neutral: oklch(14% 0.005 285.823);
     --color-neutral-content: oklch(92% 0.004 286.32);
-    --color-info: #40098e;
+    --color-info: #ebf3f4;
     --color-info-content: #ebf3f4;
     --color-success: #2e9959;
     --color-success-content: oklch(37% 0.077 168.94);
-    --color-warning: #f9c900;
+    --color-warning: #f4ee06;
     --color-warning-content: oklch(41% 0.112 45.904);
     --color-error: oklch(71% 0.194 13.428);
     --color-error-content: oklch(27% 0.105 12.094);

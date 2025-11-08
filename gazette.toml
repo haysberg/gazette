@@ -28,12 +28,8 @@ image = "https://orientxxi.info/squelettes-2021/favicon/android-icon-192x192.png
 link = "https://survie.org/spip.php?page=backend"
 image = "https://survie.org/favicon.ico"
 [[feeds.feedlist]]
-link = "https://www.revolutionpermanente.fr/spip.php?page=backend_portada" #"https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5"
+link = "https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5"
 image = "https://pbs.twimg.com/profile_images/1584923031687806980/SgoWFAk9_400x400.jpg"
-[[feeds.feedlist]]
-link = "https://orgasolitrans.fr/index.php/feed/"
-title = "L'OST"
-image = "https://orgasolitrans.fr/wp-content/uploads/2025/03/cropped-ost_v2-32x32.png"
 [[feeds.feedlist]]
 link = "https://backend.streetpress.com/rss.xml"
 title = "StreetPress"
@@ -85,13 +81,9 @@ title = "Socialter"
 subtitle = "Critique radicale et alternatives"
 image = "https://www.socialter.fr/theme/images/favicon.png"
 [[feeds.feedlist]]
-link = "https://www.reseau-salariat.info/index.xml"
-image = "https://www.reseau-salariat.info/images/logo2.svg"
-title = "Réseau Salariat"
-[[feeds.feedlist]]
 link = "https://basta.media/spip.php?page=backend"
 title = "Basta!"
-image = "https://basta.media/squelettes/basta/favicon/favicon.svg"
+image = "https://portail.basta.media/local/favicon/basta-media-332303ec797a066ea5bc27266caa4402-32.png?1747916307"
 [[feeds.feedlist]]
 link = "https://disclose.ngo/feed/"
 title = "Disclose"
@@ -106,6 +98,7 @@ title = "AlterÉco"
 image = "https://www.alternatives-economiques.fr/sites/all/themes/alternatives-economiques-main/assets/apple-touch-icon.png"
 [[feeds.feedlist]]
 link = "https://rapportsdeforce.fr/feed"
+title = "Rapports de force"
 image = "https://rapportsdeforce.fr/wp-content/themes/flymag-child/images/favicon-196x196.png"
 [[feeds.feedlist]]
 title = "L214"
@@ -124,7 +117,7 @@ title = "Attac"
 image = "https://france.attac.org/favicon.ico"
 link = "https://france.attac.org/spip.php?page=backend"
 [[feeds.feedlist]]
-title = "Au Poste"
+title = "#AuPoste"
 link = "https://www.auposte.fr/feed/"
 image = "https://www.auposte.fr/wp-content/uploads/2022/10/cropped-Fichier-107@33.33x-1-1-32x32.png"
 [[feeds.feedlist]]

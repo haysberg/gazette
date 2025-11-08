@@ -1,13 +1,3 @@
-#!/usr/bin/env uv run --script
-#
-# /// script
-# requires-python = ">=3.13"
-# dependencies = [
-#     "csscompressor",
-#     "jsmin",
-# ]
-# ///
-
 # Replace the original file with the minified version
 import gzip
 import os
