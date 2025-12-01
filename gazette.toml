@@ -140,10 +140,10 @@ image = "https://www.lemediatv.fr/favicon.ico"
 title = "Histoires Crépues"
 link = "https://histoirescrepues.fr/latest/rss/"
 image = "https://histoirescrepues.fr/content/images/size/w256h256/2024/11/Plan-de-travail-2-copie.png"
-[[feeds.feedlist]]
-title = "Fracas"
-link = "https://fracas.media/feed/"
-image = "https://fracas.media/wp-content/uploads/2024/03/cropped-favicon-192x192.png"
+# [[feeds.feedlist]]
+# title = "Fracas"
+# link = "https://fracas.media/feed/"
+# image = "https://fracas.media/wp-content/uploads/2024/03/cropped-favicon-192x192.png"
 [[feeds.feedlist]]
 title = "Equal Times"
 link = "https://www.equaltimes.org/spip.php?page=backend&lang=fr"
