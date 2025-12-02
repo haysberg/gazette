@@ -36,17 +36,9 @@ title = "StreetPress"
 domain = "streetpress.com"
 image = "https://www.streetpress.com/favicon.ico"
 [[feeds.feedlist]]
-link = "https://api.blast-info.fr/rss.xml"
-title = "BLAST"
-image = "https://www.blast-info.fr/favicon.ico"
-[[feeds.feedlist]]
 link = "https://strass-syndicat.org/feed/"
 title = "Le STRASS"
 image = "https://strass-syndicat.org/wp-content/uploads/2020/04/cropped-fav-strass-32x32.png"
-[[feeds.feedlist]]
-link = "https://npa-lanticapitaliste.org/rss.xml"
-title = "NPA"
-image = "https://npa-lanticapitaliste.org/sites/default/files/favicon_1.ico"
 [[feeds.feedlist]]
 link = "https://lafranceinsoumise.fr/feed/"
 title = "LFI"
@@ -133,18 +125,10 @@ title = "Bondy Blog"
 link = "https://www.bondyblog.fr/feed/"
 image = "https://www.bondyblog.fr/app/uploads/2020/10/cropped-LEBB-Rouge-192x192.png"
 [[feeds.feedlist]]
-title = "Le Média"
-link = "https://api.lemediatv.fr/rss.xml"
-image = "https://www.lemediatv.fr/favicon.ico"
-[[feeds.feedlist]]
 title = "Histoires Crépues"
 link = "https://histoirescrepues.fr/latest/rss/"
 image = "https://histoirescrepues.fr/content/images/size/w256h256/2024/11/Plan-de-travail-2-copie.png"
-# [[feeds.feedlist]]
-# title = "Fracas"
-# link = "https://fracas.media/feed/"
-# image = "https://fracas.media/wp-content/uploads/2024/03/cropped-favicon-192x192.png"
 [[feeds.feedlist]]
-title = "Equal Times"
-link = "https://www.equaltimes.org/spip.php?page=backend&lang=fr"
-image = "https://fracas.media/wp-content/uploads/2024/03/cropped-favicon-192x192.png"
+title = "INDEX"
+link = "https://www.index.ngo/rubrique/enquetes/feed/"
+image = "https://www.index.ngo/wp-content/uploads/2023/05/cropped-INDEX-logo-square-black-white-192x192.jpg"

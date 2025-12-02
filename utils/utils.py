@@ -1,5 +1,4 @@
 import asyncio
-import json
 import os
 import tomllib
 from datetime import datetime, timedelta
@@ -9,7 +8,7 @@ from jinja2 import Environment, FileSystemLoader
 from sqlalchemy.orm import selectinload
 from sqlmodel import Session, delete, select
 
-from utils import HTML_FILE, JSON_FILE, PLUS_FILE, SOURCES_FILE, STATIC_DIR, TEMPLATES_DIR, engine
+from utils import HTML_FILE, STATIC_DIR, TEMPLATES_DIR, engine
 from utils.logs import logger
 from utils.models import Feed, Post
 
@@ -49,15 +48,6 @@ async def update_served_files() -> None:
 		)
 		posts_last24h: list[Post] = session.exec(statement).all()
 
-		# # Get posts from later
-		# statement = (
-		# 	select(Post)
-		# 	.options(selectinload(Post.feed))
-		# 	.where(Post.publication_date < datetime.now() - timedelta(days=1))
-		# 	.order_by(Post.publication_date.desc())
-		# )
-		# posts_later: list[Post] = session.exec(statement).all()
-
 		# Split posts from the last 24 hours into today and yesterday
 		posts_today: list[Post] = []
 		posts_yesterday: list[Post] = []
@@ -83,25 +73,6 @@ async def update_served_files() -> None:
 				plus=True,
 			)
 
-			# # Render plus.html
-			# plus_html = template.render(
-			# 	posts_today=posts_later,
-			# 	feeds=feeds,
-			# 	plus=False,
-			# )
-
-			# # Render sources.html
-			# sources_template = env.get_template('sources.html')
-			# sources_html = sources_template.render(
-			# 	feeds=feeds,
-			# )
-
-			# # Generate JSON and save as a file
-			# json_data = {
-			# 	'posts_last24h': [post.model_dump() for post in posts_last24h],
-			# 	'posts_later': [post.model_dump() for post in posts_later],
-			# 	'feeds': [feed.model_dump() for feed in feeds],
-			# }
 			logger.debug('Pages rendered successfully !')
 		except Exception as e:
 			logger.error(f'Failed to render template: {e}')
@@ -111,18 +82,6 @@ async def update_served_files() -> None:
 		async with aiofiles.open(HTML_FILE, 'w') as f:
 			await f.write(index_html)
 		logger.debug(f'HTML file saved to {HTML_FILE}')
-
-		# async with aiofiles.open(PLUS_FILE, 'w') as f:
-		# 	await f.write(plus_html)
-		# logger.debug(f'PLUS file saved to {PLUS_FILE}')
-
-		# async with aiofiles.open(SOURCES_FILE, 'w') as f:
-		# 	await f.write(sources_html)
-		# logger.debug(f'SOURCES file saved to {SOURCES_FILE}')
-
-		# async with aiofiles.open(JSON_FILE, 'w') as f:
-		# 	await f.write(json.dumps(json_data, sort_keys=True, default=str))
-		# logger.debug(f'JSON file saved to {JSON_FILE}')
 
 	except Exception as e:
 		logger.error(f'Failed to save file: {e}')

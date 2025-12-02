@@ -45,6 +45,6 @@ for root, dirs, files in os.walk('static/img'):
 			image_path = file_path.rsplit('.', 1)[0] + '.avif'
 			with open(file_path, 'rb') as f:
 				file_content = f.read()
-				Image.open(BytesIO(file_content)).resize((128, 128), Image.LANCZOS).save(
+				Image.open(BytesIO(file_content)).resize((128, 128), Image.Resampling.LANCZOS).save(
 					image_path, 'AVIF'
 				)
