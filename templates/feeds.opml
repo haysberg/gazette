@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <opml version="2.0">
     <head>
-        <title>
-            Gazette Insoumise
-        </title>
+        <title>Gazette Insoumise</title>
     </head>
     <body>
-        {% for feed in feeds %}<outline text="{{ feed.title }}" type="rss" xmlUrl="{{ feed.link }}"/>
+        {% for feed in feeds %}<outline type="rss" title="{{ feed.title }}" xmlUrl="{{ feed.link }}" htmlUrl="https://{{ feed.domain }}"/>
         {% endfor %}
     </body>
 </opml>

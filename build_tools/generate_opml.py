@@ -4,8 +4,8 @@ import tomllib
 # from io import BytesIO
 from jinja2 import Environment, FileSystemLoader
 
-# Initialize Jinja2 environment
-env = Environment(loader=FileSystemLoader('templates'))
+# Initialize Jinja2 environment with autoescaping for XML
+env = Environment(loader=FileSystemLoader('templates'), autoescape=True)
 
 with open('gazette.toml', 'rb') as f:
 	content = f.read()

@@ -1,46 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <opml version="2.0">
     <head>
-        <title>
-            Gazette Insoumise
-        </title>
+        <title>Gazette Insoumise</title>
     </head>
     <body>
-        <outline text="Contretemps" type="rss" xmlUrl="https://www.contretemps.eu/rss"/>
-        <outline text="Spectre" type="rss" xmlUrl="https://spectremedia.org/feed/podcast/"/>
-        <outline text="L'Insoumission" type="rss" xmlUrl="https://linsoumission.fr/feed/"/>
-        <outline text="JLM Le blog" type="rss" xmlUrl="https://melenchon.fr/feed/"/>
-        <outline text="Afrique XXI" type="rss" xmlUrl="https://afriquexxi.info/?page=backend&lang=fr"/>
-        <outline text="Frustration Magazine" type="rss" xmlUrl="https://www.frustrationmagazine.fr/feed.xml"/>
-        <outline text="Ballast" type="rss" xmlUrl="https://www.revue-ballast.fr/feed/"/>
-        <outline text="Orient XXI" type="rss" xmlUrl="https://orientxxi.info/?page=backend&lang=fr"/>
-        <outline text="Survie" type="rss" xmlUrl="https://survie.org/spip.php?page=backend"/>
-        <outline text="Révolution Permanente" type="rss" xmlUrl="https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5"/>
-        <outline text="StreetPress" type="rss" xmlUrl="https://backend.streetpress.com/rss.xml"/>
-        <outline text="Le STRASS" type="rss" xmlUrl="https://strass-syndicat.org/feed/"/>
-        <outline text="LFI" type="rss" xmlUrl="https://lafranceinsoumise.fr/feed/"/>
-        <outline text="EU LEFT Alliance" type="rss" xmlUrl="https://leftalliance.eu/feed/"/>
-        <outline text="Institut La Boétie" type="rss" xmlUrl="https://institutlaboetie.fr/feed/"/>
-        <outline text="Arrêt sur Images" type="rss" xmlUrl="https://api.arretsurimages.net/api/public/rss/all-content"/>
-        <outline text="Informations Ouvrières" type="rss" xmlUrl="https://infos-ouvrieres.fr/feed/"/>
-        <outline text="Acrimed" type="rss" xmlUrl="https://www.acrimed.org/spip.php?page=backend"/>
-        <outline text="Ouvrage" type="rss" xmlUrl="https://www.revue-ouvrage.org/feed/"/>
-        <outline text="Socialter" type="rss" xmlUrl="https://www.socialter.fr/rss"/>
-        <outline text="Basta!" type="rss" xmlUrl="https://basta.media/spip.php?page=backend"/>
-        <outline text="Disclose" type="rss" xmlUrl="https://disclose.ngo/feed/"/>
-        <outline text="Reporterre" type="rss" xmlUrl="https://reporterre.net/spip.php?page=backend-simple"/>
-        <outline text="AlterÉco" type="rss" xmlUrl="https://www.alternatives-economiques.fr/rss.xml"/>
-        <outline text="Rapports de force" type="rss" xmlUrl="https://rapportsdeforce.fr/feed"/>
-        <outline text="L214" type="rss" xmlUrl="https://www.l214.com/feed/"/>
-        <outline text="L'Amorce" type="rss" xmlUrl="https://lamorce.co/feed/"/>
-        <outline text="Oxfam France" type="rss" xmlUrl="https://www.oxfamfrance.org/feed/"/>
-        <outline text="Attac" type="rss" xmlUrl="https://france.attac.org/spip.php?page=backend"/>
-        <outline text="#AuPoste" type="rss" xmlUrl="https://www.auposte.fr/feed/"/>
-        <outline text="Off Investigation" type="rss" xmlUrl="https://www.off-investigation.fr/feed/"/>
-        <outline text="Observatoire des multinationales" type="rss" xmlUrl="https://multinationales.org/fr/page/backend"/>
-        <outline text="Bondy Blog" type="rss" xmlUrl="https://www.bondyblog.fr/feed/"/>
-        <outline text="Histoires Crépues" type="rss" xmlUrl="https://histoirescrepues.fr/latest/rss/"/>
-        <outline text="INDEX" type="rss" xmlUrl="https://www.index.ngo/rubrique/enquetes/feed/"/>
+        <outline type="rss" title="Contretemps" xmlUrl="https://www.contretemps.eu/rss" htmlUrl="https://www.contretemps.eu"/>
+        <outline type="rss" title="Spectre" xmlUrl="https://spectremedia.org/feed/podcast/" htmlUrl="https://spectremedia.org"/>
+        <outline type="rss" title="L&#39;Insoumission" xmlUrl="https://linsoumission.fr/feed/" htmlUrl="https://linsoumission.fr"/>
+        <outline type="rss" title="JLM Le blog" xmlUrl="https://melenchon.fr/feed/" htmlUrl="https://melenchon.fr"/>
+        <outline type="rss" title="Afrique XXI" xmlUrl="https://afriquexxi.info/?page=backend&amp;lang=fr" htmlUrl="https://afriquexxi.info"/>
+        <outline type="rss" title="Frustration Magazine" xmlUrl="https://www.frustrationmagazine.fr/feed.xml" htmlUrl="https://www.frustrationmagazine.fr"/>
+        <outline type="rss" title="Ballast" xmlUrl="https://www.revue-ballast.fr/feed/" htmlUrl="https://www.revue-ballast.fr"/>
+        <outline type="rss" title="Orient XXI" xmlUrl="https://orientxxi.info/?page=backend&amp;lang=fr" htmlUrl="https://orientxxi.info"/>
+        <outline type="rss" title="Survie" xmlUrl="https://survie.org/spip.php?page=backend" htmlUrl="https://survie.org"/>
+        <outline type="rss" title="Révolution Permanente" xmlUrl="https://www.revolutionpermanente.fr/spip.php?page=backend&amp;id_mot=5" htmlUrl="https://www.revolutionpermanente.fr"/>
+        <outline type="rss" title="StreetPress" xmlUrl="https://backend.streetpress.com/rss.xml" htmlUrl="https://streetpress.com"/>
+        <outline type="rss" title="Le STRASS" xmlUrl="https://strass-syndicat.org/feed/" htmlUrl="https://strass-syndicat.org"/>
+        <outline type="rss" title="LFI" xmlUrl="https://lafranceinsoumise.fr/feed/" htmlUrl="https://lafranceinsoumise.fr"/>
+        <outline type="rss" title="EU LEFT Alliance" xmlUrl="https://leftalliance.eu/feed/" htmlUrl="https://leftalliance.eu"/>
+        <outline type="rss" title="Institut La Boétie" xmlUrl="https://institutlaboetie.fr/feed/" htmlUrl="https://institutlaboetie.fr"/>
+        <outline type="rss" title="Arrêt sur Images" xmlUrl="https://api.arretsurimages.net/api/public/rss/all-content" htmlUrl="https://arretsurimages.net"/>
+        <outline type="rss" title="Informations Ouvrières" xmlUrl="https://infos-ouvrieres.fr/feed/" htmlUrl="https://infos-ouvrieres.fr"/>
+        <outline type="rss" title="Acrimed" xmlUrl="https://www.acrimed.org/spip.php?page=backend" htmlUrl="https://www.acrimed.org"/>
+        <outline type="rss" title="Ouvrage" xmlUrl="https://www.revue-ouvrage.org/feed/" htmlUrl="https://www.revue-ouvrage.org"/>
+        <outline type="rss" title="Socialter" xmlUrl="https://www.socialter.fr/rss" htmlUrl="https://www.socialter.fr"/>
+        <outline type="rss" title="Basta!" xmlUrl="https://basta.media/spip.php?page=backend" htmlUrl="https://basta.media"/>
+        <outline type="rss" title="Disclose" xmlUrl="https://disclose.ngo/feed/" htmlUrl="https://disclose.ngo"/>
+        <outline type="rss" title="Reporterre" xmlUrl="https://reporterre.net/spip.php?page=backend-simple" htmlUrl="https://reporterre.net"/>
+        <outline type="rss" title="AlterÉco" xmlUrl="https://www.alternatives-economiques.fr/rss.xml" htmlUrl="https://www.alternatives-economiques.fr"/>
+        <outline type="rss" title="Rapports de force" xmlUrl="https://rapportsdeforce.fr/feed" htmlUrl="https://rapportsdeforce.fr"/>
+        <outline type="rss" title="L214" xmlUrl="https://www.l214.com/feed/" htmlUrl="https://www.l214.com"/>
+        <outline type="rss" title="L&#39;Amorce" xmlUrl="https://lamorce.co/feed/" htmlUrl="https://lamorce.co"/>
+        <outline type="rss" title="Oxfam France" xmlUrl="https://www.oxfamfrance.org/feed/" htmlUrl="https://www.oxfamfrance.org"/>
+        <outline type="rss" title="Attac" xmlUrl="https://france.attac.org/spip.php?page=backend" htmlUrl="https://france.attac.org"/>
+        <outline type="rss" title="#AuPoste" xmlUrl="https://www.auposte.fr/feed/" htmlUrl="https://www.auposte.fr"/>
+        <outline type="rss" title="Off Investigation" xmlUrl="https://www.off-investigation.fr/feed/" htmlUrl="https://www.off-investigation.fr"/>
+        <outline type="rss" title="Observatoire des multinationales" xmlUrl="https://multinationales.org/fr/page/backend" htmlUrl="https://multinationales.org"/>
+        <outline type="rss" title="Bondy Blog" xmlUrl="https://www.bondyblog.fr/feed/" htmlUrl="https://www.bondyblog.fr"/>
+        <outline type="rss" title="Histoires Crépues" xmlUrl="https://histoirescrepues.fr/latest/rss/" htmlUrl="https://histoirescrepues.fr"/>
+        <outline type="rss" title="INDEX" xmlUrl="https://www.index.ngo/rubrique/enquetes/feed/" htmlUrl="https://www.index.ngo"/>
         
     </body>
 </opml>

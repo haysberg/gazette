@@ -17,7 +17,7 @@ with open('gazette.toml', 'rb') as f:
 		image_path = os.path.join(
 			'static',
 			'favicons',
-			f'{feed["link"].split("/")[2].removeprefix("www.")}.avif',
+			f'{feed["domain"]}.avif',
 		)
 		os.makedirs(os.path.dirname(image_path), exist_ok=True)
 		try:
