@@ -3,9 +3,11 @@ link = "https://www.contretemps.eu/rss"
 title = "Contretemps"
 image = "https://www.contretemps.eu/wp-content/uploads/ctt.ico"
 [[feeds.feedlist]]
+title = "Spectre"
 link = "https://spectremedia.org/feed/podcast/"
 image = "https://spectremedia.org/wp-content/themes/spectre-v2/favicon.png"
 [[feeds.feedlist]]
+title="L'Insoumission"
 link = "https://linsoumission.fr/feed/"
 image = "https://linsoumission.fr/wp-content/uploads/2025/02/cropped-Pharefavicon-32x32.png"
 [[feeds.feedlist]]
@@ -13,21 +15,27 @@ link = "https://melenchon.fr/feed/"
 title = "JLM Le blog"
 image = "https://melenchon.fr/wp-content/uploads/2024/10/cropped-turtle2-32x32.png"
 [[feeds.feedlist]]
+title = "Afrique XXI"
 link = "https://afriquexxi.info/?page=backend&lang=fr"
 image = "https://afriquexxi.info/squelettes-2021/favicon/favicon-32x32.png"
 [[feeds.feedlist]]
+title = "Frustration Magazine"
 link = "https://www.frustrationmagazine.fr/feed.xml"
 image = "https://frustrationmagazine.fr/img/favicon_light.png"
 [[feeds.feedlist]]
+title = "Ballast"
 link = "https://www.revue-ballast.fr/feed/"
 image = "https://www.revue-ballast.fr/wp-content/uploads/2016/09/ballast_favicon.ico"
 [[feeds.feedlist]]
+title = "Orient XXI"
 link = "https://orientxxi.info/?page=backend&lang=fr"
 image = "https://orientxxi.info/squelettes-2021/favicon/android-icon-192x192.png"
 [[feeds.feedlist]]
+title = "Survie"
 link = "https://survie.org/spip.php?page=backend"
 image = "https://survie.org/favicon.ico"
 [[feeds.feedlist]]
+title = "Révolution Permanente"
 link = "https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5"
 image = "https://pbs.twimg.com/profile_images/1584923031687806980/SgoWFAk9_400x400.jpg"
 [[feeds.feedlist]]

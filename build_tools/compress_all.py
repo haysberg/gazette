@@ -1,4 +1,4 @@
-# Replace the original file with the minified version
+# Replaces the original file with the minified version
 import gzip
 import os
 
