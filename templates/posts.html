@@ -1,10 +1,10 @@
 {% if divider %}
-<div class="divider">HIER</div>
+<div class="divider my-2">HIER</div>
 {% endif %}
     {% for article in articles %}
     <div class="flex flex-col flex-wrap mb-1">
         <a
-            class="link link-hover link-primary md:text-base font-medium text-base/5"
+            class="link link-hover link-primary md:text-base font-medium text-base/5 font-semibold"
             href="{{ article.link }}"
             target="_blank"
             referrerpolicy="origin"
