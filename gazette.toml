@@ -179,3 +179,13 @@ title = "La Quadrature du Net"
 link = "https://www.laquadrature.net/feed/"
 domain = "laquadrature.net"
 image = "https://www.laquadrature.net/wp-content/uploads/sites/8/2018/09/LOGO-LQDN3-36x36.png"
+[[feeds.feedlist]]
+title = "Le Mouton Numérique"
+link = "https://mouton-numerique.org/feed/"
+domain = "mouton-numerique.org"
+image = "https://mouton-numerique.org/wp-content/uploads/2022/01/cropped-favicon-mouton-numerique-32x32.png"
+[[feeds.feedlist]]
+title = "Le Vent Se Lève"
+link = "https://lvsl.fr/feed/"
+domain = "lvsl.fr"
+image = "https://lvsl.fr/wp-content/uploads/fbrfg/favicon.ico"
