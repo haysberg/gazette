@@ -14,6 +14,6 @@ with open('gazette.toml', 'rb') as f:
 	# Render index.html
 	template = env.get_template('feeds.opml')
 	opml_content = template.render(feeds=config_data['feeds']['feedlist'])
-	with open('./static/feeds.opml', 'w') as o:
+	with open('./static/feeds.opml', 'w', encoding='utf-8') as o:
 		o.write(opml_content)
 	print('OPML rendered successfully !')

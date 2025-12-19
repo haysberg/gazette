@@ -33,11 +33,11 @@ title = "Ballast"
 link = "https://www.revue-ballast.fr/feed/"
 domain = "revue-ballast.fr"
 image = "https://www.revue-ballast.fr/wp-content/uploads/2016/09/ballast_favicon.ico"
-[[feeds.feedlist]]
-title = "Orient XXI"
-link = "https://orientxxi.info/?page=backend&lang=fr"
-domain = "orientxxi.info"
-image = "https://orientxxi.info/squelettes-2021/favicon/android-icon-192x192.png"
+# [[feeds.feedlist]]
+# title = "Orient XXI"
+# link = "https://orientxxi.info/?page=backend&lang=fr"
+# domain = "orientxxi.info"
+# image = "https://orientxxi.info/squelettes-2021/favicon/android-icon-192x192.png"
 [[feeds.feedlist]]
 title = "Survie"
 link = "https://survie.org/spip.php?page=backend"
