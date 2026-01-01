@@ -1,3 +1,38 @@
+@font-face {
+    font-family: "Config";
+    src: url("../fonts/Config-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Config";
+    src: url("../fonts/Config-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Config";
+    src: url("../fonts/Config-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Config";
+    src: url("../fonts/Config-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Config";
+    src: url("../fonts/Config-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+}
+
 :root {
     --color-base-100: #faf9f6;
     --color-base-content: oklch(21% 0.006 285.885);
@@ -45,14 +80,7 @@
 
 /*VBVJOR*/
 .navbar {
-    background-image: linear-gradient(
-        65deg,
-        #7b13d680,
-        #40098e80,
-        #2e995980,
-        #f9c90080,
-        #f9161680
-    );
+    background-image: linear-gradient(65deg, #7b13d6 66%, #f91616);
 }
 
 .divider::before {
@@ -65,4 +93,5 @@
 
 body {
     background: var(--bg);
+    font-family: "Config", sans-serif;
 }

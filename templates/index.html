@@ -1,24 +1,18 @@
 <!doctype html>
 <html lang="fr" dir="ltr">
     {% include "head.html" %}
-    <body class="bg-color-base-100 font-sans min-h-full bg-slate-50">
+    <body
+        class="bg-color-base-100 font-sans min-h-screen flex flex-col bg-slate-50"
+    >
         {% include "navbar.html" %}
-        <div class="max-w-screen-xl m-auto px-2 flex-grow">
+        <div class="w-full max-w-screen-xl m-auto px-2 flex-grow">
             <main>
-                {% if posts_today is defined and posts_today|length > 0 %}
-                {% with %}
-                {% set articles=posts_today %}
-                {% include "posts.html" %}
-                {% endwith %}
-                {% endif %}
-
-                {% if posts_yesterday is defined and posts_yesterday|length > 0 %}
-                {% with %}
-                    {% set articles=posts_yesterday %}
-                    {% set divider=plus %}
-                {% include "posts.html" %}
-                {%endwith %}
-                {% endif %}
+                {% if posts_today is defined and posts_today|length > 0 %} {%
+                with %} {% set articles=posts_today %} {% include "posts.html"
+                %} {% endwith %} {% endif %} {% if posts_yesterday is defined
+                and posts_yesterday|length > 0 %} {% with %} {% set
+                articles=posts_yesterday %} {% set divider=plus %} {% include
+                "posts.html" %} {%endwith %} {% endif %}
             </main>
         </div>
         {% include "footer.html" %}
