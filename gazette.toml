@@ -189,3 +189,23 @@ title = "Le Vent Se Lève"
 link = "https://lvsl.fr/feed/"
 domain = "lvsl.fr"
 image = "https://lvsl.fr/wp-content/uploads/fbrfg/favicon.ico"
+[[feeds.feedlist]]
+title = "La Déferlante"
+link = "https://revueladeferlante.fr/feed/"
+domain = "revueladeferlante.fr"
+image = "https://694359d6.delivery.rocketcdn.me/wp-content/uploads/2021/01/cropped-ld_favicon2-2-300x300.png"
+[[feeds.feedlist]]
+title = "La Brèche"
+link = "https://journal-labreche.fr/feed/"
+domain = "journal-labreche.fr"
+image = "https://journal-labreche.fr/ezessogn/2025/05/cropped-Logo-RS-1-192x192.webp"
+[[feeds.feedlist]]
+title = "Synth."
+link = "https://synthmedia.fr/feed/"
+domain = "synthmedia.fr"
+image = "https://synthmedia.fr/wp-content/uploads/2023/11/cropped-Synth-favicon-192x192.png"
+[[feeds.feedlist]]
+title = "STUP.MEDIA"
+link = "https://stup.media/feed/"
+domain = "stup.media"
+image = "https://i0.wp.com/stup.media/wp-content/uploads/2024/03/cropped-cropped-ROND.png"

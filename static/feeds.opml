@@ -42,6 +42,10 @@
         <outline type="rss" title="La Quadrature du Net" xmlUrl="https://www.laquadrature.net/feed/" htmlUrl="https://laquadrature.net"/>
         <outline type="rss" title="Le Mouton Numérique" xmlUrl="https://mouton-numerique.org/feed/" htmlUrl="https://mouton-numerique.org"/>
         <outline type="rss" title="Le Vent Se Lève" xmlUrl="https://lvsl.fr/feed/" htmlUrl="https://lvsl.fr"/>
+        <outline type="rss" title="La Déferlante" xmlUrl="https://revueladeferlante.fr/feed/" htmlUrl="https://revueladeferlante.fr"/>
+        <outline type="rss" title="La Brèche" xmlUrl="https://journal-labreche.fr/feed/" htmlUrl="https://journal-labreche.fr"/>
+        <outline type="rss" title="Synth." xmlUrl="https://synthmedia.fr/feed/" htmlUrl="https://synthmedia.fr"/>
+        <outline type="rss" title="STUP.MEDIA" xmlUrl="https://stup.media/feed/" htmlUrl="https://stup.media"/>
         
     </body>
 </opml>
