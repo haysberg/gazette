@@ -8,7 +8,7 @@ from jinja2 import Environment, FileSystemLoader
 from sqlalchemy.orm import selectinload
 from sqlmodel import Session, delete, select
 
-from utils import HTML_FILE, STATIC_DIR, TEMPLATES_DIR, engine
+from utils import HTML_FILE, RSS_FILE, STATIC_DIR, TEMPLATES_DIR, engine
 from utils.logs import logger
 from utils.models import Feed, Post
 
@@ -62,7 +62,7 @@ async def update_served_files() -> None:
 		# Get all feeds
 		feeds = (session.exec(select(Feed).order_by(Feed.title.desc()))).all()
 
-		# Render Jinja2 template and save as HTML
+		# Render Jinja2 templates
 		try:
 			# Render index.html
 			template = env.get_template('index.html')
@@ -71,6 +71,13 @@ async def update_served_files() -> None:
 				posts_yesterday=posts_yesterday,
 				feeds=feeds,
 				plus=True,
+			)
+
+			# Render RSS feed
+			rss_template = env.get_template('feed.xml')
+			rss_xml = rss_template.render(
+				posts=posts_last24h,
+				build_date=datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0000'),
 			)
 
 			logger.debug('Pages rendered successfully !')
@@ -82,6 +89,10 @@ async def update_served_files() -> None:
 		async with aiofiles.open(HTML_FILE, 'w') as f:
 			await f.write(index_html)
 		logger.debug(f'HTML file saved to {HTML_FILE}')
+
+		async with aiofiles.open(RSS_FILE, 'w') as f:
+			await f.write(rss_xml)
+		logger.debug(f'RSS feed saved to {RSS_FILE}')
 
 	except Exception as e:
 		logger.error(f'Failed to save file: {e}')

@@ -61,7 +61,7 @@ image = "https://strass-syndicat.org/wp-content/uploads/2020/04/cropped-fav-stra
 [[feeds.feedlist]]
 link = "https://lafranceinsoumise.fr/feed/"
 domain = "lafranceinsoumise.fr"
-title = "LFI"
+title = "La France Insoumise"
 image = "https://lafranceinsoumise.fr/wp-content/uploads/2024/11/cropped-TOUT-PETIT-LOGO-32x32.png"
 [[feeds.feedlist]]
 link = "https://leftalliance.eu/feed/"
@@ -154,11 +154,11 @@ title = "Off Investigation"
 link = "https://www.off-investigation.fr/feed/"
 domain = "off-investigation.fr"
 image = "https://www.off-investigation.fr/wp-content/uploads/2021/05/favicon2.png"
-# [[feeds.feedlist]]
-# title = "Observatoire des multinationales"
-# link = "https://multinationales.org/fr/page/backend"
-# domain = "multinationales.org"
-# image = "https://multinationales.org/squelettes/odm/static/img/favicon/android-chrome-192x192.png"
+[[feeds.feedlist]]
+title = "Observatoire des multinationales"
+link = "https://multinationales.org/fr/page/backend"
+domain = "multinationales.org"
+image = "https://multinationales.org/squelettes/odm/static/img/favicon/android-chrome-192x192.png"
 [[feeds.feedlist]]
 title = "Bondy Blog"
 link = "https://www.bondyblog.fr/feed/"

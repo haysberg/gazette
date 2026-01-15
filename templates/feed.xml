@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Gazette Insoumise</title>
+		<link>https://gazette.music</link>
+		<description>Agregateur de flux RSS de la presse alternative francophone</description>
+		<language>fr</language>
+		<lastBuildDate>{{ build_date }}</lastBuildDate>
+		<atom:link href="https://gazette.music/feed.xml" rel="self" type="application/rss+xml"/>
+		{% for post in posts %}
+		<item>
+			<title>{{ post.title | e }}</title>
+			<link>{{ post.link | e }}</link>
+			<guid isPermaLink="true">{{ post.link | e }}</guid>
+			<pubDate>{{ post.publication_date.strftime('%a, %d %b %Y %H:%M:%S +0000') }}</pubDate>
+			<source url="{{ post.feed.link | e }}">{{ post.feed.title | e }}</source>
+		</item>
+		{% endfor %}
+	</channel>
+</rss>

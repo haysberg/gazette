@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+    {% include "head.html" %}
+    <body
+        class="bg-color-base-100 font-sans min-h-screen flex flex-col bg-slate-50"
+    >
+        {% include "navbar.html" %}
+        <div class="w-full max-w-screen-xl m-auto px-2 flex-grow">
+            <main>
+                <h2 class="text-2xl font-bold mb-4">Liste des sources</h2>
+                <p class="mb-6 text-base-content/70">
+                    La Gazette Insoumise agrège les flux RSS de {{ feeds|length
+                    }} sources de la presse alternative et indépendante.
+                </p>
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                >
+                    {% for feed in feeds %}
+                    <a
+                        href="https://{{ feed.domain }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="card card-border bg-base-100 hover:bg-base-200 transition-colors"
+                    >
+                        <div
+                            class="card-body p-4 flex flex-row items-center gap-4"
+                        >
+                            <div class="avatar">
+                                <div class="w-12 rounded">
+                                    <img
+                                        src="/favicons/{{ feed.domain }}.avif"
+                                        alt="Logo {{ feed.title }}"
+                                    />
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="card-title text-base">
+                                    {{ feed.title }}
+                                </h3>
+                                <p class="text-sm text-base-content/50">
+                                    {{ feed.domain }}
+                                </p>
+                                {% if feed.subtitle %}
+                                <p class="text-sm text-base-content/70 mt-1">
+                                    {{ feed.subtitle }}
+                                </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </main>
+        </div>
+        {% include "footer.html" %}
+    </body>
+    <script
+        data-goatcounter="https://insoumis.goatcounter.com/count"
+        async
+        src="https://gc.zgo.at/count.js"
+    ></script>
+</html>

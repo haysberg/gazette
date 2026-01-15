@@ -1,9 +1,17 @@
 [general]
-
 root = "/app/static"
 port = 8000
 page404 = "./404.html"
-cache-control-headers = false
+cache-control-headers = true
 host = "0.0.0.0"
 compression = true
 compression-static = true
+
+# Cache static assets for 1 week, HTML/XML for 15 minutes
+[[advanced.headers]]
+source = "**/*.{css,js,woff2,avif,png,ico}"
+headers.Cache-Control = "public, max-age=604800, immutable"
+
+[[advanced.headers]]
+source = "**/*.{html,xml}"
+headers.Cache-Control = "public, max-age=900"

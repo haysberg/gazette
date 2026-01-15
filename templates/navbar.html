@@ -1,4 +1,10 @@
-<div class="navbar sticky top-0 backdrop-blur-sm drop-shadow-xl z-1000 mb-3">
+<div
+    id="offline-banner"
+    class="bg-warning text-warning-content text-center py-2 px-4 hidden"
+>
+    Vous consultez une version hors-ligne de la Gazette.
+</div>
+<div class="navbar sticky top-0 backdrop-blur-sm drop-shadow-xl z-1000">
     <a href="/" class="flex-1 flex items-center gap-x-2">
         <div class="w-10 rounded-full">
             <img
@@ -13,69 +19,25 @@
     </a>
     <div class="divider"></div>
 </div>
-<div class="fab drop-shadow-xl">
-    <div tabindex="0" role="button" class="btn btn-xl btn-success">
-        <svg
-            aria-label="New"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="white"
-            class="size-9"
-        >
-            <path
-                d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z"
-            />
-        </svg>
-    </div>
 
-    <button
-        class="btn btn-xl btn-success text-base-content text-base-100 text-white"
-        id="install-button"
-    >
-        Installer l'appli
-    </button>
+{% set download_icon %}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="white" class="size-4"><path d="M8.75 2.75a.75.75 0 0 0-1.5 0v5.69L5.03 6.22a.75.75 0 0 0-1.06 1.06l3.5 3.5a.75.75 0 0 0 1.06 0l3.5-3.5a.75.75 0 0 0-1.06-1.06L8.75 8.44V2.75Z"/><path d="M3.5 9.75a.75.75 0 0 0-1.5 0v1.5A2.75 2.75 0 0 0 4.75 14h6.5A2.75 2.75 0 0 0 14 11.25v-1.5a.75.75 0 0 0-1.5 0v1.5c0 .69-.56 1.25-1.25 1.25h-6.5c-.69 0-1.25-.56-1.25-1.25v-1.5Z"/></svg>{% endset %}
 
-    <a
-        href="https://programme.lafranceinsoumise.fr/"
-        id="programme-btn"
-        target="_blank"
-        referrerpolicy="origin"
-        class="btn btn-xl btn-primary text-base-100 flex items-center gap-x-2"
-        ><img
-            src="/img/programme.avif"
-            alt="Logo Programme LFI"
-            class="h-8 w-auto"
-        />Le programme</a
-    >
-    <a
-        id="ilb"
-        href="https://institutlaboetie.fr/"
-        target="_blank"
-        referrerpolicy="origin"
-        class="btn btn-xl btn-info text-indigo-950 flex items-center gap-x-2"
-        ><img src="/img/ilb.avif" alt="Logo ILB" class="h-8 w-auto" />Institut
-        La Boétie</a
-    >
+<div class="flex flex-wrap gap-2 justify-center py-2 mb-2">
+    {% with href="https://programme.lafranceinsoumise.fr/", variant="primary",
+    icon_img="/img/programme.avif", label="Le programme", external=true %} {%
+    include "badge.html" %} {% endwith %}
 
-    <a
-        id="action-pop"
-        href="https://actionpopulaire.fr/"
-        target="_blank"
-        referrerpolicy="origin"
-        class="btn btn-xl btn-warning text-base-content text-black flex items-center gap-x-2"
-        ><img
-            src="/img/action_pop.avif"
-            alt="Logo Action Populaire"
-            class="h-8 w-auto"
-        />Action Populaire</a
-    >
+    {% with
+    href="https://institutlaboetie.fr/", variant="info",
+    icon_img="/img/ilb.avif", label="Institut La Boétie", external=true,
+    style="color: #390080;" %} {% include "badge.html" %} {% endwith %}
 
-    <a
-        href="/feeds.opml"
-        target="_blank"
-        referrerpolicy="origin"
-        class="btn btn-xl btn-secondary text-white flex items-center gap-x-2"
-        ><img src="/img/rss.avif" alt="Logo RSS" class="h-8 w-auto" />Importer
-        RSS</a
-    >
+    {% with
+    href="https://actionpopulaire.fr/", variant="warning",
+    icon_img="/img/action_pop.avif", label="Action Pop'", external=true %}
+    {% include "badge.html" %} {% endwith %}
+
+    {% with button=true,
+    id="install-button", variant="success", icon_svg=download_icon,
+    label="Installer", style="color: white;", hidden=true %} {% include "badge.html" %} {% endwith %}
 </div>

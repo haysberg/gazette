@@ -1,5 +1,0 @@
-services:
-  gazette:
-    image: ghcr.io/haysberg/gazette:latest
-    container_name: "gazette-backend"
-    restart: unless-stopped

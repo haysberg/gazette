@@ -1,0 +1,58 @@
+{% if button %}
+<button
+    id="{{ id }}"
+    class="badge badge-{{ variant }} badge-lg gap-1 hover:brightness-110 cursor-pointer"
+    {%
+    if
+    style
+    %}style="{{ style }}"
+    {%
+    endif
+    %}
+    {%
+    if
+    hidden
+    %}hidden{%
+    endif
+    %}
+>
+    {% if icon_svg %}{{ icon_svg | safe }}{% endif %} {% if icon_img %}<img
+        src="{{ icon_img }}"
+        alt=""
+        class="size-4"
+    />{% endif %} {{ label }}
+</button>
+{% else %}
+<a
+    href="{{ href }}"
+    {%
+    if
+    external
+    %}target="_blank"
+    rel="noopener"
+    {%
+    endif
+    %}
+    class="badge badge-{{ variant }} badge-lg gap-1"
+    {%
+    if
+    style
+    %}style="{{ style }}"
+    {%
+    endif
+    %}
+    {%
+    if
+    id
+    %}id="{{ id }}"
+    {%
+    endif
+    %}
+>
+    {% if icon_svg %}{{ icon_svg | safe }}{% endif %} {% if icon_img %}<img
+        src="{{ icon_img }}"
+        alt=""
+        class="size-4"
+    />{% endif %} {{ label }}
+</a>
+{% endif %}

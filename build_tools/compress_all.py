@@ -10,6 +10,11 @@ with open('static/js/index.js') as js_file:
 	with open('static/js/index.min.js', 'w') as minified_js:
 		minified_js.write(minified)
 
+with open('static/sw.js') as sw_file:
+	minified_sw = jsmin(sw_file.read())
+	with open('static/sw.js', 'w') as sw_out:
+		sw_out.write(minified_sw)
+
 with open('static/css/style.css', 'r') as css_file:
 	compressed_css: str = compress(css_file.read())
 	with open('static/css/style.min.css', 'w') as minified_css_file:
