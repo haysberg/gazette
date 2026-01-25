@@ -34,7 +34,6 @@
         <outline type="rss" title="Oxfam France" xmlUrl="https://www.oxfamfrance.org/feed/" htmlUrl="https://oxfamfrance.org"/>
         <outline type="rss" title="Attac" xmlUrl="https://france.attac.org/spip.php?page=backend" htmlUrl="https://france.attac.org"/>
         <outline type="rss" title="#AuPoste" xmlUrl="https://www.auposte.fr/feed/" htmlUrl="https://auposte.fr"/>
-        <outline type="rss" title="Off Investigation" xmlUrl="https://www.off-investigation.fr/feed/" htmlUrl="https://off-investigation.fr"/>
         <outline type="rss" title="Observatoire des multinationales" xmlUrl="https://multinationales.org/fr/page/backend" htmlUrl="https://multinationales.org"/>
         <outline type="rss" title="Bondy Blog" xmlUrl="https://www.bondyblog.fr/feed/" htmlUrl="https://bondyblog.fr"/>
         <outline type="rss" title="Histoires Crépues" xmlUrl="https://histoirescrepues.fr/latest/rss/" htmlUrl="https://histoirescrepues.fr"/>
@@ -46,6 +45,9 @@
         <outline type="rss" title="La Brèche" xmlUrl="https://journal-labreche.fr/feed/" htmlUrl="https://journal-labreche.fr"/>
         <outline type="rss" title="Synth." xmlUrl="https://synthmedia.fr/feed/" htmlUrl="https://synthmedia.fr"/>
         <outline type="rss" title="STUP.MEDIA" xmlUrl="https://stup.media/feed/" htmlUrl="https://stup.media"/>
+        <outline type="rss" title="Bon Pote" xmlUrl="https://bonpote.com/feed/" htmlUrl="https://bonpote.com"/>
+        <outline type="rss" title="La Relève et la Peste" xmlUrl="https://lareleveetlapeste.fr/feed/" htmlUrl="https://lareleveetlapeste.fr"/>
+        <outline type="rss" title="Lundimatin" xmlUrl="https://lundi.am/spip.php?page=backend" htmlUrl="https://lundi.am"/>
         
     </body>
 </opml>

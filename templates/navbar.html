@@ -20,24 +20,31 @@
     <div class="divider"></div>
 </div>
 
-{% set download_icon %}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="white" class="size-4"><path d="M8.75 2.75a.75.75 0 0 0-1.5 0v5.69L5.03 6.22a.75.75 0 0 0-1.06 1.06l3.5 3.5a.75.75 0 0 0 1.06 0l3.5-3.5a.75.75 0 0 0-1.06-1.06L8.75 8.44V2.75Z"/><path d="M3.5 9.75a.75.75 0 0 0-1.5 0v1.5A2.75 2.75 0 0 0 4.75 14h6.5A2.75 2.75 0 0 0 14 11.25v-1.5a.75.75 0 0 0-1.5 0v1.5c0 .69-.56 1.25-1.25 1.25h-6.5c-.69 0-1.25-.56-1.25-1.25v-1.5Z"/></svg>{% endset %}
+{% set download_icon %}<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 16 16"
+    fill="white"
+    class="size-4"
+>
+    <path
+        d="M8.75 2.75a.75.75 0 0 0-1.5 0v5.69L5.03 6.22a.75.75 0 0 0-1.06 1.06l3.5 3.5a.75.75 0 0 0 1.06 0l3.5-3.5a.75.75 0 0 0-1.06-1.06L8.75 8.44V2.75Z"
+    />
+    <path
+        d="M3.5 9.75a.75.75 0 0 0-1.5 0v1.5A2.75 2.75 0 0 0 4.75 14h6.5A2.75 2.75 0 0 0 14 11.25v-1.5a.75.75 0 0 0-1.5 0v1.5c0 .69-.56 1.25-1.25 1.25h-6.5c-.69 0-1.25-.56-1.25-1.25v-1.5Z"
+    /></svg
+>{% endset %}
 
 <div class="flex flex-wrap gap-2 justify-center py-2 mb-2">
     {% with href="https://programme.lafranceinsoumise.fr/", variant="primary",
     icon_img="/img/programme.avif", label="Le programme", external=true %} {%
-    include "badge.html" %} {% endwith %}
-
-    {% with
+    include "badge.html" %} {% endwith %} {% with
     href="https://institutlaboetie.fr/", variant="info",
     icon_img="/img/ilb.avif", label="Institut La Boétie", external=true,
-    style="color: #390080;" %} {% include "badge.html" %} {% endwith %}
-
-    {% with
+    style="color: #390080;" %} {% include "badge.html" %} {% endwith %} {% with
     href="https://actionpopulaire.fr/", variant="warning",
-    icon_img="/img/action_pop.avif", label="Action Pop'", external=true %}
-    {% include "badge.html" %} {% endwith %}
-
-    {% with button=true,
+    icon_img="/img/action_pop.avif", label="Action Pop'", external=true %} {%
+    include "badge.html" %} {% endwith %} {% with button=true,
     id="install-button", variant="success", icon_svg=download_icon,
-    label="Installer", style="color: white;", hidden=true %} {% include "badge.html" %} {% endwith %}
+    label="Installer", style="color: white;", hidden=true %} {% include
+    "badge.html" %} {% endwith %}
 </div>
