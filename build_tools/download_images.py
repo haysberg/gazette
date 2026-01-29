@@ -40,11 +40,11 @@ print(f'{avif_count} AVIF images in static/favicons.')
 for root, dirs, files in os.walk('static/img'):
 	for file in files:
 		file_path = os.path.join(root, file)
-		if file.endswith('.png'):
+		if file.endswith(('.png', '.webp', '.jpg', '.jpeg')):
 			# Open file and convert to AVIF
 			image_path = file_path.rsplit('.', 1)[0] + '.avif'
 			with open(file_path, 'rb') as f:
 				file_content = f.read()
-				Image.open(BytesIO(file_content)).resize((128, 128), Image.Resampling.LANCZOS).save(
-					image_path, 'AVIF'
-				)
+				img = Image.open(BytesIO(file_content))
+				img.thumbnail((32, 32), Image.Resampling.LANCZOS)
+				img.save(image_path, 'AVIF')
