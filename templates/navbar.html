@@ -51,6 +51,11 @@
     icon_img="/img/discord.avif", label="La Fabrique Insoumise", external=true%}
     {% include "badge.html" %} {% endwith %}
     <span></span>
+    {% with href="https://amfis.fr/", variant="secondary",
+    icon_img="/img/amfis.avif", label="Amfis 2026", external=true,
+    style="background-color: var(--color-secondary-content); color:
+    var(--color-secondary);" %} {% include "badge.html" %} {% endwith %}
+    <span></span>
     {% with button=true, id="install-button", variant="success",
     icon_svg=download_icon, label="Installer", style="color: white;",
     hidden=true %} {% include "badge.html" %} {% endwith %}
