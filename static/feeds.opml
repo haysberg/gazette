@@ -19,12 +19,10 @@
         <outline type="rss" title="La France Insoumise" xmlUrl="https://lafranceinsoumise.fr/feed/" htmlUrl="https://lafranceinsoumise.fr"/>
         <outline type="rss" title="EU LEFT Alliance" xmlUrl="https://leftalliance.eu/feed/" htmlUrl="https://leftalliance.eu"/>
         <outline type="rss" title="Institut La Boétie" xmlUrl="https://institutlaboetie.fr/feed/" htmlUrl="https://institutlaboetie.fr"/>
-        <outline type="rss" title="Arrêt sur Images" xmlUrl="https://api.arretsurimages.net/api/public/rss/all-content" htmlUrl="https://arretsurimages.net"/>
         <outline type="rss" title="Informations Ouvrières" xmlUrl="https://infos-ouvrieres.fr/feed/" htmlUrl="https://infos-ouvrieres.fr"/>
         <outline type="rss" title="Acrimed" xmlUrl="https://www.acrimed.org/spip.php?page=backend" htmlUrl="https://acrimed.org"/>
         <outline type="rss" title="Ouvrage" xmlUrl="https://www.revue-ouvrage.org/feed/" htmlUrl="https://revue-ouvrage.org"/>
         <outline type="rss" title="Socialter" xmlUrl="https://www.socialter.fr/rss" htmlUrl="https://socialter.fr"/>
-        <outline type="rss" title="Basta!" xmlUrl="https://basta.media/spip.php?page=backend" htmlUrl="https://basta.media"/>
         <outline type="rss" title="Disclose" xmlUrl="https://disclose.ngo/feed/" htmlUrl="https://disclose.ngo"/>
         <outline type="rss" title="Reporterre" xmlUrl="https://reporterre.net/spip.php?page=backend-simple" htmlUrl="https://reporterre.net"/>
         <outline type="rss" title="AlterÉco" xmlUrl="https://www.alternatives-economiques.fr/rss.xml" htmlUrl="https://alternatives-economiques.fr"/>
@@ -48,6 +46,8 @@
         <outline type="rss" title="Bon Pote" xmlUrl="https://bonpote.com/feed/" htmlUrl="https://bonpote.com"/>
         <outline type="rss" title="La Relève et la Peste" xmlUrl="https://lareleveetlapeste.fr/feed/" htmlUrl="https://lareleveetlapeste.fr"/>
         <outline type="rss" title="Lundimatin" xmlUrl="https://lundi.am/spip.php?page=backend" htmlUrl="https://lundi.am"/>
+        <outline type="rss" title="Lisbeth" xmlUrl="https://lisbethmedia.com/feed" htmlUrl="https://lisbethmedia.com"/>
+        <outline type="rss" title="Mouvements" xmlUrl="https://mouvements.info/feed" htmlUrl="https://mouvements.info"/>
         
     </body>
 </opml>

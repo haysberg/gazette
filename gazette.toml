@@ -47,7 +47,8 @@ image = "https://survie.org/favicon.ico"
 title = "Révolution Permanente"
 link = "https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5"
 domain = "revolutionpermanente.fr"
-image = "https://pbs.twimg.com/profile_images/1584923031687806980/SgoWFAk9_400x400.jpg"
+image = "https://www.revolutionpermanente.fr/squelettes/assets/img/favicon.ico"
+max_posts = 2
 [[feeds.feedlist]]
 link = "https://backend.streetpress.com/rss.xml"
 title = "StreetPress"
@@ -73,11 +74,11 @@ link = "https://institutlaboetie.fr/feed/"
 domain = "institutlaboetie.fr"
 title = "Institut La Boétie"
 image = "https://institutlaboetie.fr/wp-content/uploads/2020/03/LOGO-FAVICON-150x150.png"
-[[feeds.feedlist]]
-link = "https://api.arretsurimages.net/api/public/rss/all-content"
-domain = "arretsurimages.net"
-title = "Arrêt sur Images"
-image = "https://www.arretsurimages.net/assets/img/favicon/favicon-32x32.png"
+# [[feeds.feedlist]]
+# link = "https://api.arretsurimages.net/api/public/rss/all-content"
+# domain = "arretsurimages.net"
+# title = "Arrêt sur Images"
+# image = "https://www.arretsurimages.net/assets/img/favicon/favicon-32x32.png"
 [[feeds.feedlist]]
 link = "https://infos-ouvrieres.fr/feed/"
 domain = "infos-ouvrieres.fr"
@@ -99,11 +100,11 @@ domain = "socialter.fr"
 title = "Socialter"
 subtitle = "Critique radicale et alternatives"
 image = "https://www.socialter.fr/theme/images/favicon.png"
-[[feeds.feedlist]]
-link = "https://basta.media/spip.php?page=backend"
-domain = "basta.media"
-title = "Basta!"
-image = "https://portail.basta.media/local/favicon/basta-media-332303ec797a066ea5bc27266caa4402-32.png?1747916307"
+# [[feeds.feedlist]]
+# link = "https://basta.media/spip.php?page=backend"
+# domain = "basta.media"
+# title = "Basta!"
+# image = "https://portail.basta.media/local/favicon/basta-media-332303ec797a066ea5bc27266caa4402-32.png?1747916307"
 [[feeds.feedlist]]
 link = "https://disclose.ngo/feed/"
 domain = "disclose.ngo"
@@ -114,17 +115,19 @@ link = "https://reporterre.net/spip.php?page=backend-simple"
 domain = "reporterre.net"
 title = "Reporterre"
 image = "https://reporterre.net/squelettes/images/android-chrome-512x512.png"
-max_posts = 3
+max_posts = 2
 [[feeds.feedlist]]
 link = "https://www.alternatives-economiques.fr/rss.xml"
 domain = "alternatives-economiques.fr"
 title = "AlterÉco"
 image = "https://www.alternatives-economiques.fr/sites/all/themes/alternatives-economiques-main/assets/apple-touch-icon.png"
+max_posts = 2
 [[feeds.feedlist]]
 link = "https://rapportsdeforce.fr/feed"
 domain = "rapportsdeforce.fr"
 title = "Rapports de force"
 image = "https://rapportsdeforce.fr/wp-content/themes/flymag-child/images/favicon-196x196.png"
+max_posts = 2
 [[feeds.feedlist]]
 title = "L214"
 image = "https://www.l214.com/wp-content/uploads/2020/02/Favicon-L214-64x64-1.png"
@@ -225,3 +228,13 @@ title = "Lundimatin"
 link = "https://lundi.am/spip.php?page=backend"
 domain = "lundi.am"
 image = "https://lundi.am/favicon.ico"
+[[feeds.feedlist]]
+title = "Lisbeth"
+link = "https://lisbethmedia.com/feed"
+domain = "lisbethmedia.com"
+image = "https://lisbethmedia.com/favicon.ico"
+[[feeds.feedlist]]
+title = "Mouvements"
+link = "https://mouvements.info/feed"
+domain = "mouvements.info"
+image = "https://mouvements.info/wp-content/themes/Mouvements/images/favicons/favicon-196x196.png"
