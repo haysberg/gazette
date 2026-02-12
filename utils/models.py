@@ -21,6 +21,13 @@ class Feed(SQLModel, table=True):
 	image: str = Field(default='')
 	posts: list['Post'] = Relationship(back_populates='feed')
 
+	# Throttle: max number of posts to keep from this feed
+	max_posts: int | None = Field(default=None)
+
+	# Conditional fetching (ETag / Last-Modified)
+	etag: str | None = Field(default=None)
+	modified: str | None = Field(default=None)
+
 	# Failure tracking
 	failure_count: int = Field(default=0)
 	last_error: str | None = Field(default=None)
@@ -41,13 +48,21 @@ class Feed(SQLModel, table=True):
 				# Log but don't fail - many feeds have minor issues that feedparser can work around
 				logger.warning(
 					f'Feed {feed_dict["link"]} has formatting issues but may still be usable: '
-					f'{getattr(data.bozo_exception, "getMessage", lambda: str(data.bozo_exception))()}'
+					f'{
+						getattr(
+							data.bozo_exception, "getMessage", lambda: str(data.bozo_exception)
+						)()
+					}'
 				)
 				# Only raise if we have no usable data
 				if not hasattr(data, 'feed') or not data.entries:
 					raise SyntaxError(
 						f'Feed {feed_dict["link"]} is too malformed to parse: '
-						f'{getattr(data.bozo_exception, "getMessage", lambda: str(data.bozo_exception))()}'
+						f'{
+							getattr(
+								data.bozo_exception, "getMessage", lambda: str(data.bozo_exception)
+							)()
+						}'
 					)
 
 			feed = Feed(
@@ -116,14 +131,25 @@ class Feed(SQLModel, table=True):
 		posts_added = 0
 
 		try:
-			# Parse feed with timeout (non-blocking, retries happen on next 15-min cycle)
-			data: dict = await asyncio.to_thread(feedparser.parse, self.link)
+			# Parse feed with conditional fetching (ETag / Last-Modified)
+			data: dict = await asyncio.to_thread(
+				feedparser.parse, self.link, etag=self.etag, modified=self.modified
+			)
+
+			# Handle 304 Not Modified — feed hasn't changed since last fetch
+			if hasattr(data, 'status') and data.status == 304:
+				logger.debug(f'Feed {self.title} not modified, skipping')
+				return None
 
 			# Check for malformed feed
 			if data.bozo:
 				logger.warning(
 					f'Feed {self.link} has formatting issues: '
-					f'{getattr(data.bozo_exception, "getMessage", lambda: str(data.bozo_exception))()}'
+					f'{
+						getattr(
+							data.bozo_exception, "getMessage", lambda: str(data.bozo_exception)
+						)()
+					}'
 				)
 				# Only fail if we have no entries at all
 				if not data.entries:
@@ -191,10 +217,12 @@ class Feed(SQLModel, table=True):
 				try:
 					session.commit()
 
-					# Update success tracking
+					# Update success tracking and conditional fetching headers
 					self.last_success = datetime.now()
 					self.failure_count = 0
 					self.last_error = None
+					self.etag = getattr(data, 'etag', None)
+					self.modified = getattr(data, 'modified', None)
 					session.merge(self)
 					session.commit()
 

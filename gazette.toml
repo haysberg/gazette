@@ -114,6 +114,7 @@ link = "https://reporterre.net/spip.php?page=backend-simple"
 domain = "reporterre.net"
 title = "Reporterre"
 image = "https://reporterre.net/squelettes/images/android-chrome-512x512.png"
+max_posts = 3
 [[feeds.feedlist]]
 link = "https://www.alternatives-economiques.fr/rss.xml"
 domain = "alternatives-economiques.fr"

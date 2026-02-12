@@ -23,12 +23,39 @@ async def update_all_posts() -> None:
 
 	# Delete entries older than a week
 	with Session(engine) as session:
-		# Delete entries in db older than a week
 		logger.debug('Running cleanup of old posts...')
 		statement = delete(Post).where(Post.publication_date < datetime.now() - timedelta(weeks=1))
 		session.exec(statement)
+
+		# Throttle feeds with max_posts limit
+		feeds_with_limit = session.exec(select(Feed).where(Feed.max_posts.is_not(None))).all()
+		for feed in feeds_with_limit:
+			excess_posts = session.exec(
+				select(Post)
+				.where(Post.feed_link == feed.link)
+				.order_by(Post.publication_date.desc())
+				.offset(feed.max_posts)
+			).all()
+			for post in excess_posts:
+				session.delete(post)
+
 		session.commit()
 	await update_served_files()
+
+
+def timeago(dt: datetime) -> str:
+	delta = datetime.now() - dt
+	seconds = int(delta.total_seconds())
+	if seconds < 60:
+		return "À l'instant"
+	minutes = seconds // 60
+	if minutes < 60:
+		return f'Il y a {minutes} min'
+	hours = minutes // 60
+	if hours < 24:
+		return f'Il y a {hours}h'
+	days = hours // 24
+	return f'Il y a {days}j'
 
 
 async def update_served_files() -> None:
@@ -37,6 +64,7 @@ async def update_served_files() -> None:
 
 	# Initialize Jinja2 environment
 	env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
+	env.filters['timeago'] = timeago
 
 	with Session(engine) as session:
 		# Get posts from the last 24 hours

@@ -25,7 +25,7 @@
                 height="16px"
                 role="presentation"
             />
-            {% endif %} <i class="discret">{{article.feed.title}}</i>
+            {% endif %} <i class="discret">{{article.feed.title}} · {{ article.publication_date | timeago }}</i>
         </a>
     </div>
     {% endfor %}

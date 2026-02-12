@@ -1,6 +1,8 @@
 # Replaces the original file with the minified version
 import gzip
+import hashlib
 import os
+import time
 
 from csscompressor import compress
 from jsmin import jsmin
@@ -11,7 +13,11 @@ with open('static/js/index.js') as js_file:
 		minified_js.write(minified)
 
 with open('static/sw.js') as sw_file:
-	minified_sw = jsmin(sw_file.read())
+	sw_content = sw_file.read()
+	# Inject a unique cache name per build to bust stale service worker caches
+	cache_hash = hashlib.md5(str(time.time()).encode()).hexdigest()[:8]
+	sw_content = sw_content.replace('CACHE_PLACEHOLDER', f'gazette-{cache_hash}')
+	minified_sw = jsmin(sw_content)
 	with open('static/sw.js', 'w') as sw_out:
 		sw_out.write(minified_sw)
 

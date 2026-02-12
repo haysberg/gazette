@@ -185,3 +185,4 @@ static/*.html
 static/index.json
 static/index.json
 *.gz
+.claude/
