@@ -4,6 +4,12 @@ const isPWA = !!(
   window.navigator.standalone
 );
 
+// Defer manifest loading — not needed for initial render
+const manifestLink = document.createElement("link");
+manifestLink.rel = "manifest";
+manifestLink.href = "/manifest.json";
+document.head.appendChild(manifestLink);
+
 // Register service worker
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker

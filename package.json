@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "devDependencies": {
+    "@tailwindcss/cli": "^4",
+    "tailwindcss": "^4",
+    "daisyui": "^5"
+  },
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i src/tailwind.css -o static/css/daisy.min.css --minify"
+  }
+}

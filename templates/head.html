@@ -9,30 +9,16 @@ default_favicon = "/icons/favicon.ico" %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ long_name }}</title>
-    <link rel="preload" href="/css/style.min.css" as="style" />
     <link rel="preload" href="/css/daisy.min.css" as="style" />
-    <link
-        rel="preload"
-        href="/fonts/Config-Regular.woff2"
-        as="font"
-        type="font/woff2"
-        crossorigin
-    />
-    <link
-        rel="preload"
-        href="/fonts/Config-Bold.woff2"
-        as="font"
-        type="font/woff2"
-        crossorigin
-    />
-    <link rel="dns-prefetch" href="https://gc.zgo.at" />
+    <link rel="preload" href="/fonts/Config-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Config-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Config-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://gc.zgo.at" />
     <meta name="application-name" content="{{ long_name }}" />
     <meta name="description" content="{{ description }}" />
     <meta name="keywords" content="{{ keywords }}" />
     <meta name="referrer" content="same-origin" />
-    <script async src="/js/index.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/style.min.css" />
-    <link rel="manifest" href="manifest.json" />
+    {% include "inline_style.html" %}
     <meta name="theme-color" content="#7b13d6" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="author" content="haysberg" />
@@ -42,29 +28,12 @@ default_favicon = "/icons/favicon.ico" %}
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="{{ long_name }}" />
     <link href="css/daisy.min.css" rel="stylesheet" type="text/css" />
-    <script async src="js/daisy.min.js"></script>
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="icons/favicon-32x32.png"
-    />
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="96x96"
-        href="icons/favicon-96x96.png"
-    />
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="icons/favicon-16x16.png"
-    />
+    <script defer src="/js/index.min.js"></script>
+    <link rel="icon" type="image/avif" sizes="96x96" href="icons/favicon-96x96.avif" />
+    <link rel="icon" type="image/avif" sizes="32x32" href="icons/favicon-32x32.avif" />
+    <link rel="icon" type="image/avif" sizes="16x16" href="icons/favicon-16x16.avif" />
+    <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
     <link rel="shortcut icon" href="icons/favicon.ico" />
-    <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="icons/apple-icon-180x180.png"
-    />
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-icon-180x180.png" />
 </head>

@@ -9,8 +9,7 @@ from sqlmodel import Field, Relationship, Session, SQLModel
 from utils import engine
 from utils.logs import logger
 
-# Set a timeout for feedparser requests (30 seconds)
-feedparser.SOCKET_TIMEOUT = 30
+FEED_TIMEOUT = 30
 
 
 class Feed(SQLModel, table=True):
@@ -35,48 +34,31 @@ class Feed(SQLModel, table=True):
 
 	@classmethod
 	async def init_feed(cls, feed_dict: dict):
-		logger.info(f'Initializing feed {feed_dict["link"]}')
-		feed = None
+		logger.info('Initializing feed', feed=feed_dict['link'])
 		error_msg = None
 
 		try:
-			# Parse feed with timeout (non-blocking, retries happen on next 15-min cycle)
-			data: dict = await asyncio.to_thread(feedparser.parse, feed_dict['link'])
+			data: dict = await asyncio.wait_for(
+				asyncio.to_thread(feedparser.parse, feed_dict['link']),
+				timeout=FEED_TIMEOUT,
+			)
 
-			# Check if feedparser detected malformed feed
 			if data.bozo:
-				# Log but don't fail - many feeds have minor issues that feedparser can work around
-				logger.warning(
-					f'Feed {feed_dict["link"]} has formatting issues but may still be usable: '
-					f'{
-						getattr(
-							data.bozo_exception, "getMessage", lambda: str(data.bozo_exception)
-						)()
-					}'
-				)
-				# Only raise if we have no usable data
+				bozo_msg = getattr(
+					data.bozo_exception, 'getMessage', lambda: str(data.bozo_exception)
+				)()
+				logger.warning('Feed has formatting issues', feed=feed_dict['link'], issue=bozo_msg)
 				if not hasattr(data, 'feed') or not data.entries:
-					raise SyntaxError(
-						f'Feed {feed_dict["link"]} is too malformed to parse: '
-						f'{
-							getattr(
-								data.bozo_exception, "getMessage", lambda: str(data.bozo_exception)
-							)()
-						}'
-					)
+					raise SyntaxError(f'Feed too malformed to parse: {bozo_msg}')
 
 			feed = Feed(
-				link=data.feed.link if hasattr(data.feed, 'link') else feed_dict['link'],
-				domain=(data.feed.link if hasattr(data.feed, 'link') else feed_dict['link'])
+				link=getattr(data.feed, 'link', feed_dict['link']),
+				domain=getattr(data.feed, 'link', feed_dict['link'])
 				.split('/')[2]
 				.removeprefix('www.'),
-				title=data.feed.title
-				if hasattr(data.feed, 'title')
-				else feed_dict.get('title', 'Unknown'),
-				subtitle=data.feed.subtitle if hasattr(data.feed, 'subtitle') else '',
-				image=data.feed.image.href
-				if hasattr(data.feed, 'image') and hasattr(data.feed.image, 'href')
-				else None,
+				title=getattr(data.feed, 'title', feed_dict.get('title', 'Unknown')),
+				subtitle=getattr(data.feed, 'subtitle', ''),
+				image=getattr(getattr(data.feed, 'image', None), 'href', None),
 				last_success=datetime.now(),
 				failure_count=0,
 			)
@@ -90,21 +72,21 @@ class Feed(SQLModel, table=True):
 				session.merge(feed)
 				session.commit()
 
-			logger.info(f'Successfully initialized feed {feed_dict["link"]}')
+			logger.info('Successfully initialized feed', feed=feed_dict['link'])
 			return feed
 
 		except (AttributeError, KeyError) as e:
-			error_msg = f'Invalid feed structure: {str(e)}'
-			logger.error(f'Feed {feed_dict["link"]} does not have a valid structure. {e}')
-		except (ConnectionError, ConnectionResetError, TimeoutError) as e:
-			error_msg = f'Connection error: {str(e)}'
-			logger.error(f"Couldn't connect to {feed_dict['link']}, reason is {e}")
+			error_msg = f'Invalid feed structure: {e}'
+			logger.error('Invalid feed structure', feed=feed_dict['link'], error=str(e))
+		except (ConnectionError, ConnectionResetError, TimeoutError, asyncio.TimeoutError) as e:
+			error_msg = f'Connection error: {e}'
+			logger.error('Connection failed', feed=feed_dict['link'], error=str(e))
 		except SyntaxError as e:
-			error_msg = f'Malformed feed: {str(e)}'
-			logger.error(f'Feed {feed_dict["link"]} is malformed: {e}')
+			error_msg = f'Malformed feed: {e}'
+			logger.error('Malformed feed', feed=feed_dict['link'], error=str(e))
 		except Exception as e:
-			error_msg = f'Unexpected error: {str(e)}'
-			logger.error(f'Unexpected error initializing feed {feed_dict["link"]}: {e}')
+			error_msg = f'Unexpected error: {e}'
+			logger.error('Unexpected error initializing feed', feed=feed_dict['link'], error=str(e))
 
 		# Save failed feed with error information
 		if error_msg:
@@ -117,12 +99,14 @@ class Feed(SQLModel, table=True):
 						subtitle=feed_dict.get('subtitle', ''),
 						image=feed_dict.get('image', ''),
 						failure_count=1,
-						last_error=error_msg[:500],  # Limit error message length
+						last_error=error_msg[:500],
 					)
 					session.merge(failed_feed)
 					session.commit()
 			except Exception as db_error:
-				logger.error(f'Failed to save error state for {feed_dict["link"]}: {db_error}')
+				logger.error(
+					'Failed to save error state', feed=feed_dict['link'], error=str(db_error)
+				)
 
 		return None
 
@@ -131,37 +115,32 @@ class Feed(SQLModel, table=True):
 		posts_added = 0
 
 		try:
-			# Parse feed with conditional fetching (ETag / Last-Modified)
-			data: dict = await asyncio.to_thread(
-				feedparser.parse, self.link, etag=self.etag, modified=self.modified
+			data: dict = await asyncio.wait_for(
+				asyncio.to_thread(
+					feedparser.parse, self.link, etag=self.etag, modified=self.modified
+				),
+				timeout=FEED_TIMEOUT,
 			)
 
-			# Handle 304 Not Modified — feed hasn't changed since last fetch
+			# Handle 304 Not Modified
 			if hasattr(data, 'status') and data.status == 304:
-				logger.debug(f'Feed {self.title} not modified, skipping')
+				logger.debug('Feed not modified, skipping', feed=self.title)
 				return None
 
-			# Check for malformed feed
 			if data.bozo:
-				logger.warning(
-					f'Feed {self.link} has formatting issues: '
-					f'{
-						getattr(
-							data.bozo_exception, "getMessage", lambda: str(data.bozo_exception)
-						)()
-					}'
-				)
-				# Only fail if we have no entries at all
+				bozo_msg = getattr(
+					data.bozo_exception, 'getMessage', lambda: str(data.bozo_exception)
+				)()
+				logger.warning('Feed has formatting issues', feed=self.link, issue=bozo_msg)
 				if not data.entries:
-					raise SyntaxError(f'Feed {self.link} returned no entries due to parsing errors')
+					raise SyntaxError(f'Feed returned no entries due to parsing errors')
 
 			with Session(engine) as session:
 				for entry in data.entries:
 					try:
-						# Validate required fields exist
 						if not hasattr(entry, 'link') or not hasattr(entry, 'title'):
 							logger.warning(
-								f'Entry from {self.title} missing required fields (link or title), skipping'
+								'Entry missing required fields, skipping', feed=self.title
 							)
 							continue
 
@@ -172,7 +151,7 @@ class Feed(SQLModel, table=True):
 								pub_date = datetime.fromtimestamp(mktime(entry.published_parsed))
 							except (ValueError, OverflowError, OSError) as e:
 								logger.warning(
-									f'Invalid published_parsed date in {self.title}: {e}'
+									'Invalid published_parsed date', feed=self.title, error=str(e)
 								)
 
 						if (
@@ -183,16 +162,16 @@ class Feed(SQLModel, table=True):
 							try:
 								pub_date = datetime.fromtimestamp(mktime(entry.updated_parsed))
 							except (ValueError, OverflowError, OSError) as e:
-								logger.warning(f'Invalid updated_parsed date in {self.title}: {e}')
+								logger.warning(
+									'Invalid updated_parsed date', feed=self.title, error=str(e)
+								)
 
 						if not pub_date:
-							# Use current time as fallback
 							pub_date = datetime.now()
 							logger.warning(
-								f'Entry from {self.title} has no valid date, using current time'
+								'Entry has no valid date, using current time', feed=self.title
 							)
 
-						# Prepare the Post object
 						parsed_entry = Post(
 							link=entry.link,
 							title=entry.title,
@@ -204,59 +183,54 @@ class Feed(SQLModel, table=True):
 						posts_added += 1
 
 					except AttributeError as ae:
-						logger.error(
-							f'An entry from {self.title} does not have a valid structure: {ae}'
-						)
+						logger.error('Invalid entry structure', feed=self.title, error=str(ae))
 						continue
 					except Exception as e:
-						logger.error(
-							f'Unexpected error while processing entry from {self.title}: {e}'
-						)
+						logger.error('Error processing entry', feed=self.title, error=str(e))
 						continue
+
+				# Single transaction: commit posts + update feed metadata
+				feed = session.get(Feed, self.link)
+				if feed:
+					feed.last_success = datetime.now()
+					feed.failure_count = 0
+					feed.last_error = None
+					feed.etag = getattr(data, 'etag', None)
+					feed.modified = getattr(data, 'modified', None)
 
 				try:
 					session.commit()
-
-					# Update success tracking and conditional fetching headers
-					self.last_success = datetime.now()
-					self.failure_count = 0
-					self.last_error = None
-					self.etag = getattr(data, 'etag', None)
-					self.modified = getattr(data, 'modified', None)
-					session.merge(self)
-					session.commit()
-
-					logger.info(f'Successfully updated {posts_added} posts from {self.title}')
-
+					logger.info('Updated posts', feed=self.title, count=posts_added)
 				except Exception as commit_exc:
-					logger.error(f'Session commit failed for {self.title}: {commit_exc}')
+					logger.error('Session commit failed', feed=self.title, error=str(commit_exc))
 					session.rollback()
 					raise
 
-		except (ConnectionError, ConnectionResetError, TimeoutError) as e:
-			error_msg = f'Connection error: {str(e)}'
-			logger.error(f"Couldn't connect to {self.link}, reason is {e}")
+		except (ConnectionError, ConnectionResetError, TimeoutError, asyncio.TimeoutError) as e:
+			error_msg = f'Connection error: {e}'
+			logger.error('Connection failed', feed=self.link, error=str(e))
 		except SyntaxError as e:
-			error_msg = f'Malformed feed: {str(e)}'
-			logger.error(f'Feed {self.link} is malformed: {e}')
+			error_msg = f'Malformed feed: {e}'
+			logger.error('Malformed feed', feed=self.link, error=str(e))
 		except Exception as e:
-			error_msg = f'Unexpected error: {str(e)}'
-			logger.error(f'Unexpected error in update_posts for {self.link}: {e}')
+			error_msg = f'Unexpected error: {e}'
+			logger.error('Unexpected error in update_posts', feed=self.link, error=str(e))
 
-		# Update failure tracking if there was an error
 		if error_msg:
 			try:
 				with Session(engine) as session:
-					# Increment failure count and update error message
 					feed = session.get(Feed, self.link)
 					if feed:
 						feed.failure_count += 1
-						feed.last_error = error_msg[:500]  # Limit error message length
-						session.merge(feed)
+						feed.last_error = error_msg[:500]
 						session.commit()
-						logger.warning(f'Feed {self.link} failure count: {feed.failure_count}')
+						logger.warning(
+							'Feed failure count incremented',
+							feed=self.link,
+							count=feed.failure_count,
+						)
 			except Exception as db_error:
-				logger.error(f'Failed to update error state for {self.link}: {db_error}')
+				logger.error('Failed to update error state', feed=self.link, error=str(db_error))
 
 		return None
 

@@ -1,0 +1,4 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@source "../templates";
+@source inline("badge-primary badge-secondary badge-info badge-warning badge-success badge-error");

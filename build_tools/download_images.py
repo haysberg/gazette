@@ -37,6 +37,15 @@ avif_count = len(
 )
 print(f'{avif_count} AVIF images in static/favicons.')
 
+# Convert navbar logo to a properly sized AVIF
+navbar_src = os.path.join('static', 'icons', 'favicon-96x96.png')
+navbar_dst = os.path.join('static', 'icons', 'favicon-96x96.avif')
+try:
+	Image.open(navbar_src).save(navbar_dst, 'AVIF')
+	print(f'Converted {navbar_src} to AVIF')
+except Exception as e:
+	print(f'Failed to convert navbar logo: {e}')
+
 for root, dirs, files in os.walk('static/img'):
 	for file in files:
 		file_path = os.path.join(root, file)

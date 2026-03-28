@@ -1,9 +1,9 @@
 import asyncio
-import os
 import tomllib
 from datetime import datetime, timedelta
 
 import aiofiles
+import minify_html
 from jinja2 import Environment, FileSystemLoader
 from sqlalchemy.orm import selectinload
 from sqlmodel import Session, delete, select
@@ -12,12 +12,28 @@ from utils import HTML_FILE, RSS_FILE, STATIC_DIR, TEMPLATES_DIR, engine
 from utils.logs import logger
 from utils.models import Feed, Post
 
+# Skip feeds that have failed more than this many times in a row
+MAX_CONSECUTIVE_FAILURES = 10
+
 
 async def update_all_posts() -> None:
 	logger.info('Updating posts')
 	with Session(engine) as session:
 		feeds = (session.exec(select(Feed))).all()
-	tasks = [feed.update_posts() for feed in feeds]
+
+	# Skip feeds with too many consecutive failures
+	active_feeds = []
+	for feed in feeds:
+		if feed.failure_count >= MAX_CONSECUTIVE_FAILURES:
+			logger.warning(
+				'Skipping feed due to repeated failures',
+				feed=feed.title,
+				failure_count=feed.failure_count,
+			)
+			continue
+		active_feeds.append(feed)
+
+	tasks = [feed.update_posts() for feed in active_feeds]
 	await asyncio.gather(*tasks)
 	logger.info('Finished updating posts.')
 
@@ -60,9 +76,7 @@ def timeago(dt: datetime) -> str:
 
 async def update_served_files() -> None:
 	logger.info('Generating static files...')
-	os.makedirs(STATIC_DIR, exist_ok=True)
 
-	# Initialize Jinja2 environment
 	env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
 	env.filters['timeago'] = timeago
 
@@ -90,9 +104,7 @@ async def update_served_files() -> None:
 		# Get all feeds
 		feeds = (session.exec(select(Feed).order_by(Feed.title.desc()))).all()
 
-		# Render Jinja2 templates
 		try:
-			# Render index.html
 			template = env.get_template('index.html')
 			index_html = template.render(
 				posts_today=posts_today,
@@ -101,38 +113,39 @@ async def update_served_files() -> None:
 				plus=True,
 			)
 
-			# Render RSS feed
 			rss_template = env.get_template('feed.xml')
 			rss_xml = rss_template.render(
 				posts=posts_last24h,
 				build_date=datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0000'),
 			)
 
-			logger.debug('Pages rendered successfully !')
+			index_html = minify_html.minify(index_html, minify_css=True, minify_js=True)
+			rss_xml = minify_html.minify(rss_xml)
+
+			logger.debug('Pages rendered successfully')
 		except Exception as e:
-			logger.error(f'Failed to render template: {e}')
+			logger.error('Failed to render template', error=str(e))
 			return
 
 	try:
 		async with aiofiles.open(HTML_FILE, 'w') as f:
 			await f.write(index_html)
-		logger.debug(f'HTML file saved to {HTML_FILE}')
+		logger.debug('HTML file saved', path=HTML_FILE)
 
 		async with aiofiles.open(RSS_FILE, 'w') as f:
 			await f.write(rss_xml)
-		logger.debug(f'RSS feed saved to {RSS_FILE}')
+		logger.debug('RSS feed saved', path=RSS_FILE)
 
 	except Exception as e:
-		logger.error(f'Failed to save file: {e}')
+		logger.error('Failed to save file', error=str(e))
 
 	logger.debug('Static files generation ended.')
 
 
 async def init_service() -> None:
 	with open('gazette.toml', 'rb') as f:
-		content = f.read()
-		config_data = tomllib.loads(content.decode('utf-8'))
-		logger.debug(f'Found {len(config_data["feeds"]["feedlist"])} feeds')
+		config_data = tomllib.load(f)
+		logger.debug('Found feeds', count=len(config_data['feeds']['feedlist']))
 
 	logger.info('Initializing feeds...')
 	tasks = [Feed.init_feed(feed_dict) for feed_dict in config_data['feeds']['feedlist']]

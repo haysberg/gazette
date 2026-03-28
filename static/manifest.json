@@ -3,48 +3,43 @@
   "short_name": "Gazette LFI",
   "icons": [
     {
-      "src": "/icons/gazette_lfi.webp",
-      "sizes": "192x192",
-      "type": "image/webp"
-    },
-    {
-      "src": "/icons/android_chrome_192x192.png",
+      "src": "/icons/android-icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/icons/android_chrome_512x512.png",
+      "src": "/icons/favicon_512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "/icons/apple_touch_icon.png",
+      "src": "/icons/apple-icon-180x180.png",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "/icons/favicon_16x16.png",
+      "src": "/icons/favicon-16x16.png",
       "sizes": "16x16",
       "type": "image/png"
     },
     {
-      "src": "/icons/favicon_32x32.png",
+      "src": "/icons/favicon-32x32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "/icons/favicon_96x96.png",
+      "src": "/icons/favicon-96x96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "/icons/mstile_150x150.png",
+      "src": "/icons/ms-icon-150x150.png",
       "sizes": "150x150",
       "type": "image/png"
     },
     {
-      "src": "/icons/safari_pinned_tab.png",
-      "sizes": "512x512",
+      "src": "/icons/ms-icon-310x310.png",
+      "sizes": "310x310",
       "type": "image/png"
     }
   ],
