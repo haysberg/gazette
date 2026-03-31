@@ -2,7 +2,6 @@
 import gzip
 import hashlib
 import os
-import time
 
 import brotli
 
@@ -16,8 +15,12 @@ with open('static/js/index.js') as js_file:
 
 with open('static/sw.js') as sw_file:
 	sw_content = sw_file.read()
-	# Inject a unique cache name per build to bust stale service worker caches
-	cache_hash = hashlib.md5(str(time.time()).encode()).hexdigest()[:8]
+	# Inject a content-based cache name so the SW busts cache when assets change
+	content_to_hash = b''
+	for asset_path in ['static/css/daisy.min.css', 'static/js/index.min.js']:
+		with open(asset_path, 'rb') as af:
+			content_to_hash += af.read()
+	cache_hash = hashlib.md5(content_to_hash).hexdigest()[:8]
 	sw_content = sw_content.replace('CACHE_PLACEHOLDER', f'gazette-{cache_hash}')
 	minified_sw = jsmin(sw_content)
 	with open('static/sw.js', 'w') as sw_out:

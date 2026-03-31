@@ -23,6 +23,9 @@ class Feed(SQLModel, table=True):
 	# Throttle: max number of posts to keep from this feed
 	max_posts: int | None = Field(default=None)
 
+	# Only keep free/public articles (filters on accessPermission tag)
+	free_only: bool = Field(default=False)
+
 	# Conditional fetching (ETag / Last-Modified)
 	etag: str | None = Field(default=None)
 	modified: str | None = Field(default=None)
@@ -142,6 +145,9 @@ class Feed(SQLModel, table=True):
 							logger.warning(
 								'Entry missing required fields, skipping', feed=self.title
 							)
+							continue
+
+						if self.free_only and entry.get('accesspermission', 'free') != 'free':
 							continue
 
 						# Get publication date with fallback chain

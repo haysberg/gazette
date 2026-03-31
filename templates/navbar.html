@@ -41,7 +41,7 @@
     <span></span>
     {% with href="https://institutlaboetie.fr/", variant="info",
     icon_img="/img/ilb.avif", label="Institut La Boétie", external=true,
-    style="color: #390080;" %} {% include "badge.html" %} {% endwith %}
+    style="color: #390080; border-color: #390080;" %} {% include "badge.html" %} {% endwith %}
     <span></span>
     {% with href="https://actionpopulaire.fr/", variant="warning",
     icon_img="/img/action_pop.avif", label="Action Pop'", external=true,
@@ -55,6 +55,10 @@
     icon_img="/img/amfis.avif", label="Amfis 2026", external=true,
     style="background-color: var(--color-secondary-content); color:
     var(--color-secondary);" %} {% include "badge.html" %} {% endwith %}
+    <span></span>
+    {% with href="/feed.xml", variant="outline",
+    icon_svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4"><path d="M2 2a1 1 0 0 1 1-1 12 12 0 0 1 12 12 1 1 0 1 1-2 0A10 10 0 0 0 3 3a1 1 0 0 1-1-1Zm0 5a1 1 0 0 1 1-1 7 7 0 0 1 7 7 1 1 0 1 1-2 0 5 5 0 0 0-5-5 1 1 0 0 1-1-1Zm2 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"/></svg>',
+    label="Flux RSS", style="background-color: #f97316; color: white; border-color: #ea580c;" %} {% include "badge.html" %} {% endwith %}
     <span></span>
     {% with button=true, id="install-button", variant="success",
     icon_svg=download_icon, label="Installer", style="color: white;",

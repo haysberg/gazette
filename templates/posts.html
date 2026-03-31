@@ -15,6 +15,7 @@
             target="_blank"
             referrerpolicy="origin"
             class="link link-hover flex items-center gap-x-1 inline-flex mb-1"
+            {% if article.feed.subtitle %}title="{{ article.feed.subtitle }}"{% endif %}
         >
             {% if article.feed.image is defined and article.feed.image != ""
             %}

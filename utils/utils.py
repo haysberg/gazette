@@ -1,4 +1,5 @@
 import asyncio
+import hashlib
 import tomllib
 from datetime import datetime, timedelta
 
@@ -11,6 +12,12 @@ from sqlmodel import Session, delete, select
 from utils import HTML_FILE, RSS_FILE, STATIC_DIR, TEMPLATES_DIR, engine
 from utils.logs import logger
 from utils.models import Feed, Post
+
+
+def file_hash(path: str) -> str:
+	"""Return a short content hash for cache busting."""
+	with open(path, 'rb') as f:
+		return hashlib.md5(f.read()).hexdigest()[:8]
 
 # Skip feeds that have failed more than this many times in a row
 MAX_CONSECUTIVE_FAILURES = 10
@@ -104,6 +111,10 @@ async def update_served_files() -> None:
 		# Get all feeds
 		feeds = (session.exec(select(Feed).order_by(Feed.title.desc()))).all()
 
+		# Cache busting hashes for static assets
+		css_hash = file_hash(f'{STATIC_DIR}/css/daisy.min.css')
+		js_hash = file_hash(f'{STATIC_DIR}/js/index.min.js')
+
 		try:
 			template = env.get_template('index.html')
 			index_html = template.render(
@@ -111,6 +122,8 @@ async def update_served_files() -> None:
 				posts_yesterday=posts_yesterday,
 				feeds=feeds,
 				plus=True,
+				css_hash=css_hash,
+				js_hash=js_hash,
 			)
 
 			rss_template = env.get_template('feed.xml')

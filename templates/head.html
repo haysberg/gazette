@@ -9,7 +9,7 @@ default_favicon = "/icons/favicon.ico" %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ long_name }}</title>
-    <link rel="preload" href="/css/daisy.min.css" as="style" />
+    <link rel="preload" href="/css/daisy.min.css?v={{ css_hash }}" as="style" />
     <link rel="preload" href="/fonts/Config-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Config-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Config-Black.woff2" as="font" type="font/woff2" crossorigin />
@@ -27,8 +27,8 @@ default_favicon = "/icons/favicon.ico" %}
     <meta property="og:description" content="{{ description }}" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="{{ long_name }}" />
-    <link href="css/daisy.min.css" rel="stylesheet" type="text/css" />
-    <script defer src="/js/index.min.js"></script>
+    <link href="css/daisy.min.css?v={{ css_hash }}" rel="stylesheet" type="text/css" />
+    <script defer src="/js/index.min.js?v={{ js_hash }}"></script>
     <link rel="icon" type="image/avif" sizes="96x96" href="icons/favicon-96x96.avif" />
     <link rel="icon" type="image/avif" sizes="32x32" href="icons/favicon-32x32.avif" />
     <link rel="icon" type="image/avif" sizes="16x16" href="icons/favicon-16x16.avif" />
