@@ -10,7 +10,8 @@
     {
       "src": "/icons/favicon_512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/icons/apple-icon-180x180.png",
@@ -45,7 +46,7 @@
   ],
   "theme_color": "#7b13d6",
   "background_color": "#7b13d6",
-  "display": "fullscreen",
+  "display": "standalone",
   "category": ["news", "politics"],
   "id": "/",
   "start_url": "/",
@@ -68,14 +69,7 @@
       "platform": "windows"
     }
   ],
-  "related_applications": [
-    {
-      "platform": "webapp",
-      "url": "https://insoumis.news/manifest.json",
-      "id": "/"
-    }
-  ],
-  "prefer_related_applications": true,
+  "prefer_related_applications": false,
   "lang": "fr",
   "dir": "ltr"
 }

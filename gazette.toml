@@ -266,12 +266,6 @@ link = "https://contre-attaque.net/feed/"
 domain = "contre-attaque.net"
 subtitle = "Média de lutte"
 image = "https://contre-attaque.net/wp-content/uploads/2022/03/cropped-Sans-titre-1-192x192.png"
-[[feeds.feedlist]]
-title = "Les Économistes Atterrés"
-link = "https://www.atterres.org/rubrique/nos-analyses/feed/"
-domain = "atterres.org"
-subtitle = "Analyses économiques hétérodoxes"
-image = "https://www.atterres.org/wp-content/uploads/2024/10/cropped-baniere-ea-192x192.png"
 # [[feeds.feedlist]]
 # title = "Politis"
 # link = "https://www.politis.fr/flux-rss-apps/"
