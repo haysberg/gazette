@@ -44,19 +44,19 @@ if (!isPWA) {
   let installPrompt = null;
   const installButton = document.querySelector("#install-button");
 
+  if (installButton) {
+    installButton.addEventListener("click", async () => {
+      if (!installPrompt) return;
+      const result = await installPrompt.prompt();
+      console.log(`Install prompt was: ${result.outcome}`);
+      installPrompt = null;
+      installButton.setAttribute("hidden", "");
+    });
+  }
+
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     installPrompt = e;
-    // Show the install button
-    if (installButton) {
-      installButton.removeAttribute("hidden");
-      installButton.addEventListener("click", async () => {
-        if (!installPrompt) return;
-        const result = await installPrompt.prompt();
-        console.log(`Install prompt was: ${result.outcome}`);
-        installPrompt = null;
-        installButton.setAttribute("hidden", "");
-      });
-    }
+    if (installButton) installButton.removeAttribute("hidden");
   });
 }

@@ -12,36 +12,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    },
-    {
-      "src": "/icons/apple-icon-180x180.png",
-      "sizes": "180x180",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/favicon-16x16.png",
-      "sizes": "16x16",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/favicon-96x96.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/ms-icon-150x150.png",
-      "sizes": "150x150",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/ms-icon-310x310.png",
-      "sizes": "310x310",
-      "type": "image/png"
     }
   ],
   "theme_color": "#7b13d6",
@@ -55,18 +25,16 @@
   "description": "Gazette Insoumise est un agrégateur de flux qui regroupe les dernières nouvelles des médias alternatifs et indépendants de la gauche de rupture.",
   "screenshots": [
     {
-      "src": "screenshots/phone_screenshot.png",
+      "src": "/screenshots/phone_screenshot.png",
       "sizes": "1290x2796",
       "form_factor": "narrow",
-      "label": "Accueil Gazette LFI sur mobile",
-      "platform": "android"
+      "label": "Accueil Gazette LFI sur mobile"
     },
     {
-      "src": "screenshots/desktop_screenshot.png",
+      "src": "/screenshots/desktop_screenshot.png",
       "sizes": "2541x1354",
       "form_factor": "wide",
-      "label": "Accueil Gazette LFI sur ordinateur",
-      "platform": "windows"
+      "label": "Accueil Gazette LFI sur ordinateur"
     }
   ],
   "prefer_related_applications": false,
