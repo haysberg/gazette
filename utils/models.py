@@ -12,6 +12,10 @@ from utils.logs import logger
 FEED_TIMEOUT = 30
 
 
+class FeedParsingError(Exception):
+	"""Raised when a feed is too malformed to parse."""
+
+
 class Feed(SQLModel, table=True):
 	link: str = Field(primary_key=True)
 	domain: str
@@ -52,7 +56,7 @@ class Feed(SQLModel, table=True):
 				)()
 				logger.warning('Feed has formatting issues', feed=feed_dict['link'], issue=bozo_msg)
 				if not hasattr(data, 'feed') or not data.entries:
-					raise SyntaxError(f'Feed too malformed to parse: {bozo_msg}')
+					raise FeedParsingError(f'Feed too malformed to parse: {bozo_msg}')
 
 			feed = Feed(
 				link=getattr(data.feed, 'link', feed_dict['link']),
@@ -84,7 +88,7 @@ class Feed(SQLModel, table=True):
 		except (ConnectionError, ConnectionResetError, TimeoutError, asyncio.TimeoutError) as e:
 			error_msg = f'Connection error: {e}'
 			logger.error('Connection failed', feed=feed_dict['link'], error=str(e))
-		except SyntaxError as e:
+		except FeedParsingError as e:
 			error_msg = f'Malformed feed: {e}'
 			logger.error('Malformed feed', feed=feed_dict['link'], error=str(e))
 		except Exception as e:
@@ -113,7 +117,8 @@ class Feed(SQLModel, table=True):
 
 		return None
 
-	async def update_posts(self):
+	async def update_posts(self) -> bool:
+		"""Update posts for this feed. Returns True if new content was added."""
 		error_msg = None
 		posts_added = 0
 
@@ -128,7 +133,7 @@ class Feed(SQLModel, table=True):
 			# Handle 304 Not Modified
 			if hasattr(data, 'status') and data.status == 304:
 				logger.debug('Feed not modified, skipping', feed=self.title)
-				return None
+				return False
 
 			if data.bozo:
 				bozo_msg = getattr(
@@ -136,7 +141,7 @@ class Feed(SQLModel, table=True):
 				)()
 				logger.warning('Feed has formatting issues', feed=self.link, issue=bozo_msg)
 				if not data.entries:
-					raise SyntaxError(f'Feed returned no entries due to parsing errors')
+					raise FeedParsingError('Feed returned no entries due to parsing errors')
 
 			with Session(engine) as session:
 				for entry in data.entries:
@@ -207,6 +212,7 @@ class Feed(SQLModel, table=True):
 				try:
 					session.commit()
 					logger.info('Updated posts', feed=self.title, count=posts_added)
+					return posts_added > 0
 				except Exception as commit_exc:
 					logger.error('Session commit failed', feed=self.title, error=str(commit_exc))
 					session.rollback()
@@ -215,7 +221,7 @@ class Feed(SQLModel, table=True):
 		except (ConnectionError, ConnectionResetError, TimeoutError, asyncio.TimeoutError) as e:
 			error_msg = f'Connection error: {e}'
 			logger.error('Connection failed', feed=self.link, error=str(e))
-		except SyntaxError as e:
+		except FeedParsingError as e:
 			error_msg = f'Malformed feed: {e}'
 			logger.error('Malformed feed', feed=self.link, error=str(e))
 		except Exception as e:
@@ -238,7 +244,7 @@ class Feed(SQLModel, table=True):
 			except Exception as db_error:
 				logger.error('Failed to update error state', feed=self.link, error=str(db_error))
 
-		return None
+		return False
 
 
 class Post(SQLModel, table=True):

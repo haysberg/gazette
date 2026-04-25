@@ -1,6 +1,5 @@
 import asyncio
 import signal
-import subprocess
 from datetime import datetime
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -27,8 +26,6 @@ async def main():
 	)
 	scheduler.start()
 
-	# Run static-web-server in a separate process
-	# Use asyncio.to_thread to avoid blocking the event loop
 	loop = asyncio.get_running_loop()
 
 	# Handle graceful shutdown
@@ -42,15 +39,25 @@ async def main():
 	for sig in (signal.SIGTERM, signal.SIGINT):
 		loop.add_signal_handler(sig, shutdown_handler)
 
-	# Start static-web-server in a thread
-	server_process = await asyncio.to_thread(subprocess.Popen, ['/bin/static-web-server'])
+	# Start static-web-server as a monitored async subprocess
+	server_process = await asyncio.create_subprocess_exec('/bin/static-web-server')
+
+	async def monitor_server():
+		"""Shut down the app if the web server exits unexpectedly."""
+		returncode = await server_process.wait()
+		if not stop_event.is_set():
+			logger.error('static-web-server exited unexpectedly', returncode=returncode)
+			stop_event.set()
+
+	monitor_task = asyncio.create_task(monitor_server())
 
 	try:
-		# Wait until shutdown signal
 		await stop_event.wait()
 	finally:
-		server_process.terminate()
-		server_process.wait()
+		if server_process.returncode is None:
+			server_process.terminate()
+			await server_process.wait()
+		monitor_task.cancel()
 		logger.info('Shutdown complete')
 
 

@@ -13,14 +13,23 @@ from utils import HTML_FILE, RSS_FILE, STATIC_DIR, TEMPLATES_DIR, engine
 from utils.logs import logger
 from utils.models import Feed, Post
 
+# Skip feeds that have failed more than this many times in a row
+MAX_CONSECUTIVE_FAILURES = 10
 
-def file_hash(path: str) -> str:
+# Reuse a single Jinja2 environment across updates
+_jinja_env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
+_jinja_env.filters['timeago'] = lambda dt: _timeago(dt)
+
+
+def _file_hash(path: str) -> str:
 	"""Return a short content hash for cache busting."""
 	with open(path, 'rb') as f:
 		return hashlib.md5(f.read()).hexdigest()[:8]
 
-# Skip feeds that have failed more than this many times in a row
-MAX_CONSECUTIVE_FAILURES = 10
+
+# Static asset hashes — these files only change at deploy time
+_css_hash = _file_hash(f'{STATIC_DIR}/css/daisy.min.css')
+_js_hash = _file_hash(f'{STATIC_DIR}/js/index.min.js')
 
 
 async def update_all_posts() -> None:
@@ -41,8 +50,9 @@ async def update_all_posts() -> None:
 		active_feeds.append(feed)
 
 	tasks = [feed.update_posts() for feed in active_feeds]
-	await asyncio.gather(*tasks)
-	logger.info('Finished updating posts.')
+	results = await asyncio.gather(*tasks)
+	has_new_content = any(results)
+	logger.info('Finished updating posts.', new_content=has_new_content)
 
 	# Delete entries older than a week
 	with Session(engine) as session:
@@ -63,10 +73,14 @@ async def update_all_posts() -> None:
 				session.delete(post)
 
 		session.commit()
-	await update_served_files()
+
+	if has_new_content:
+		await update_served_files()
+	else:
+		logger.info('No new content, skipping static file regeneration.')
 
 
-def timeago(dt: datetime) -> str:
+def _timeago(dt: datetime) -> str:
 	delta = datetime.now() - dt
 	seconds = int(delta.total_seconds())
 	if seconds < 60:
@@ -83,9 +97,6 @@ def timeago(dt: datetime) -> str:
 
 async def update_served_files() -> None:
 	logger.info('Generating static files...')
-
-	env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
-	env.filters['timeago'] = timeago
 
 	with Session(engine) as session:
 		# Get posts from the last 24 hours
@@ -111,22 +122,18 @@ async def update_served_files() -> None:
 		# Get all feeds
 		feeds = (session.exec(select(Feed).order_by(Feed.title.desc()))).all()
 
-		# Cache busting hashes for static assets
-		css_hash = file_hash(f'{STATIC_DIR}/css/daisy.min.css')
-		js_hash = file_hash(f'{STATIC_DIR}/js/index.min.js')
-
 		try:
-			template = env.get_template('index.html')
+			template = _jinja_env.get_template('index.html')
 			index_html = template.render(
 				posts_today=posts_today,
 				posts_yesterday=posts_yesterday,
 				feeds=feeds,
 				plus=True,
-				css_hash=css_hash,
-				js_hash=js_hash,
+				css_hash=_css_hash,
+				js_hash=_js_hash,
 			)
 
-			rss_template = env.get_template('feed.xml')
+			rss_template = _jinja_env.get_template('feed.xml')
 			rss_xml = rss_template.render(
 				posts=posts_last24h,
 				build_date=datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0000'),
@@ -161,5 +168,11 @@ async def init_service() -> None:
 		logger.debug('Found feeds', count=len(config_data['feeds']['feedlist']))
 
 	logger.info('Initializing feeds...')
-	tasks = [Feed.init_feed(feed_dict) for feed_dict in config_data['feeds']['feedlist']]
-	await asyncio.gather(*tasks)
+	feedlist = config_data['feeds']['feedlist']
+	tasks = [Feed.init_feed(feed_dict) for feed_dict in feedlist]
+	results = await asyncio.gather(*tasks)
+
+	total = len(feedlist)
+	succeeded = sum(1 for r in results if r is not None)
+	failed = total - succeeded
+	logger.info('Feed initialization complete', total=total, succeeded=succeeded, failed=failed)
