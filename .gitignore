@@ -186,3 +186,4 @@ static/index.json
 static/index.json
 *.gz
 .claude/
+templates/inline_style.html

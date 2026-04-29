@@ -1,0 +1,43 @@
+version: '3'
+
+tasks:
+  default:
+    desc: Run the full build pipeline
+    cmds:
+      - task: deps
+      - task: css
+      - task: favicons
+      - task: icons
+      - task: compress
+      - task: opml
+
+  deps:
+    desc: Update Python and JS dependencies
+    cmds:
+      - uv sync -U
+      - bun update
+
+  css:
+    desc: Build minified Tailwind/DaisyUI CSS
+    cmds:
+      - bunx @tailwindcss/cli -i src/tailwind.css -o static/css/daisy.min.css --minify
+
+  favicons:
+    desc: Download per-feed favicons and convert to AVIF
+    cmds:
+      - uv run ./build_tools/download_images.py
+
+  icons:
+    desc: Convert app icons (PNG -> AVIF)
+    cmds:
+      - uv run ./build_tools/convert_icons.py
+
+  compress:
+    desc: Minify JS/CSS and produce gzip/brotli copies of static assets
+    cmds:
+      - uv run ./build_tools/compress_all.py
+
+  opml:
+    desc: Render feeds.opml and sources.html from gazette.toml
+    cmds:
+      - uv run ./build_tools/generate_opml.py

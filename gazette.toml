@@ -230,6 +230,7 @@ link = "https://revueladeferlante.fr/feed/"
 domain = "revueladeferlante.fr"
 subtitle = "Revue des révolutions féministes"
 image = "https://694359d6.delivery.rocketcdn.me/wp-content/uploads/2021/01/cropped-ld_favicon2-2-300x300.png"
+max_posts = 2
 [[feeds.feedlist]]
 title = "La Brèche"
 link = "https://journal-labreche.fr/feed/"
@@ -266,16 +267,15 @@ link = "https://contre-attaque.net/feed/"
 domain = "contre-attaque.net"
 subtitle = "Média de lutte"
 image = "https://contre-attaque.net/wp-content/uploads/2022/03/cropped-Sans-titre-1-192x192.png"
-# [[feeds.feedlist]]
-# title = "Politis"
-# link = "https://www.politis.fr/flux-rss-apps/"
-# domain = "politis.fr"
-# subtitle = "Hebdomadaire de gauche et d'écologie"
-# image = "https://www.politis.fr/favicon-32x32.png"
-# free_only = true
 [[feeds.feedlist]]
 title = "Hors-Série"
 link = "https://www.hors-serie.net/feed/"
 domain = "hors-serie.net"
 subtitle = "Média de critique culturelle et politique"
 image = "https://www.hors-serie.net/favicon.ico"
+[[feeds.feedlist]]
+title = "Norman Ajari"
+link = "https://normanajari.substack.com/feed"
+domain = "normanajari.substack.com"
+subtitle = "Pensée noire et philosophie décoloniale"
+image = "https://substackcdn.com/icons/substack/apple-touch-icon.png"
