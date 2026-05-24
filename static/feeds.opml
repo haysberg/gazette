@@ -50,6 +50,7 @@
         <outline type="rss" title="Contre Attaque" xmlUrl="https://contre-attaque.net/feed/" htmlUrl="https://contre-attaque.net"/>
         <outline type="rss" title="Hors-Série" xmlUrl="https://www.hors-serie.net/feed/" htmlUrl="https://hors-serie.net"/>
         <outline type="rss" title="Norman Ajari" xmlUrl="https://normanajari.substack.com/feed" htmlUrl="https://normanajari.substack.com"/>
+        <outline type="rss" title="Manuel Bompard" xmlUrl="https://manuelbompard.fr/feed/" htmlUrl="https://manuelbompard.fr"/>
         
     </body>
 </opml>
