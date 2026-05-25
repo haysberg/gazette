@@ -2,6 +2,7 @@ import os
 import tomllib
 from io import BytesIO
 
+import cairosvg
 import requests
 from PIL import Image
 
@@ -23,7 +24,17 @@ with open('gazette.toml', 'rb') as f:
 		try:
 			response = requests.get(feed['image'], timeout=10, headers=headers, stream=True)
 			response.raise_for_status()
-			img_data = BytesIO(response.content)
+			content_type = response.headers.get('Content-Type', '').lower()
+			is_svg = 'svg' in content_type or feed['image'].lower().split('?')[0].endswith('.svg')
+			if is_svg:
+				png_bytes = cairosvg.svg2png(
+					bytestring=response.content,
+					output_width=32,
+					output_height=32,
+				)
+				img_data = BytesIO(png_bytes)
+			else:
+				img_data = BytesIO(response.content)
 			Image.open(img_data).resize((32, 32)).save(image_path, 'AVIF')
 		except Exception as e:
 			print(f'Failed to process favicon for {feed["link"]}: {e}')
