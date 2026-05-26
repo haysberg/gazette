@@ -36,8 +36,8 @@
 
 <div class="flex flex-wrap gap-2 justify-center py-2 mb-2">
     {% with href="https://programme.lafranceinsoumise.fr/", variant="primary",
-    icon_img="/img/programme.avif", label="Le programme", external=true %} {%
-    include "badge.html" %} {% endwith %}
+    icon_img="/img/programme.avif", label="Le programme", external=true,
+    style="background-color: #4C0297; color: #FFFCF4; border-color: #4C0297;" %} {% include "badge.html" %} {% endwith %}
 
     {% with href="https://institutlaboetie.fr/", variant="info",
     icon_img="/img/ilb.avif", label="Institut La Boétie", external=true,
@@ -52,6 +52,18 @@
     icon_img="/img/amfis.avif", label="Amfis 2026", external=true,
     style="background-color: var(--color-secondary-content); color:
     var(--color-secondary);" %} {% include "badge.html" %} {% endwith %}
+
+    {% with href="https://melenchon2027.fr/", variant="primary",
+    icon_img="/img/melenchon2027.avif", label="Mélenchon 2027", external=true %} {%
+    include "badge.html" %} {% endwith %}
+
+    {% with href="https://melenchon2027.fr/livrets-2022/", variant="primary",
+    label="📚 Les Livrets", external=true,
+    style="background-color: #FFFCF4; color: #212320; border-color: #E5DDC8;" %} {% include "badge.html" %} {% endwith %}
+
+    {% with href="https://melenchon2027.fr/plans-2022/", variant="primary",
+    label="🗺️ Les Plans", external=true,
+    style="background-color: #212320; color: #FFFCF4; border-color: #212320;" %} {% include "badge.html" %} {% endwith %}
 
 
     {% with button=true, id="install-button", variant="success",

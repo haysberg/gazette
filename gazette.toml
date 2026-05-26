@@ -78,6 +78,12 @@ title = "La France Insoumise"
 subtitle = "Mouvement politique"
 image = "https://lafranceinsoumise.fr/wp-content/uploads/2024/11/cropped-TOUT-PETIT-LOGO-32x32.png"
 [[feeds.feedlist]]
+link = "https://desintox.lafranceinsoumise.fr/feed/"
+domain = "desintox.lafranceinsoumise.fr"
+title = "Desintox"
+subtitle = "Répondre aux idées reçues et décrypter l'actualité et les programmes politiques"
+image = "https://desintox.lafranceinsoumise.fr/wp-content/uploads/2025/06/cropped-FaviconBON-32x32.png"
+[[feeds.feedlist]]
 link = "https://leftalliance.eu/feed/"
 domain = "leftalliance.eu"
 title = "EU LEFT Alliance"
