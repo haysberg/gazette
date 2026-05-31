@@ -31,6 +31,9 @@ def _file_hash(path: str) -> str:
 _css_hash = _file_hash(f'{STATIC_DIR}/css/daisy.min.css')
 _js_hash = _file_hash(f'{STATIC_DIR}/js/index.min.js')
 
+with open(f'{STATIC_DIR}/csp-hash.txt') as _csp_file:
+	_csp_hash = _csp_file.read().strip()
+
 
 async def update_all_posts() -> None:
 	logger.info('Updating posts')
@@ -131,6 +134,9 @@ async def update_served_files() -> None:
 				plus=True,
 				css_hash=_css_hash,
 				js_hash=_js_hash,
+				canonical_url='https://insoumis.news/',
+				csp_hash=_csp_hash,
+				is_home=True,
 			)
 
 			rss_template = _jinja_env.get_template('feed.xml')
@@ -139,7 +145,9 @@ async def update_served_files() -> None:
 				build_date=datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0000'),
 			)
 
-			index_html = minify_html.minify(index_html, minify_css=True, minify_js=True)
+			# minify_css must stay False: the inline <style> block is already compressed,
+			# and re-minifying it would change the bytes and invalidate the CSP sha256.
+			index_html = minify_html.minify(index_html, minify_css=False, minify_js=True)
 			rss_xml = minify_html.minify(rss_xml)
 
 			logger.debug('Pages rendered successfully')

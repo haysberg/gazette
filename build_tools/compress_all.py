@@ -1,4 +1,5 @@
 # Replaces the original file with the minified version
+import base64
 import gzip
 import hashlib
 import os
@@ -33,6 +34,10 @@ with open('static/css/style.css', 'r') as css_file:
 	# Generate inline style template for embedding in <head>
 	with open('templates/inline_style.html', 'w') as inline_file:
 		inline_file.write(f'<style>{compressed_css}</style>')
+	# CSP hash of inline style — content only, no <style> tags
+	csp_hash = base64.b64encode(hashlib.sha256(compressed_css.encode()).digest()).decode()
+	with open('static/csp-hash.txt', 'w') as csp_file:
+		csp_file.write(f'sha256-{csp_hash}')
 
 for root, dirs, files in os.walk('static'):
 	for file in files:

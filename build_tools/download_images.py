@@ -10,32 +10,36 @@ headers = {
 	'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
 }
 
+SMALL_SIZE = (32, 32)
+LARGE_MAX = (192, 192)
+
 with open('gazette.toml', 'rb') as f:
 	content = f.read()
 	config_data = tomllib.loads(content.decode('utf-8'))
 	print(f'Found {len(config_data["feeds"]["feedlist"])} feeds in config.')
 	for feed in config_data['feeds']['feedlist']:
-		image_path = os.path.join(
-			'static',
-			'favicons',
-			f'{feed["domain"]}.avif',
-		)
-		os.makedirs(os.path.dirname(image_path), exist_ok=True)
+		domain = feed['domain']
+		small_path = os.path.join('static', 'favicons', f'{domain}.avif')
+		large_path = os.path.join('static', 'favicons', f'{domain}-large.avif')
+		os.makedirs(os.path.dirname(small_path), exist_ok=True)
 		try:
-			response = requests.get(feed['image'], timeout=10, headers=headers, stream=True)
+			response = requests.get(feed['image'], timeout=10, headers=headers)
 			response.raise_for_status()
+			raw = response.content
 			content_type = response.headers.get('Content-Type', '').lower()
 			is_svg = 'svg' in content_type or feed['image'].lower().split('?')[0].endswith('.svg')
 			if is_svg:
-				png_bytes = cairosvg.svg2png(
-					bytestring=response.content,
-					output_width=32,
-					output_height=32,
-				)
-				img_data = BytesIO(png_bytes)
+				# SVG is vector — render at each target size for crisp output
+				png_small = cairosvg.svg2png(bytestring=raw, output_width=SMALL_SIZE[0], output_height=SMALL_SIZE[1])
+				Image.open(BytesIO(png_small)).save(small_path, 'AVIF')
+				png_large = cairosvg.svg2png(bytestring=raw, output_width=LARGE_MAX[0], output_height=LARGE_MAX[1])
+				Image.open(BytesIO(png_large)).save(large_path, 'AVIF')
 			else:
-				img_data = BytesIO(response.content)
-			Image.open(img_data).resize((32, 32)).save(image_path, 'AVIF')
+				# Raster: 32×32 for posts; thumbnail preserves aspect and never upscales for sources
+				Image.open(BytesIO(raw)).resize(SMALL_SIZE).save(small_path, 'AVIF')
+				img_large = Image.open(BytesIO(raw))
+				img_large.thumbnail(LARGE_MAX, Image.Resampling.LANCZOS)
+				img_large.save(large_path, 'AVIF')
 		except Exception as e:
 			print(f'Failed to process favicon for {feed["link"]}: {e}')
 # Count all .avif images in static/favicons

@@ -1,0 +1,43 @@
+{% autoescape false -%}
+# Gazette Insoumise
+
+> Agrégateur de flux RSS de la presse alternative et indépendante de la gauche de rupture, principalement française et européenne.
+
+La Gazette Insoumise regroupe les dernières publications de médias alternatifs et indépendants. Le site est statique, sans cookie, sans collecte de données personnelles. Le code source est public sur GitHub.
+
+- URL canonique : https://insoumis.news/
+- Code source : https://github.com/haysberg/gazette
+- Licence : voir LICENSE dans le dépôt
+
+---
+
+## Pages
+
+- [Accueil](https://insoumis.news/) — articles agrégés des 24-48 dernières heures
+- [Sources](https://insoumis.news/sources.html) — catalogue des médias agrégés
+- [Flux RSS](https://insoumis.news/feed.xml) — agrégation au format RSS
+- [Fichier OPML](https://insoumis.news/feeds.opml) — import en bloc dans un lecteur RSS
+- [Confidentialité](https://insoumis.news/privacy.html) — politique de confidentialité
+
+---
+
+## Sources agrégées ({{ feeds|length }})
+
+Liste complète des médias agrégés. Le flux RSS unifié est régénéré toutes les 15 minutes.
+
+{% for feed in feeds %}
+### {{ feed.title }}
+
+- Site : https://{{ feed.domain }}
+- Flux RSS source : {{ feed.link }}
+{%- if feed.subtitle %}
+- Description : {{ feed.subtitle }}
+{%- endif %}
+
+{% endfor %}
+---
+
+## Articles en direct
+
+Les articles eux-mêmes ne sont pas inclus dans ce dump car ils changent toutes les 15 minutes. Récupérez-les via le flux RSS unifié : https://insoumis.news/feed.xml
+{%- endautoescape %}

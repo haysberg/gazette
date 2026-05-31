@@ -10,13 +10,13 @@
         <outline type="rss" title="JLM Le blog" xmlUrl="https://melenchon.fr/feed/" htmlUrl="https://melenchon.fr"/>
         <outline type="rss" title="Afrique XXI" xmlUrl="https://afriquexxi.info/?page=backend&amp;lang=fr" htmlUrl="https://afriquexxi.info"/>
         <outline type="rss" title="Frustration Magazine" xmlUrl="https://www.frustrationmagazine.fr/feed.xml" htmlUrl="https://frustrationmagazine.fr"/>
-        <outline type="rss" title="Ballast" xmlUrl="https://www.revue-ballast.fr/feed/" htmlUrl="https://revue-ballast.fr"/>
         <outline type="rss" title="Orient XXI" xmlUrl="https://orientxxi.info/?page=backend&amp;lang=fr" htmlUrl="https://orientxxi.info"/>
         <outline type="rss" title="Survie" xmlUrl="https://survie.org/spip.php?page=backend" htmlUrl="https://survie.org"/>
         <outline type="rss" title="Révolution Permanente" xmlUrl="https://www.revolutionpermanente.fr/spip.php?page=backend&amp;id_mot=5" htmlUrl="https://revolutionpermanente.fr"/>
         <outline type="rss" title="StreetPress" xmlUrl="https://backend.streetpress.com/rss.xml" htmlUrl="https://streetpress.com"/>
         <outline type="rss" title="Le STRASS" xmlUrl="https://strass-syndicat.org/feed/" htmlUrl="https://strass-syndicat.org"/>
         <outline type="rss" title="La France Insoumise" xmlUrl="https://lafranceinsoumise.fr/feed/" htmlUrl="https://lafranceinsoumise.fr"/>
+        <outline type="rss" title="Desintox" xmlUrl="https://desintox.lafranceinsoumise.fr/feed/" htmlUrl="https://desintox.lafranceinsoumise.fr"/>
         <outline type="rss" title="EU LEFT Alliance" xmlUrl="https://leftalliance.eu/feed/" htmlUrl="https://leftalliance.eu"/>
         <outline type="rss" title="Institut La Boétie" xmlUrl="https://institutlaboetie.fr/feed/" htmlUrl="https://institutlaboetie.fr"/>
         <outline type="rss" title="Arrêt sur Images" xmlUrl="https://api.arretsurimages.net/api/public/rss/all-content" htmlUrl="https://arretsurimages.net"/>
@@ -52,6 +52,7 @@
         <outline type="rss" title="Norman Ajari" xmlUrl="https://normanajari.substack.com/feed" htmlUrl="https://normanajari.substack.com"/>
         <outline type="rss" title="Manuel Bompard" xmlUrl="https://manuelbompard.fr/feed/" htmlUrl="https://manuelbompard.fr"/>
         <outline type="rss" title="Problematik" xmlUrl="https://www.problematik-media.com/feed.xml" htmlUrl="https://www.problematik-media.com"/>
+        <outline type="rss" title="Mathilde Panot" xmlUrl="https://mathildepanot.fr/feed/" htmlUrl="https://mathildepanot.fr"/>
         
     </body>
 </opml>

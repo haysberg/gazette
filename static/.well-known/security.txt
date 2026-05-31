@@ -1,0 +1,4 @@
+Contact: https://github.com/haysberg/gazette/security/advisories/new
+Expires: 2027-05-31T00:00:00.000Z
+Preferred-Languages: fr, en
+Canonical: https://insoumis.news/.well-known/security.txt

@@ -30,6 +30,29 @@
     font-display: swap;
 }
 
+html {
+    scrollbar-gutter: stable;
+}
+
+.skip-link {
+    position: absolute;
+    left: 0.5rem;
+    top: -3rem;
+    z-index: 2000;
+    padding: 0.5rem 1rem;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: top 0.15s ease-in-out;
+}
+
+.skip-link:focus {
+    top: 0.5rem;
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
 :root {
     --color-base-100: #faf9f6;
     --color-base-content: oklch(21% 0.006 285.885);
@@ -73,6 +96,18 @@
 
 .navbar * {
     animation: slideInFromLeft 0.8s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar *,
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 /*VBVJOR*/

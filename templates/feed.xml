@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Gazette Insoumise</title>
-		<link>https://gazette.music</link>
+		<link>https://insoumis.news</link>
 		<description>Agregateur de flux RSS de la presse alternative francophone</description>
 		<language>fr</language>
 		<lastBuildDate>{{ build_date }}</lastBuildDate>
-		<atom:link href="https://gazette.music/feed.xml" rel="self" type="application/rss+xml"/>
+		<atom:link href="https://insoumis.news/feed.xml" rel="self" type="application/rss+xml"/>
 		{% for post in posts %}
 		<item>
 			<title>{{ post.title | e }}</title>

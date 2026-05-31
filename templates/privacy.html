@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+    {% include "head.html" %}
+    <body
+        class="bg-color-base-100 font-sans min-h-screen flex flex-col bg-slate-50"
+    >
+        {% include "navbar.html" %}
+        <div class="w-full max-w-screen-xl m-auto px-2 flex-grow">
+            <main id="main-content" class="prose max-w-3xl mx-auto py-6">
+                <h2 class="text-2xl font-bold mb-4">Politique de confidentialité</h2>
+                <p class="mb-4">
+                    La Gazette Insoumise est un agrégateur de presse statique
+                    qui ne collecte aucune donnée personnelle identifiable.
+                    Cette page récapitule ce qui se passe (et surtout ce qui
+                    ne se passe pas) quand vous nous rendez visite.
+                </p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">Cookies</h3>
+                <p class="mb-4">
+                    Aucun cookie n'est déposé par la Gazette. La PWA stocke
+                    localement, dans votre navigateur, les ressources
+                    statiques nécessaires au fonctionnement hors-ligne (CSS,
+                    JS, icônes) via le <em>service worker</em>. Ces données
+                    ne quittent jamais votre appareil.
+                </p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">Mesure d'audience</h3>
+                <p class="mb-4">
+                    Nous utilisons <a class="link link-primary" href="https://www.goatcounter.com/help/privacy" target="_blank" rel="noopener">GoatCounter</a>,
+                    un service analytique respectueux de la vie privée :
+                    aucun cookie, pas d'empreinte de navigateur, pas
+                    d'adresse IP individuelle conservée. Seules sont
+                    enregistrées des informations agrégées (page consultée,
+                    site référent, pays, catégorie de navigateur). Vous
+                    pouvez désactiver le suivi via l'en-tête
+                    <code>DNT</code> ou
+                    <code>Sec-GPC: 1</code> (Global Privacy Control), qui
+                    sont respectés.
+                </p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">Sites tiers</h3>
+                <p class="mb-4">
+                    Les articles agrégés pointent vers des sites
+                    indépendants ayant chacun leur propre politique. Cliquer
+                    sur un titre vous fait quitter la Gazette : nous ne
+                    contrôlons pas ce que ces sites peuvent faire.
+                </p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">Code source</h3>
+                <p class="mb-4">
+                    L'intégralité du code est publique sur
+                    <a class="link link-primary" href="https://github.com/haysberg/gazette" target="_blank" rel="noopener">GitHub</a>.
+                    N'importe qui peut vérifier le comportement réel du
+                    site.
+                </p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">Contact</h3>
+                <p class="mb-4">
+                    Pour signaler un problème de sécurité ou de
+                    confidentialité, ouvrez un
+                    <a class="link link-primary" href="https://github.com/haysberg/gazette/security/advisories/new" target="_blank" rel="noopener">Security Advisory sur GitHub</a>.
+                </p>
+            </main>
+        </div>
+        {% include "footer.html" %}
+        <script
+            data-goatcounter="https://insoumis.goatcounter.com/count"
+            async
+            src="https://gc.zgo.at/count.js"
+        ></script>
+    </body>
+</html>

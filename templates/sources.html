@@ -6,7 +6,7 @@
     >
         {% include "navbar.html" %}
         <div class="w-full max-w-screen-xl m-auto px-2 flex-grow">
-            <main>
+            <main id="main-content">
                 <h2 class="text-2xl font-bold mb-4">Liste des sources</h2>
                 <p class="mb-6 text-base-content/70">
                     La Gazette Insoumise agrège les flux RSS de {{ feeds|length
@@ -20,7 +20,7 @@
                         href="https://{{ feed.domain }}"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="card card-border bg-base-100 hover:bg-base-200 transition-colors"
+                        class="card card-border bg-base-100 hover:shadow-lg hover:-translate-y-0.5 transition-all"
                     >
                         <div
                             class="card-body p-4 flex flex-row items-center gap-4"
@@ -28,8 +28,11 @@
                             <div class="avatar">
                                 <div class="w-12 rounded">
                                     <img
-                                        src="/favicons/{{ feed.domain }}.avif"
+                                        src="/favicons/{{ feed.domain }}-large.avif"
                                         alt="Logo {{ feed.title }}"
+                                        loading="lazy"
+                                        width="48"
+                                        height="48"
                                     />
                                 </div>
                             </div>

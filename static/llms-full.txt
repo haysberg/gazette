@@ -1,0 +1,375 @@
+# Gazette Insoumise
+
+> Agrégateur de flux RSS de la presse alternative et indépendante de la gauche de rupture, principalement française et européenne.
+
+La Gazette Insoumise regroupe les dernières publications de médias alternatifs et indépendants. Le site est statique, sans cookie, sans collecte de données personnelles. Le code source est public sur GitHub.
+
+- URL canonique : https://insoumis.news/
+- Code source : https://github.com/haysberg/gazette
+- Licence : voir LICENSE dans le dépôt
+
+---
+
+## Pages
+
+- [Accueil](https://insoumis.news/) — articles agrégés des 24-48 dernières heures
+- [Sources](https://insoumis.news/sources.html) — catalogue des médias agrégés
+- [Flux RSS](https://insoumis.news/feed.xml) — agrégation au format RSS
+- [Fichier OPML](https://insoumis.news/feeds.opml) — import en bloc dans un lecteur RSS
+- [Confidentialité](https://insoumis.news/privacy.html) — politique de confidentialité
+
+---
+
+## Sources agrégées (49)
+
+Liste complète des médias agrégés. Le flux RSS unifié est régénéré toutes les 15 minutes.
+
+
+### Contretemps
+
+- Site : https://contretemps.eu
+- Flux RSS source : https://www.contretemps.eu/rss
+- Description : Revue de critique communiste
+
+
+### Spectre
+
+- Site : https://spectremedia.org
+- Flux RSS source : https://spectremedia.org/feed/podcast/
+- Description : Média de podcasts engagés
+
+
+### L'Insoumission
+
+- Site : https://linsoumission.fr
+- Flux RSS source : https://linsoumission.fr/feed/
+- Description : Le média de la France Insoumise
+
+
+### JLM Le blog
+
+- Site : https://melenchon.fr
+- Flux RSS source : https://melenchon.fr/feed/
+- Description : Le blog de Jean-Luc Mélenchon
+
+
+### Afrique XXI
+
+- Site : https://afriquexxi.info
+- Flux RSS source : https://afriquexxi.info/?page=backend&lang=fr
+- Description : Média indépendant sur l'actualité africaine
+
+
+### Frustration Magazine
+
+- Site : https://frustrationmagazine.fr
+- Flux RSS source : https://www.frustrationmagazine.fr/feed.xml
+- Description : Magazine de critique sociale
+
+
+### Orient XXI
+
+- Site : https://orientxxi.info
+- Flux RSS source : https://orientxxi.info/?page=backend&lang=fr
+- Description : Média indépendant sur le Moyen-Orient et le monde
+
+
+### Survie
+
+- Site : https://survie.org
+- Flux RSS source : https://survie.org/spip.php?page=backend
+- Description : Association de lutte contre la Françafrique et le néocolonialisme
+
+
+### Révolution Permanente
+
+- Site : https://revolutionpermanente.fr
+- Flux RSS source : https://www.revolutionpermanente.fr/spip.php?page=backend&id_mot=5
+- Description : Média anticapitaliste
+
+
+### StreetPress
+
+- Site : https://streetpress.com
+- Flux RSS source : https://backend.streetpress.com/rss.xml
+- Description : Enquêtes et reportages de terrain
+
+
+### Le STRASS
+
+- Site : https://strass-syndicat.org
+- Flux RSS source : https://strass-syndicat.org/feed/
+- Description : Syndicat du travail sexuel
+
+
+### La France Insoumise
+
+- Site : https://lafranceinsoumise.fr
+- Flux RSS source : https://lafranceinsoumise.fr/feed/
+- Description : Mouvement politique
+
+
+### Desintox
+
+- Site : https://desintox.lafranceinsoumise.fr
+- Flux RSS source : https://desintox.lafranceinsoumise.fr/feed/
+- Description : Répondre aux idées reçues et décrypter l'actualité et les programmes politiques
+
+
+### EU LEFT Alliance
+
+- Site : https://leftalliance.eu
+- Flux RSS source : https://leftalliance.eu/feed/
+- Description : Alliance de la gauche au Parlement européen
+
+
+### Institut La Boétie
+
+- Site : https://institutlaboetie.fr
+- Flux RSS source : https://institutlaboetie.fr/feed/
+- Description : Institut de formation politique
+
+
+### Arrêt sur Images
+
+- Site : https://arretsurimages.net
+- Flux RSS source : https://api.arretsurimages.net/api/public/rss/all-content
+- Description : Critique des médias et décryptage de l'information
+
+
+### Informations Ouvrières
+
+- Site : https://infos-ouvrieres.fr
+- Flux RSS source : https://infos-ouvrieres.fr/feed/
+- Description : Presse du Parti ouvrier indépendant
+
+
+### Acrimed
+
+- Site : https://acrimed.org
+- Flux RSS source : https://www.acrimed.org/spip.php?page=backend
+- Description : Observatoire critique des médias
+
+
+### Ouvrage
+
+- Site : https://revue-ouvrage.org
+- Flux RSS source : https://www.revue-ouvrage.org/feed/
+- Description : Revue de sciences sociales et politiques
+
+
+### Socialter
+
+- Site : https://socialter.fr
+- Flux RSS source : https://www.socialter.fr/rss
+- Description : Critique radicale et alternatives
+
+
+### Basta!
+
+- Site : https://basta.media
+- Flux RSS source : https://basta.media/spip.php?page=backend
+- Description : Média indépendant sur les questions sociales et environnementales
+
+
+### Disclose
+
+- Site : https://disclose.ngo
+- Flux RSS source : https://disclose.ngo/feed/
+- Description : Média d'investigation à but non lucratif
+
+
+### Reporterre
+
+- Site : https://reporterre.net
+- Flux RSS source : https://reporterre.net/spip.php?page=backend-simple
+- Description : Le quotidien de l'écologie
+
+
+### AlterÉco
+
+- Site : https://alternatives-economiques.fr
+- Flux RSS source : https://www.alternatives-economiques.fr/rss.xml
+- Description : L'économie autrement
+
+
+### Rapports de force
+
+- Site : https://rapportsdeforce.fr
+- Flux RSS source : https://rapportsdeforce.fr/feed
+- Description : Média sur les luttes sociales et les mouvements sociaux
+
+
+### L214
+
+- Site : https://l214.com
+- Flux RSS source : https://www.l214.com/feed/
+- Description : Association de défense des animaux
+
+
+### L'Amorce
+
+- Site : https://lamorce.co
+- Flux RSS source : https://lamorce.co/feed/
+- Description : Revue contre l'exploitation animale et pour l'égalité politique
+
+
+### Oxfam France
+
+- Site : https://oxfamfrance.org
+- Flux RSS source : https://www.oxfamfrance.org/feed/
+- Description : ONG de lutte contre les inégalités et la pauvreté
+
+
+### Attac
+
+- Site : https://france.attac.org
+- Flux RSS source : https://france.attac.org/spip.php?page=backend
+- Description : Association pour la taxation des transactions financières et pour l'action citoyenne
+
+
+### #AuPoste
+
+- Site : https://auposte.fr
+- Flux RSS source : https://auposte.media/emissions.xml
+- Description : Média indépendant de David Dufresne
+
+
+### Off Investigation
+
+- Site : https://off-investigation.fr
+- Flux RSS source : https://www.off-investigation.fr/feed/
+- Description : Média d'investigation indépendant
+
+
+### Observatoire des multinationales
+
+- Site : https://multinationales.org
+- Flux RSS source : https://multinationales.org/fr/page/backend
+- Description : Enquêtes sur les grandes entreprises et leurs impacts
+
+
+### Bondy Blog
+
+- Site : https://bondyblog.fr
+- Flux RSS source : https://www.bondyblog.fr/feed/
+- Description : Média des quartiers populaires
+
+
+### Histoires Crépues
+
+- Site : https://histoirescrepues.fr
+- Flux RSS source : https://histoirescrepues.fr/latest/rss/
+- Description : Média afrodescendant
+
+
+### INDEX
+
+- Site : https://index.ngo
+- Flux RSS source : https://www.index.ngo/rubrique/enquetes/feed/
+- Description : ONG d'investigation sur les violences d'État
+
+
+### La Quadrature du Net
+
+- Site : https://laquadrature.net
+- Flux RSS source : https://www.laquadrature.net/feed/
+- Description : Défense des libertés fondamentales dans l'environnement numérique
+
+
+### Le Mouton Numérique
+
+- Site : https://mouton-numerique.org
+- Flux RSS source : https://mouton-numerique.org/feed/
+- Description : Réflexion critique sur le numérique et ses impacts
+
+
+### La Déferlante
+
+- Site : https://revueladeferlante.fr
+- Flux RSS source : https://revueladeferlante.fr/feed/
+- Description : Revue des révolutions féministes
+
+
+### La Brèche
+
+- Site : https://journal-labreche.fr
+- Flux RSS source : https://journal-labreche.fr/feed/
+- Description : Journal d'investigation au service de l'intérêt général
+
+
+### Synth.
+
+- Site : https://synthmedia.fr
+- Flux RSS source : https://synthmedia.fr/feed/
+- Description : Média de synthèse de l'actualité politique
+
+
+### STUP.MEDIA
+
+- Site : https://stup.media
+- Flux RSS source : https://stup.media/feed/
+- Description : Média d'investigation marseillais
+
+
+### Lisbeth
+
+- Site : https://lisbethmedia.com
+- Flux RSS source : https://lisbethmedia.com/feed
+- Description : Média féministe
+
+
+### Mouvements
+
+- Site : https://mouvements.info
+- Flux RSS source : https://mouvements.info/feed
+- Description : Revue de réflexion sur les luttes sociales et politiques
+
+
+### Contre Attaque
+
+- Site : https://contre-attaque.net
+- Flux RSS source : https://contre-attaque.net/feed/
+- Description : Média de lutte
+
+
+### Hors-Série
+
+- Site : https://hors-serie.net
+- Flux RSS source : https://www.hors-serie.net/feed/
+- Description : Média de critique culturelle et politique
+
+
+### Norman Ajari
+
+- Site : https://normanajari.substack.com
+- Flux RSS source : https://normanajari.substack.com/feed
+- Description : Pensée noire et philosophie décoloniale
+
+
+### Manuel Bompard
+
+- Site : https://manuelbompard.fr
+- Flux RSS source : https://manuelbompard.fr/feed/
+- Description : Le blog officiel de Manuel Bompard
+
+
+### Problematik
+
+- Site : https://www.problematik-media.com
+- Flux RSS source : https://www.problematik-media.com/feed.xml
+- Description : Problematik est un media queer indépendant.
+
+
+### Mathilde Panot
+
+- Site : https://mathildepanot.fr
+- Flux RSS source : https://mathildepanot.fr/feed/
+- Description : Le blog officiel de Mathilde Panot
+
+
+---
+
+## Articles en direct
+
+Les articles eux-mêmes ne sont pas inclus dans ce dump car ils changent toutes les 15 minutes. Récupérez-les via le flux RSS unifié : https://insoumis.news/feed.xml

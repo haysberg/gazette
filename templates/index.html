@@ -6,7 +6,7 @@
     >
         {% include "navbar.html" %}
         <div class="w-full max-w-screen-xl m-auto px-2 flex-grow">
-            <main>
+            <main id="main-content">
                 {% if posts_today is defined and posts_today|length > 0 %} {%
                 with %} {% set articles=posts_today %} {% include "posts.html"
                 %} {% endwith %} {% endif %} {% if posts_yesterday is defined

@@ -1,0 +1,20 @@
+# Gazette Insoumise
+
+> Agrégateur de flux RSS de la presse alternative et indépendante de la gauche de rupture, principalement française et européenne. Plus de 45 sources, mises à jour toutes les 15 minutes.
+
+La Gazette Insoumise est un site statique pré-généré qui regroupe les dernières publications de médias alternatifs et indépendants. Le projet s'adresse principalement à des militants et sympathisants de la France Insoumise et plus largement de la gauche de rupture.
+
+Le code source est ouvert et disponible sur GitHub.
+
+## Contenu principal
+
+- [Accueil — articles du jour et de la veille](https://insoumis.news/): page d'accueil listant tous les articles agrégés des dernières 24-48 heures
+- [Liste des sources](https://insoumis.news/sources.html): catalogue complet des médias agrégés avec leur domaine et description
+- [Flux RSS agrégé](https://insoumis.news/feed.xml): flux RSS unifié de toutes les sources, pour consultation depuis un lecteur RSS externe
+- [Fichier OPML](https://insoumis.news/feeds.opml): import en un clic de toutes les sources dans un lecteur RSS
+
+## Métadonnées
+
+- [Sitemap](https://insoumis.news/sitemap.xml)
+- [Manifest PWA](https://insoumis.news/manifest.json)
+- [Code source](https://github.com/haysberg/gazette)
