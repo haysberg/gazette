@@ -5,9 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "aiofiles>=24.1.0",
     "apscheduler>=3.11.0",
+    "brotli>=1.2.0",
     "feedparser>=6.0.11",
+    "httpx>=0.28.1",
     "jinja2>=3.1.6",
     "minify-html>=0.18.1",
     "sqlmodel>=0.0.24",
@@ -15,8 +16,14 @@ dependencies = [
 ]
 
 [dependency-groups]
+# Everything the deploy-time build needs, and nothing more: both are pure Python,
+# so a VPS never needs cairo or libjpeg. Pillow and cairosvg live in `dev` because
+# they only regenerate icons and favicons, and those outputs are committed.
+build = [
+    "csscompressor>=0.9.5",
+    "jsmin>=3.0.1",
+]
 dev = [
-    "brotli>=1.2.0",
     "cairosvg>=2.7.1",
     "csscompressor>=0.9.5",
     "jsmin>=3.0.1",

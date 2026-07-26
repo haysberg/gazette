@@ -1,0 +1,62 @@
+# Gazette feed aggregator — systemd unit for a VPS deployment without Docker.
+#
+# This runs the scheduler only: GAZETTE_SERVE_STATIC=0 stops the process from
+# spawning the bundled static-web-server, because Caddy serves /opt/gazette/static
+# instead. Install to /etc/systemd/system/gazette.service.
+
+[Unit]
+Description=Gazette RSS aggregator
+Documentation=https://github.com/haysberg/gazette
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=gazette
+Group=gazette
+WorkingDirectory=/opt/gazette
+
+# Paths default to ./static and ./templates relative to WorkingDirectory. Keeping
+# the static dir inside the checkout matters: the app reads the built assets from
+# it at import (css/daisy.min.css, js/index.min.js, csp-hash.txt) as well as
+# writing the rendered pages into it.
+Environment=GAZETTE_SERVE_STATIC=0
+Environment=TZ=Europe/Paris
+
+# ProtectSystem=strict leaves the checkout read-only, so Python cannot drop
+# __pycache__ next to its sources. It degrades silently, but disabling bytecode
+# writing keeps it from retrying on every start; site-packages are already
+# compiled by `uv sync --compile-bytecode`.
+Environment=PYTHONDONTWRITEBYTECODE=1
+
+ExecStart=/opt/gazette/.venv/bin/python3 app.py
+
+Restart=always
+RestartSec=10s
+
+# The feed database is in-memory, so a restart refetches all feeds (~6s) and
+# re-renders the pages before the scheduler's first interval fire.
+TimeoutStopSec=30s
+
+# Hardening. ProtectSystem=strict makes the whole filesystem read-only, so the
+# static directory has to be granted back explicitly — that is where the rendered
+# pages and their .br/.gz siblings are written.
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictNamespaces=true
+LockPersonality=true
+ReadWritePaths=/opt/gazette/static
+
+# Peak measured at ~170 MiB while fetching all 49 feeds concurrently. This is a
+# ceiling, not a reservation.
+MemoryMax=400M
+
+[Install]
+WantedBy=multi-user.target

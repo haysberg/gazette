@@ -3,13 +3,13 @@ import hashlib
 import tomllib
 from datetime import datetime, timedelta
 
-import aiofiles
 import minify_html
 from jinja2 import Environment, FileSystemLoader
 from sqlalchemy.orm import selectinload
 from sqlmodel import Session, delete, select
 
-from utils import HTML_FILE, RSS_FILE, STATIC_DIR, TEMPLATES_DIR, engine
+from precompress import write_compressed
+from utils import CONFIG_FILE, HTML_FILE, RSS_FILE, STATIC_DIR, TEMPLATES_DIR, engine
 from utils.logs import logger
 from utils.models import Feed, Post
 
@@ -148,20 +148,27 @@ async def update_served_files() -> None:
 			# minify_css must stay False: the inline <style> block is already compressed,
 			# and re-minifying it would change the bytes and invalidate the CSP sha256.
 			index_html = minify_html.minify(index_html, minify_css=False, minify_js=True)
-			rss_xml = minify_html.minify(rss_xml)
+
+			# The RSS feed is deliberately NOT minified: minify_html applies HTML rules
+			# to XML, which unquotes attributes (version=2.0), lowercases tags
+			# (lastBuildDate) and drops </link> because <link> is a void HTML element.
+			# That produced a feed that was not well-formed XML. Brotli already squeezes
+			# out the whitespace, so there is nothing to gain here.
 
 			logger.debug('Pages rendered successfully')
 		except Exception as e:
 			logger.error('Failed to render template', error=str(e))
 			return
 
+	# Write each page with its brotli/gzip siblings. Without them the web server
+	# compresses the homepage and the RSS feed from scratch on every single
+	# request; here it is paid once per regeneration. Brotli q11 is CPU-bound, so
+	# it goes to a thread rather than stalling the scheduler's event loop.
 	try:
-		async with aiofiles.open(HTML_FILE, 'w') as f:
-			await f.write(index_html)
+		await asyncio.to_thread(write_compressed, HTML_FILE, index_html)
 		logger.debug('HTML file saved', path=HTML_FILE)
 
-		async with aiofiles.open(RSS_FILE, 'w') as f:
-			await f.write(rss_xml)
+		await asyncio.to_thread(write_compressed, RSS_FILE, rss_xml)
 		logger.debug('RSS feed saved', path=RSS_FILE)
 
 	except Exception as e:
@@ -171,7 +178,7 @@ async def update_served_files() -> None:
 
 
 async def init_service() -> None:
-	with open('gazette.toml', 'rb') as f:
+	with open(CONFIG_FILE, 'rb') as f:
 		config_data = tomllib.load(f)
 		logger.debug('Found feeds', count=len(config_data['feeds']['feedlist']))
 
@@ -184,3 +191,8 @@ async def init_service() -> None:
 	succeeded = sum(1 for r in results if r is not None)
 	failed = total - succeeded
 	logger.info('Feed initialization complete', total=total, succeeded=succeeded, failed=failed)
+
+	# init_feed already stored the entries from its own fetch, so the pages can be
+	# rendered right away. The scheduler's first run is therefore one interval out
+	# instead of immediately re-fetching every feed.
+	await update_served_files()

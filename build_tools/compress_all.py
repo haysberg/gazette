@@ -3,6 +3,7 @@ import base64
 import gzip
 import hashlib
 import os
+import re
 
 import brotli
 
@@ -22,7 +23,14 @@ with open('static/sw.js') as sw_file:
 		with open(asset_path, 'rb') as af:
 			content_to_hash += af.read()
 	cache_hash = hashlib.md5(content_to_hash).hexdigest()[:8]
-	sw_content = sw_content.replace('CACHE_PLACEHOLDER', f'gazette-{cache_hash}')
+	# This script rewrites static/sw.js in place, so on any checkout that has been
+	# built once the placeholder is already gone and a plain replace() silently does
+	# nothing — freezing the cache name and leaving returning PWA users on stale
+	# CSS/JS forever. Match an already-injected name too so the build stays correct
+	# whether it runs on a pristine or a previously built tree.
+	sw_content = re.sub(
+		r'CACHE_PLACEHOLDER|gazette-[0-9a-f]{8}', f'gazette-{cache_hash}', sw_content
+	)
 	minified_sw = jsmin(sw_content)
 	with open('static/sw.js', 'w') as sw_out:
 		sw_out.write(minified_sw)

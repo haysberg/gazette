@@ -1,0 +1,49 @@
+# Gazette — Caddy site config for a bare-metal / VPS deployment.
+#
+# The gazette service pre-renders every page; Caddy only ever reads files. Because
+# each page is written together with .br and .gz siblings, `precompressed` lets
+# Caddy hand those bytes straight to the client and never compress a response
+# itself — the homepage and the RSS feed included. There is deliberately no
+# `encode` directive: adding one would compress on the fly per request, which is
+# exactly the cost this setup removes.
+#
+# Replace the site address with your own domain. Caddy provisions TLS automatically.
+
+insoumis.news {
+	root * /opt/gazette/static
+
+	# Security headers on every response (mirrors sws.toml).
+	header {
+		Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "same-origin"
+		X-Frame-Options "DENY"
+		Permissions-Policy "interest-cohort=(), browsing-topics=()"
+		-Server
+	}
+
+	# Advertise the feed alternates on HTML responses. "/" is listed explicitly
+	# because the path matcher sees the request path, not the resolved index file.
+	@html path / *.html
+	header @html Link `</feed.xml>; rel="alternate"; type="application/rss+xml"; title="Gazette Insoumise — RSS", </feeds.opml>; rel="alternate"; type="text/x-opml"; title="Gazette Insoumise — OPML"`
+
+	# Deploy-time assets, all query-string fingerprinted by the templates.
+	# /js/*.js does not match /sw.js, which is handled below.
+	@immutable path *.css *.woff2 *.avif *.png *.ico *.json /js/*.js
+	header @immutable Cache-Control "public, max-age=604800, immutable"
+
+	# Pages and the feed are regenerated every 15 minutes; the service worker needs
+	# a short TTL so updates actually reach installed clients.
+	@shortlived path / *.html *.xml /sw.js
+	header @shortlived Cache-Control "public, max-age=900"
+
+	# Serves 404.html with a real 404 status rather than 200.
+	handle_errors {
+		rewrite * /{err.status_code}.html
+		file_server
+	}
+
+	file_server {
+		precompressed br gzip
+	}
+}

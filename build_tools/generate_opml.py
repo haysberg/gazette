@@ -1,7 +1,14 @@
 import hashlib
+import os
+import sys
 import tomllib
 
 from jinja2 import Environment, FileSystemLoader
+
+# Run as a script, so the repo root is not on sys.path — add it to reach precompress.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from precompress import write_compressed  # noqa: E402
 
 env = Environment(loader=FileSystemLoader('templates'), autoescape=True)
 
@@ -26,8 +33,7 @@ with open('gazette.toml', 'rb') as f:
 	# Render OPML
 	opml_template = env.get_template('feeds.opml')
 	opml_content = opml_template.render(feeds=feeds)
-	with open('./static/feeds.opml', 'w', encoding='utf-8') as o:
-		o.write(opml_content)
+	write_compressed('./static/feeds.opml', opml_content)
 	print('OPML rendered successfully!')
 
 	# Render sources page
@@ -39,8 +45,7 @@ with open('gazette.toml', 'rb') as f:
 		canonical_url='https://insoumis.news/sources.html',
 		csp_hash=csp_hash,
 	)
-	with open('./static/sources.html', 'w', encoding='utf-8') as o:
-		o.write(sources_content)
+	write_compressed('./static/sources.html', sources_content)
 	print('Sources page rendered successfully!')
 
 	# Render privacy page
@@ -51,13 +56,11 @@ with open('gazette.toml', 'rb') as f:
 		canonical_url='https://insoumis.news/privacy.html',
 		csp_hash=csp_hash,
 	)
-	with open('./static/privacy.html', 'w', encoding='utf-8') as o:
-		o.write(privacy_content)
+	write_compressed('./static/privacy.html', privacy_content)
 	print('Privacy page rendered successfully!')
 
 	# Render /llms-full.txt — full content dump for AI agents
 	llms_full_template = env.get_template('llms-full.txt')
 	llms_full_content = llms_full_template.render(feeds=feeds)
-	with open('./static/llms-full.txt', 'w', encoding='utf-8') as o:
-		o.write(llms_full_content)
+	write_compressed('./static/llms-full.txt', llms_full_content)
 	print('llms-full.txt rendered successfully!')

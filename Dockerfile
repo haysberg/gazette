@@ -10,7 +10,7 @@ RUN bunx @tailwindcss/cli -i src/tailwind.css -o static/css/daisy.min.css --mini
 ## PYTHON BUILD STEP
 FROM ghcr.io/astral-sh/uv:python3.14-alpine AS build
 WORKDIR /build
-COPY gazette.toml uv.lock pyproject.toml ./
+COPY gazette.toml uv.lock pyproject.toml precompress.py ./
 COPY static ./static/
 COPY templates ./templates/
 COPY build_tools ./build_tools/
@@ -26,7 +26,7 @@ ENV TZ=Europe/Paris
 
 WORKDIR /app
 
-COPY gazette.toml sws.toml app.py uv.lock pyproject.toml ./
+COPY gazette.toml sws.toml app.py uv.lock pyproject.toml precompress.py ./
 COPY templates ./templates/
 COPY --from=build /build/templates/inline_style.html ./templates/inline_style.html
 COPY utils ./utils/

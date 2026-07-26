@@ -3,6 +3,7 @@ from datetime import datetime
 from time import mktime
 
 import feedparser
+import httpx
 from sqlalchemy import Index
 from sqlmodel import Field, Relationship, Session, SQLModel
 
@@ -10,10 +11,84 @@ from utils import engine
 from utils.logs import logger
 
 FEED_TIMEOUT = 30
+FEED_CONNECT_TIMEOUT = 10
+
+# Feeds are fetched through a shared client so a handful of slow origins cannot
+# saturate a single-vCPU box. `feedparser.parse` used to do its own blocking
+# urllib fetch inside a thread, where a hung origin pinned a thread-pool worker
+# forever: `asyncio.wait_for` cancels the await, not the thread.
+MAX_CONCURRENT_FETCHES = 10
+
+USER_AGENT = 'Gazette/1.0 (+https://insoumis.news/)'
+
+_fetch_semaphore = asyncio.Semaphore(MAX_CONCURRENT_FETCHES)
+_client: httpx.AsyncClient | None = None
 
 
 class FeedParsingError(Exception):
 	"""Raised when a feed is too malformed to parse."""
+
+
+class FeedNotModified(Exception):
+	"""Raised when the origin answers 304 to a conditional request."""
+
+
+def _get_client() -> httpx.AsyncClient:
+	global _client
+	if _client is None:
+		_client = httpx.AsyncClient(
+			timeout=httpx.Timeout(FEED_TIMEOUT, connect=FEED_CONNECT_TIMEOUT),
+			follow_redirects=True,
+			headers={'User-Agent': USER_AGENT},
+			limits=httpx.Limits(max_connections=MAX_CONCURRENT_FETCHES),
+		)
+	return _client
+
+
+async def close_client() -> None:
+	"""Close the shared HTTP client, if one was ever opened."""
+	global _client
+	if _client is not None:
+		await _client.aclose()
+		_client = None
+
+
+async def fetch_feed(
+	url: str, etag: str | None = None, modified: str | None = None
+) -> httpx.Response:
+	"""Fetch a feed conditionally. Raises FeedNotModified when unchanged."""
+	headers = {}
+	if etag:
+		headers['If-None-Match'] = etag
+	if modified:
+		headers['If-Modified-Since'] = modified
+
+	async with _fetch_semaphore:
+		response = await _get_client().get(url, headers=headers)
+
+	if response.status_code == 304:
+		raise FeedNotModified
+	response.raise_for_status()
+	return response
+
+
+def _parse_response(response: httpx.Response) -> dict:
+	"""Parse already-fetched bytes.
+
+	`content-location` is required: without it feedparser has no base URL, so
+	feeds that publish relative entry links leave them unresolved and every
+	article link on the page breaks. Content-Type is deliberately not forwarded —
+	origins that mislabel feeds as text/html parse fine when feedparser sniffs
+	the body itself.
+	"""
+	return feedparser.parse(
+		response.content,
+		response_headers={'content-location': str(response.url)},
+	)
+
+
+def _bozo_message(data: dict) -> str:
+	return getattr(data.bozo_exception, 'getMessage', lambda: str(data.bozo_exception))()
 
 
 class Feed(SQLModel, table=True):
@@ -41,19 +116,21 @@ class Feed(SQLModel, table=True):
 
 	@classmethod
 	async def init_feed(cls, feed_dict: dict):
+		"""Register a feed and store the entries from the very same response.
+
+		The initial fetch used to be thrown away after reading title/subtitle/image,
+		and the scheduler then re-fetched all 49 feeds immediately — two full passes
+		over the network on every start. Storing the entries here means one pass.
+		"""
 		logger.info('Initializing feed', feed=feed_dict['link'])
 		error_msg = None
 
 		try:
-			data: dict = await asyncio.wait_for(
-				asyncio.to_thread(feedparser.parse, feed_dict['link']),
-				timeout=FEED_TIMEOUT,
-			)
+			response = await fetch_feed(feed_dict['link'])
+			data: dict = await asyncio.to_thread(_parse_response, response)
 
 			if data.bozo:
-				bozo_msg = getattr(
-					data.bozo_exception, 'getMessage', lambda: str(data.bozo_exception)
-				)()
+				bozo_msg = _bozo_message(data)
 				logger.warning('Feed has formatting issues', feed=feed_dict['link'], issue=bozo_msg)
 				if not hasattr(data, 'feed') or not data.entries:
 					raise FeedParsingError(f'Feed too malformed to parse: {bozo_msg}')
@@ -68,6 +145,8 @@ class Feed(SQLModel, table=True):
 				image=getattr(getattr(data.feed, 'image', None), 'href', None),
 				last_success=datetime.now(),
 				failure_count=0,
+				etag=response.headers.get('etag'),
+				modified=response.headers.get('last-modified'),
 			)
 
 			# Override with config values if provided
@@ -76,16 +155,20 @@ class Feed(SQLModel, table=True):
 					setattr(feed, key, value)
 
 			with Session(engine) as session:
-				session.merge(feed)
+				# merge() returns the persistent instance; the feed row has to exist
+				# before its posts reference it.
+				merged = session.merge(feed)
+				session.flush()
+				posts_added = merged._store_entries(data, session)
 				session.commit()
 
-			logger.info('Successfully initialized feed', feed=feed_dict['link'])
+			logger.info('Successfully initialized feed', feed=feed_dict['link'], posts=posts_added)
 			return feed
 
 		except (AttributeError, KeyError) as e:
 			error_msg = f'Invalid feed structure: {e}'
 			logger.error('Invalid feed structure', feed=feed_dict['link'], error=str(e))
-		except (ConnectionError, ConnectionResetError, TimeoutError, asyncio.TimeoutError) as e:
+		except httpx.HTTPError as e:
 			error_msg = f'Connection error: {e}'
 			logger.error('Connection failed', feed=feed_dict['link'], error=str(e))
 		except FeedParsingError as e:
@@ -117,88 +200,74 @@ class Feed(SQLModel, table=True):
 
 		return None
 
+	def _store_entries(self, data: dict, session: Session) -> int:
+		"""Merge a parsed feed's entries into `session`. Returns how many were stored."""
+		posts_added = 0
+
+		for entry in data.entries:
+			try:
+				if not hasattr(entry, 'link') or not hasattr(entry, 'title'):
+					logger.warning('Entry missing required fields, skipping', feed=self.title)
+					continue
+
+				if self.free_only and entry.get('accesspermission', 'free') != 'free':
+					continue
+
+				# Get publication date with fallback chain
+				pub_date = None
+				if hasattr(entry, 'published_parsed') and entry.published_parsed:
+					try:
+						pub_date = datetime.fromtimestamp(mktime(entry.published_parsed))
+					except (ValueError, OverflowError, OSError) as e:
+						logger.warning(
+							'Invalid published_parsed date', feed=self.title, error=str(e)
+						)
+
+				if not pub_date and hasattr(entry, 'updated_parsed') and entry.updated_parsed:
+					try:
+						pub_date = datetime.fromtimestamp(mktime(entry.updated_parsed))
+					except (ValueError, OverflowError, OSError) as e:
+						logger.warning('Invalid updated_parsed date', feed=self.title, error=str(e))
+
+				if not pub_date:
+					pub_date = datetime.now()
+					logger.warning('Entry has no valid date, using current time', feed=self.title)
+
+				parsed_entry = Post(
+					link=entry.link,
+					title=entry.title,
+					feed_link=self.link,
+					publication_date=pub_date,
+				)
+
+				session.merge(parsed_entry)
+				posts_added += 1
+
+			except AttributeError as ae:
+				logger.error('Invalid entry structure', feed=self.title, error=str(ae))
+				continue
+			except Exception as e:
+				logger.error('Error processing entry', feed=self.title, error=str(e))
+				continue
+
+		return posts_added
+
 	async def update_posts(self) -> bool:
 		"""Update posts for this feed. Returns True if new content was added."""
 		error_msg = None
-		posts_added = 0
 
 		try:
-			data: dict = await asyncio.wait_for(
-				asyncio.to_thread(
-					feedparser.parse, self.link, etag=self.etag, modified=self.modified
-				),
-				timeout=FEED_TIMEOUT,
-			)
-
-			# Handle 304 Not Modified
-			if hasattr(data, 'status') and data.status == 304:
-				logger.debug('Feed not modified, skipping', feed=self.title)
-				return False
+			response = await fetch_feed(self.link, self.etag, self.modified)
+			data: dict = await asyncio.to_thread(_parse_response, response)
 
 			if data.bozo:
-				bozo_msg = getattr(
-					data.bozo_exception, 'getMessage', lambda: str(data.bozo_exception)
-				)()
+				bozo_msg = _bozo_message(data)
 				logger.warning('Feed has formatting issues', feed=self.link, issue=bozo_msg)
 				if not data.entries:
 					raise FeedParsingError('Feed returned no entries due to parsing errors')
 
 			with Session(engine) as session:
-				for entry in data.entries:
-					try:
-						if not hasattr(entry, 'link') or not hasattr(entry, 'title'):
-							logger.warning(
-								'Entry missing required fields, skipping', feed=self.title
-							)
-							continue
-
-						if self.free_only and entry.get('accesspermission', 'free') != 'free':
-							continue
-
-						# Get publication date with fallback chain
-						pub_date = None
-						if hasattr(entry, 'published_parsed') and entry.published_parsed:
-							try:
-								pub_date = datetime.fromtimestamp(mktime(entry.published_parsed))
-							except (ValueError, OverflowError, OSError) as e:
-								logger.warning(
-									'Invalid published_parsed date', feed=self.title, error=str(e)
-								)
-
-						if (
-							not pub_date
-							and hasattr(entry, 'updated_parsed')
-							and entry.updated_parsed
-						):
-							try:
-								pub_date = datetime.fromtimestamp(mktime(entry.updated_parsed))
-							except (ValueError, OverflowError, OSError) as e:
-								logger.warning(
-									'Invalid updated_parsed date', feed=self.title, error=str(e)
-								)
-
-						if not pub_date:
-							pub_date = datetime.now()
-							logger.warning(
-								'Entry has no valid date, using current time', feed=self.title
-							)
-
-						parsed_entry = Post(
-							link=entry.link,
-							title=entry.title,
-							feed_link=self.link,
-							publication_date=pub_date,
-						)
-
-						session.merge(parsed_entry)
-						posts_added += 1
-
-					except AttributeError as ae:
-						logger.error('Invalid entry structure', feed=self.title, error=str(ae))
-						continue
-					except Exception as e:
-						logger.error('Error processing entry', feed=self.title, error=str(e))
-						continue
+				posts_added = self._store_entries(data, session)
 
 				# Single transaction: commit posts + update feed metadata
 				feed = session.get(Feed, self.link)
@@ -206,8 +275,8 @@ class Feed(SQLModel, table=True):
 					feed.last_success = datetime.now()
 					feed.failure_count = 0
 					feed.last_error = None
-					feed.etag = getattr(data, 'etag', None)
-					feed.modified = getattr(data, 'modified', None)
+					feed.etag = response.headers.get('etag')
+					feed.modified = response.headers.get('last-modified')
 
 				try:
 					session.commit()
@@ -218,7 +287,10 @@ class Feed(SQLModel, table=True):
 					session.rollback()
 					raise
 
-		except (ConnectionError, ConnectionResetError, TimeoutError, asyncio.TimeoutError) as e:
+		except FeedNotModified:
+			logger.debug('Feed not modified, skipping', feed=self.title)
+			return False
+		except httpx.HTTPError as e:
 			error_msg = f'Connection error: {e}'
 			logger.error('Connection failed', feed=self.link, error=str(e))
 		except FeedParsingError as e:
