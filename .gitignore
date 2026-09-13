@@ -175,6 +175,7 @@ cython_debug/
 
 
 ######### SPECIFIC
+.DS_Store
 *.db*
 data/static/index*
 data/index.html

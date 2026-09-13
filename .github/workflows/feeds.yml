@@ -1,0 +1,20 @@
+name: Feed check
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10
+
+      # Fails the job when one or more configured feeds no longer parse. That is
+      # the notification: GitHub surfaces the failure in the Actions tab.
+      - name: Check every configured feed
+        run: uv run python build_tools/check_feeds.py
