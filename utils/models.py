@@ -1,11 +1,11 @@
 import asyncio
-from datetime import datetime
-from time import mktime
+from calendar import timegm
+from datetime import datetime, timedelta
 
 import feedparser
 import httpx
 from sqlalchemy import Index
-from sqlmodel import Field, Relationship, Session, SQLModel
+from sqlmodel import Field, Relationship, Session, SQLModel, select
 
 from utils import engine
 from utils.logs import logger
@@ -21,6 +21,11 @@ MAX_CONCURRENT_FETCHES = 10
 
 USER_AGENT = 'Gazette/1.0 (+https://insoumis.news/)'
 
+# A failing feed is retried later and later instead of being dropped for the
+# lifetime of the process: 15 min, 30 min, 1 h… capped at 6 h.
+RETRY_BASE_SECONDS = 15 * 60
+RETRY_MAX_SECONDS = 6 * 60 * 60
+
 _fetch_semaphore = asyncio.Semaphore(MAX_CONCURRENT_FETCHES)
 _client: httpx.AsyncClient | None = None
 
@@ -31,6 +36,23 @@ class FeedParsingError(Exception):
 
 class FeedNotModified(Exception):
 	"""Raised when the origin answers 304 to a conditional request."""
+
+
+def _parsed_datetime(parsed) -> datetime:
+	"""Convert a feedparser struct_time to local wall-clock time.
+
+	feedparser's `*_parsed` fields are UTC, but `time.mktime` interprets a
+	struct_time as *local* time — round-tripping it through mktime/fromtimestamp
+	shifts every date by the local UTC offset. `timegm` returns the correct epoch,
+	and `fromtimestamp` then renders it in the server's timezone (TZ=Europe/Paris
+	in production), which is what every comparison and display expects.
+	"""
+	return datetime.fromtimestamp(timegm(parsed))
+
+
+def _retry_delay(failure_count: int) -> int:
+	"""Exponential backoff for a feed that has failed `failure_count` times."""
+	return min(RETRY_BASE_SECONDS * 2 ** (failure_count - 1), RETRY_MAX_SECONDS)
 
 
 def _get_client() -> httpx.AsyncClient:
@@ -113,6 +135,8 @@ class Feed(SQLModel, table=True):
 	failure_count: int = Field(default=0)
 	last_error: str | None = Field(default=None)
 	last_success: datetime | None = Field(default=None)
+	# Earliest time this feed may be fetched again after a failure
+	next_retry: datetime | None = Field(default=None)
 
 	@classmethod
 	async def init_feed(cls, feed_dict: dict):
@@ -190,6 +214,7 @@ class Feed(SQLModel, table=True):
 						image=feed_dict.get('image', ''),
 						failure_count=1,
 						last_error=error_msg[:500],
+						next_retry=datetime.now() + timedelta(seconds=_retry_delay(1)),
 					)
 					session.merge(failed_feed)
 					session.commit()
@@ -201,8 +226,16 @@ class Feed(SQLModel, table=True):
 		return None
 
 	def _store_entries(self, data: dict, session: Session) -> int:
-		"""Merge a parsed feed's entries into `session`. Returns how many were stored."""
+		"""Merge a parsed feed's entries into `session`.
+
+		Returns how many entries were *new*. A POST that always answers 200 with
+		the same items used to count every merge as new, which made the caller
+		regenerate every static file on every cycle; only genuine inserts count.
+		"""
 		posts_added = 0
+		existing_links = set(
+			session.exec(select(Post.link).where(Post.feed_link == self.link)).all()
+		)
 
 		for entry in data.entries:
 			try:
@@ -217,7 +250,7 @@ class Feed(SQLModel, table=True):
 				pub_date = None
 				if hasattr(entry, 'published_parsed') and entry.published_parsed:
 					try:
-						pub_date = datetime.fromtimestamp(mktime(entry.published_parsed))
+						pub_date = _parsed_datetime(entry.published_parsed)
 					except (ValueError, OverflowError, OSError) as e:
 						logger.warning(
 							'Invalid published_parsed date', feed=self.title, error=str(e)
@@ -225,7 +258,7 @@ class Feed(SQLModel, table=True):
 
 				if not pub_date and hasattr(entry, 'updated_parsed') and entry.updated_parsed:
 					try:
-						pub_date = datetime.fromtimestamp(mktime(entry.updated_parsed))
+						pub_date = _parsed_datetime(entry.updated_parsed)
 					except (ValueError, OverflowError, OSError) as e:
 						logger.warning('Invalid updated_parsed date', feed=self.title, error=str(e))
 
@@ -240,8 +273,11 @@ class Feed(SQLModel, table=True):
 					publication_date=pub_date,
 				)
 
+				is_new = parsed_entry.link not in existing_links
 				session.merge(parsed_entry)
-				posts_added += 1
+				if is_new:
+					existing_links.add(parsed_entry.link)
+					posts_added += 1
 
 			except AttributeError as ae:
 				logger.error('Invalid entry structure', feed=self.title, error=str(ae))
@@ -275,6 +311,7 @@ class Feed(SQLModel, table=True):
 					feed.last_success = datetime.now()
 					feed.failure_count = 0
 					feed.last_error = None
+					feed.next_retry = None
 					feed.etag = response.headers.get('etag')
 					feed.modified = response.headers.get('last-modified')
 
@@ -307,11 +344,15 @@ class Feed(SQLModel, table=True):
 					if feed:
 						feed.failure_count += 1
 						feed.last_error = error_msg[:500]
+						feed.next_retry = datetime.now() + timedelta(
+							seconds=_retry_delay(feed.failure_count)
+						)
 						session.commit()
 						logger.warning(
 							'Feed failure count incremented',
 							feed=self.link,
 							count=feed.failure_count,
+							retry_at=feed.next_retry.isoformat(),
 						)
 			except Exception as db_error:
 				logger.error('Failed to update error state', feed=self.link, error=str(db_error))

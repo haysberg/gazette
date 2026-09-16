@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /healthz
 Content-Signal: search=yes, ai-input=yes, ai-train=yes
 
 Sitemap: https://insoumis.news/sitemap.xml

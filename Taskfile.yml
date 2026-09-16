@@ -41,3 +41,9 @@ tasks:
     desc: Render feeds.opml and sources.html from gazette.toml
     cmds:
       - uv run ./build_tools/generate_opml.py
+
+  check:
+    desc: Lint and run the test suite
+    cmds:
+      - uv run ruff check .
+      - uv run pytest -q

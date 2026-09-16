@@ -33,11 +33,20 @@ COPY utils ./utils/
 COPY --from=build /build/static ./static/
 COPY --from=ghcr.io/static-web-server/static-web-server /static-web-server /bin/static-web-server
 
-RUN apk update --no-cache && apk add --no-cache curl && uv sync --frozen --no-cache --no-dev --no-editable --compile-bytecode
+RUN uv sync --frozen --no-cache --no-dev --no-editable --compile-bytecode \
+	&& addgroup -S gazette \
+	&& adduser -S -G gazette gazette \
+	&& chown -R gazette:gazette /app
+
+# The app renders pages into /app/static at runtime, so that tree must stay
+# writable by the unprivileged user; everything else is read-only.
+USER gazette
 
 EXPOSE 8000
 
+# /healthz is a static file: a full homepage render should not be the liveness
+# probe. busybox wget is part of the base image, so curl is not needed.
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-	CMD curl -f http://localhost:8000/ || exit 1
+	CMD wget -q -O /dev/null http://localhost:8000/healthz || exit 1
 
 CMD ["python3", "app.py"]

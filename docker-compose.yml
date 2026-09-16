@@ -3,3 +3,13 @@ services:
     image: ghcr.io/haysberg/gazette:latest
     container_name: "gazette-backend"
     restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 256

@@ -149,6 +149,17 @@ python3 build_tools/generate_opml.py
 python3 build_tools/download_daisy.py
 ```
 
+## Tests
+
+```bash
+# Linter et suite de tests
+task check
+
+# Équivalents directs
+uv run ruff check .
+uv run pytest
+```
+
 ## Licence
 
 Voir le fichier [LICENSE](LICENSE) pour plus de détails.

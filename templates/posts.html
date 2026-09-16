@@ -1,5 +1,8 @@
+{% if heading %}
+<h2 class="sr-only">{{ heading }}</h2>
+{% endif %}
 {% if divider %}
-<div class="divider my-2">HIER</div>
+<div class="divider my-2" role="heading" aria-level="2">HIER</div>
 {% endif %}
     {% for article in articles %}
     <div class="flex flex-col flex-wrap mb-1">
@@ -7,6 +10,7 @@
             class="link link-hover link-primary md:text-base font-medium text-base/5 font-semibold"
             href="{{ article.link }}"
             target="_blank"
+            rel="noopener"
             referrerpolicy="origin"
             >{{ article.title }}
         </a>
@@ -22,8 +26,8 @@
             <img
                 src="/favicons/{{ article.feed.domain }}.avif"
                 loading="lazy"
-                width="16px"
-                height="16px"
+                width="16"
+                height="16"
                 role="presentation"
             />
             {% endif %} <i class="discret">{{article.feed.title}} · {{ article.publication_date | timeago }}</i>

@@ -8,8 +8,9 @@
         <div class="w-full max-w-screen-xl m-auto px-2 flex-grow">
             <main id="main-content">
                 {% if posts_today is defined and posts_today|length > 0 %} {%
-                with %} {% set articles=posts_today %} {% include "posts.html"
-                %} {% endwith %} {% endif %} {% if posts_yesterday is defined
+                with %} {% set articles=posts_today %} {% set
+                heading="Aujourd'hui" %} {% include "posts.html" %} {% endwith %}
+                {% endif %} {% if posts_yesterday is defined
                 and posts_yesterday|length > 0 %} {% with %} {% set
                 articles=posts_yesterday %} {% set divider=plus %} {% include
                 "posts.html" %} {%endwith %} {% endif %}
@@ -19,7 +20,7 @@
         <script
             data-goatcounter="https://insoumis.goatcounter.com/count"
             async
-            src="https://gc.zgo.at/count.js"
+            src="/js/count.min.js"
         ></script>
     </body>
 </html>

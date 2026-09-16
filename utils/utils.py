@@ -4,7 +4,7 @@ import tomllib
 from datetime import datetime, timedelta
 
 import minify_html
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 from sqlalchemy.orm import selectinload
 from sqlmodel import Session, delete, select
 
@@ -13,12 +13,15 @@ from utils import CONFIG_FILE, HTML_FILE, RSS_FILE, STATIC_DIR, TEMPLATES_DIR, e
 from utils.logs import logger
 from utils.models import Feed, Post
 
-# Skip feeds that have failed more than this many times in a row
-MAX_CONSECUTIVE_FAILURES = 10
-
-# Reuse a single Jinja2 environment across updates
-_jinja_env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
+# Reuse a single Jinja2 environment across updates. Autoescaping is mandatory
+# here: titles and subtitles come from third-party feeds, and rendering them raw
+# lets a hostile or broken feed inject markup into the page.
+_jinja_env = Environment(
+	loader=FileSystemLoader(TEMPLATES_DIR),
+	autoescape=select_autoescape(['html', 'xml']),
+)
 _jinja_env.filters['timeago'] = lambda dt: _timeago(dt)
+_jinja_env.filters['rfc822'] = lambda dt: _rfc822(dt)
 
 
 def _file_hash(path: str) -> str:
@@ -40,14 +43,16 @@ async def update_all_posts() -> None:
 	with Session(engine) as session:
 		feeds = (session.exec(select(Feed))).all()
 
-	# Skip feeds with too many consecutive failures
+	# Skip feeds whose backoff window has not elapsed yet
+	now = datetime.now()
 	active_feeds = []
 	for feed in feeds:
-		if feed.failure_count >= MAX_CONSECUTIVE_FAILURES:
-			logger.warning(
-				'Skipping feed due to repeated failures',
+		if feed.next_retry is not None and feed.next_retry > now:
+			logger.debug(
+				'Feed in backoff, skipping',
 				feed=feed.title,
 				failure_count=feed.failure_count,
+				retry_at=feed.next_retry.isoformat(),
 			)
 			continue
 		active_feeds.append(feed)
@@ -81,6 +86,15 @@ async def update_all_posts() -> None:
 		await update_served_files()
 	else:
 		logger.info('No new content, skipping static file regeneration.')
+
+
+def _rfc822(dt: datetime) -> str:
+	"""Render a local datetime as an RFC 822 timestamp with its real offset.
+
+	The pubDate used to be formatted with a literal `+0000` even though the value
+	was local time, so every item's timestamp was off by the UTC offset.
+	"""
+	return dt.astimezone().strftime('%a, %d %b %Y %H:%M:%S %z')
 
 
 def _timeago(dt: datetime) -> str:
@@ -142,7 +156,7 @@ async def update_served_files() -> None:
 			rss_template = _jinja_env.get_template('feed.xml')
 			rss_xml = rss_template.render(
 				posts=posts_last24h,
-				build_date=datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0000'),
+				build_date=datetime.now(),
 			)
 
 			# minify_css must stay False: the inline <style> block is already compressed,
