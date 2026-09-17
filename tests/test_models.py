@@ -8,7 +8,7 @@ import feedparser
 from sqlalchemy.pool import StaticPool
 from sqlmodel import Session, SQLModel, create_engine
 
-from utils.models import Feed, _parsed_datetime, _retry_delay
+from utils.models import Feed, Post, _entry_excerpt, _entry_image, _parsed_datetime, _retry_delay
 
 
 def make_entry(link: str, title: str = 'Titre') -> feedparser.FeedParserDict:
@@ -59,3 +59,43 @@ def test_store_entries_counts_only_new_links():
 		# A genuinely new link is counted.
 		data.entries.append(make_entry('https://exemple.org/b'))
 		assert feed._store_entries(data, session) == 1
+
+
+def test_undated_entry_keeps_first_seen_date():
+	engine = create_engine(
+		'sqlite://', connect_args={'check_same_thread': False}, poolclass=StaticPool
+	)
+	SQLModel.metadata.create_all(engine)
+
+	with Session(engine) as session:
+		feed = Feed(link='https://exemple.org/rss', domain='exemple.org', title='Exemple')
+		session.add(feed)
+		session.commit()
+
+		data = SimpleNamespace(entries=[make_entry('https://exemple.org/a')])
+		assert feed._store_entries(data, session) == 1
+		session.commit()
+		first = session.get(Post, 'https://exemple.org/a').publication_date
+
+		# A feed that keeps re-serving an entry without a date must not bump it to
+		# "now" on every cycle, which made it leapfrog to the top of the page.
+		assert feed._store_entries(data, session) == 0
+		session.commit()
+		again = session.get(Post, 'https://exemple.org/a').publication_date
+		assert again == first
+
+
+def test_entry_excerpt_strips_markup_and_image_is_extracted():
+	entry = feedparser.FeedParserDict(
+		{
+			'summary': '<p>Bonjour <b>le</b> monde</p>',
+			'media_thumbnail': [{'url': 'https://exemple.org/img.jpg'}],
+		}
+	)
+	assert _entry_excerpt(entry) == 'Bonjour le monde'
+	assert _entry_image(entry) == 'https://exemple.org/img.jpg'
+
+
+def test_entry_image_ignores_non_http_urls():
+	entry = feedparser.FeedParserDict({'media_thumbnail': [{'url': 'javascript:alert(1)'}]})
+	assert _entry_image(entry) is None

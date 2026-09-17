@@ -6,6 +6,6 @@
     "daisyui": "^5.5.20"
   },
   "scripts": {
-    "build:css": "npx @tailwindcss/cli -i src/tailwind.css -o static/css/daisy.min.css --minify"
+    "build:css": "bunx @tailwindcss/cli -i src/tailwind.css -o static/css/daisy.min.css --minify"
   }
 }

@@ -184,7 +184,21 @@ data/favicons
 tmp
 static/*.html
 static/index.json
-static/index.json
 *.gz
 .claude/
 templates/inline_style.html
+
+# Generated build outputs. Rebuilt by build_tools/*.py in the Docker image and
+# by deploy/update.sh on a VPS, so they are not tracked and never show up as
+# "local changes" during a deploy.
+static/**/*.br
+static/csp-hash.txt
+static/css/style.min.css
+static/js/index.min.js
+static/sw.js
+static/feed.xml
+static/feeds.opml
+static/llms-full.txt
+static/sitemap.xml
+static/status.json
+static/source/

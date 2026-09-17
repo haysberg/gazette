@@ -54,6 +54,7 @@ html {
 }
 
 :root {
+    color-scheme: light;
     --color-base-100: #faf9f6;
     --color-base-content: oklch(21% 0.006 285.885);
     --color-primary: #7b13d6;
@@ -80,6 +81,77 @@ html {
     --border: 2px;
     --depth: 1;
     --noise: 0;
+}
+
+/* Dark palette. Applied when the reader picked dark explicitly, or (absent a
+   choice) when the operating system asks for it. */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --color-base-100: #14121b;
+        --color-base-content: #ece9f5;
+        --color-primary: #a855f7;
+        --color-primary-content: #1b0b2e;
+        --color-secondary: #ff5a5a;
+        --color-secondary-content: #2a0505;
+        --color-accent: #34d399;
+        --color-accent-content: #04231a;
+        --color-neutral: #e5e7eb;
+        --color-neutral-content: #14121b;
+        --color-info: #1e293b;
+        --color-info-content: #dbeafe;
+        --color-success: #34d399;
+        --color-success-content: #04231a;
+        --color-warning: #facc15;
+        --color-warning-content: #241a00;
+        --color-error: #f87171;
+        --color-error-content: #2a0505;
+    }
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --color-base-100: #14121b;
+    --color-base-content: #ece9f5;
+    --color-primary: #a855f7;
+    --color-primary-content: #1b0b2e;
+    --color-secondary: #ff5a5a;
+    --color-secondary-content: #2a0505;
+    --color-accent: #34d399;
+    --color-accent-content: #04231a;
+    --color-neutral: #e5e7eb;
+    --color-neutral-content: #14121b;
+    --color-info: #1e293b;
+    --color-info-content: #dbeafe;
+    --color-success: #34d399;
+    --color-success-content: #04231a;
+    --color-warning: #facc15;
+    --color-warning-content: #241a00;
+    --color-error: #f87171;
+    --color-error-content: #2a0505;
+}
+
+/* Theme toggle icon: moon in light mode, sun in dark mode. */
+.theme-icon-sun {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-icon-moon {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-icon-sun {
+    display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-icon-moon {
+        display: none;
+    }
+
+    :root:not([data-theme="light"]) .theme-icon-sun {
+        display: block;
+    }
 }
 
 @keyframes slideInFromLeft {
@@ -124,7 +196,8 @@ html {
 }
 
 body {
-    background: var(--bg);
+    background: var(--color-base-100);
+    color: var(--color-base-content);
     font-family:
         "Config",
         ui-sans-serif,

@@ -14,10 +14,11 @@
             referrerpolicy="origin"
             >{{ article.title }}
         </a>
+        {% if article.excerpt %}
+        <p class="text-sm text-base-content/70 mb-1">{{ article.excerpt }}</p>
+        {% endif %}
         <a
-            href="https://{{article.feed.domain}}"
-            target="_blank"
-            referrerpolicy="origin"
+            href="/source/{{ article.feed.domain }}/"
             class="link link-hover flex items-center gap-x-1 inline-flex mb-1"
             {% if article.feed.subtitle %}title="{{ article.feed.subtitle }}"{% endif %}
         >

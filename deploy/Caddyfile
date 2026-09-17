@@ -12,9 +12,13 @@
 insoumis.news {
 	root * /opt/gazette/static
 
-	# Security headers on every response (mirrors sws.toml).
+	# Security headers on every response (mirrors sws.toml). The CSP is sent as a
+	# real header (not a <meta>) so frame-ancestors and the other directives apply.
 	header {
 		Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+		Content-Security-Policy "default-src 'self'; script-src 'self' 'inline-speculation-rules'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://insoumis.goatcounter.com; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'"
+		Cross-Origin-Opener-Policy "same-origin"
+		Cross-Origin-Resource-Policy "same-origin"
 		X-Content-Type-Options "nosniff"
 		Referrer-Policy "same-origin"
 		X-Frame-Options "DENY"
@@ -32,9 +36,10 @@ insoumis.news {
 	@immutable path *.css *.woff2 *.avif *.png *.ico *.json /js/*.js
 	header @immutable Cache-Control "public, max-age=604800, immutable"
 
-	# Pages and the feed are regenerated every 15 minutes; the service worker needs
-	# a short TTL so updates actually reach installed clients.
-	@shortlived path / *.html *.xml /sw.js
+	# Pages, the feed and status.json are regenerated every 15 minutes; the service
+	# worker needs a short TTL so updates actually reach installed clients. This
+	# comes after @immutable so /status.json overrides the *.json rule.
+	@shortlived path / *.html *.xml /sw.js /source/* /status.json
 	header @shortlived Cache-Control "public, max-age=900"
 
 	# Serves 404.html with a real 404 status rather than 200.

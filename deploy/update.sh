@@ -53,8 +53,8 @@ log 'Syncing dependencies'
 as_app uv sync --exact --no-default-groups --group build --compile-bytecode
 
 log 'Rebuilding static assets'
-# compress_all.py first: it produces templates/inline_style.html and
-# static/csp-hash.txt, which generate_opml.py needs to render its pages.
+# compress_all.py first: it produces static/css/style.min.css and
+# static/js/index.min.js, whose hashes generate_opml.py needs to render its pages.
 as_app ./.venv/bin/python build_tools/compress_all.py
 as_app ./.venv/bin/python build_tools/generate_opml.py
 

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+    {% include "head.html" %}
+    <body
+        class="bg-base-100 text-base-content font-sans min-h-screen flex flex-col"
+    >
+        {% include "navbar.html" %}
+        <div class="w-full max-w-screen-xl m-auto px-2 flex-grow">
+            <main id="main-content">
+                <div class="flex items-center gap-4 py-4">
+                    <img
+                        src="/favicons/{{ feed.domain }}-large.avif"
+                        alt="Logo {{ feed.title }}"
+                        width="48"
+                        height="48"
+                        class="w-12 h-12 rounded"
+                    />
+                    <div class="min-w-0">
+                        <h2 class="text-2xl font-bold">{{ feed.title }}</h2>
+                        <a
+                            href="https://{{ feed.domain }}"
+                            target="_blank"
+                            rel="noopener"
+                            referrerpolicy="origin"
+                            class="link link-primary text-sm"
+                            >{{ feed.domain }}</a
+                        >
+                        {% if feed.subtitle %}
+                        <p class="text-base-content/70 text-sm mt-1">
+                            {{ feed.subtitle }}
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+                <p class="text-sm text-base-content/60 mb-4">
+                    {{ posts|length }} article{{ 's' if posts|length != 1 }} sur
+                    les 7 derniers jours ·
+                    <a class="link" href="/sources.html">Toutes les sources</a>
+                </p>
+                {% if posts %}
+                <div class="flex flex-col">
+                    {% for article in posts %}
+                    <div class="flex flex-col mb-3">
+                        <a
+                            class="link link-hover link-primary font-medium text-base/5 font-semibold"
+                            href="{{ article.link }}"
+                            target="_blank"
+                            rel="noopener"
+                            referrerpolicy="origin"
+                            >{{ article.title }}</a
+                        >
+                        {% if article.excerpt %}
+                        <p class="text-sm text-base-content/70 mt-0.5">
+                            {{ article.excerpt }}
+                        </p>
+                        {% endif %}
+                        <i class="discret"
+                            >{{ article.publication_date | timeago }}</i
+                        >
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-base-content/70">
+                    Aucun article récent pour cette source.
+                </p>
+                {% endif %}
+            </main>
+        </div>
+        {% include "footer.html" %}
+        <script
+            data-goatcounter="https://insoumis.goatcounter.com/count"
+            async
+            src="/js/count.min.js"
+        ></script>
+    </body>
+</html>

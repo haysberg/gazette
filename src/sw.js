@@ -1,9 +1,11 @@
-const CACHE_NAME = "gazette-b0f3bddf";
+const CACHE_NAME = "CACHE_PLACEHOLDER";
 const ASSETS_TO_CACHE = [
   "/",
   "/index.html",
   "/css/daisy.min.css",
+  "/css/style.min.css",
   "/js/index.min.js",
+  "/js/theme.js",
   "/manifest.json",
   "/icons/favicon.ico",
   "/icons/favicon-32x32.avif",

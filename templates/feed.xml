@@ -6,6 +6,7 @@
 		<description>Agregateur de flux RSS de la presse alternative francophone</description>
 		<language>fr</language>
 		<lastBuildDate>{{ build_date | rfc822 }}</lastBuildDate>
+		<ttl>15</ttl>
 		<atom:link href="https://insoumis.news/feed.xml" rel="self" type="application/rss+xml"/>
 		{% for post in posts %}
 		<item>
@@ -13,7 +14,14 @@
 			<link>{{ post.link | e }}</link>
 			<guid isPermaLink="true">{{ post.link | e }}</guid>
 			<pubDate>{{ post.publication_date | rfc822 }}</pubDate>
+			<category>{{ post.feed.title | e }}</category>
 			<source url="{{ post.feed.link | e }}">{{ post.feed.title | e }}</source>
+			{% if post.excerpt %}
+			<description>{{ post.excerpt | e }}</description>
+			{% endif %}
+			{% if post.image %}
+			<enclosure url="{{ post.image | e }}" type="{{ post.image | enclosure_type }}" length="0"/>
+			{% endif %}
 		</item>
 		{% endfor %}
 	</channel>

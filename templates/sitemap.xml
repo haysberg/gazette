@@ -25,4 +25,11 @@
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
+    {% for feed in feeds %}
+    <url>
+        <loc>https://insoumis.news/source/{{ feed.domain }}/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    {% endfor %}
 </urlset>

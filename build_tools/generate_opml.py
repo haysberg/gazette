@@ -25,10 +25,8 @@ with open('gazette.toml', 'rb') as f:
 	print(f'Found {len(feeds)} feeds in config.')
 
 	css_hash = file_hash('static/css/daisy.min.css')
+	style_hash = file_hash('static/css/style.min.css')
 	js_hash = file_hash('static/js/index.min.js')
-
-	with open('static/csp-hash.txt') as csp_file:
-		csp_hash = csp_file.read().strip()
 
 	# Render OPML
 	opml_template = env.get_template('feeds.opml')
@@ -41,9 +39,9 @@ with open('gazette.toml', 'rb') as f:
 	sources_content = sources_template.render(
 		feeds=feeds,
 		css_hash=css_hash,
+		style_hash=style_hash,
 		js_hash=js_hash,
 		canonical_url='https://insoumis.news/sources.html',
-		csp_hash=csp_hash,
 	)
 	write_compressed('./static/sources.html', sources_content)
 	print('Sources page rendered successfully!')
@@ -52,12 +50,18 @@ with open('gazette.toml', 'rb') as f:
 	privacy_template = env.get_template('privacy.html')
 	privacy_content = privacy_template.render(
 		css_hash=css_hash,
+		style_hash=style_hash,
 		js_hash=js_hash,
 		canonical_url='https://insoumis.news/privacy.html',
-		csp_hash=csp_hash,
 	)
 	write_compressed('./static/privacy.html', privacy_content)
 	print('Privacy page rendered successfully!')
+
+	# Render sitemap, including one entry per per-source page
+	sitemap_template = env.get_template('sitemap.xml')
+	sitemap_content = sitemap_template.render(feeds=feeds)
+	write_compressed('./static/sitemap.xml', sitemap_content)
+	print('Sitemap rendered successfully!')
 
 	# Render /llms-full.txt — full content dump for AI agents
 	llms_full_template = env.get_template('llms-full.txt')

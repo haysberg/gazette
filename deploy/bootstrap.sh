@@ -82,8 +82,8 @@ log 'Installing Python dependencies (runtime + build group)'
 as_app uv sync --exact --no-default-groups --group build --compile-bytecode
 
 log 'Building static assets'
-# Order matters: compress_all.py emits templates/inline_style.html and
-# static/csp-hash.txt, both of which generate_opml.py renders into its pages.
+# Order matters: compress_all.py emits static/css/style.min.css and
+# static/js/index.min.js, whose hashes generate_opml.py renders into its pages.
 # .venv/bin/python rather than `uv run`: the latter re-syncs the environment with
 # the default groups and would pull the dev group back in.
 as_app ./.venv/bin/python build_tools/compress_all.py

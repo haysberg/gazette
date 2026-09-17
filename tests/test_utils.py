@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from email.utils import parsedate_to_datetime
 from types import SimpleNamespace
 
-from utils.utils import _jinja_env, _rfc822, _timeago
+from utils.utils import _enclosure_type, _jinja_env, _rfc822, _timeago
 
 
 def test_runtime_environment_autoescapes_feed_content():
@@ -36,6 +36,38 @@ def test_rfc822_keeps_wall_clock_and_has_offset():
 	parsed = parsedate_to_datetime(_rfc822(datetime(2026, 9, 13, 14, 0)))
 	assert parsed.tzinfo is not None
 	assert parsed.replace(tzinfo=None) == datetime(2026, 9, 13, 14, 0)
+
+
+def test_enclosure_type_from_extension():
+	assert _enclosure_type('https://exemple.org/a.png') == 'image/png'
+	assert _enclosure_type('https://exemple.org/a.webp?size=2') == 'image/webp'
+	assert _enclosure_type('https://exemple.org/a') == 'image/jpeg'
+
+
+def test_source_template_escapes_excerpt():
+	template = _jinja_env.get_template('source.html')
+	feed = SimpleNamespace(
+		domain='exemple.org',
+		title='Exemple',
+		subtitle='',
+		link='https://exemple.org/rss',
+	)
+	post = SimpleNamespace(
+		link='https://exemple.org/a',
+		title='Titre',
+		excerpt='<b>x</b>',
+		publication_date=datetime(2026, 9, 13, 14, 0),
+	)
+	output = template.render(
+		feed=feed,
+		posts=[post],
+		css_hash='c',
+		style_hash='s',
+		js_hash='j',
+		canonical_url='https://insoumis.news/source/exemple.org/',
+	)
+	assert '<b>x</b>' not in output
+	assert '&lt;b&gt;' in output
 
 
 def test_timeago_buckets():

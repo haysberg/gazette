@@ -1,4 +1,6 @@
 import asyncio
+import html
+import re
 from calendar import timegm
 from datetime import datetime, timedelta
 
@@ -111,6 +113,54 @@ def _parse_response(response: httpx.Response) -> dict:
 
 def _bozo_message(data: dict) -> str:
 	return getattr(data.bozo_exception, 'getMessage', lambda: str(data.bozo_exception))()
+
+
+# Excerpts are stored as plain text so the page never renders third-party markup.
+# They are capped to keep the in-memory database (and every regenerated page) small.
+EXCERPT_MAX = 400
+_TAG_RE = re.compile(r'<[^>]+>')
+_WS_RE = re.compile(r'\s+')
+# XML 1.0 forbids most C0 control characters; a feed can smuggle them into a
+# summary and break the generated RSS feed.
+_CTRL_RE = re.compile(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]')
+
+
+def _entry_excerpt(entry) -> str | None:
+	"""Return a tag-stripped, whitespace-collapsed excerpt for an entry."""
+	raw = entry.get('summary') or entry.get('description')
+	if not raw and entry.get('content'):
+		try:
+			raw = entry['content'][0].get('value')
+		except (KeyError, IndexError, TypeError):
+			raw = None
+	if not raw:
+		return None
+
+	text = _WS_RE.sub(' ', html.unescape(_CTRL_RE.sub('', _TAG_RE.sub(' ', raw)))).strip()
+	if not text:
+		return None
+	if len(text) > EXCERPT_MAX:
+		text = text[:EXCERPT_MAX].rsplit(' ', 1)[0].rstrip() + '…'
+	return text
+
+
+def _entry_image(entry) -> str | None:
+	"""Return the entry's lead image URL, if the feed advertises one."""
+	candidates = []
+	for key in ('media_thumbnail', 'media_content'):
+		for media in entry.get(key) or []:
+			candidates.append(media.get('url'))
+	for enclosure in entry.get('enclosures') or []:
+		if str(enclosure.get('type', '')).startswith('image/'):
+			candidates.append(enclosure.get('href') or enclosure.get('url'))
+	for link in entry.get('links') or []:
+		if link.get('rel') == 'enclosure' and str(link.get('type', '')).startswith('image/'):
+			candidates.append(link.get('href'))
+
+	for url in candidates:
+		if isinstance(url, str) and url.startswith(('http://', 'https://')):
+			return url
+	return None
 
 
 class Feed(SQLModel, table=True):
@@ -233,9 +283,16 @@ class Feed(SQLModel, table=True):
 		regenerate every static file on every cycle; only genuine inserts count.
 		"""
 		posts_added = 0
-		existing_links = set(
-			session.exec(select(Post.link).where(Post.feed_link == self.link)).all()
-		)
+		# link -> (publication_date, excerpt, image) for posts already stored, so an
+		# entry that stops carrying a date stops being re-dated to "now" every cycle.
+		existing = {
+			link: (pub_date, excerpt, image)
+			for link, pub_date, excerpt, image in session.exec(
+				select(Post.link, Post.publication_date, Post.excerpt, Post.image).where(
+					Post.feed_link == self.link
+				)
+			).all()
+		}
 
 		for entry in data.entries:
 			try:
@@ -262,21 +319,39 @@ class Feed(SQLModel, table=True):
 					except (ValueError, OverflowError, OSError) as e:
 						logger.warning('Invalid updated_parsed date', feed=self.title, error=str(e))
 
+				is_new = entry.link not in existing
 				if not pub_date:
-					pub_date = datetime.now()
-					logger.warning('Entry has no valid date, using current time', feed=self.title)
+					if is_new:
+						pub_date = datetime.now()
+						logger.warning(
+							'Entry has no valid date, using current time', feed=self.title
+						)
+					else:
+						# Keep the date the post was first stored with, otherwise an
+						# undated entry leapfrogs to the top of the page every update.
+						pub_date = existing[entry.link][0]
+
+				excerpt = _entry_excerpt(entry)
+				image = _entry_image(entry)
+				if not is_new:
+					# A feed that omits summary/media in a later fetch must not wipe
+					# what was already stored.
+					prev_excerpt, prev_image = existing[entry.link][1], existing[entry.link][2]
+					excerpt = excerpt or prev_excerpt
+					image = image or prev_image
 
 				parsed_entry = Post(
 					link=entry.link,
 					title=entry.title,
 					feed_link=self.link,
 					publication_date=pub_date,
+					excerpt=excerpt,
+					image=image,
 				)
 
-				is_new = parsed_entry.link not in existing_links
 				session.merge(parsed_entry)
 				if is_new:
-					existing_links.add(parsed_entry.link)
+					existing[parsed_entry.link] = (pub_date, excerpt, image)
 					posts_added += 1
 
 			except AttributeError as ae:
@@ -368,3 +443,6 @@ class Post(SQLModel, table=True):
 	feed_link: str = Field(foreign_key='feed.link')
 	feed: Feed = Relationship(back_populates='posts')
 	publication_date: datetime
+	# Plain-text preview and lead image, both optional and untrusted (third-party).
+	excerpt: str | None = Field(default=None)
+	image: str | None = Field(default=None)

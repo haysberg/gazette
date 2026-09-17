@@ -66,7 +66,7 @@ cd /opt/gazette
 sudo -u gazette uv sync --exact --no-default-groups --group build
 
 # 4. Build des assets — l'ordre compte : compress_all.py produit
-#    templates/inline_style.html et csp-hash.txt dont generate_opml.py a besoin.
+#    static/css/style.min.css et static/js/index.min.js dont generate_opml.py a besoin.
 #    convert_icons.py et download_images.py ne sont PAS nécessaires ici : leurs
 #    sorties (icônes AVIF, favicons) sont versionnées, et elles exigeraient
 #    Pillow et cairosvg — donc libcairo — sur le serveur.

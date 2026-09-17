@@ -9,8 +9,9 @@ canonical_url|default("https://insoumis.news/") %}
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'inline-speculation-rules'; style-src-elem 'self' '{{ csp_hash }}'; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://insoumis.goatcounter.com; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'" />
     <title>{{ long_name }}</title>
+    {# Loaded synchronously so the stored theme is applied before first paint. #}
+    <script src="/js/theme.js?v={{ js_hash }}"></script>
     <link rel="preload" href="/css/daisy.min.css?v={{ css_hash }}" as="style" />
     <link rel="preload" href="/fonts/Config-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Config-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
@@ -21,7 +22,6 @@ canonical_url|default("https://insoumis.news/") %}
     <meta name="referrer" content="same-origin" />
     <link rel="canonical" href="{{ canonical_url }}" />
     <meta property="og:url" content="{{ canonical_url }}" />
-    {% include "inline_style.html" %}
     <meta name="theme-color" content="#7b13d6" />
     <meta name="color-scheme" content="light dark" />
     <link rel="alternate" type="application/rss+xml" title="Gazette Insoumise — RSS" href="/feed.xml" />
@@ -33,7 +33,8 @@ canonical_url|default("https://insoumis.news/") %}
     <meta property="og:description" content="{{ description }}" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="{{ long_name }}" />
-    <link href="css/daisy.min.css?v={{ css_hash }}" rel="stylesheet" type="text/css" />
+    <link href="/css/daisy.min.css?v={{ css_hash }}" rel="stylesheet" type="text/css" />
+    <link href="/css/style.min.css?v={{ style_hash }}" rel="stylesheet" type="text/css" />
     <script defer src="/js/index.min.js?v={{ js_hash }}"></script>
     <script type="speculationrules">
         {
