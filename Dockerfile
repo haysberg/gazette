@@ -1,6 +1,6 @@
 ## CSS BUILD STEP
 # Base images are pinned by digest; Dependabot bumps them (see .github/dependabot.yml).
-FROM oven/bun:alpine@sha256:d888c0ae6c86d7866ff10c5aafdd9077b36aee6455b33dd270fb93c0dd5cef6f AS css-build
+FROM docker.io/oven/bun:alpine@sha256:d888c0ae6c86d7866ff10c5aafdd9077b36aee6455b33dd270fb93c0dd5cef6f AS css-build
 WORKDIR /build
 COPY package.json ./
 RUN bun install
