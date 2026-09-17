@@ -46,7 +46,9 @@ EXPOSE 8000
 
 # /healthz is a static file: a full homepage render should not be the liveness
 # probe. busybox wget is part of the base image, so curl is not needed.
+# Probe 127.0.0.1, not localhost: static-web-server binds IPv4 only, while
+# localhost resolves to ::1 first in the image and yields a false negative.
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-	CMD wget -q -O /dev/null http://localhost:8000/healthz || exit 1
+	CMD wget -q -O /dev/null http://127.0.0.1:8000/healthz || exit 1
 
 CMD ["python3", "app.py"]

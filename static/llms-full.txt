@@ -20,7 +20,7 @@ La Gazette Insoumise regroupe les dernières publications de médias alternatifs
 
 ---
 
-## Sources agrégées (49)
+## Sources agrégées (48)
 
 Liste complète des médias agrégés. Le flux RSS unifié est régénéré toutes les 15 minutes.
 
@@ -184,13 +184,6 @@ Liste complète des médias agrégés. Le flux RSS unifié est régénéré tout
 - Site : https://reporterre.net
 - Flux RSS source : https://reporterre.net/spip.php?page=backend-simple
 - Description : Le quotidien de l'écologie
-
-
-### AlterÉco
-
-- Site : https://alternatives-economiques.fr
-- Flux RSS source : https://www.alternatives-economiques.fr/rss.xml
-- Description : L'économie autrement
 
 
 ### Rapports de force
