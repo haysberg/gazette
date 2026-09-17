@@ -28,6 +28,24 @@ USER_AGENT = 'Gazette/1.0 (+https://insoumis.news/)'
 RETRY_BASE_SECONDS = 15 * 60
 RETRY_MAX_SECONDS = 6 * 60 * 60
 
+# Some feeds expose an <accessPermission> tag and can be filtered directly. For
+# the others (Reflets, Arrêt sur Images…) paywalled articles are only marked on
+# the article page, so `free_only` feeds get their new articles checked here.
+PAYWALL_MAX_CHECKS = 50
+PAYWALL_RE = re.compile(
+	r'('
+	r'r[ée]serv[ée]e?s? aux abonn'
+	r'|article r[ée]serv[ée]'
+	r'|contenu r[ée]serv[ée]'
+	r'|cet article est r[ée]serv[ée]'
+	r'|isAccessibleForFree"?\s*:\s*false'
+	r'|subscriber-only'
+	r'|subscribe to (read|continue)'
+	r'|abonn[ée]s? pour lire'
+	r')',
+	re.I,
+)
+
 _fetch_semaphore = asyncio.Semaphore(MAX_CONCURRENT_FETCHES)
 _client: httpx.AsyncClient | None = None
 
@@ -94,6 +112,37 @@ async def fetch_feed(
 		raise FeedNotModified
 	response.raise_for_status()
 	return response
+
+
+async def _detect_paywalled(entries) -> set[str]:
+	"""Return links of entries whose article page looks paywalled.
+
+	Only called for `free_only` feeds. It is a best-effort check of the article
+	page (the feed itself carries no marker for some sites); a fetch error is
+	treated as "free" so a transient failure never hides an article.
+	"""
+	links: list[str] = []
+	for entry in entries:
+		link = getattr(entry, 'link', None)
+		if link and link not in links:
+			links.append(link)
+		if len(links) >= PAYWALL_MAX_CHECKS:
+			break
+
+	async def check(link: str) -> str | None:
+		try:
+			async with _fetch_semaphore:
+				response = await _get_client().get(
+					link, headers={'Accept': 'text/html,application/xhtml+xml'}
+				)
+			if response.status_code == 200 and PAYWALL_RE.search(response.text):
+				return link
+		except Exception:
+			return None
+		return None
+
+	results = await asyncio.gather(*(check(link) for link in links), return_exceptions=True)
+	return {result for result in results if isinstance(result, str)}
 
 
 def _parse_response(response: httpx.Response) -> dict:
@@ -174,7 +223,12 @@ class Feed(SQLModel, table=True):
 	# Throttle: max number of posts to keep from this feed
 	max_posts: int | None = Field(default=None)
 
-	# Only keep free/public articles (filters on accessPermission tag)
+	# Display cap: max posts shown on the homepage (0 = unlimited). Keeps one
+	# prolific feed from crowding out the rest; does not affect retention.
+	max_display: int | None = Field(default=None)
+
+	# Only keep free/public articles. Filters on the feed's accessPermission tag
+	# when present, and otherwise checks the article page for a paywall marker.
 	free_only: bool = Field(default=False)
 
 	# Conditional fetching (ETag / Last-Modified)
@@ -228,12 +282,18 @@ class Feed(SQLModel, table=True):
 				if hasattr(feed, key):
 					setattr(feed, key, value)
 
+			paywalled: set[str] = set()
+			if feed.free_only:
+				paywalled = await _detect_paywalled(
+					[e for e in data.entries if not e.get('accesspermission')]
+				)
+
 			with Session(engine) as session:
 				# merge() returns the persistent instance; the feed row has to exist
 				# before its posts reference it.
 				merged = session.merge(feed)
 				session.flush()
-				posts_added = merged._store_entries(data, session)
+				posts_added = merged._store_entries(data, session, paywalled)
 				session.commit()
 
 			logger.info('Successfully initialized feed', feed=feed_dict['link'], posts=posts_added)
@@ -275,7 +335,9 @@ class Feed(SQLModel, table=True):
 
 		return None
 
-	def _store_entries(self, data: dict, session: Session) -> int:
+	def _store_entries(
+		self, data: dict, session: Session, paywalled: set[str] | None = None
+	) -> int:
 		"""Merge a parsed feed's entries into `session`.
 
 		Returns how many entries were *new*. A POST that always answers 200 with
@@ -300,8 +362,13 @@ class Feed(SQLModel, table=True):
 					logger.warning('Entry missing required fields, skipping', feed=self.title)
 					continue
 
-				if self.free_only and entry.get('accesspermission', 'free') != 'free':
-					continue
+				if self.free_only:
+					# Direct tag when the feed provides one…
+					if entry.get('accesspermission', 'free') != 'free':
+						continue
+					# …otherwise the per-article check done by the caller.
+					if paywalled and entry.link in paywalled:
+						continue
 
 				# Get publication date with fallback chain
 				pub_date = None
@@ -377,8 +444,24 @@ class Feed(SQLModel, table=True):
 				if not data.entries:
 					raise FeedParsingError('Feed returned no entries due to parsing errors')
 
+			paywalled: set[str] = set()
+			if self.free_only:
+				with Session(engine) as session:
+					existing_links = set(
+						session.exec(select(Post.link).where(Post.feed_link == self.link)).all()
+					)
+				paywalled = await _detect_paywalled(
+					[
+						entry
+						for entry in data.entries
+						if getattr(entry, 'link', None)
+						and not entry.get('accesspermission')
+						and entry.link not in existing_links
+					]
+				)
+
 			with Session(engine) as session:
-				posts_added = self._store_entries(data, session)
+				posts_added = self._store_entries(data, session, paywalled)
 
 				# Single transaction: commit posts + update feed metadata
 				feed = session.get(Feed, self.link)

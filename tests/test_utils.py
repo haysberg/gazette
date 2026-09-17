@@ -2,7 +2,13 @@ from datetime import datetime, timedelta
 from email.utils import parsedate_to_datetime
 from types import SimpleNamespace
 
-from utils.utils import _enclosure_type, _jinja_env, _rfc822, _timeago
+from utils.utils import (
+	_apply_display_cap,
+	_enclosure_type,
+	_jinja_env,
+	_rfc822,
+	_timeago,
+)
 
 
 def test_runtime_environment_autoescapes_feed_content():
@@ -70,6 +76,21 @@ def test_source_template_escapes_title_and_omits_excerpt():
 	assert '&lt;b&gt;Titre&lt;/b&gt;' in output
 	# Summaries are no longer rendered on the served pages.
 	assert 'resume' not in output
+
+
+def test_display_cap_limits_a_busy_source_but_not_unlimited():
+	busy = SimpleNamespace(max_display=None)  # falls back to the default of 3
+	unlimited = SimpleNamespace(max_display=0)
+
+	def post(link, feed_link, feed):
+		return SimpleNamespace(link=link, feed_link=feed_link, feed=feed)
+
+	posts = [post(f'busy-{i}', 'busy', busy) for i in range(6)]
+	posts += [post(f'unlimited-{i}', 'unlimited', unlimited) for i in range(6)]
+
+	kept = _apply_display_cap(posts)
+	assert sum(1 for p in kept if p.feed_link == 'busy') == 3
+	assert sum(1 for p in kept if p.feed_link == 'unlimited') == 6
 
 
 def test_timeago_buckets():

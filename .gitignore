@@ -188,6 +188,9 @@ static/index.json
 .claude/
 templates/inline_style.html
 
+# JS dependencies: installed by `bun install` (locked by bun.lock), not committed.
+node_modules/
+
 # Generated build outputs. Rebuilt by build_tools/*.py in the Docker image and
 # by deploy/update.sh on a VPS, so they are not tracked and never show up as
 # "local changes" during a deploy.

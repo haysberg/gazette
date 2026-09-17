@@ -80,7 +80,20 @@ domain = "exemple.com"
 title = "Nom de la source"
 image = "https://exemple.com/favicon.ico"
 subtitle = "Description optionnelle"
+# Optionnel :
+# max_posts = 2     # ne conserve que les 2 derniers articles (rétention)
+# max_display = 3   # n'affiche que 3 articles en page d'accueil (0 = illimité)
+# free_only = true  # ne garde que les articles en accès libre (paywall filtré)
 ```
+
+`free_only` filtre les articles payants : d'abord via la balise
+`accessPermission` du flux quand elle existe (Politis), sinon en vérifiant la
+page de l'article (Reflets.info, Arrêt sur Images). Les échecs réseau ne
+masquent jamais un article.
+
+En page d'accueil, chaque source est limitée par défaut à 3 articles
+(`max_display`), pour qu'un média très prolifique ne noie pas les autres. La
+valeur par défaut est dans `utils/utils.py` (`DEFAULT_MAX_DISPLAY`).
 
 ### Variables d'environnement
 

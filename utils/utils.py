@@ -43,6 +43,11 @@ _js_hash = _file_hash(f'{STATIC_DIR}/js/index.min.js')
 SOURCE_DIR = os.path.join(STATIC_DIR, 'source')
 STATUS_FILE = os.path.join(STATIC_DIR, 'status.json')
 
+# How many posts a single source may show on the homepage. One prolific outlet
+# (Reporterre, Révolution Permanente…) would otherwise dominate the flow. Set a
+# feed's `max_display` to override per source, or 0 for unlimited.
+DEFAULT_MAX_DISPLAY = 3
+
 
 async def update_all_posts() -> None:
 	logger.info('Updating posts')
@@ -159,6 +164,27 @@ def _timeago(dt: datetime) -> str:
 	return f'Il y a {days}j'
 
 
+def _apply_display_cap(posts: list[Post]) -> list[Post]:
+	"""Keep at most each feed's `max_display` newest posts (0 = unlimited).
+
+	`posts` is expected newest-first; a feed that published a burst keeps only
+	its most recent few on the homepage.
+	"""
+	counts: dict[str, int] = {}
+	kept: list[Post] = []
+	for post in posts:
+		limit = post.feed.max_display
+		if limit is None:
+			limit = DEFAULT_MAX_DISPLAY
+		if limit > 0:
+			seen = counts.get(post.feed_link, 0)
+			if seen >= limit:
+				continue
+			counts[post.feed_link] = seen + 1
+		kept.append(post)
+	return kept
+
+
 async def update_served_files(changed_feeds: set[str] | None = None) -> None:
 	"""Render every served page.
 
@@ -178,12 +204,13 @@ async def update_served_files(changed_feeds: set[str] | None = None) -> None:
 		)
 		posts_last48h: list[Post] = session.exec(statement).all()
 
-		# The homepage spans two calendar days; the RSS feed only the last 24h.
+		# The RSS feed keeps the last 24h in full; the homepage per-source cap is
+		# a display concern, so it is applied only to what is split into days.
 		posts_24h = [p for p in posts_last48h if p.publication_date > now - timedelta(hours=24)]
 		posts_today: list[Post] = []
 		posts_yesterday: list[Post] = []
 		today_date = now.date()
-		for post in posts_last48h:
+		for post in _apply_display_cap(posts_last48h):
 			if post.publication_date.date() == today_date:
 				posts_today.append(post)
 			else:

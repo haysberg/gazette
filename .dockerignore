@@ -1,3 +1,12 @@
+# Build context is only the sources the image actually builds from (bun install
+# and uv sync run inside the image), so keep host-installed trees out of it.
+.git
+.venv
+node_modules
+__pycache__
+.pytest_cache
+.ruff_cache
+
 ./static/index.html
 ./static/index.json
 ./static/plus.html

@@ -8,7 +8,15 @@ import feedparser
 from sqlalchemy.pool import StaticPool
 from sqlmodel import Session, SQLModel, create_engine
 
-from utils.models import Feed, Post, _entry_excerpt, _entry_image, _parsed_datetime, _retry_delay
+from utils.models import (
+	PAYWALL_RE,
+	Feed,
+	Post,
+	_entry_excerpt,
+	_entry_image,
+	_parsed_datetime,
+	_retry_delay,
+)
 
 
 def make_entry(link: str, title: str = 'Titre') -> feedparser.FeedParserDict:
@@ -83,6 +91,15 @@ def test_undated_entry_keeps_first_seen_date():
 		session.commit()
 		again = session.get(Post, 'https://exemple.org/a').publication_date
 		assert again == first
+
+
+def test_paywall_regex_matches_markers_without_false_positives():
+	assert PAYWALL_RE.search('Vous lisez un article réservé aux abonnés.')
+	assert PAYWALL_RE.search('"isAccessibleForFree": false')
+	assert PAYWALL_RE.search('This is a subscriber-only article')
+	# Newsletter/subscription prompts on free pages must not flag the article.
+	assert not PAYWALL_RE.search("Abonnez-vous à notre newsletter")
+	assert not PAYWALL_RE.search('Nos abonnés nous soutiennent')
 
 
 def test_entry_excerpt_strips_markup_and_image_is_extracted():

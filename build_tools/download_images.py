@@ -1,4 +1,6 @@
 import os
+import subprocess
+import sys
 import tomllib
 from io import BytesIO
 
@@ -17,8 +19,14 @@ with open('gazette.toml', 'rb') as f:
 	content = f.read()
 	config_data = tomllib.loads(content.decode('utf-8'))
 	print(f'Found {len(config_data["feeds"]["feedlist"])} feeds in config.')
+
+	# Optional domain arguments limit the run to specific sources, so adding one
+	# feed does not rewrite every favicon (and produce a noisy diff).
+	only = set(sys.argv[1:])
 	for feed in config_data['feeds']['feedlist']:
 		domain = feed['domain']
+		if only and domain not in only:
+			continue
 		small_path = os.path.join('static', 'favicons', f'{domain}.avif')
 		large_path = os.path.join('static', 'favicons', f'{domain}-large.avif')
 		os.makedirs(os.path.dirname(small_path), exist_ok=True)
@@ -72,3 +80,6 @@ for root, dirs, files in os.walk('static/img'):
 				img = Image.open(BytesIO(file_content))
 				img.thumbnail((32, 32), Image.Resampling.LANCZOS)
 				img.save(image_path, 'AVIF')
+
+# Regenerate the per-logo dark/light theme rules from the favicons just built.
+subprocess.run([sys.executable, os.path.join('build_tools', 'favicon_theme.py')], check=True)
