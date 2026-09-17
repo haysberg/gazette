@@ -14,9 +14,6 @@
             referrerpolicy="origin"
             >{{ article.title }}
         </a>
-        {% if article.excerpt %}
-        <p class="text-sm text-base-content/70 mb-1">{{ article.excerpt }}</p>
-        {% endif %}
         <a
             href="/source/{{ article.feed.domain }}/"
             class="link link-hover flex items-center gap-x-1 inline-flex mb-1"

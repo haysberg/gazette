@@ -66,7 +66,7 @@ html {
     --color-neutral: oklch(14% 0.005 285.823);
     --color-neutral-content: oklch(92% 0.004 286.32);
     --color-info: #ebf3f4;
-    --color-info-content: #ebf3f4;
+    --color-info-content: oklch(28% 0.03 250);
     --color-success: #2e9959;
     --color-success-content: oklch(37% 0.077 168.94);
     --color-warning: #f4ee06;
@@ -151,6 +151,37 @@ html {
 
     :root:not([data-theme="light"]) .theme-icon-sun {
         display: block;
+    }
+}
+
+/* Institut La Boétie badge. The mark is a dark purple raster, so on a dark
+   background the default badge colours leave both the logo and the label
+   unreadable; give it its own palette and lighten the logo in dark mode. */
+.badge-ilb {
+    background-color: #ebf3f4;
+    color: #390080;
+    border-color: #c9b6ef;
+}
+
+:root[data-theme="dark"] .badge-ilb {
+    background-color: #2b1e4d;
+    color: #e7ddff;
+    border-color: #7c5cff;
+}
+
+:root[data-theme="dark"] .badge-ilb img {
+    filter: brightness(0) invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .badge-ilb {
+        background-color: #2b1e4d;
+        color: #e7ddff;
+        border-color: #7c5cff;
+    }
+
+    :root:not([data-theme="light"]) .badge-ilb img {
+        filter: brightness(0) invert(1);
     }
 }
 

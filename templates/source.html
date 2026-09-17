@@ -49,11 +49,6 @@
                             referrerpolicy="origin"
                             >{{ article.title }}</a
                         >
-                        {% if article.excerpt %}
-                        <p class="text-sm text-base-content/70 mt-0.5">
-                            {{ article.excerpt }}
-                        </p>
-                        {% endif %}
                         <i class="discret"
                             >{{ article.publication_date | timeago }}</i
                         >

@@ -44,7 +44,7 @@ def test_enclosure_type_from_extension():
 	assert _enclosure_type('https://exemple.org/a') == 'image/jpeg'
 
 
-def test_source_template_escapes_excerpt():
+def test_source_template_escapes_title_and_omits_excerpt():
 	template = _jinja_env.get_template('source.html')
 	feed = SimpleNamespace(
 		domain='exemple.org',
@@ -54,8 +54,8 @@ def test_source_template_escapes_excerpt():
 	)
 	post = SimpleNamespace(
 		link='https://exemple.org/a',
-		title='Titre',
-		excerpt='<b>x</b>',
+		title='<b>Titre</b>',
+		excerpt='<i>resume</i>',
 		publication_date=datetime(2026, 9, 13, 14, 0),
 	)
 	output = template.render(
@@ -66,8 +66,10 @@ def test_source_template_escapes_excerpt():
 		js_hash='j',
 		canonical_url='https://insoumis.news/source/exemple.org/',
 	)
-	assert '<b>x</b>' not in output
-	assert '&lt;b&gt;' in output
+	assert '<b>Titre</b>' not in output
+	assert '&lt;b&gt;Titre&lt;/b&gt;' in output
+	# Summaries are no longer rendered on the served pages.
+	assert 'resume' not in output
 
 
 def test_timeago_buckets():

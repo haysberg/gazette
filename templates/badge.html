@@ -1,7 +1,7 @@
 {% if button %}
 <button
     id="{{ id }}"
-    class="badge badge-{{ variant }} badge-lg gap-1 hover:brightness-110 cursor-pointer"
+    class="badge badge-{{ variant }} badge-lg gap-1 hover:brightness-110 cursor-pointer {{ extra_class | default('') }}"
     {%
     if
     style
@@ -33,7 +33,7 @@
     {%
     endif
     %}
-    class="badge badge-{{ variant }} badge-lg gap-1"
+    class="badge badge-{{ variant }} badge-lg gap-1 {{ extra_class | default('') }}"
     {%
     if
     style
