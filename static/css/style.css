@@ -185,6 +185,18 @@ html {
     }
 }
 
+/* Mélenchon 2027 badge. The default primary badge flips to dark text in dark
+   mode, which reads as dim on the purple fill; keep the label bright instead. */
+:root[data-theme="dark"] .badge-melenchon {
+    color: #f3ecff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .badge-melenchon {
+        color: #f3ecff;
+    }
+}
+
 @keyframes slideInFromLeft {
     0% {
         transform: translateX(-10%);
