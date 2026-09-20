@@ -13,7 +13,15 @@ headers = {
 }
 
 SMALL_SIZE = (32, 32)
-LARGE_MAX = (192, 192)
+# Source logos are shown at 48 CSS px, so ~128 px still covers HiDPI phones
+# while cutting the bytes of the old 192 px renders.
+LARGE_MAX = (128, 128)
+# Inline badge/footer icons render at 16 CSS px; keep enough pixels for HiDPI
+# displays (Lighthouse expects >= 2x the displayed size).
+INLINE_ICON_MAX = (64, 64)
+# Explicit AVIF quality. Pillow defaults to ~75; at these small display sizes
+# 60 is visually indistinguishable and meaningfully smaller.
+AVIF_QUALITY = 60
 
 with open('gazette.toml', 'rb') as f:
 	content = f.read()
@@ -39,15 +47,15 @@ with open('gazette.toml', 'rb') as f:
 			if is_svg:
 				# SVG is vector — render at each target size for crisp output
 				png_small = cairosvg.svg2png(bytestring=raw, output_width=SMALL_SIZE[0], output_height=SMALL_SIZE[1])
-				Image.open(BytesIO(png_small)).save(small_path, 'AVIF')
+				Image.open(BytesIO(png_small)).save(small_path, 'AVIF', quality=AVIF_QUALITY)
 				png_large = cairosvg.svg2png(bytestring=raw, output_width=LARGE_MAX[0], output_height=LARGE_MAX[1])
-				Image.open(BytesIO(png_large)).save(large_path, 'AVIF')
+				Image.open(BytesIO(png_large)).save(large_path, 'AVIF', quality=AVIF_QUALITY)
 			else:
 				# Raster: 32×32 for posts; thumbnail preserves aspect and never upscales for sources
-				Image.open(BytesIO(raw)).resize(SMALL_SIZE).save(small_path, 'AVIF')
+				Image.open(BytesIO(raw)).resize(SMALL_SIZE).save(small_path, 'AVIF', quality=AVIF_QUALITY)
 				img_large = Image.open(BytesIO(raw))
 				img_large.thumbnail(LARGE_MAX, Image.Resampling.LANCZOS)
-				img_large.save(large_path, 'AVIF')
+				img_large.save(large_path, 'AVIF', quality=AVIF_QUALITY)
 		except Exception as e:
 			print(f'Failed to process favicon for {feed["link"]}: {e}')
 # Count all .avif images in static/favicons
@@ -64,7 +72,7 @@ print(f'{avif_count} AVIF images in static/favicons.')
 navbar_src = os.path.join('static', 'icons', 'favicon-96x96.png')
 navbar_dst = os.path.join('static', 'icons', 'favicon-96x96.avif')
 try:
-	Image.open(navbar_src).save(navbar_dst, 'AVIF')
+	Image.open(navbar_src).save(navbar_dst, 'AVIF', quality=AVIF_QUALITY)
 	print(f'Converted {navbar_src} to AVIF')
 except Exception as e:
 	print(f'Failed to convert navbar logo: {e}')
@@ -78,8 +86,8 @@ for root, dirs, files in os.walk('static/img'):
 			with open(file_path, 'rb') as f:
 				file_content = f.read()
 				img = Image.open(BytesIO(file_content))
-				img.thumbnail((32, 32), Image.Resampling.LANCZOS)
-				img.save(image_path, 'AVIF')
+				img.thumbnail(INLINE_ICON_MAX, Image.Resampling.LANCZOS)
+				img.save(image_path, 'AVIF', quality=AVIF_QUALITY)
 
 # Regenerate the per-logo dark/light theme rules from the favicons just built.
 subprocess.run([sys.executable, os.path.join('build_tools', 'favicon_theme.py')], check=True)

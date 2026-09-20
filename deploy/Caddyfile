@@ -31,10 +31,10 @@ insoumis.news {
 	@html path / *.html
 	header @html Link `</feed.xml>; rel="alternate"; type="application/rss+xml"; title="Gazette Insoumise — RSS", </feeds.opml>; rel="alternate"; type="text/x-opml"; title="Gazette Insoumise — OPML"`
 
-	# Deploy-time assets, all query-string fingerprinted by the templates.
-	# /js/*.js does not match /sw.js, which is handled below.
+	# Deploy-time assets, all query-string fingerprinted by the templates, so they
+	# can be cached for a year. /js/*.js does not match /sw.js, handled below.
 	@immutable path *.css *.woff2 *.avif *.png *.ico *.json /js/*.js
-	header @immutable Cache-Control "public, max-age=604800, immutable"
+	header @immutable Cache-Control "public, max-age=31536000, immutable"
 
 	# Pages, the feed and status.json are regenerated every 15 minutes; the service
 	# worker needs a short TTL so updates actually reach installed clients. This

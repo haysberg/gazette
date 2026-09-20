@@ -5,7 +5,7 @@ const ASSETS_TO_CACHE = [
   "/css/daisy.min.css",
   "/css/style.min.css",
   "/js/index.min.js",
-  "/js/theme.js",
+  "/js/theme.min.js",
   "/manifest.json",
   "/icons/favicon.ico",
   "/icons/favicon-32x32.avif",

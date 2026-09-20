@@ -1,4 +1,18 @@
 @import "tailwindcss";
-@plugin "daisyui";
+
+/* Only 9 daisyUI components are actually used (avatar, badge, button, card,
+   divider, dock, footer, link, navbar). Excluding the rest cuts the main
+   stylesheet by roughly a third. Base and utilities are left untouched, and the
+   badge-* colours are forced below even though they only appear via variables. */
+@plugin "daisyui" {
+    exclude: alert, aura, breadcrumbs, calendar, carousel, chat, checkbox,
+        collapse, countdown, diff, drawer, dropdown, fab, fieldset, fileinput,
+        filter, hero, hover3d, hovergallery, indicator, input, kbd, label, list,
+        loading, mask, megamenu, menu, mockup, modal, otp, progress,
+        radialprogress, radio, range, rating, select, skeleton, stack, stat,
+        status, steps, swap, tab, table, textarea, textrotate, timeline, toast,
+        toggle, tooltip, validator;
+}
+
 @source "../templates";
 @source inline("badge-primary badge-secondary badge-info badge-warning badge-success badge-error");

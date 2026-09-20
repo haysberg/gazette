@@ -11,12 +11,14 @@ canonical_url|default("https://insoumis.news/") %}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ long_name }}</title>
     {# Loaded synchronously so the stored theme is applied before first paint. #}
-    <script src="/js/theme.js?v={{ js_hash }}"></script>
+    <script src="/js/theme.min.js?v={{ js_hash }}"></script>
     <link rel="preload" href="/css/daisy.min.css?v={{ css_hash }}" as="style" />
-    <link rel="preload" href="/fonts/Config-Regular.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/Config-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/Config-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/css/style.min.css?v={{ style_hash }}" as="style" />
+    <link rel="preload" href="/fonts/Config-Regular-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Config-SemiBold-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Config-Black-latin.woff2" as="font" type="font/woff2" crossorigin />
     <meta name="application-name" content="{{ long_name }}" />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="description" content="{{ description }}" />
     <meta name="keywords" content="{{ keywords }}" />
     <meta name="referrer" content="same-origin" />

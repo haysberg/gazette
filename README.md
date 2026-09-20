@@ -49,9 +49,9 @@ cd gazette
 # Installer les dépendances
 uv sync
 
-# Construire les assets (CSS, JS minifié, OPML, pages statiques) : les sorties
-# de build ne sont pas versionnées et sont nécessaires au démarrage.
-task css compress opml
+# Construire les assets (CSS, fontes, JS minifié, OPML, pages statiques) : les
+# sorties de build ne sont pas versionnées et sont nécessaires au démarrage.
+task css fonts compress opml
 
 # Lancer l'application
 python3 app.py

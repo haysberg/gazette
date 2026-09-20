@@ -33,10 +33,20 @@ def _file_hash(path: str) -> str:
 		return hashlib.md5(f.read()).hexdigest()[:8]
 
 
-# Static asset hashes — these files only change at deploy time
+def _files_hash(*paths: str) -> str:
+	"""Return one short hash over several files, so any change busts them all."""
+	digest = hashlib.md5()
+	for path in paths:
+		with open(path, 'rb') as f:
+			digest.update(f.read())
+	return digest.hexdigest()[:8]
+
+
+# Static asset hashes — these files only change at deploy time. The JS scripts
+# share one hash so a change to either busts both cache-busted <script> URLs.
 _css_hash = _file_hash(f'{STATIC_DIR}/css/daisy.min.css')
 _style_hash = _file_hash(f'{STATIC_DIR}/css/style.min.css')
-_js_hash = _file_hash(f'{STATIC_DIR}/js/index.min.js')
+_js_hash = _files_hash(f'{STATIC_DIR}/js/index.min.js', f'{STATIC_DIR}/js/theme.min.js')
 
 # Per-source pages live in their own directory so the web server resolves
 # /source/<domain>/ to the generated index.html.

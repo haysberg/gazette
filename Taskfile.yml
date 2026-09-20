@@ -6,6 +6,7 @@ tasks:
     cmds:
       - task: deps
       - task: css
+      - task: fonts
       - task: favicons
       - task: icons
       - task: compress
@@ -21,6 +22,11 @@ tasks:
     desc: Build minified Tailwind/DaisyUI CSS
     cmds:
       - bunx @tailwindcss/cli -i src/tailwind.css -o static/css/daisy.min.css --minify
+
+  fonts:
+    desc: Subset self-hosted fonts into latin/latin-ext slices
+    cmds:
+      - uv run ./build_tools/subset_fonts.py
 
   favicons:
     desc: Download per-feed favicons and convert to AVIF

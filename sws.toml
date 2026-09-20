@@ -25,11 +25,11 @@ headers.Permissions-Policy = "interest-cohort=(), browsing-topics=()"
 source = "**/*.html"
 headers.Link = "</feed.xml>; rel=\"alternate\"; type=\"application/rss+xml\"; title=\"Gazette Insoumise — RSS\", </feeds.opml>; rel=\"alternate\"; type=\"text/x-opml\"; title=\"Gazette Insoumise — OPML\""
 
-# Cache deploy-time assets for 1 week. HTML, XML and JSON are regenerated (or
+# Cache deploy-time assets for 1 year. HTML, XML and JSON are regenerated (or
 # reflect runtime state, like status.json), so they get a short TTL instead.
 [[advanced.headers]]
 source = "**/*.{css,woff2,avif,png,ico}"
-headers.Cache-Control = "public, max-age=604800, immutable"
+headers.Cache-Control = "public, max-age=31536000, immutable"
 
 [[advanced.headers]]
 source = "**/*.{html,xml,json}"
@@ -38,7 +38,7 @@ headers.Cache-Control = "public, max-age=900"
 # JS has a long cache, except sw.js which needs a short TTL for update propagation
 [[advanced.headers]]
 source = "**/js/*.js"
-headers.Cache-Control = "public, max-age=604800, immutable"
+headers.Cache-Control = "public, max-age=31536000, immutable"
 
 [[advanced.headers]]
 source = "sw.js"

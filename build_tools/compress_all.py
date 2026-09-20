@@ -14,11 +14,16 @@ with open('static/js/index.js') as js_file:
 	with open('static/js/index.min.js', 'w') as minified_js:
 		minified_js.write(minified)
 
+with open('static/js/theme.js') as theme_file:
+	minified_theme = jsmin(theme_file.read())
+	with open('static/js/theme.min.js', 'w') as minified_theme_js:
+		minified_theme_js.write(minified_theme)
+
 with open('src/sw.js') as sw_file:
 	sw_content = sw_file.read()
 	# Inject a content-based cache name so the SW busts cache when assets change
 	content_to_hash = b''
-	for asset_path in ['static/css/daisy.min.css', 'static/js/index.min.js']:
+	for asset_path in ['static/css/daisy.min.css', 'static/js/index.min.js', 'static/js/theme.min.js']:
 		with open(asset_path, 'rb') as af:
 			content_to_hash += af.read()
 	cache_hash = hashlib.md5(content_to_hash).hexdigest()[:8]
@@ -43,10 +48,15 @@ compressed_css: str = compress(css)
 with open('static/css/style.min.css', 'w') as minified_css_file:
 	_ = minified_css_file.write(compressed_css)
 
+# Already-compressed formats gain nothing from a second pass (the brotli copy of
+# a woff2 is even a few bytes larger), so skip them and their own siblings. The
+# web servers fall back to serving the original file.
+ALREADY_COMPRESSED = {'.avif', '.br', '.gz', '.ico', '.jpeg', '.jpg', '.png', '.webp', '.woff2'}
+
 for root, dirs, files in os.walk('static'):
 	for file in files:
 		file_path = os.path.join(root, file)
-		if file.endswith(('.gz', '.br')):
+		if os.path.splitext(file)[1].lower() in ALREADY_COMPRESSED:
 			continue
 		with open(file_path, 'rb') as f_in:
 			data = f_in.read()

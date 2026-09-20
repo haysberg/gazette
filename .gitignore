@@ -198,6 +198,7 @@ static/**/*.br
 static/csp-hash.txt
 static/css/style.min.css
 static/js/index.min.js
+static/js/theme.min.js
 static/sw.js
 static/feed.xml
 static/feeds.opml

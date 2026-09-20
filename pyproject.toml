@@ -21,11 +21,13 @@ dependencies = [
 # they only regenerate icons and favicons, and those outputs are committed.
 build = [
     "csscompressor>=0.9.5",
+    "fonttools>=4.60.0",
     "jsmin>=3.0.1",
 ]
 dev = [
     "cairosvg>=2.7.1",
     "csscompressor>=0.9.5",
+    "fonttools>=4.60.0",
     "jsmin>=3.0.1",
     "pillow>=12.0.0",
     "pytest>=8.4.0",
