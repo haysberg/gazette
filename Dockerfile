@@ -9,7 +9,7 @@ COPY templates/ ./templates/
 RUN bunx @tailwindcss/cli -i src/tailwind.css -o static/css/daisy.min.css --minify
 
 ## PYTHON BUILD STEP
-FROM ghcr.io/astral-sh/uv:python3.14-alpine@sha256:5722f48fd41005cf9ab51096fd17cd810dfd42c45490f70be7639ff2ef7960ba AS build
+FROM ghcr.io/astral-sh/uv:python3.14-alpine@sha256:cfc3bc293a2c03baeb5ae857f32a03f6d756dca329223ba8932cf6a7db9b5c18 AS build
 WORKDIR /build
 COPY gazette.toml uv.lock pyproject.toml precompress.py ./
 COPY static ./static/
@@ -23,7 +23,7 @@ RUN uv run ./build_tools/convert_icons.py \
     && uv run ./build_tools/generate_opml.py
 
 ## PROD STEP
-FROM ghcr.io/astral-sh/uv:python3.14-alpine@sha256:5722f48fd41005cf9ab51096fd17cd810dfd42c45490f70be7639ff2ef7960ba
+FROM ghcr.io/astral-sh/uv:python3.14-alpine@sha256:cfc3bc293a2c03baeb5ae857f32a03f6d756dca329223ba8932cf6a7db9b5c18
 ENV PATH="/app/.venv/bin:$PATH"
 ENV TZ=Europe/Paris
 
